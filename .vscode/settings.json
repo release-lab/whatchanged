@@ -5,6 +5,7 @@
     "promptForTags": false,
     "transform": "snakecase"
   },
+  "go.lintTool":"golangci-lint",
   "go.buildFlags": ["-mode=vendor"],
   "go.toolsEnvVars": {
     "GOFLAGS": "-mod=vendor"

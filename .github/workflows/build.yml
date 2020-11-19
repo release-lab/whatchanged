@@ -23,15 +23,10 @@ jobs:
           go version
           go env
 
-      - name: Install tools
-        env:
-          GO111MODULE: on
-        run: |
-          go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.32.2
-          golangci-lint --version
-
       - name: Lint
-        run: make lint
+        uses: golangci/golangci-lint-action@v2
+        with:
+          version: v1.32.2
 
       - name: Format
         run: make format-check
