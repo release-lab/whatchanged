@@ -1,0 +1,65 @@
+name: ci
+
+on: [push, pull_request]
+
+jobs:
+  ci:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    strategy:
+      matrix:
+        go: ["^1.15.0"]
+        os: [ubuntu-latest, macOS-latest, windows-latest]
+    name: Go ${{ matrix.go }} in ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go }}
+
+      - name: Environment
+        run: |
+          go version
+          go env
+
+      - name: Install tools
+        env:
+          GO111MODULE: on
+        run: |
+          go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.27.0
+          golangci-lint --version
+
+      - name: Lint
+        run: make lint
+
+      - name: Format
+        run: make format-check
+
+      - name: Test
+        run: |
+          make test
+          go mod tidy
+          git checkout ./
+
+      - name: Build
+        uses: goreleaser/goreleaser-action@v2
+        with:
+          version: latest
+          args: release --rm-dist --skip-publish
+
+  release:
+    name: Release to Github
+    if: startsWith(github.ref, 'refs/tags/') && github.repository == 'axetroy/go-cli-boilerplate'
+    needs: [ci]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@v2
+        with:
+          version: latest
+          args: release --rm-dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}

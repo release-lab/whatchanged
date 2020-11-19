@@ -1,0 +1,12 @@
+{
+  "go.addTags": {
+    "tags": "json",
+    "options": "json=omitempty",
+    "promptForTags": false,
+    "transform": "snakecase"
+  },
+  "go.buildFlags": ["-mode=vendor"],
+  "go.toolsEnvVars": {
+    "GOFLAGS": "-mod=vendor"
+  }
+}
