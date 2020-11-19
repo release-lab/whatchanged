@@ -14,7 +14,6 @@ var (
 	version = "dev"
 	commit  = "none"
 	date    = "unknown"
-	builtBy = "unknown"
 )
 
 func run() error {
@@ -42,7 +41,8 @@ func run() error {
 	}
 
 	if showVersion {
-		println(version)
+		fmt.Printf("%s %s %s\n", version, commit, date)
+		os.Exit(0)
 	}
 
 	version := flag.Arg(0)
