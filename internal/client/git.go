@@ -141,7 +141,19 @@ func (g *GitClient) Head() (*plumbing.Reference, error) {
 }
 
 func (g *GitClient) Logs(from string, to string) ([]*object.Commit, error) {
-	cIter, err := g.repository.Log(&git.LogOptions{From: plumbing.NewHash(from)})
+	options := git.LogOptions{From: plumbing.NewHash(from)}
+
+	if to != "" {
+		toCommit, err := g.repository.CommitObject(plumbing.NewHash(to))
+
+		if err != nil {
+			return nil, errors.WithStack(err)
+		}
+
+		options.Since = &toCommit.Committer.When
+	}
+
+	cIter, err := g.repository.Log(&options)
 
 	if err != nil {
 		return nil, errors.WithStack(err)

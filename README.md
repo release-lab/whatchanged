@@ -12,9 +12,9 @@ A cli to generate changelog
 
 feature:
 - [x] Cross-platform support
-- [ ] Template Support
+- [x] Template Support
 - [ ] Custom template
-- [ ] Conventional Commits Parser
+- [x] Conventional Commits Parser
 
 ### Usage
 

@@ -1,3 +1,5 @@
+# github.com/davecgh/go-spew v1.1.1
+github.com/davecgh/go-spew/spew
 # github.com/emirpasic/gods v1.12.0
 github.com/emirpasic/gods/containers
 github.com/emirpasic/gods/lists
@@ -71,8 +73,13 @@ github.com/mitchellh/go-homedir
 # github.com/pkg/errors v0.8.1
 ## explicit
 github.com/pkg/errors
+# github.com/pmezard/go-difflib v1.0.0
+github.com/pmezard/go-difflib/difflib
 # github.com/sergi/go-diff v1.1.0
 github.com/sergi/go-diff/diffmatchpatch
+# github.com/stretchr/testify v1.4.0
+## explicit
+github.com/stretchr/testify/assert
 # github.com/xanzy/ssh-agent v0.2.1
 github.com/xanzy/ssh-agent
 # golang.org/x/crypto v0.0.0-20200302210943-78000ba7a073
@@ -104,3 +111,5 @@ golang.org/x/sys/unix
 golang.org/x/sys/windows
 # gopkg.in/warnings.v0 v0.1.2
 gopkg.in/warnings.v0
+# gopkg.in/yaml.v2 v2.2.4
+gopkg.in/yaml.v2

@@ -1,21 +1,36 @@
 package printer
 
 import (
-	"bufio"
-	"fmt"
+	"bytes"
+	"html/template"
+	"io"
+	"os"
 	"strings"
 
 	"github.com/go-git/go-git/v5/plumbing/object"
+	"github.com/pkg/errors"
 )
 
 func Stdout(commits []*object.Commit) error {
-	for _, c := range commits {
-		scanner := bufio.NewScanner(strings.NewReader(c.Message))
-		scanner.Scan()
-		title := strings.TrimSpace(scanner.Text())
-		shotHash := string(c.Hash.String()[0:7])
-		line := fmt.Sprintf(`%s %s`, shotHash, title)
-		fmt.Println(line)
+	ctx := transform("v1.0.0", commits)
+
+	t := template.New("stdout")
+
+	t.Funcs(template.FuncMap{
+		"StringsJoin": strings.Join,
+	})
+
+	if t, err := t.Parse(defaultTemplate); err != nil {
+		return errors.WithStack(err)
+	} else {
+		b := bytes.NewBuffer([]byte{})
+		if err := t.Execute(b, ctx); err != nil {
+			return errors.WithStack(err)
+		}
+
+		if _, err := io.Copy(os.Stdout, b); err != nil {
+			return errors.WithStack(err)
+		}
 	}
 
 	return nil
