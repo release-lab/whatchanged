@@ -39,6 +39,7 @@ type GitClient struct {
 	tags       []*Tag
 }
 
+// Get the Nth tag
 func (g *GitClient) TagN(offset int) (*Tag, error) {
 	tags, err := g.Tags()
 
@@ -59,6 +60,7 @@ func (g *GitClient) TagN(offset int) (*Tag, error) {
 	return tag, nil
 }
 
+// Get next tag from the specified tag
 func (g *GitClient) NextTag(target *Tag) (*Tag, error) {
 	tags, err := g.Tags()
 
@@ -78,6 +80,7 @@ func (g *GitClient) NextTag(target *Tag) (*Tag, error) {
 	return nil, nil
 }
 
+// Get tag information from tag name
 func (g *GitClient) TagName(name string) (*Tag, error) {
 	tags, err := g.Tags()
 
@@ -98,6 +101,7 @@ func (g *GitClient) TagName(name string) (*Tag, error) {
 	return nil, nil
 }
 
+// Get all tags
 func (g *GitClient) Tags() ([]*Tag, error) {
 	if g.tags != nil {
 		return g.tags, nil
@@ -159,10 +163,13 @@ func (g *GitClient) Tags() ([]*Tag, error) {
 	return tags, nil
 }
 
+// Get HEAD of tree
 func (g *GitClient) Head() (*plumbing.Reference, error) {
 	return g.repository.Head()
 }
 
+// Get commit list from range
+// to: is optional
 func (g *GitClient) Logs(from string, to string) ([]*object.Commit, error) {
 	options := git.LogOptions{From: plumbing.NewHash(from)}
 
@@ -236,6 +243,10 @@ func (g *GitClient) getCommitHash(str string) (string, error) {
 	}
 }
 
+// Get tags with range
+// eg. Get all tags between v2.0.0 and v1.0.0 and including thenself
+// start: v2.0.0
+// end: v1.0.0
 func (g *GitClient) GetTagRangesByTagName(start string, end string) ([]*Tag, error) {
 	tags, err := g.Tags()
 
@@ -257,51 +268,4 @@ func (g *GitClient) GetTagRangesByTagName(start string, end string) ([]*Tag, err
 	result := tags[startIndex : endIndex+1]
 
 	return result, nil
-}
-
-func (g *GitClient) GetTagRangesByCommitHash(startHash string, endHash string) ([]*Tag, error) {
-	start, err := g.repository.CommitObject(plumbing.NewHash(startHash))
-
-	if err != nil {
-		return nil, errors.WithStack(err)
-	}
-
-	end, err := g.repository.CommitObject(plumbing.NewHash(endHash))
-
-	if err != nil {
-		return nil, errors.WithStack(err)
-	}
-
-	tags, err := g.Tags()
-
-	if err != nil {
-		return nil, errors.WithStack(err)
-	}
-
-	result := make([]*Tag, 0)
-
-	for _, tag := range tags {
-		tagTime := tag.Commit.Committer.When
-		if tagTime.After(start.Author.When) && tagTime.After(end.Author.When) {
-			result = append(result, tag)
-		}
-	}
-
-	return result, nil
-}
-
-func (g *GitClient) LogsRange(start string, end string) ([]*object.Commit, error) {
-	startHash, err := g.getCommitHash(start)
-
-	if err != nil {
-		return nil, errors.WithStack(err)
-	}
-
-	endHash, err := g.getCommitHash(end)
-
-	if err != nil {
-		return nil, errors.WithStack(err)
-	}
-
-	return g.Logs(startHash, endHash)
 }
