@@ -11,10 +11,12 @@ A cli to generate changelog
 > The project is in development
 
 feature:
+
 - [x] Cross-platform support
 - [x] Template Support
 - [ ] Custom template
 - [x] Conventional Commits Parser
+- [ ] Generate multiple versions of change logs
 
 ### Usage
 

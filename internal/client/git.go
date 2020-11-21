@@ -30,6 +30,7 @@ func NewGitClient(dir string) (*GitClient, error) {
 
 type GitClient struct {
 	repository *git.Repository
+	tags       []*Tag
 }
 
 func (g *GitClient) TagN(offset int) (*Tag, error) {
@@ -92,6 +93,9 @@ func (g *GitClient) TagName(name string) (*Tag, error) {
 }
 
 func (g *GitClient) Tags() ([]*Tag, error) {
+	if g.tags != nil {
+		return g.tags, nil
+	}
 	tags := make([]*Tag, 0)
 
 	tt, _ := g.repository.References()
@@ -141,6 +145,8 @@ func (g *GitClient) Tags() ([]*Tag, error) {
 		// return prev.Commit.Committer.When.UnixNano() > next.Commit.Committer.When.UnixNano()
 		return prevVersion.GT(*nextVersion)
 	})
+
+	g.tags = tags
 
 	return tags, nil
 }
