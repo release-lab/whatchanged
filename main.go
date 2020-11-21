@@ -1,9 +1,12 @@
 package main
 
 import (
+	"bytes"
 	"flag"
 	"fmt"
+	"io"
 	"os"
+	"strings"
 
 	"github.com/axetroy/changelog/internal/client"
 	"github.com/axetroy/changelog/internal/printer"
@@ -173,38 +176,91 @@ func run() error {
 			}
 		}
 	} else {
-		// Only output one version of the changelog
-		from, err := client.TagName(version)
+		ranges := strings.Split(version, "~")
+		length := len(ranges)
 
-		if err != nil {
-			return errors.WithStack(err)
-		}
+		// handle version range
+		// v2.0.0~v1.0.0
+		// HEAD~
+		if length == 2 {
+			tags, err := client.GetTagRangesByTagName(ranges[0], ranges[1])
 
-		if from == nil {
-			return errors.New(fmt.Sprintf("can not found tag %s", version))
-		}
+			if err != nil {
+				return errors.WithStack(err)
+			}
 
-		to, err := client.NextTag(from)
+			var output []byte
 
-		if err != nil {
-			return errors.WithStack(err)
-		}
+			for index, tag := range tags {
+				fromHash := tag.Commit.Hash.String()
+				toHash := ""
+				// if not last element
+				if index != len(tags)-1 {
+					toHash = tags[index+1].Commit.Hash.String()
+				} else {
+					nextTag, err := client.NextTag(tag)
 
-		toHash := ""
+					if err != nil {
+						return errors.WithStack(err)
+					}
 
-		// if don't have next tag
-		if to != nil {
-			toHash = to.Commit.Hash.String()
-		}
+					if nextTag != nil {
+						toHash = nextTag.Commit.Hash.String()
+					}
+				}
 
-		commits, err := client.Logs(from.Commit.Hash.String(), toHash)
+				commits, err := client.Logs(fromHash, toHash)
 
-		if err != nil {
-			return errors.WithStack(err)
-		}
+				if err != nil {
+					return errors.WithStack(err)
+				}
 
-		if err := printer.Stdout(version, commits); err != nil {
-			return errors.WithStack(err)
+				if b, err := printer.Bytes(tag.Name, commits); err != nil {
+					return errors.WithStack(err)
+				} else {
+					output = append(output, b...)
+				}
+			}
+
+			_, err = io.Copy(os.Stdout, bytes.NewBuffer(output))
+
+			if err != nil {
+				return errors.WithStack(err)
+			}
+		} else {
+			// only output one version of the changelog
+			from, err := client.TagName(version)
+
+			if err != nil {
+				return errors.WithStack(err)
+			}
+
+			if from == nil {
+				return errors.New(fmt.Sprintf("can not found tag %s", version))
+			}
+
+			to, err := client.NextTag(from)
+
+			if err != nil {
+				return errors.WithStack(err)
+			}
+
+			toHash := ""
+
+			// if don't have next tag
+			if to != nil {
+				toHash = to.Commit.Hash.String()
+			}
+
+			commits, err := client.Logs(from.Commit.Hash.String(), toHash)
+
+			if err != nil {
+				return errors.WithStack(err)
+			}
+
+			if err := printer.Stdout(version, commits); err != nil {
+				return errors.WithStack(err)
+			}
 		}
 	}
 

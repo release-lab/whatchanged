@@ -1,6 +1,7 @@
 package printer
 
 const defaultTemplate = `# {{ .Version }}
+
 {{- define "body" -}}
 {{range . -}}
 - {{if .Field.Header.Scope }}**{{ .Field.Header.Scope }}**: {{ end }}{{ .Field.Header.Subject }}({{.Short}}) (thanks @{{ .Author.Name }}){{if .Field.Footer }} {{if .Field.Footer.Closes }}, Closes: {{ StringsJoin .Field.Footer.Closes "," }} {{- end }}  {{- end}}
@@ -10,33 +11,34 @@ const defaultTemplate = `# {{ .Version }}
 ### New feature:
 {{ template "body" .Feat }}
 {{- end -}}
-{{if .Fix -}}
+{{if .Fix}}
 ### Bugs fixed:
 {{ template "body" .Fix }}
 {{- end -}}
-{{if .Refactor -}}
+{{if .Refactor}}
 ### Code Refactoring:
 {{ template "body" .Refactor }}
 {{- end -}}
-{{if .Test -}}
+{{if .Test}}
 ### Testing:
 {{ template "body" .Test }}
 {{- end -}}
-{{if .Perf -}}
+{{if .Perf}}
 ### Performance improves:
 {{ template "body" .Perf }}
 {{- end -}}
-{{if .Docs -}}
+{{if .Docs}}
 ### Documentation:
 {{ template "body" .Docs }}
 {{- end -}}
-{{- if .BreakingChanges -}}
+{{if .BreakingChanges}}
 ### BREAKING CHANGES:
 {{ range .BreakingChanges -}}
-- {{ .Field.Footer.BreakingChange.Title }} {{ .Field.Title }}
+- {{if .Field.Footer.BreakingChange.Title}}{{ .Field.Footer.BreakingChange.Title }}{{ else }}{{ .Field.Title }}{{ end }}
 {{ .Field.Footer.BreakingChange.Content }}
 {{- end -}}
-{{- end -}}
+{{- end}}
+
 ### Commits({{ len .Commits }}):
 {{range .Commits -}}
 - **{{ .Short }}** {{ .Field.Title }}
