@@ -16,6 +16,57 @@ var (
 	date    = "unknown"
 )
 
+func printHelp() {
+	fmt.Println(`changelog - a cli to generate changelog from git project
+
+USAGE:
+  changelog [OPTIONS] [version]
+
+ARGUMENTS:
+  [version]     Optional version or version range.
+                1.null.
+                  If you do not specify the version, then it will automatically
+                  generate a change log from "HEAD~<latest version>" or
+                  "HEAD~<earliest commit>" or "<latest version>-<last version>"
+                2.single version. eg. v1.2.0
+                  Generate a specific version of the changelog.
+                3.version range. eg v1.3.0~v1.2.0
+                  Generate changelog within the specified range.
+                  For more details, please check the following examples.
+
+OPTIONS:
+  --help        Print help information.
+  --version     Print version information.
+  --dir         Specify the directory to be generated.
+                The directory should contain a .git folder. defaults to $PWD.
+  --tpl         Specify the directory to be generated.
+
+EXAMPLES:
+  # generate changelog from HEAD to <latest version>
+  $ changelog
+
+  # generate changelog of the specified version
+  $ changelog v1.2.0
+
+  # generate changelog within the specified range
+  $ changelog v1.3.0~v1.2.0
+
+  # generate changelog from HEAD to specified version
+  $ changelog HEAD~v1.3.0
+
+  # generate all changelog
+  $ changelog HEAD~
+
+  # generate changelog from two commit hashes
+  $ changelog 770ed02~585445d
+
+  # Generate changelog for the specified project
+  $ changelog --dir=/path/to/project v1.0.0
+
+SOURCE CODE:
+  https://github.com/axetroy/changelog`)
+}
+
 func run() error {
 	var (
 		showHelp    bool
@@ -36,7 +87,7 @@ func run() error {
 	flag.Parse()
 
 	if showHelp {
-		flag.Usage()
+		printHelp()
 		os.Exit(0)
 	}
 
@@ -122,6 +173,7 @@ func run() error {
 			}
 		}
 	} else {
+		// Only output one version of the changelog
 		from, err := client.TagName(version)
 
 		if err != nil {
