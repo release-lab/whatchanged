@@ -39,5 +39,5 @@ const defaultTemplate = `# {{ .Version }}
 {{- end -}}
 ### Commits({{ len .Commits }}):
 {{range .Commits -}}
-- {{ .Short }} {{ .Field.Title }}
+- **{{ .Short }}** {{ .Field.Title }}
 {{ end }}`

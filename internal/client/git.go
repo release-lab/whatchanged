@@ -3,6 +3,7 @@ package client
 import (
 	"io"
 	"path"
+	"regexp"
 	"sort"
 
 	"github.com/blang/semver/v4"
@@ -10,6 +11,10 @@ import (
 	"github.com/go-git/go-git/v5/plumbing"
 	"github.com/go-git/go-git/v5/plumbing/object"
 	"github.com/pkg/errors"
+)
+
+var (
+	versionRegexp = regexp.MustCompile(`^v`)
 )
 
 type Tag struct {
@@ -122,7 +127,9 @@ func (g *GitClient) Tags() ([]*Tag, error) {
 					return nil, errors.WithStack(err)
 				}
 
-				_, invalid := semver.New(name.Short())
+				version := versionRegexp.ReplaceAllString(name.Short(), "")
+
+				_, invalid := semver.New(version)
 
 				if invalid == nil {
 					tags = append(tags, &Tag{
@@ -139,8 +146,8 @@ func (g *GitClient) Tags() ([]*Tag, error) {
 		prev := tags[i]
 		next := tags[j]
 
-		prevVersion, _ := semver.New(prev.Name)
-		nextVersion, _ := semver.New(next.Name)
+		prevVersion, _ := semver.New(versionRegexp.ReplaceAllString(prev.Name, ""))
+		nextVersion, _ := semver.New(versionRegexp.ReplaceAllString(next.Name, ""))
 
 		// return prev.Commit.Committer.When.UnixNano() > next.Commit.Committer.When.UnixNano()
 		return prevVersion.GT(*nextVersion)

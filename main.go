@@ -55,14 +55,71 @@ func run() error {
 
 	// If no tag is specified, it will be generate automatically
 	if version == "" {
-		commits, err := client.LogsAuto()
+		head, err := client.Head()
 
 		if err != nil {
 			return errors.WithStack(err)
 		}
 
-		if err := printer.Stdout("unreleased", commits); err != nil {
+		latestTag, err := client.TagN(0)
+
+		if err != nil {
 			return errors.WithStack(err)
+		}
+
+		if latestTag == nil {
+			// if there is not tag
+			// then it's unreleased
+			commits, err := client.Logs(head.Hash().String(), "")
+
+			if err != nil {
+				return errors.WithStack(err)
+			}
+
+			if err := printer.Stdout("unreleased", commits); err != nil {
+				return errors.WithStack(err)
+			}
+			return nil
+		} else {
+			if latestTag.Commit.Hash.String() == head.Hash().String() {
+				// if the current head is the latest tag
+				nextTag, err := client.NextTag(latestTag)
+
+				if err != nil {
+					return errors.WithStack(err)
+				}
+
+				toHash := ""
+
+				if nextTag != nil {
+					toHash = nextTag.Commit.Hash.String()
+				}
+
+				commits, err := client.Logs(latestTag.Commit.Hash.String(), toHash)
+
+				if err != nil {
+					return errors.WithStack(err)
+				}
+
+				if err := printer.Stdout(latestTag.Name, commits); err != nil {
+					return errors.WithStack(err)
+				}
+
+				return nil
+			} else {
+				toHash := latestTag.Commit.Hash.String()
+
+				commits, err := client.Logs(latestTag.Commit.Hash.String(), toHash)
+
+				if err != nil {
+					return errors.WithStack(err)
+				}
+
+				if err := printer.Stdout(latestTag.Name, commits); err != nil {
+					return errors.WithStack(err)
+				}
+				return nil
+			}
 		}
 	} else {
 		from, err := client.TagName(version)
