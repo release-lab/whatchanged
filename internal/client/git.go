@@ -1,7 +1,6 @@
 package client
 
 import (
-	"fmt"
 	"io"
 	"path"
 	"regexp"
@@ -206,41 +205,6 @@ func (g *GitClient) Logs(from string, to string) ([]*object.Commit, error) {
 	}
 
 	return commits, errors.WithStack(err)
-}
-
-// get commit hash from a string
-// str: HEAD
-// str: HASH
-// str: tag
-func (g *GitClient) getCommitHash(str string) (string, error) {
-	if str == "HEAD" {
-		commit, err := g.repository.Head()
-
-		if err != nil {
-			return "", errors.WithStack(err)
-		}
-
-		return commit.Hash().String(), nil
-	} else {
-		version := versionRegexp.ReplaceAllString(str, "")
-		_, err := semver.New(version)
-
-		if err != nil {
-			return "", errors.WithStack(err)
-		}
-
-		tag, err := g.TagName(str)
-
-		if err != nil {
-			return "", errors.WithStack(err)
-		}
-
-		if tag == nil {
-			return "", errors.New(fmt.Sprintf(`tag '%s' not exist`, str))
-		}
-
-		return tag.Commit.Hash.String(), nil
-	}
 }
 
 // Get tags with range
