@@ -61,7 +61,7 @@ func run() error {
 			return errors.WithStack(err)
 		}
 
-		if err := printer.Stdout(commits); err != nil {
+		if err := printer.Stdout("unreleased", commits); err != nil {
 			return errors.WithStack(err)
 		}
 	} else {
@@ -94,7 +94,7 @@ func run() error {
 			return errors.WithStack(err)
 		}
 
-		if err := printer.Stdout(commits); err != nil {
+		if err := printer.Stdout(version, commits); err != nil {
 			return errors.WithStack(err)
 		}
 	}

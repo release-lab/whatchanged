@@ -11,8 +11,8 @@ import (
 	"github.com/pkg/errors"
 )
 
-func Stdout(commits []*object.Commit) error {
-	ctx := transform("v1.0.0", commits)
+func Stdout(version string, commits []*object.Commit) error {
+	ctx := transform(version, commits)
 
 	t := template.New("stdout")
 

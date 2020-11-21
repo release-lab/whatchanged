@@ -5,6 +5,7 @@ import (
 	"path"
 	"sort"
 
+	"github.com/blang/semver/v4"
 	"github.com/go-git/go-git/v5"
 	"github.com/go-git/go-git/v5/plumbing"
 	"github.com/go-git/go-git/v5/plumbing/object"
@@ -117,11 +118,15 @@ func (g *GitClient) Tags() ([]*Tag, error) {
 					return nil, errors.WithStack(err)
 				}
 
-				tags = append(tags, &Tag{
-					Name:   name.Short(),
-					Hash:   ref.Hash().String(),
-					Commit: commit,
-				})
+				_, invalid := semver.New(name.Short())
+
+				if invalid == nil {
+					tags = append(tags, &Tag{
+						Name:   name.Short(),
+						Hash:   ref.Hash().String(),
+						Commit: commit,
+					})
+				}
 			}
 		}
 	}
@@ -130,7 +135,11 @@ func (g *GitClient) Tags() ([]*Tag, error) {
 		prev := tags[i]
 		next := tags[j]
 
-		return prev.Commit.Committer.When.UnixNano() > next.Commit.Committer.When.UnixNano()
+		prevVersion, _ := semver.New(prev.Name)
+		nextVersion, _ := semver.New(next.Name)
+
+		// return prev.Commit.Committer.When.UnixNano() > next.Commit.Committer.When.UnixNano()
+		return prevVersion.GT(*nextVersion)
 	})
 
 	return tags, nil
