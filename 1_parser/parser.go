@@ -101,7 +101,7 @@ func Parse(git *client.GitClient, ranges string) (*Scope, error) {
 	versions := strings.Split(ranges, "~")
 
 	if ranges == "" {
-		versions = append(versions, "HEAD")
+		versions[0] = "HEAD"
 		latestTag, err := git.TagN(0)
 
 		if err != nil {
