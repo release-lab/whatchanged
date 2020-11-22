@@ -1,4 +1,4 @@
-package printer
+package generator
 
 const defaultTemplate = `# {{ .Version }}
 

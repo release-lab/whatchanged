@@ -10,6 +10,8 @@ A cli to generate changelog
 
 > The project is in development
 
+[How it works?](HOW_IT_WORKS.md)
+
 feature:
 
 - [x] Cross-platform support
@@ -72,6 +74,7 @@ EXAMPLES:
   $ changelog HEAD~
 
   # generate changelog from two commit hashes
+  # supports 7-bit short hash and 40-bit long hash
   $ changelog 770ed02~585445d
 
   # Generate changelog for the specified project

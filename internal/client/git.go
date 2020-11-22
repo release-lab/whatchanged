@@ -5,6 +5,7 @@ import (
 	"path"
 	"regexp"
 	"sort"
+	"strings"
 
 	"github.com/blang/semver/v4"
 	"github.com/go-git/go-git/v5"
@@ -30,11 +31,11 @@ func NewGitClient(dir string) (*GitClient, error) {
 		return nil, errors.WithStack(err)
 	}
 
-	return &GitClient{repository: r}, nil
+	return &GitClient{Repository: r}, nil
 }
 
 type GitClient struct {
-	repository *git.Repository
+	Repository *git.Repository
 	tags       []*Tag
 }
 
@@ -107,7 +108,7 @@ func (g *GitClient) Tags() ([]*Tag, error) {
 	}
 	tags := make([]*Tag, 0)
 
-	tt, _ := g.repository.References()
+	tt, _ := g.Repository.References()
 
 	for {
 		if ref, err := tt.Next(); err == io.EOF {
@@ -119,13 +120,13 @@ func (g *GitClient) Tags() ([]*Tag, error) {
 		} else {
 			name := ref.Name()
 			if name.IsTag() {
-				commitHash, err := g.repository.ResolveRevision(plumbing.Revision(ref.Hash().String()))
+				commitHash, err := g.Repository.ResolveRevision(plumbing.Revision(ref.Hash().String()))
 
 				if err != nil {
 					return nil, errors.WithStack(err)
 				}
 
-				commit, err := g.repository.CommitObject(*commitHash)
+				commit, err := g.Repository.CommitObject(*commitHash)
 
 				if err != nil {
 					return nil, errors.WithStack(err)
@@ -164,7 +165,66 @@ func (g *GitClient) Tags() ([]*Tag, error) {
 
 // Get HEAD of tree
 func (g *GitClient) Head() (*plumbing.Reference, error) {
-	return g.repository.Head()
+	return g.Repository.Head()
+}
+
+// Get commit of HASH
+func (g *GitClient) Commit(longHash string) (*object.Commit, error) {
+	return g.Repository.CommitObject(plumbing.NewHash(longHash))
+}
+
+// Get commit of SHORT HASH
+func (g *GitClient) CommitByShort(shortHash string) (*object.Commit, error) {
+	cIter, err := g.Repository.Log(&git.LogOptions{})
+
+	if err != nil {
+		return nil, errors.WithStack(err)
+	}
+
+	for {
+		if commit, err := cIter.Next(); err == io.EOF {
+			break
+		} else if err != nil {
+			return nil, errors.WithStack(err)
+		} else if commit != nil {
+			if strings.HasPrefix(commit.Hash.String(), shortHash) {
+				return commit, nil
+			}
+		}
+	}
+
+	return nil, nil
+}
+
+// Get first commit
+func (g *GitClient) GetFirstCommit() (*object.Commit, error) {
+	options := git.LogOptions{}
+
+	cIter, err := g.Repository.Log(&options)
+
+	if err != nil {
+		return nil, errors.WithStack(err)
+	}
+
+	var c *object.Commit
+
+	for {
+		if commit, err := cIter.Next(); err == io.EOF {
+			break
+		} else if err != nil {
+			return nil, errors.WithStack(err)
+		} else if commit != nil {
+			if c == nil {
+				c = commit
+			} else {
+				if c.Committer.When.UnixNano() > commit.Committer.When.UnixNano() {
+					c = commit
+				}
+			}
+		}
+	}
+
+	return c, nil
 }
 
 // Get commit list from range
@@ -173,7 +233,7 @@ func (g *GitClient) Logs(from string, to string) ([]*object.Commit, error) {
 	options := git.LogOptions{From: plumbing.NewHash(from)}
 
 	if to != "" {
-		toCommit, err := g.repository.CommitObject(plumbing.NewHash(to))
+		toCommit, err := g.Repository.CommitObject(plumbing.NewHash(to))
 
 		if err != nil {
 			return nil, errors.WithStack(err)
@@ -182,7 +242,7 @@ func (g *GitClient) Logs(from string, to string) ([]*object.Commit, error) {
 		options.Since = &toCommit.Committer.When
 	}
 
-	cIter, err := g.repository.Log(&options)
+	cIter, err := g.Repository.Log(&options)
 
 	if err != nil {
 		return nil, errors.WithStack(err)
@@ -205,6 +265,51 @@ func (g *GitClient) Logs(from string, to string) ([]*object.Commit, error) {
 	}
 
 	return commits, errors.WithStack(err)
+}
+
+// Get next commit behind a commit
+func (g *GitClient) PrevCommit(hash string) (*object.Commit, error) {
+	options := git.LogOptions{From: plumbing.NewHash(hash)}
+
+	cIter, err := g.Repository.Log(&options)
+
+	if err != nil {
+		return nil, errors.WithStack(err)
+	}
+
+	if commit, err := cIter.Next(); err == io.EOF {
+		return nil, nil
+	} else if err != nil {
+		return nil, errors.WithStack(err)
+	} else {
+		return commit, nil
+	}
+}
+
+// Get next commit behind a commit
+func (g *GitClient) NextCommit(hash string) (*object.Commit, error) {
+	options := git.LogOptions{From: plumbing.NewHash(hash)}
+
+	cIter, err := g.Repository.Log(&options)
+
+	if err != nil {
+		return nil, errors.WithStack(err)
+	}
+
+	var next *object.Commit
+
+	if commit, err := cIter.Next(); err == io.EOF {
+		return nil, nil
+	} else if err != nil {
+		return nil, errors.WithStack(err)
+	} else {
+		if next.Hash.String() == hash {
+			return next, nil
+		}
+		next = commit
+	}
+
+	return next, nil
 }
 
 // Get tags with range
@@ -232,4 +337,94 @@ func (g *GitClient) GetTagRangesByTagName(start string, end string) ([]*Tag, err
 	result := tags[startIndex : endIndex+1]
 
 	return result, nil
+}
+
+// Get tags with commit range
+func (g *GitClient) GetTagRangesByCommit(start *object.Commit, end *object.Commit) ([]*Tag, error) {
+	tags, err := g.Tags()
+
+	if err != nil {
+		return nil, errors.WithStack(err)
+	}
+
+	result := make([]*Tag, 0)
+
+	for _, tag := range tags {
+		tagTime := tag.Commit.Committer.When
+		if (tagTime.Before(start.Author.When) || tagTime.Equal(start.Author.When)) && (tagTime.After(end.Author.When) || tagTime.Equal(end.Author.When)) {
+			result = append(result, tag)
+		}
+	}
+
+	return result, nil
+}
+
+func (g *GitClient) GetTagByCommit(commit *object.Commit) (*Tag, error) {
+	tags, err := g.Tags()
+
+	if err != nil {
+		return nil, errors.WithStack(err)
+	}
+
+	for _, tag := range tags {
+		if tag.Commit.Hash.String() == commit.Hash.String() {
+			return tag, nil
+		}
+	}
+
+	return nil, nil
+}
+
+func (g *GitClient) GetLastCommitOfTag(tag *Tag) (*object.Commit, error) {
+	nextTag, err := g.NextTag(tag)
+
+	if err != nil {
+		return nil, errors.WithStack(err)
+	}
+
+	options := git.LogOptions{From: tag.Commit.Hash}
+
+	cIter, err := g.Repository.Log(&options)
+
+	if err != nil {
+		return nil, errors.WithStack(err)
+	}
+
+	if nextTag == nil {
+		options.Since = &tag.Commit.Committer.When
+		var lastCommit *object.Commit
+		for {
+			if commit, err := cIter.Next(); err == io.EOF {
+				break
+			} else if err != nil {
+				return nil, errors.WithStack(err)
+			} else if commit == nil {
+				break
+			} else {
+				lastCommit = commit
+			}
+		}
+
+		return lastCommit, nil
+	} else {
+
+		var lastCommit *object.Commit
+
+		for {
+			if commit, err := cIter.Next(); err == io.EOF {
+				break
+			} else if err != nil {
+				return nil, errors.WithStack(err)
+			} else if commit == nil {
+				break
+			} else {
+				if commit.Hash.String() == nextTag.Commit.Hash.String() {
+					return lastCommit, nil
+				}
+				lastCommit = commit
+			}
+		}
+
+		return lastCommit, nil
+	}
 }

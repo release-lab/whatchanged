@@ -6,10 +6,12 @@ import (
 	"fmt"
 	"io"
 	"os"
-	"strings"
 
+	parser "github.com/axetroy/changelog/1_parser"
+	extractor "github.com/axetroy/changelog/2_extractor"
+	transform "github.com/axetroy/changelog/3_transform"
+	generator "github.com/axetroy/changelog/4_generator"
 	"github.com/axetroy/changelog/internal/client"
-	"github.com/axetroy/changelog/internal/printer"
 	"github.com/pkg/errors"
 )
 
@@ -58,6 +60,9 @@ EXAMPLES:
   $ changelog HEAD~v1.3.0
 
   # generate all changelog
+	$ changelog HEAD~
+
+	# generate all changelog
   $ changelog HEAD~
 
   # generate changelog from two commit hashes
@@ -107,161 +112,34 @@ func run() error {
 		return errors.WithStack(err)
 	}
 
-	// If no tag is specified, it will be generate automatically
-	if version == "" {
-		head, err := client.Head()
+	scope, err := parser.Parse(client, version)
 
-		if err != nil {
-			return errors.WithStack(err)
-		}
+	if err != nil {
+		return errors.WithStack(err)
+	}
 
-		latestTag, err := client.TagN(0)
+	splices, err := extractor.Extract(client, scope)
 
-		if err != nil {
-			return errors.WithStack(err)
-		}
+	if err != nil {
+		return errors.WithStack(err)
+	}
 
-		if latestTag == nil {
-			// if there is not tag
-			// then it's unreleased
-			commits, err := client.Logs(head.Hash().String(), "")
+	ctxs, err := transform.Transform(client, splices)
 
-			if err != nil {
-				return errors.WithStack(err)
-			}
+	if err != nil {
+		return errors.WithStack(err)
+	}
 
-			if err := printer.Stdout("unreleased", commits); err != nil {
-				return errors.WithStack(err)
-			}
-			return nil
-		} else {
-			if latestTag.Commit.Hash.String() == head.Hash().String() {
-				// if the current head is the latest tag
-				nextTag, err := client.NextTag(latestTag)
+	output, err := generator.Generate(client, ctxs)
 
-				if err != nil {
-					return errors.WithStack(err)
-				}
+	if err != nil {
+		return errors.WithStack(err)
+	}
 
-				toHash := ""
+	_, err = io.Copy(os.Stdout, bytes.NewBuffer(output))
 
-				if nextTag != nil {
-					toHash = nextTag.Commit.Hash.String()
-				}
-
-				commits, err := client.Logs(latestTag.Commit.Hash.String(), toHash)
-
-				if err != nil {
-					return errors.WithStack(err)
-				}
-
-				if err := printer.Stdout(latestTag.Name, commits); err != nil {
-					return errors.WithStack(err)
-				}
-
-				return nil
-			} else {
-				toHash := latestTag.Commit.Hash.String()
-
-				commits, err := client.Logs(latestTag.Commit.Hash.String(), toHash)
-
-				if err != nil {
-					return errors.WithStack(err)
-				}
-
-				if err := printer.Stdout(latestTag.Name, commits); err != nil {
-					return errors.WithStack(err)
-				}
-				return nil
-			}
-		}
-	} else {
-		ranges := strings.Split(version, "~")
-		length := len(ranges)
-
-		// handle version range
-		// v2.0.0~v1.0.0
-		// HEAD~
-		if length == 2 {
-			tags, err := client.GetTagRangesByTagName(ranges[0], ranges[1])
-
-			if err != nil {
-				return errors.WithStack(err)
-			}
-
-			var output []byte
-
-			for index, tag := range tags {
-				fromHash := tag.Commit.Hash.String()
-				toHash := ""
-				// if not last element
-				if index != len(tags)-1 {
-					toHash = tags[index+1].Commit.Hash.String()
-				} else {
-					nextTag, err := client.NextTag(tag)
-
-					if err != nil {
-						return errors.WithStack(err)
-					}
-
-					if nextTag != nil {
-						toHash = nextTag.Commit.Hash.String()
-					}
-				}
-
-				commits, err := client.Logs(fromHash, toHash)
-
-				if err != nil {
-					return errors.WithStack(err)
-				}
-
-				if b, err := printer.Bytes(tag.Name, commits); err != nil {
-					return errors.WithStack(err)
-				} else {
-					output = append(output, b...)
-				}
-			}
-
-			_, err = io.Copy(os.Stdout, bytes.NewBuffer(output))
-
-			if err != nil {
-				return errors.WithStack(err)
-			}
-		} else {
-			// only output one version of the changelog
-			from, err := client.TagName(version)
-
-			if err != nil {
-				return errors.WithStack(err)
-			}
-
-			if from == nil {
-				return errors.New(fmt.Sprintf("can not found tag %s", version))
-			}
-
-			to, err := client.NextTag(from)
-
-			if err != nil {
-				return errors.WithStack(err)
-			}
-
-			toHash := ""
-
-			// if don't have next tag
-			if to != nil {
-				toHash = to.Commit.Hash.String()
-			}
-
-			commits, err := client.Logs(from.Commit.Hash.String(), toHash)
-
-			if err != nil {
-				return errors.WithStack(err)
-			}
-
-			if err := printer.Stdout(version, commits); err != nil {
-				return errors.WithStack(err)
-			}
-		}
+	if err != nil {
+		return errors.WithStack(err)
 	}
 
 	return nil
