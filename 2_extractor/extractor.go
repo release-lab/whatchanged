@@ -81,9 +81,11 @@ func Extract(g *client.GitClient, scope *parser.Scope) ([]*ExtractSplice, error)
 
 		if tag := getTagOfCommit(scope.Tags, commit); tag != nil {
 			splice := &ExtractSplice{
-				Name: tag.Name,
-				Tag:  tag,
+				Name:   tag.Name,
+				Tag:    tag,
+				Commit: make([]*object.Commit, 0),
 			}
+			splice.Commit = append(splice.Commit, commit)
 			index++
 		internalLoop:
 			for {
@@ -95,10 +97,6 @@ func Extract(g *client.GitClient, scope *parser.Scope) ([]*ExtractSplice, error)
 
 				if t := getTagOfCommit(scope.Tags, nextCommit); t != nil {
 					break internalLoop
-				}
-
-				if splice.Commit == nil {
-					splice.Commit = make([]*object.Commit, 0)
 				}
 
 				splice.Commit = append(splice.Commit, nextCommit)
