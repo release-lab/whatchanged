@@ -3,8 +3,10 @@ package generator
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"html/template"
 	"io/ioutil"
+	"net/url"
 	"os"
 	"path"
 	"strings"
@@ -15,6 +17,25 @@ import (
 )
 
 func Generate(g *client.GitClient, contexts []*transformer.TemplateContext, format string, preset string, templateFile string) ([]byte, error) {
+	remote, err := g.GetRemote()
+
+	if err != nil {
+		return nil, errors.WithStack(err)
+	}
+
+	var remoteURL *url.URL
+
+	if remote != nil || len(remote.URLs) > 0 {
+		for _, urlStr := range remote.URLs {
+			// prefer github and gitlab
+			if strings.HasPrefix(urlStr, "https://github.com") || strings.HasPrefix(urlStr, "https://gitlab.com") {
+				if remoteURL, err = url.Parse(urlStr); err != nil {
+					return nil, errors.WithStack(err)
+				}
+				break
+			}
+		}
+	}
 
 	switch format {
 	case "json":
@@ -65,6 +86,18 @@ func Generate(g *client.GitClient, contexts []*transformer.TemplateContext, form
 				"stringsJoin": strings.Join,
 				"unescape": func(s string) template.HTML {
 					return template.HTML(s)
+				},
+				"hashURL": func(longHash string) string {
+					short := string(longHash[0:7])
+					if remoteURL == nil {
+						return short
+					}
+
+					u, _ := url.Parse(remoteURL.String())
+
+					u.Path = u.Path + "/commit/" + longHash
+
+					return fmt.Sprintf(`[%s](%s)`, short, u.String())
 				},
 			})
 

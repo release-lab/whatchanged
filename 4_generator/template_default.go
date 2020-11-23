@@ -1,10 +1,9 @@
 package generator
 
 const DEFAULT_TEMPLATE = `# {{ .Version }}
-
 {{- define "body" -}}
 {{range . -}}
-- {{if .Field.Header.Scope }}**{{ unescape .Field.Header.Scope }}**: {{ end }}{{ unescape .Field.Header.Subject }}({{.Short}}) (thanks @{{ unescape .Author.Name }}){{if .Field.Footer }} {{if .Field.Footer.Closes }}, Closes: {{ stringsJoin .Field.Footer.Closes "," }} {{- end }}  {{- end}}
+- {{if .Field.Header.Scope }}**{{ unescape .Field.Header.Scope }}**: {{ end }}{{ unescape .Field.Header.Subject }}({{ hashURL .Hash}}) (thanks @{{ unescape .Author.Name }}){{if .Field.Footer }} {{if .Field.Footer.Closes }}, Closes: {{ stringsJoin .Field.Footer.Closes "," }} {{- end }}  {{- end}}
 {{ end }}
 {{- end -}}
 
@@ -33,5 +32,5 @@ const DEFAULT_TEMPLATE = `# {{ .Version }}
 
 ### Commits({{ len .Commits }}):
 {{range .Commits -}}
-- **{{ .Short }}** {{ unescape .Field.Title }}
+- {{ hashURL .Hash }} {{ unescape .Field.Title }}
 {{ end }}`

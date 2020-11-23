@@ -11,6 +11,7 @@ import (
 
 	"github.com/blang/semver/v4"
 	"github.com/go-git/go-git/v5"
+	"github.com/go-git/go-git/v5/config"
 	"github.com/go-git/go-git/v5/plumbing"
 	"github.com/go-git/go-git/v5/plumbing/object"
 	"github.com/pkg/errors"
@@ -475,4 +476,32 @@ func (g *GitClient) GetLastCommitOfTag(tag *Tag) (*object.Commit, error) {
 
 		return lastCommit, nil
 	}
+}
+
+func (g *GitClient) GetRemote() (*config.RemoteConfig, error) {
+	repoConfig, err := g.Repository.Config()
+
+	if err != nil {
+		return nil, errors.WithStack(err)
+	}
+
+	if remote, ok := repoConfig.Remotes["origin"]; ok {
+		return remote, nil
+	} else {
+		for _, remote := range repoConfig.Remotes {
+			for _, url := range remote.URLs {
+				// prefer github/gitlab remote
+				if strings.HasPrefix(url, "https://github.com") {
+					return remote, nil
+				} else if strings.HasPrefix(url, "https://gitlab.com") {
+					return remote, nil
+				}
+			}
+		}
+
+		for _, remote := range repoConfig.Remotes {
+			return remote, nil
+		}
+	}
+	return nil, nil
 }
