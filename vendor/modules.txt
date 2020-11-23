@@ -94,6 +94,9 @@ github.com/shurcooL/markdownfmt/markdown
 # github.com/stretchr/testify v1.4.0
 ## explicit
 github.com/stretchr/testify/assert
+# github.com/whilp/git-urls v1.0.0
+## explicit
+github.com/whilp/git-urls
 # github.com/xanzy/ssh-agent v0.2.1
 github.com/xanzy/ssh-agent
 # golang.org/x/crypto v0.0.0-20200302210943-78000ba7a073

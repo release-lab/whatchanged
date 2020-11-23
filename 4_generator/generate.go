@@ -14,6 +14,7 @@ import (
 	transformer "github.com/axetroy/changelog/3_transformer"
 	"github.com/axetroy/changelog/internal/client"
 	"github.com/pkg/errors"
+	giturls "github.com/whilp/git-urls"
 )
 
 func Generate(g *client.GitClient, contexts []*transformer.TemplateContext, format string, preset string, templateFile string) ([]byte, error) {
@@ -27,12 +28,28 @@ func Generate(g *client.GitClient, contexts []*transformer.TemplateContext, form
 
 	if remote != nil || len(remote.URLs) > 0 {
 		for _, urlStr := range remote.URLs {
-			// prefer github and gitlab
-			if strings.HasPrefix(urlStr, "https://github.com") || strings.HasPrefix(urlStr, "https://gitlab.com") {
-				if remoteURL, err = url.Parse(urlStr); err != nil {
+			if remoteURL, err = giturls.Parse(urlStr); err != nil {
+				return nil, errors.WithStack(err)
+			} else {
+				if remoteURL.Host == "github.com" || remoteURL.Host == "gitlab.com" {
+					break
+				}
+			}
+		}
+
+		if remoteURL != nil {
+			urlPath := strings.TrimSuffix(remoteURL.Path, ".git")
+			switch remoteURL.Scheme {
+			case "http":
+				fallthrough
+			case "https":
+				if remoteURL, err = url.Parse(fmt.Sprintf("%s://%s/%s", remoteURL.Scheme, remoteURL.Host, urlPath)); err != nil {
 					return nil, errors.WithStack(err)
 				}
-				break
+			case "ssh":
+				if remoteURL, err = url.Parse(fmt.Sprintf("https://%s/%s", remoteURL.Host, urlPath)); err != nil {
+					return nil, errors.WithStack(err)
+				}
 			}
 		}
 	}

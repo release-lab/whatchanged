@@ -10,4 +10,5 @@ require (
 	github.com/shurcooL/go v0.0.0-20200502201357-93f07166e636 // indirect
 	github.com/shurcooL/markdownfmt v0.0.0-20191117054414-21fe95c248e9
 	github.com/stretchr/testify v1.4.0
+	github.com/whilp/git-urls v1.0.0
 )
