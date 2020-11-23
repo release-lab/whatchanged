@@ -48,7 +48,7 @@ With the above context array, we can easily render the template.
 
 Up to this point, the role of generator is to generate templates and which template to generate.
 
-- [ ] JSON
+- [x] JSON
 - [x] Markdown
 - [ ] PlainText
 
