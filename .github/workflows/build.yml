@@ -54,13 +54,9 @@ jobs:
         with:
           fetch-depth: 0
 
-      - run: |
-          ls -lsa ./.git
-          git --no-pager log
-
       - name: Generate release.md
         run: |
-          ./run.sh --file=release.md
+          ./run.sh --tpl=release.tpl --file=release.md
 
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v2
