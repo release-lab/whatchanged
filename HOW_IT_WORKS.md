@@ -55,3 +55,7 @@ Up to this point, the role of generator is to generate templates and which templ
 ### 5. formatter
 
 In this step we will format the output. For example, format markdown/json
+
+### 6. writer
+
+Output content at this stage, it determines whether to output a file or stdout

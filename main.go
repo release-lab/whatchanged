@@ -1,18 +1,16 @@
 package main
 
 import (
-	"bytes"
 	"flag"
 	"fmt"
-	"io"
 	"os"
-	"path"
 
 	parser "github.com/axetroy/changelog/1_parser"
 	extractor "github.com/axetroy/changelog/2_extractor"
 	transform "github.com/axetroy/changelog/3_transform"
 	generator "github.com/axetroy/changelog/4_generator"
 	formatter "github.com/axetroy/changelog/5_formatter"
+	writer "github.com/axetroy/changelog/6_writer"
 	"github.com/axetroy/changelog/internal/client"
 	"github.com/pkg/errors"
 )
@@ -154,30 +152,13 @@ func run() error {
 		return errors.WithStack(err)
 	}
 
-	var writer io.Writer
-
-	if outputFile != "" {
-		if !path.IsAbs(outputFile) {
-			outputFile = path.Join(cwd, outputFile)
-		}
-		file, err := os.Create(outputFile)
-
-		if err != nil {
-			return errors.WithStack(err)
-		}
-
-		writer = file
-	} else {
-		writer = os.Stdout
-	}
-
-	output, err = formatter.Format(output, format, templateFile)
+	formattedOutput, err := formatter.Format(output, format, templateFile)
 
 	if err != nil {
 		return errors.WithStack(err)
 	}
 
-	_, err = io.Copy(writer, bytes.NewBuffer(output))
+	_, err = writer.Write(formattedOutput, outputFile)
 
 	if err != nil {
 		return errors.WithStack(err)
