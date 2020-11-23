@@ -114,7 +114,7 @@ func Generate(g *client.GitClient, contexts []*transformer.TemplateContext, form
 
 					u.Path = u.Path + "/commit/" + longHash
 
-					return fmt.Sprintf(`[%s](%s)`, short, u.String())
+					return fmt.Sprintf("[`%s`](%s)", short, u.String())
 				},
 			})
 

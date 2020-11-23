@@ -32,5 +32,5 @@ const DEFAULT_TEMPLATE = `# {{ .Version }}
 
 ### Commits({{ len .Commits }}):
 {{range .Commits -}}
-- {{ hashURL .Hash }} {{ unescape .Field.Title }}
+- [{{- hashURL .Hash -}}] - {{ unescape .Field.Title }}
 {{ end }}`
