@@ -51,6 +51,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          clean: false
+          lfs: true
 
       - run: |
           ls -lsa ./.git
