@@ -1,0 +1,3 @@
+[submodule "__test__/vscode-deno"]
+	path = __test__/vscode-deno
+	url = https://github.com/axetroy/vscode-deno

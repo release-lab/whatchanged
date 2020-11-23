@@ -2,6 +2,8 @@ package client
 
 import (
 	"io"
+	"io/ioutil"
+	"os"
 	"path"
 	"regexp"
 	"sort"
@@ -25,7 +27,53 @@ type Tag struct {
 }
 
 func NewGitClient(dir string) (*GitClient, error) {
-	r, err := git.PlainOpen(path.Join(dir, ".git"))
+	var (
+		isProjectDir bool = false
+	)
+
+	cwd, err := os.Getwd()
+
+	if err != nil {
+		return nil, errors.WithStack(err)
+	}
+
+	if !path.IsAbs(dir) {
+		dir = path.Join(cwd, dir)
+	}
+
+	files, err := ioutil.ReadDir(dir)
+
+	if err != nil {
+		return nil, errors.WithStack(err)
+	}
+
+	for _, file := range files {
+		if file.Name() == ".git" {
+			if file.IsDir() {
+				isProjectDir = true
+			} else {
+				// git submodule
+				content, err := ioutil.ReadFile(path.Join(dir, file.Name()))
+
+				if err != nil {
+					return nil, errors.WithStack(err)
+				}
+
+				matcher := regexp.MustCompile(`gitdir: (.*)`).FindStringSubmatch(string(content))
+
+				subModuleGitDir := path.Join(dir, matcher[1])
+
+				dir = subModuleGitDir
+			}
+			break
+		}
+	}
+
+	if isProjectDir {
+		dir = path.Join(dir, ".git")
+	}
+
+	r, err := git.PlainOpen(dir)
 
 	if err != nil {
 		return nil, errors.WithStack(err)

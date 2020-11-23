@@ -100,6 +100,7 @@ func run() error {
 	if err != nil {
 		return errors.WithStack(err)
 	}
+
 	flag.StringVar(&projectDir, "dir", cwd, "Project dir")
 	flag.StringVar(&format, "fmt", "md", "The changelog format")
 	flag.StringVar(&preset, "preset", "default", "Cli built-in markdown template")
