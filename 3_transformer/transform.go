@@ -1,4 +1,4 @@
-package transform
+package transformer
 
 import (
 	extractor "github.com/axetroy/changelog/2_extractor"

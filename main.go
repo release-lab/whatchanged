@@ -7,7 +7,7 @@ import (
 
 	parser "github.com/axetroy/changelog/1_parser"
 	extractor "github.com/axetroy/changelog/2_extractor"
-	transform "github.com/axetroy/changelog/3_transform"
+	transformer "github.com/axetroy/changelog/3_transformer"
 	generator "github.com/axetroy/changelog/4_generator"
 	formatter "github.com/axetroy/changelog/5_formatter"
 	writer "github.com/axetroy/changelog/6_writer"
@@ -140,7 +140,7 @@ func run() error {
 		return errors.WithStack(err)
 	}
 
-	ctxs, err := transform.Transform(client, splices)
+	ctxs, err := transformer.Transform(client, splices)
 
 	if err != nil {
 		return errors.WithStack(err)

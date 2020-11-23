@@ -31,7 +31,7 @@ type Scope struct {
 
 After we specify the scope, we need, in the entire scope, which ones involve tags/commits
 
-### 3. Transform
+### 3. Transformer
 
 At this step, we already have relevant data
 
@@ -52,10 +52,10 @@ Up to this point, the role of generator is to generate templates and which templ
 - [x] Markdown
 - [ ] PlainText
 
-### 5. formatter
+### 5. Formatter
 
 In this step we will format the output. For example, format markdown/json
 
-### 6. writer
+### 6. Writer
 
 Output content at this stage, it determines whether to output a file or stdout

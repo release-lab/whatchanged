@@ -9,12 +9,12 @@ import (
 	"path"
 	"strings"
 
-	transform "github.com/axetroy/changelog/3_transform"
+	transformer "github.com/axetroy/changelog/3_transformer"
 	"github.com/axetroy/changelog/internal/client"
 	"github.com/pkg/errors"
 )
 
-func Generate(g *client.GitClient, contexts []*transform.TemplateContext, format string, preset string, templateFile string) ([]byte, error) {
+func Generate(g *client.GitClient, contexts []*transformer.TemplateContext, format string, preset string, templateFile string) ([]byte, error) {
 
 	switch format {
 	case "json":
