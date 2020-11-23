@@ -71,6 +71,9 @@ github.com/imdario/mergo
 github.com/jbenet/go-context/io
 # github.com/kevinburke/ssh_config v0.0.0-20190725054713-01f96b0aa0cd
 github.com/kevinburke/ssh_config
+# github.com/mattn/go-runewidth v0.0.9
+## explicit
+github.com/mattn/go-runewidth
 # github.com/mitchellh/go-homedir v1.1.0
 github.com/mitchellh/go-homedir
 # github.com/pkg/errors v0.8.1
@@ -78,8 +81,16 @@ github.com/mitchellh/go-homedir
 github.com/pkg/errors
 # github.com/pmezard/go-difflib v1.0.0
 github.com/pmezard/go-difflib/difflib
+# github.com/russross/blackfriday v1.5.3-0.20190124082335-a477dd164691
+github.com/russross/blackfriday
 # github.com/sergi/go-diff v1.1.0
 github.com/sergi/go-diff/diffmatchpatch
+# github.com/shurcooL/go v0.0.0-20200502201357-93f07166e636
+## explicit
+github.com/shurcooL/go/indentwriter
+# github.com/shurcooL/markdownfmt v0.0.0-20191117054414-21fe95c248e9
+## explicit
+github.com/shurcooL/markdownfmt/markdown
 # github.com/stretchr/testify v1.4.0
 ## explicit
 github.com/stretchr/testify/assert

@@ -12,6 +12,7 @@ import (
 	extractor "github.com/axetroy/changelog/2_extractor"
 	transform "github.com/axetroy/changelog/3_transform"
 	generator "github.com/axetroy/changelog/4_generator"
+	formatter "github.com/axetroy/changelog/5_formatter"
 	"github.com/axetroy/changelog/internal/client"
 	"github.com/pkg/errors"
 )
@@ -168,6 +169,12 @@ func run() error {
 		writer = file
 	} else {
 		writer = os.Stdout
+	}
+
+	output, err = formatter.Format(output, format, templateFile)
+
+	if err != nil {
+		return errors.WithStack(err)
 	}
 
 	_, err = io.Copy(writer, bytes.NewBuffer(output))
