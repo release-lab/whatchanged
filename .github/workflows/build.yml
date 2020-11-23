@@ -52,7 +52,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - run: ls -lsa ./.git
+      - run: |
+          ls -lsa ./.git
+          git --no-pager log
 
       - name: Generate release.md
         run: |
