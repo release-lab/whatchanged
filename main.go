@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"path"
 
 	parser "github.com/axetroy/changelog/1_parser"
 	extractor "github.com/axetroy/changelog/2_extractor"
@@ -44,6 +45,7 @@ OPTIONS:
   --version     Print version information.
   --dir         Specify the directory to be generated.
                 The directory should contain a .git folder. defaults to $PWD.
+  --file        Write output to file. default write to stdout.
   --fmt         The changelog format. Available options are "md"/"json".
                 Defaults to "md".
   --preset      Cli built-in markdown template. Available options are "default".
@@ -53,16 +55,16 @@ OPTIONS:
 
 EXAMPLES:
   # generate changelog from HEAD to <latest version>. equivalent to 'changelog HEAD~tag:0'
-	$ changelog
+  $ changelog
 
   # generate changelog of the specified version
   $ changelog v1.2.0
 
   # generate changelog within the specified range
-	$ changelog v1.3.0~v1.2.0
+  $ changelog v1.3.0~v1.2.0
 
-	# generate changelog from HEAD to <Nth tag>
-	$ changelog ~tag:0
+  # generate changelog from HEAD to <Nth tag>
+  $ changelog ~tag:0
 
   # generate changelog from <0th tag> to <2th tag>
   $ changelog tag:0~tag:2
@@ -71,7 +73,7 @@ EXAMPLES:
   $ changelog HEAD~v1.3.0
 
   # generate all changelog
-	$ changelog HEAD~
+  $ changelog HEAD~
 
   # generate changelog from two commit hashes
   $ changelog 770ed02~585445d
@@ -91,6 +93,7 @@ func run() error {
 		preset       string
 		templateFile string
 		format       string
+		outputFile   string
 	)
 
 	cwd, err := os.Getwd()
@@ -102,6 +105,7 @@ func run() error {
 	flag.StringVar(&format, "fmt", "md", "The changelog format")
 	flag.StringVar(&preset, "preset", "default", "Cli built-in markdown template")
 	flag.StringVar(&templateFile, "tpl", "", "Specify the template when generating")
+	flag.StringVar(&outputFile, "file", "", "Specify output result to file.")
 	flag.BoolVar(&showHelp, "help", false, "Print help information")
 	flag.BoolVar(&showVersion, "version", false, "Print version information")
 
@@ -149,7 +153,24 @@ func run() error {
 		return errors.WithStack(err)
 	}
 
-	_, err = io.Copy(os.Stdout, bytes.NewBuffer(output))
+	var writer io.Writer
+
+	if outputFile != "" {
+		if !path.IsAbs(outputFile) {
+			outputFile = path.Join(cwd, outputFile)
+		}
+		file, err := os.Create(outputFile)
+
+		if err != nil {
+			return errors.WithStack(err)
+		}
+
+		writer = file
+	} else {
+		writer = os.Stdout
+	}
+
+	_, err = io.Copy(writer, bytes.NewBuffer(output))
 
 	if err != nil {
 		return errors.WithStack(err)
