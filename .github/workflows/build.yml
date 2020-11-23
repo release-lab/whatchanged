@@ -52,8 +52,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          clean: false
-          lfs: true
+          fetch-depth: 0
 
       - run: |
           ls -lsa ./.git
