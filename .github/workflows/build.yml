@@ -54,7 +54,7 @@ jobs:
 
       - name: Generate release.md
         run: |
-          ./sh.sh --file=release.md
+          ./run.sh --file=release.md
 
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v2
