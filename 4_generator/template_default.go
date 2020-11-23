@@ -1,6 +1,6 @@
 package generator
 
-const defaultTemplate = `# {{ .Version }}
+const DEFAULT_TEMPLATE = `# {{ .Version }}
 
 {{- define "body" -}}
 {{range . -}}

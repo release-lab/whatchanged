@@ -44,7 +44,12 @@ OPTIONS:
   --version     Print version information.
   --dir         Specify the directory to be generated.
                 The directory should contain a .git folder. defaults to $PWD.
-  --tpl         Specify the directory to be generated.
+  --fmt         The changelog format. Available options are "md"/"json".
+                Defaults to "md".
+  --preset      Cli built-in markdown template. Available options are "default".
+                Only available when --fmt=md and --tpl is nil. Defaults to
+                "default".
+  --tpl         Specify the template file for generating. Only available when --fmt=md.
 
 EXAMPLES:
   # generate changelog from HEAD to <latest version>. equivalent to 'changelog HEAD~tag:0'
@@ -80,9 +85,12 @@ SOURCE CODE:
 
 func run() error {
 	var (
-		showHelp    bool
-		showVersion bool
-		projectDir  string
+		showHelp     bool
+		showVersion  bool
+		projectDir   string
+		preset       string
+		templateFile string
+		format       string
 	)
 
 	cwd, err := os.Getwd()
@@ -90,10 +98,12 @@ func run() error {
 	if err != nil {
 		return errors.WithStack(err)
 	}
-	flag.StringVar(&projectDir, "dir", cwd, "project dir")
-	flag.StringVar(&projectDir, "tpl", cwd, "TODO: generate changelog with template")
-	flag.BoolVar(&showHelp, "help", false, "print help information")
-	flag.BoolVar(&showVersion, "version", false, "print version information")
+	flag.StringVar(&projectDir, "dir", cwd, "Project dir")
+	flag.StringVar(&format, "fmt", "md", "The changelog format")
+	flag.StringVar(&preset, "preset", "default", "Cli built-in markdown template")
+	flag.StringVar(&templateFile, "tpl", "", "Specify the template when generating")
+	flag.BoolVar(&showHelp, "help", false, "Print help information")
+	flag.BoolVar(&showVersion, "version", false, "Print version information")
 
 	flag.Parse()
 
@@ -133,7 +143,7 @@ func run() error {
 		return errors.WithStack(err)
 	}
 
-	output, err := generator.Generate(client, ctxs)
+	output, err := generator.Generate(client, ctxs, format, preset, templateFile)
 
 	if err != nil {
 		return errors.WithStack(err)

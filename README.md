@@ -15,8 +15,8 @@ A cli to generate changelog
 feature:
 
 - [x] Cross-platform support
-- [x] Template Support
-- [ ] Custom template
+- [x] Preset template for generation
+- [x] Custom template file
 - [x] Conventional Commits Parser
 - [x] Generate multiple versions of change logs
 
@@ -55,26 +55,36 @@ OPTIONS:
   --version     Print version information.
   --dir         Specify the directory to be generated.
                 The directory should contain a .git folder. defaults to $PWD.
-  --tpl         Specify the directory to be generated.
+  --fmt         The changelog format. Available options are "md"/"json".
+                Defaults to "md".
+  --preset      Cli built-in markdown template. Available options are "default".
+                Only available when --fmt=md and --tpl is nil. Defaults to
+                "default".
+  --tpl         Specify the template file for generating. Only available when --fmt=md.
 
 EXAMPLES:
-  # generate changelog from HEAD to <latest version>
-  $ changelog
+  # generate changelog from HEAD to <latest version>. equivalent to 'changelog HEAD~tag:0'
+	$ changelog
 
   # generate changelog of the specified version
   $ changelog v1.2.0
 
   # generate changelog within the specified range
-  $ changelog v1.3.0~v1.2.0
+	$ changelog v1.3.0~v1.2.0
+
+	# generate changelog from HEAD to <Nth tag>
+	$ changelog ~tag:0
+
+  # generate changelog from <0th tag> to <2th tag>
+  $ changelog tag:0~tag:2
 
   # generate changelog from HEAD to specified version
   $ changelog HEAD~v1.3.0
 
   # generate all changelog
-  $ changelog HEAD~
+	$ changelog HEAD~
 
   # generate changelog from two commit hashes
-  # supports 7-bit short hash and 40-bit long hash
   $ changelog 770ed02~585445d
 
   # Generate changelog for the specified project
