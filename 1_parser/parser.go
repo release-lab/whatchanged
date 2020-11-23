@@ -3,6 +3,7 @@ package parser
 import (
 	"fmt"
 	"regexp"
+	"strconv"
 	"strings"
 
 	"github.com/axetroy/changelog/internal/client"
@@ -24,6 +25,7 @@ type Scope struct {
 var (
 	regShortHash = regexp.MustCompile(`^[a-z\d]{7}$`)
 	regLongHash  = regexp.MustCompile(`^[a-z\d]{40}$`)
+	regTag       = regexp.MustCompile(`^tag:(\d+)$`)
 )
 
 func getCommitFromHEAD(git *client.GitClient) (*object.Commit, error) {
@@ -69,6 +71,22 @@ func getCommit(git *client.GitClient, version string, isStart bool) (*object.Com
 		}
 
 		return commit, nil
+	} else if regTag.MatchString(version) {
+		matcher := regTag.FindStringSubmatch(version)
+
+		tagIndex, err := strconv.ParseInt(matcher[1], 10, 10)
+
+		if err != nil {
+			return nil, errors.WithStack(err)
+		}
+
+		tag, err := git.TagN(int(tagIndex))
+
+		if err != nil {
+			return nil, errors.WithStack(err)
+		}
+
+		return tag.Commit, nil
 	} else if regShortHash.MatchString(version) {
 		return git.CommitByShort(version)
 	} else if regLongHash.MatchString(version) {

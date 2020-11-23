@@ -47,23 +47,26 @@ OPTIONS:
   --tpl         Specify the directory to be generated.
 
 EXAMPLES:
-  # generate changelog from HEAD to <latest version>
-  $ changelog
+  # generate changelog from HEAD to <latest version>. equivalent to 'changelog HEAD~tag:0'
+	$ changelog
 
   # generate changelog of the specified version
   $ changelog v1.2.0
 
   # generate changelog within the specified range
-  $ changelog v1.3.0~v1.2.0
+	$ changelog v1.3.0~v1.2.0
+
+	# generate changelog from HEAD to <Nth tag>
+	$ changelog ~tag:0
+
+  # generate changelog from <0th tag> to <2th tag>
+  $ changelog tag:0~tag:2
 
   # generate changelog from HEAD to specified version
   $ changelog HEAD~v1.3.0
 
   # generate all changelog
 	$ changelog HEAD~
-
-	# generate all changelog
-  $ changelog HEAD~
 
   # generate changelog from two commit hashes
   $ changelog 770ed02~585445d
