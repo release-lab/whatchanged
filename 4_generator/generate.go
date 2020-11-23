@@ -16,7 +16,12 @@ func Generate(g *client.GitClient, contexts []*transform.TemplateContext) ([]byt
 	for _, ctx := range contexts {
 		t := template.New(ctx.Version)
 
-		t.Funcs(template.FuncMap{"StringsJoin": strings.Join})
+		t.Funcs(template.FuncMap{
+			"stringsJoin": strings.Join,
+			"unescape": func(s string) template.HTML {
+				return template.HTML(s)
+			},
+		})
 
 		if t, err := t.Parse(defaultTemplate); err != nil {
 			return nil, errors.WithStack(err)

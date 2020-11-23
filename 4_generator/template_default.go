@@ -4,7 +4,7 @@ const defaultTemplate = `# {{ .Version }}
 
 {{- define "body" -}}
 {{range . -}}
-- {{if .Field.Header.Scope }}**{{ .Field.Header.Scope }}**: {{ end }}{{ .Field.Header.Subject }}({{.Short}}) (thanks @{{ .Author.Name }}){{if .Field.Footer }} {{if .Field.Footer.Closes }}, Closes: {{ StringsJoin .Field.Footer.Closes "," }} {{- end }}  {{- end}}
+- {{if .Field.Header.Scope }}**{{ unescape .Field.Header.Scope }}**: {{ end }}{{ unescape .Field.Header.Subject }}({{.Short}}) (thanks @{{ unescape .Author.Name }}){{if .Field.Footer }} {{if .Field.Footer.Closes }}, Closes: {{ stringsJoin .Field.Footer.Closes "," }} {{- end }}  {{- end}}
 {{ end }}
 {{- end -}}
 {{if .Feat}}
@@ -34,12 +34,12 @@ const defaultTemplate = `# {{ .Version }}
 {{if .BreakingChanges}}
 ### BREAKING CHANGES:
 {{ range .BreakingChanges -}}
-- {{if .Field.Footer.BreakingChange.Title}}{{ .Field.Footer.BreakingChange.Title }}{{ else }}{{ .Field.Title }}{{ end }}
-{{ .Field.Footer.BreakingChange.Content }}
+- {{if .Field.Footer.BreakingChange.Title}}{{ unescape .Field.Footer.BreakingChange.Title }}{{ else }}{{ unescape .Field.Title }}{{ end }}
+{{ unescape .Field.Footer.BreakingChange.Content }}
 {{- end -}}
 {{- end}}
 
 ### Commits({{ len .Commits }}):
 {{range .Commits -}}
-- **{{ .Short }}** {{ .Field.Title }}
+- **{{ .Short }}** {{ unescape .Field.Title }}
 {{ end }}`
