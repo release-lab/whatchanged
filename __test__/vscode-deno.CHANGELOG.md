@@ -5,18 +5,6 @@ v4.0.0
 
 -	deprecated(7729788) (thanks @axetroy)
 
-### Code Refactoring:
-
--	rename function name(a6cb403) (thanks @axetroy)
--	do not create json module(76b550c) (thanks @axetroy)
--	update(cde4dda) (thanks @axetroy)
--	remove unused extension(c20037d) (thanks @axetroy)
--	move configuration to Core module(8066121) (thanks @axetroy)
-
-### Documentation:
-
--	update changelog(d30f167) (thanks @axetroy)
-
 ### Commits(16):
 
 -	**151641e** 4.0.0
@@ -45,22 +33,6 @@ v4.0.0
 
 -	added unstable settings option (#167)(1a4a230) (thanks @Luca Casonato)
 
-### Code Refactoring:
-
--	sort deps tree viewer(c7009d7) (thanks @axetroy)
--	improve code(6414b9a) (thanks @axetroy)
-
-### Testing:
-
--	fix test case(14603bd) (thanks @axetroy)
-
-### Documentation:
-
--	update changelog(4e36065) (thanks @axetroy)
--	update i18n(2f7845f) (thanks @axetroy)
--	update readme(8ea4cf2) (thanks @axetroy)
--	update i18n(9ab4dd4) (thanks @axetroy)
-
 ### Commits(16):
 
 -	**6ab3817** 3.7.0
@@ -88,20 +60,6 @@ v4.0.0
 -	file protocol import statement not work. close #146(67897bc) (thanks @axetroy)
 
 -	not deno project also show deno deps tree view.(81303df) (thanks @axetroy)
-
-### Code Refactoring:
-
--	improve code(2ba8078) (thanks @axetroy)
--	fix typo(85514ef) (thanks @axetroy)
--	update i18n(30b78ef) (thanks @axetroy)
--	remove unused i18n(5c785cc) (thanks @axetroy)
--	remove unused code(e29effc) (thanks @axetroy)
--	improve code(96ed751) (thanks @axetroy)
-
-### Documentation:
-
--	update changelog(8a9ea10) (thanks @axetroy)
--	fix typo (#158)(eedf35d) (thanks @bouzuya)
 
 ### Commits(22):
 
@@ -139,16 +97,6 @@ v4.0.0
 
 -	**deps**: update dependency semver to v7.3.1 (#143)(16a112b) (thanks @renovate[bot])
 
-### Code Refactoring:
-
--	improve code(ffdf7ff) (thanks @axetroy)
--	improve file_walker(cc79850) (thanks @axetroy)
-
-### Documentation:
-
--	update changelog(963e134) (thanks @axetroy)
--	update example(09a57a2) (thanks @axetroy)
-
 ### Commits(9):
 
 -	**19fdd52** 3.6.1
@@ -174,15 +122,6 @@ v4.0.0
 -	**deps**: update dependency semver to v7.3.0 (#140)(13e3947) (thanks @renovate[bot])
 -	**deps**: update dependency semver to v7.2.2 (#137)(d9bd9c8) (thanks @renovate[bot])
 
-### Code Refactoring:
-
--	improve module resolver(6881e33) (thanks @axetroy)
-
-### Documentation:
-
--	update changelog(41fbefe) (thanks @axetroy)
--	update readme(85b68d7) (thanks @axetroy)
-
 ### Commits(12):
 
 -	**8d1d3f7** 3.6.0
@@ -205,11 +144,6 @@ v4.0.0
 
 -	add more test case for import_map. ref #132(e4b1d6a) (thanks @axetroy)
 
-### Documentation:
-
--	update changelog(b7e2c14) (thanks @axetroy)
--	update readme(8f5ddf1) (thanks @axetroy)
-
 ### Commits(4):
 
 -	**cc94bf2** 3.5.1
@@ -229,11 +163,6 @@ v4.0.0
 ### Bugs fixed:
 
 -	refresh diagnostic not work(f8e8e70) (thanks @axetroy)
-
-### Documentation:
-
--	update changelog(d6f099e) (thanks @axetroy)
--	update changelog(b85da47) (thanks @axetroy)
 
 ### Commits(8):
 
@@ -255,10 +184,6 @@ v4.0.0
 
 -	**deps**: update dependency semver to v7.2.1 (#128)(90f4ad2) (thanks @renovate[bot])
 
-### Code Refactoring:
-
--	add extension support for resolvedModule(5ea1d19) (thanks @axetroy)
-
 ### Commits(10):
 
 -	**3944ed0** 3.4.2
@@ -278,11 +203,6 @@ v4.0.0
 	### Bugs fixed:
 
 -	Tsserver crashes in some cases(11563b4) (thanks @axetroy)
-
-### Documentation:
-
--	update changelog(27e717e) (thanks @axetroy)
--	add example for react(078065c) (thanks @axetroy)
 
 ### Commits(9):
 
@@ -307,10 +227,6 @@ v4.0.0
 
 -	importmap not work when set to a relative path. close #103(0e8398f) (thanks @axetroy)
 
-### Documentation:
-
--	update changelog(8831fac) (thanks @axetroy)
-
 ### Commits(4):
 
 -	**0347042** 3.4.0
@@ -334,15 +250,6 @@ v4.0.0
 -	**deps**: update dependency vscode-languageclient to v6.1.3 (#101)(f5a743c) (thanks @renovate[bot])
 
 -	**deps**: update dependency vscode-languageclient to v6.1.2 (#99)(550f0bc) (thanks @renovate[bot])
-
-### Code Refactoring:
-
--	merge(b3c0cec) (thanks @axetroy)
--	format code(cfd2147) (thanks @axetroy)
-
-### Documentation:
-
--	update changelog(a7881b9) (thanks @axetroy)
 
 ### Commits(20):
 
@@ -379,23 +286,6 @@ v4.0.0
 ### Bugs fixed:
 
 -	cannot resolve module if location headers is relative or absolute path. close #97(75d6027) (thanks @axetroy)
-
-### Code Refactoring:
-
--	improve module resolver(011cbb3) (thanks @axetroy)
--	improve code(427a3ca) (thanks @axetroy)
--	bump to vscode^1.43.0(1967ae3) (thanks @axetroy)
--	improve code(033cdb4) (thanks @axetroy)
--	improve hash_meta(a6be8c5) (thanks @axetroy)
-
-### Testing:
-
--	improve test case(f9879b7) (thanks @axetroy)
-
-### Documentation:
-
--	update changelog(3a4eec6) (thanks @axetroy)
--	update readme(445ea65) (thanks @axetroy)
 
 ### BREAKING CHANGES:
 
@@ -455,27 +345,6 @@ v4.0.0
 -	auto-import not work for some modules. close #44(11d38b3) (thanks @axetroy)
 -	If query exists in url, module will not be parsed correctly(a8965b5) (thanks @axetroy)
 
-### Code Refactoring:
-
--	improve code(7cd9a55) (thanks @axetroy)
--	improve code(de9506c) (thanks @axetroy)
--	re-enable noUnusedLocals in tsconfig.json(8e489b5) (thanks @axetroy)
--	remove unused code(3d642bd) (thanks @axetroy)
--	improve code(1a2b7b6) (thanks @axetroy)
--	Improve code quality(5794907) (thanks @axetroy)
--	improve code(f974d97) (thanks @axetroy)
--	improve code(1c156b1) (thanks @axetroy)
-
-### Testing:
-
--	fix test(a4e1a14) (thanks @axetroy)
--	add more test case for module_resolver(649b9dc) (thanks @axetroy)
--	improve test case(2ca1638) (thanks @axetroy)
-
-### Documentation:
-
--	update changelog(5c7604f) (thanks @axetroy)
-
 ### Commits(18):
 
 -	**a4e1a14** test: fix test
@@ -506,34 +375,9 @@ v4.0.0
 
 -	support Deno Dependency Viewer. close #83(1b327b8) (thanks @axetroy)
 
-### Code Refactoring:
-
--	improve diagnostics(fe1682f) (thanks @axetroy)
--	rename function name(3f8d578) (thanks @axetroy)
--	normalize file path(d8abdf3) (thanks @axetroy)
--	improve start server logic(c0e2300) (thanks @axetroy)
-
-### Testing:
-
--	write test case for deno_deps(df34869) (thanks @axetroy)
--	improve test case(4cfe7b8) (thanks @axetroy)
--	improve test(633ae31) (thanks @axetroy)
--	improve test case(7483cb7) (thanks @axetroy)
--	improve test case(22c8bce) (thanks @axetroy)
--	improve test case(64bf615) (thanks @axetroy)
--	add test case(a19c04b) (thanks @axetroy)
--	update test case(ba54a38) (thanks @axetroy)
--	add more test for util(465fa90) (thanks @axetroy)
--	fix test case(5291704) (thanks @axetroy)
--	add test case for file_walker(98aed6a) (thanks @axetroy)
-
 ### Performance improves:
 
 -	improve performance for file_walker(77ce898) (thanks @axetroy)
-
-### Documentation:
-
--	update changelog(1772477) (thanks @axetroy)
 
 ### Commits(26):
 
@@ -571,10 +415,6 @@ v4.0.0
 
 -	auto-import rewrite not work on Windows(3602979) (thanks @axetroy)
 
-### Documentation:
-
--	update changelog(d68d065) (thanks @axetroy)
-
 ### Commits(3):
 
 -	**fd71d0c** 3.1.1
@@ -593,16 +433,6 @@ v4.0.0
 ### Bugs fixed:
 
 -	normalize filepath(f5ecd71) (thanks @axetroy)
-
-### Code Refactoring:
-
--	extra common code to util(5316648) (thanks @axetroy)
--	extra common code to util(b97a2cf) (thanks @axetroy)
--	update(8f79348) (thanks @axetroy)
-
-### Documentation:
-
--	update changelog(521ca52) (thanks @axetroy)
 
 ### Commits(9):
 
@@ -623,14 +453,6 @@ v4.0.0
 
 -	typescript server crash if create a new untitled typescript TextDocument ref: #86(e5643e1) (thanks @axetroy)
 
-### Code Refactoring:
-
--	improve code(002da57) (thanks @axetroy)
-
-### Documentation:
-
--	update changelog(74c1954) (thanks @axetroy)
-
 ### Commits(6):
 
 -	**c790727** 3.0.6
@@ -647,10 +469,6 @@ v4.0.0
 
 -	extension not work when project has tsconfig.json at root dir(9ce2874) (thanks @axetroy)
 
-### Documentation:
-
--	update readme and changelog(4517b41) (thanks @axetroy)
-
 ### Commits(4):
 
 -	**215d09c** 3.0.5
@@ -666,16 +484,6 @@ v4.0.0
 -	invalid http tester regular expression(3d51ab0) (thanks @axetroy)
 
 -	'fetch module' on work correctly for importmap module(087d834) (thanks @axetroy)
-
-### Code Refactoring:
-
--	improve get type of hash_meta(b3b860b) (thanks @axetroy)
--	improve code(180bde1) (thanks @axetroy)
-
-### Documentation:
-
--	update readme(310f488) (thanks @axetroy)
--	update changelog(e6d6e0a) (thanks @axetroy)
 
 ### Commits(10):
 
@@ -700,20 +508,6 @@ v4.0.0
 -	can not set TextDocument's language mode correctly in Windows(83d6e34) (thanks @axetroy)
 
 -	somethine server does not ready and send notify(271c9cd) (thanks @axetroy)
-
-### Code Refactoring:
-
--	improve var name(9cb72a8) (thanks @axetroy)
--	update(5e54d4e) (thanks @axetroy)
--	remove unnecessary await(d3e5654) (thanks @axetroy)
--	remove unnecessary await(e1ab675) (thanks @axetroy)
--	typescript-deno-plugin(6170e21) (thanks @axetroy)
-
-### Documentation:
-
--	update changelog(b50908b) (thanks @axetroy)
--	update readme(360c19b) (thanks @axetroy)
--	Adding note about tsconfig.json (#82)(5fd5806) (thanks @Yusuke Sakurai)
 
 ### Commits(20):
 
@@ -745,11 +539,6 @@ v4.0.0
 
 -	parse .vscode/settings.json with json5(b3de3d3) (thanks @axetroy)
 
-### Documentation:
-
--	update changelog(1ab3532) (thanks @axetroy)
--	add readme for typescript-deno-plugin(da68d42) (thanks @axetroy)
-
 ### Commits(6):
 
 -	**eae5fb6** 3.0.2
@@ -765,10 +554,6 @@ v4.0.0
 	### New feature:
 
 -	re-enable typescript-deno-plugin with workspace's typescript version. close #78(7a53e70) (thanks @axetroy)
-
-### Documentation:
-
--	update changelog(6d856ee) (thanks @axetroy)
 
 ### Commits(3):
 
@@ -816,55 +601,6 @@ v4.0.0
 -	fix invalid regexp for Windows(a96e93a) (thanks @axetroy)
 -	path resolution of Windows(a9e3336) (thanks @axetroy)
 -	**deps**: update dependency vscode-languageserver-textdocument to v1.0.1 (#66)(c49b0fa) (thanks @renovate[bot])
-
-### Code Refactoring:
-
--	improve code(89b7d4c) (thanks @axetroy)
--	improve code(3e560f2) (thanks @axetroy)
--	improve code(80a47f6) (thanks @axetroy)
--	add normalizeImportStatement and test case(e53af86) (thanks @axetroy)
--	improve code(2dd0bdf) (thanks @axetroy)
--	make sure invalid url will not throw error(06cd9d1) (thanks @axetroy)
--	remove unused code(cc8318c) (thanks @axetroy)
--	move common code to core(ef0e24a) (thanks @axetroy)
--	update code struct(42c65ab) (thanks @axetroy)
--	Extract common code(9568757) (thanks @axetroy)
--	import map(8b21c1d) (thanks @axetroy)
--	rename function name(e4493f7) (thanks @axetroy)
--	improve Deno Language Server(a472547) (thanks @axetroy)
--	improve diagnostics(cc20091) (thanks @axetroy)
--	improve path handler(b2927a7) (thanks @axetroy)
--	improve filepath handler(2223c40) (thanks @axetroy)
-
-### Testing:
-
--	add test for module_resolver if redirect(68026ad) (thanks @axetroy)
--	add more test for module_resolver(0e6fb19) (thanks @axetroy)
--	add more test for hash_meta(429e9b2) (thanks @axetroy)
--	make sure deno_dir(5553b78) (thanks @axetroy)
--	add cache_map and test case(9663a63) (thanks @axetroy)
--	add deno_compile_hint test case(03a808b) (thanks @axetroy)
--	add more test for import_map(57647d9) (thanks @axetroy)
--	generate coverage(6d842b6) (thanks @axetroy)
--	add test case for remote module with query(4c05138) (thanks @axetroy)
--	remove unused test case(f69a6d1) (thanks @axetroy)
--	fix test(6206477) (thanks @axetroy)
--	add module resolver unit test(97bbd37) (thanks @axetroy)
--	add testcase for deno module(3c50e4c) (thanks @axetroy)
--	add getDenoDeps testcase(af59922) (thanks @axetroy)
--	add test case for manifest module(27ca82c) (thanks @axetroy)
--	add unit test for client/utils.ts(96f5c0a) (thanks @axetroy)
--	disable format test(b71ba68) (thanks @axetroy)
--	update(3f31927) (thanks @axetroy)
--	add unit test for deno class. #39(b85baf9) (thanks @axetroy)
-
-### Documentation:
-
--	update changelog(85b4c4f) (thanks @axetroy)
--	update readme(85ffa3c) (thanks @axetroy)
--	update readme(8e4322f) (thanks @axetroy)
--	update readme(10d4223) (thanks @axetroy)
--	update(73d4dc7) (thanks @axetroy)
 
 ### Commits(82):
 
@@ -958,10 +694,6 @@ v4.0.0
 
 -	Try to fix the path processing under windows. ref: #61(e3d5bf2) (thanks @axetroy)
 
-### Documentation:
-
--	update changelog(a650f19) (thanks @axetroy)
-
 ### Commits(3):
 
 -	**cb399d1** 2.0.4
@@ -974,10 +706,6 @@ v4.0.0
 	### Bugs fixed:
 
 -	Try to fix the path processing under windows. ref: #61(8c02221) (thanks @axetroy)
-
-### Documentation:
-
--	update changelog(eeab8fb) (thanks @axetroy)
 
 ### Commits(3):
 
@@ -993,14 +721,6 @@ v4.0.0
 -	Auto-Import for Deno module incorrectly. now use http protocol modules instead of relative paths. close #44(df71fd1) (thanks @axetroy)
 
 -	typescript-deno-plugin will be disable when open the file out of workspace.(b0f3aa6) (thanks @axetroy)
-
-### Code Refactoring:
-
--	enable strict mode(a05a777) (thanks @axetroy)
-
-### Documentation:
-
--	update changelog(5cb1f61) (thanks @axetroy)
 
 ### Commits(5):
 
@@ -1023,21 +743,6 @@ v4.0.0
 -	**deps**: update dependency vscode-languageclient to v6.1.1 (#58)(ae547f9) (thanks @renovate[bot])
 -	**deps**: update dependency vscode-languageserver to v6.1.1 (#57)(e687f20) (thanks @renovate[bot])
 -	import module from 'file:///path/to/module/mod.ts' not work(962411d) (thanks @axetroy)
-
-### Code Refactoring:
-
--	improve code(5ad9851) (thanks @axetroy)
--	improve code(4ef9673) (thanks @axetroy)
--	improve code(57703f4) (thanks @axetroy)
--	update(3b58dbd) (thanks @axetroy)
-
-### Documentation:
-
--	update changelog(9eeac21) (thanks @axetroy)
--	update readme(d48f7de) (thanks @axetroy)
--	update readme(eee5114) (thanks @axetroy)
--	update(41d6e73) (thanks @axetroy)
--	update readme(4592767) (thanks @axetroy)
 
 ### Commits(17):
 
@@ -1072,12 +777,6 @@ v4.0.0
 
 -	upgrade Deno formatter (#50)(e872d1c) (thanks @Axetroy)
 
-### Documentation:
-
--	update changelog(ee36bd6) (thanks @axetroy)
--	update readme(ff14377) (thanks @axetroy)
--	update readme(865503c) (thanks @axetroy)
-
 ### Commits(8):
 
 -	**b98eb3f** 2.0.0
@@ -1099,15 +798,6 @@ v4.0.0
 -	Now opening the js file will also launch the extension. the same with tsserver.(d4a9beb) (thanks @axetroy)
 
 -	support external type definitions with `X-TypeScript-Types` headers. close #35(98253dd) (thanks @axetroy)
-
-### Code Refactoring:
-
--	update DENO_DIR(541456f) (thanks @axetroy)
-
-### Documentation:
-
--	update changelog(84ab4bd) (thanks @axetroy)
--	update README.md(46a4798) (thanks @axetroy)
 
 ### Commits(11):
 
@@ -1137,16 +827,6 @@ v4.0.0
 -	Module index is incorrect. close #47(d69e90a) (thanks @axetroy)
 -	module import intelligent no work correctly when import from 'http/server.ts'(055d062) (thanks @axetroy)
 
-### Code Refactoring:
-
--	update(4098c00) (thanks @axetroy)
-
-### Documentation:
-
--	update changelog(b98fe61) (thanks @axetroy)
--	update changelog(5a31ba3) (thanks @axetroy)
--	Improve grammar and sentence structure (#46)(9d709e3) (thanks @David)
-
 ### Commits(9):
 
 -	**46dd9cc** 1.22.0
@@ -1165,10 +845,6 @@ v4.0.0
 	### New feature:
 
 -	support external type definitions with '/// <reference types=https://raw.githubusercontent.com/date-fns/date-fns/master/typings.d.ts />'. ref: #35(f7affb2) (thanks @axetroy)
-
-### Documentation:
-
--	update changelog(7f4509e) (thanks @axetroy)
 
 ### Commits(7):
 
@@ -1190,17 +866,6 @@ v4.0.0
 ### Bugs fixed:
 
 -	update ignore diagnostics code. close #41(34e6c10) (thanks @axetroy)
-
-### Code Refactoring:
-
--	rewrite typescript-deno-plugin(8c4cc59) (thanks @axetroy)
--	reformat code(499b119) (thanks @axetroy)
-
-### Documentation:
-
--	update changelog(d054f27) (thanks @axetroy)
--	add Github issue template(77a6740) (thanks @axetroy)
--	Fix wrong configuration file path(07ef9ae) (thanks @axetroy)
 
 ### Commits(8):
 
@@ -1225,11 +890,6 @@ v4.0.0
 ### Bugs fixed:
 
 -	esm module resolver(ffe30fb) (thanks @axetroy)
-
-### Documentation:
-
--	update changelog(56f5096) (thanks @axetroy)
--	add screenshot(a7dffc8) (thanks @axetroy)
 
 ### Commits(6):
 
@@ -1263,16 +923,6 @@ v4.0.0
 
 -	create local module no work(bcceff2) (thanks @axetroy)
 
-### Code Refactoring:
-
--	improve typescript plugin(9b70328) (thanks @axetroy)
--	Remove redundant code(75fd7f2) (thanks @axetroy)
--	refactor typescript plugin(46d9450) (thanks @axetroy)
-
-### Documentation:
-
--	update CHANGELOG.md(d35c922) (thanks @axetroy)
-
 ### Commits(9):
 
 -	**6c05649** 1.18.0
@@ -1295,15 +945,6 @@ v4.0.0
 ### Bugs fixed:
 
 -	create a local module if is not relative or absolute path(21bacce) (thanks @axetroy)
-
-### Documentation:
-
--	update changelog(327782b) (thanks @axetroy)
--	update configuration description(b67ff06) (thanks @axetroy)
--	update README.md(a2dfbdb) (thanks @axetroy)
--	add screenshot(92cac97) (thanks @axetroy)
--	update README.md(14cbcf8) (thanks @axetroy)
--	update README.md(7b9267c) (thanks @axetroy)
 
 ### Commits(10):
 
@@ -1329,14 +970,6 @@ v4.0.0
 
 -	add default content for creating a file when fix missing local module(1404f2f) (thanks @axetroy)
 
-### Code Refactoring:
-
--	refactor code(a3c1828) (thanks @axetroy)
-
-### Documentation:
-
--	update CHANGELOG.md(ef03c70) (thanks @axetroy)
-
 ### Commits(6):
 
 -	**b5cdaed** 1.16.0
@@ -1357,11 +990,6 @@ v4.0.0
 
 -	**deps**: pin dependency execa to 4.0.0 (#30)(47ca6e4) (thanks @renovate[bot])
 -	`typescript-deno-plugin` may not find modules and cause `typescript` to crash(8bdc5db) (thanks @axetroy)
-
-### Documentation:
-
--	update CHANGELOG.md(f059bc3) (thanks @axetroy)
--	update README.md(b6e6d76) (thanks @axetroy)
 
 ### Commits(6):
 
@@ -1387,17 +1015,6 @@ v4.0.0
 
 -	lock prettier version to make sure formatter work on deno v0.32.0. We will switch to dprint in a future release and only suppport formatting typescript/javascipt code.(78b3266) (thanks @axetroy)
 
-### Code Refactoring:
-
--	reformat code(1f1cd14) (thanks @axetroy)
-
-### Documentation:
-
--	update changelog(4f14872) (thanks @axetroy)
--	update README.md(e8e13d9) (thanks @axetroy)
--	update screenshot.gif(7184c9b) (thanks @axetroy)
--	update README.md(aa9cb4a) (thanks @axetroy)
-
 ### Commits(10):
 
 -	**6f35673** 1.14.0
@@ -1418,10 +1035,6 @@ v4.0.0
 
 -	cannot find module if redirected. close #27(6fd7b13) (thanks @axetroy)
 
-### Documentation:
-
--	update changelog(377ad30) (thanks @axetroy)
-
 ### Commits(3):
 
 -	**2600f45** 1.13.1
@@ -1440,16 +1053,6 @@ v4.0.0
 -	can not import module which end with `.ts`(0169107) (thanks @axetroy)
 -	**deps**: pin dependency vscode-uri to 2.1.1 (#26)(5cdf757) (thanks @renovate[bot])
 -	improve import module position(8a999c6) (thanks @axetroy)
-
-### Code Refactoring:
-
--	Remove redundant code(f188e99) (thanks @axetroy)
--	remove utils.ts(c9f51c1) (thanks @axetroy)
--	diagnostics(a74a9ec) (thanks @axetroy)
-
-### Documentation:
-
--	update changelog(ad95ce5) (thanks @axetroy)
 
 ### Commits(10):
 
@@ -1474,21 +1077,6 @@ v4.0.0
 -	Warning when import from http(72d9db3) (thanks @axetroy)
 
 -	remove `deno.enable = true` by default(532cdf0) (thanks @axetroy)
-
-### Code Refactoring:
-
--	diagnostic(45b4267) (thanks @axetroy)
--	server(8e7bf88) (thanks @axetroy)
--	rewrite extension(916e5ca) (thanks @axetroy)
--	improve multiple workspace. close #23(4e9ab53) (thanks @axetroy)
-
-### Documentation:
-
--	add CHANGELOG.md(e8e5004) (thanks @axetroy)
--	fix typo(b6cd461) (thanks @axetroy)
--	update README.md(27c2440) (thanks @axetroy)
--	update README.md(e4fb383) (thanks @axetroy)
--	update README.md(356530c) (thanks @axetroy)
 
 ### Commits(14):
 
@@ -1520,14 +1108,6 @@ v4.0.0
 -	add missing typescript deps(751261a) (thanks @axetroy)
 -	**deps**: pin dependency get-port to 5.1.1 (#18)(d3cf219) (thanks @renovate[bot])
 
-### Code Refactoring:
-
--	improve sync workspace forlder(8bb4703) (thanks @axetroy)
-
-### Documentation:
-
--	update README.md(2d9a32d) (thanks @axetroy)
-
 ### Commits(7):
 
 -	**1b6a2f8** 1.11.0
@@ -1557,12 +1137,6 @@ v4.0.0
 
 -	completion show everywhere(21741a2) (thanks @axetroy)
 
-### Code Refactoring:
-
--	refactor code(a9760fe) (thanks @axetroy)
--	add freeport(749e181) (thanks @axetroy)
--	rewrite to C/S model with LSP (#15)(8674e32) (thanks @Axetroy)
-
 ### Commits(6):
 
 -	**5b1d518** 1.10.0
@@ -1590,10 +1164,6 @@ v4.0.0
 	### New feature:
 
 -	support top-level await. close #10(d1cd97c) (thanks @axetroy)
-
-### Documentation:
-
--	add screenshot.gif(7872947) (thanks @axetroy)
 
 ### Commits(7):
 
@@ -1630,11 +1200,6 @@ v4.0.0
 ### Bugs fixed:
 
 -	only allow .d.ts file for deno.dtsFilepaths(8916695) (thanks @axetroy)
-
-### Documentation:
-
--	update README.md(9a58fc5) (thanks @axetroy)
--	update README.md(06d4110) (thanks @axetroy)
 
 ### Commits(6):
 
@@ -1677,11 +1242,6 @@ v4.0.0
 -	try fix ci(e21e3f9) (thanks @axetroy)
 
 -	use yarn package for vsce(67b2efd) (thanks @axetroy)
-
-### Documentation:
-
--	update README.md(356a86c) (thanks @axetroy)
--	update readme(44ba16b) (thanks @axetroy)
 
 ### Commits(8):
 

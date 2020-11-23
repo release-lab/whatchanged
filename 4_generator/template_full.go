@@ -1,6 +1,6 @@
 package generator
 
-const DEFAULT_TEMPLATE = `# {{ .Version }}
+const FULL_TEMPLATE = `# {{ .Version }}
 
 {{- define "body" -}}
 {{range . -}}
@@ -18,9 +18,24 @@ const DEFAULT_TEMPLATE = `# {{ .Version }}
 {{ template "body" .Fix }}
 {{- end -}}
 
+{{if .Refactor}}
+### Code Refactoring:
+{{ template "body" .Refactor }}
+{{- end -}}
+
+{{if .Test}}
+### Testing:
+{{ template "body" .Test }}
+{{- end -}}
+
 {{if .Perf}}
 ### Performance improves:
 {{ template "body" .Perf }}
+{{- end -}}
+
+{{if .Docs}}
+### Documentation:
+{{ template "body" .Docs }}
 {{- end -}}
 
 {{if .BreakingChanges}}

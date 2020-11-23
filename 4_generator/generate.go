@@ -51,6 +51,8 @@ func Generate(g *client.GitClient, contexts []*transformer.TemplateContext, form
 			switch preset {
 			case "default":
 				templateStr = DEFAULT_TEMPLATE
+			case "full":
+				templateStr = FULL_TEMPLATE
 			default:
 				return nil, errors.Errorf("invalid preset '%s'", preset)
 			}
