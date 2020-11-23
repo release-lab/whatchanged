@@ -20,7 +20,8 @@ feature:
 
 Here are some changelog that have been generated
 
-- [vscode-deno](__test__/vscode-deno.CHANGELOG.md)
+- [github.com/axetroy/vscode-deno](__test__/vscode-deno.CHANGELOG.md)
+- [github.com/axetroy/changelog](CHANGELOG.md)
 
 ### Usage
 

@@ -1,5 +1,5 @@
-Unreleased
-==========
+v0.1.0
+======
 
 ### 🔥 New feature:
 
@@ -22,8 +22,10 @@ Unreleased
 -	if empty argument for command line([`9c79fd9`](https://github.com/axetroy/changelog/commit/9c79fd91bbf88f7861b4aca89ced8384cf2b9bcd)) (thanks @axetroy)
 -	**ci**: remove unsued code([`66bcf8f`](https://github.com/axetroy/changelog/commit/66bcf8f43db85409e0392c93f2e347ed91699e81)) (thanks @axetroy)
 
-### 💪 Commits(31):
+### 💪 Commits(33):
 
+-	[`7c687f7`](https://github.com/axetroy/changelog/commit/7c687f7d729f199ee295109012cc5a2661f96c54) - ci: increase linter timeout
+-	[`b61c491`](https://github.com/axetroy/changelog/commit/b61c49171a776045d89e6cbaad82326070e2db78) - refactor: improve default preset
 -	[`1292dfc`](https://github.com/axetroy/changelog/commit/1292dfc0e39abf24262e94cd9076d91808dd0cc4) - refactor: update template
 -	[`9993ee6`](https://github.com/axetroy/changelog/commit/9993ee600c84cf77d3a0c634e8fa83c2580e137f) - fix: improve ssh git url parser
 -	[`b9432db`](https://github.com/axetroy/changelog/commit/b9432db1d1f5afe170296b9e0bfebee1aa62fabb) - feat: link commit for generation

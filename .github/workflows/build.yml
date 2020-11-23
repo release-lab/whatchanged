@@ -42,7 +42,7 @@ jobs:
         uses: goreleaser/goreleaser-action@v2
         with:
           version: latest
-          args: release --rm-dist --skip-publish
+          args: release --rm-dist --skip-publish --skip-validate
 
   release:
     name: Release to Github
@@ -52,10 +52,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Generate release.md
+        run: |
+          ./sh.sh --file=release.md
+
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v2
         with:
           version: latest
-          args: release --rm-dist
+          args: release --rm-dist --skip-validate --release-notes=./release.md
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
