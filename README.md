@@ -18,7 +18,7 @@ feature:
 - [x] Template Support
 - [ ] Custom template
 - [x] Conventional Commits Parser
-- [ ] Generate multiple versions of change logs
+- [x] Generate multiple versions of change logs
 
 ### Usage
 
@@ -92,9 +92,9 @@ If you are using Linux/macOS. you can install it with the following command:
 # install latest version
 curl -fsSL https://raw.githubusercontent.com/axetroy/changelog/master/install.sh | bash
 # or install specified version
-curl -fsSL https://raw.githubusercontent.com/axetroy/changelog/master/install.sh | bash -s v1.3.0
+curl -fsSL https://raw.githubusercontent.com/axetroy/changelog/master/install.sh | bash -s v0.1.0
 # or install from gobinaries.com
-curl -sf https://gobinaries.com/axetroy/changelog@v1.3.0 | sh
+curl -sf https://gobinaries.com/axetroy/changelog@v0.1.0 | sh
 ```
 
 Or
