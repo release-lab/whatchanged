@@ -6,11 +6,9 @@
 
 ## changelog
 
-A cli to generate changelog
+Elegant changelog generator.
 
-> The project is in development
-
-[How it works?](HOW_IT_WORKS.md)
+**Elegant**/**Simple**/**Efficient**/**Scalable**
 
 feature:
 
@@ -19,6 +17,10 @@ feature:
 - [x] Custom template file
 - [x] Conventional Commits Parser
 - [x] Generate multiple versions of change logs
+
+Here are some changelog that have been generated
+
+- [vscode-deno](__test__/vscode-deno.CHANGELOG.md)
 
 ### Usage
 
@@ -140,6 +142,10 @@ $ make build
 ```bash
 $ make test
 ```
+
+### How it works?
+
+[detail](HOW_IT_WORKS)
 
 ### License
 
