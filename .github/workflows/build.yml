@@ -13,6 +13,8 @@ jobs:
     name: Go ${{ matrix.go }} in ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-go@v2
         with:
@@ -44,7 +46,7 @@ jobs:
           version: latest
           args: release --rm-dist --skip-publish --skip-validate
 
-      - name: Try to generate changelog for this repo
+      - name: Generate changelog
         run: |
           ./run.sh HEAD~
 
