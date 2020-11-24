@@ -66,6 +66,10 @@ func generate(remote string, version string) ([]byte, error) {
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
+	// cors
+	w.Header().Set("Access-Control-Allow-Origin", r.Header.Get("Origin"))
+	w.Header().Set("Access-Control-Allow-Methods", "GET")
+
 	query := r.URL.Query()
 
 	username := query.Get("username")
