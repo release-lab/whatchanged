@@ -1,4 +1,5 @@
 [![Build Status](https://github.com/axetroy/changelog/workflows/ci/badge.svg)](https://github.com/axetroy/changelog/actions)
+[![Build Status](https://github.com/axetroy/changelog/workflows/repl/badge.svg)](https://github.com/axetroy/changelog/actions)
 [![Go Report Card](https://goreportcard.com/badge/github.com/axetroy/changelog)](https://goreportcard.com/report/github.com/axetroy/changelog)
 ![Latest Version](https://img.shields.io/github/v/release/axetroy/changelog.svg)
 ![License](https://img.shields.io/github/license/axetroy/changelog.svg)
