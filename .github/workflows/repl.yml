@@ -24,6 +24,7 @@ jobs:
           npm run build
 
       - uses: actions/upload-artifact@v2
+        if: matrix.os == 'ubuntu-latest'
         with:
           name: repl
           path: ./repl/dist
@@ -41,7 +42,7 @@ jobs:
           name: repl
           path: ./dist
 
-      - name: Build and Deploy 🚀
+      - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           ACCESS_TOKEN: ${{ secrets.GH_TOKEN }}
