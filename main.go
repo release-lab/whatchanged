@@ -47,7 +47,7 @@ OPTIONS:
   --file        Write output to file. default write to stdout.
   --fmt         The changelog format. Available options are "md"/"json".
                 Defaults to "md".
-	--preset      Cli built-in markdown template. Available options are "default"
+  --preset      Cli built-in markdown template. Available options are "default"
                 /"full".
                 Only available when --fmt=md and --tpl is nil. Defaults to
                 "default".
