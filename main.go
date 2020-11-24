@@ -3,7 +3,9 @@ package main
 import (
 	"flag"
 	"fmt"
+	"io/ioutil"
 	"os"
+	"path"
 
 	parser "github.com/axetroy/changelog/1_parser"
 	extractor "github.com/axetroy/changelog/2_extractor"
@@ -148,7 +150,22 @@ func run() error {
 		return errors.WithStack(err)
 	}
 
-	output, err := generator.Generate(client, ctxs, format, preset, templateFile)
+	var templateStr string
+
+	if templateFile != "" {
+		if !path.IsAbs(templateFile) {
+			templateFile = path.Join(cwd, templateFile)
+		}
+		fileBytes, err := ioutil.ReadFile(templateFile)
+
+		if err != nil {
+			return errors.WithStack(err)
+		}
+
+		templateStr = string(fileBytes)
+	}
+
+	output, err := generator.Generate(client, ctxs, format, preset, templateStr)
 
 	if err != nil {
 		return errors.WithStack(err)

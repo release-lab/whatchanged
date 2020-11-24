@@ -18,7 +18,7 @@ import (
 	"github.com/pkg/errors"
 )
 
-func generate(remote string, version string) ([]byte, error) {
+func generate(remote string, version string, templateStr string) ([]byte, error) {
 	repo, err := git.CloneContext(context.Background(), memory.NewStorage(), nil, &git.CloneOptions{
 		URL:      remote,
 		Progress: os.Stderr,
@@ -50,7 +50,7 @@ func generate(remote string, version string) ([]byte, error) {
 		return nil, errors.WithStack(err)
 	}
 
-	output, err := generator.Generate(c, ctxs, "md", "default", "")
+	output, err := generator.Generate(c, ctxs, "md", "default", templateStr)
 
 	if err != nil {
 		return nil, errors.WithStack(err)
@@ -75,10 +75,11 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	username := query.Get("username")
 	repo := query.Get("repo")
 	version := query.Get("version")
+	template := query.Get("template")
 
 	url := fmt.Sprintf("https://github.com/%s/%s", username, repo)
 
-	changelog, err := generate(url, version)
+	changelog, err := generate(url, version, template)
 
 	if err != nil {
 		b := []byte(fmt.Sprintf("%+v\n", err))

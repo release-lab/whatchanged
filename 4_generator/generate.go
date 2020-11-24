@@ -5,10 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"html/template"
-	"io/ioutil"
 	"net/url"
-	"os"
-	"path"
 	"strings"
 
 	transformer "github.com/axetroy/changelog/3_transformer"
@@ -17,7 +14,7 @@ import (
 	giturls "github.com/whilp/git-urls"
 )
 
-func Generate(g *client.GitClient, contexts []*transformer.TemplateContext, format string, preset string, templateFile string) ([]byte, error) {
+func Generate(g *client.GitClient, contexts []*transformer.TemplateContext, format string, preset string, templateStr string) ([]byte, error) {
 	remote, err := g.GetRemote()
 
 	if err != nil {
@@ -66,26 +63,11 @@ func Generate(g *client.GitClient, contexts []*transformer.TemplateContext, form
 	case "md":
 		var output []byte
 
-		var templateStr string
-
-		cwd, err := os.Getwd()
-
 		if err != nil {
 			return nil, errors.WithStack(err)
 		}
 
-		if templateFile != "" {
-			if !path.IsAbs(templateFile) {
-				templateFile = path.Join(cwd, templateFile)
-			}
-			fileBytes, err := ioutil.ReadFile(templateFile)
-
-			if err != nil {
-				return nil, errors.WithStack(err)
-			}
-
-			templateStr = string(fileBytes)
-		} else {
+		if templateStr == "" {
 			switch preset {
 			case "default":
 				templateStr = DEFAULT_TEMPLATE
