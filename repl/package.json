@@ -2,8 +2,8 @@
   "name": "changelog-repl",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build"
+    "dev": "cross-env NODE_ENV=development vite",
+    "build": "cross-env NODE_ENV=production vite build"
   },
   "dependencies": {
     "ant-design-vue": "^2.0.0-rc.1",
@@ -13,6 +13,7 @@
   "devDependencies": {
     "@types/marked": "^1.2.0",
     "@vue/compiler-sfc": "^3.0.2",
+    "cross-env": "^7.0.2",
     "import-http": "^0.3.1",
     "rollup-plugin-esm-import-to-url": "^2.1.0",
     "sass": "^1.29.0",
