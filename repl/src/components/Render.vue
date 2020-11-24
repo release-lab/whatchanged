@@ -1,7 +1,11 @@
 <template>
   <a-tabs class="render">
     <a-tab-pane key="1" tab="Result">
-      <Markdown :content="content" class="markdown" />
+      <Markdown
+        :content="content"
+        class="markdown"
+        style="padding-left: 30px"
+      />
     </a-tab-pane>
     <a-tab-pane key="2" tab="Source">
       <CodeMirror ref="CodeMirror" :content="content" :readonly="true" />
