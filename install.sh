@@ -27,18 +27,18 @@ get_os(){
 main() {
     local os=$(get_os)
     local arch=$(get_arch)
-    local dest_file="${downloadFolder}/dvm_${os}_${arch}.tar.gz"
+    local dest_file="${downloadFolder}/changelog_${os}_${arch}.tar.gz"
 
     if [[ $# -eq 0 ]]; then
         asset_path=$(
-            command curl -sSf https://github.com/axetroy/dvm/releases |
-                command grep -o "/axetroy/dvm/releases/download/.*/dvm_${os}_${arch}\\.tar.gz" |
+            command curl -sSf https://github.com/axetroy/changelog/releases |
+                command grep -o "/axetroy/changelog/releases/download/.*/changelog_${os}_${arch}\\.tar.gz" |
                 command head -n 1
         )
         if [[ ! "$asset_path" ]]; then exit 1; fi
         asset_uri="https://github.com${asset_path}"
     else
-        asset_uri="https://github.com/axetroy/dvm/releases/download/${1}/dvm_${os}_${arch}\\.tar.gz"
+        asset_uri="https://github.com/axetroy/changelog/releases/download/${1}/changelog_${os}_${arch}\\.tar.gz"
     fi
 
     mkdir -p ${downloadFolder}
@@ -50,16 +50,16 @@ main() {
 
     binDir=/usr/local/bin
 
-    echo "[2/3] Install dvm to the ${binDir}"
+    echo "[2/3] Install changelog to the ${binDir}"
     mkdir -p ${HOME}/bin
     tar -xz -f ${dest_file} -C ${binDir}
-    exe=${binDir}/dvm
+    exe=${binDir}/changelog
     chmod +x ${exe}
 
     echo "[3/3] Set environment variables"
-    echo "dvm was installed successfully to ${exe}"
-    if command -v dvm --version >/dev/null; then
-        echo "Run 'dvm --help' to get started"
+    echo "changelog was installed successfully to ${exe}"
+    if command -v changelog --version >/dev/null; then
+        echo "Run 'changelog --help' to get started"
     else
         echo "Manually add the directory to your \$HOME/.bash_profile (or similar)"
         echo "  export PATH=${HOME}/bin:\$PATH"
