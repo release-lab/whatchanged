@@ -44,6 +44,10 @@ jobs:
           version: latest
           args: release --rm-dist --skip-publish --skip-validate
 
+      - name: Try to generate changelog for this repo
+        run: |
+          ./run.sh HEAD~
+
   release:
     name: Release to Github
     if: startsWith(github.ref, 'refs/tags/') && github.repository == 'axetroy/changelog'
