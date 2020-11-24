@@ -146,7 +146,7 @@ $ make test
 
 ### How it works?
 
-[detail](HOW_IT_WORKS)
+[detail](HOW_IT_WORKS.md)
 
 ### License
 
