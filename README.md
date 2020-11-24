@@ -7,22 +7,19 @@
 
 ## changelog
 
-Elegant changelog generator.
+An elegant changelog generator.
 
-**Elegant**/**Simple**/**Efficient**/**Scalable**
+Focus on **Elegant**/**Simple**/**Efficient**/**Scalable**
 
-feature:
+[Feel the magic online](https://axetroy.github.io/changelog/)
+
+Feature:
 
 - [x] Cross-platform support
 - [x] Preset template for generation
 - [x] Custom template file
 - [x] Conventional Commits Parser
 - [x] Generate multiple versions of change logs
-
-Here are some changelog that have been generated
-
-- [github.com/axetroy/vscode-deno](__test__/vscode-deno.CHANGELOG.md)
-- [github.com/axetroy/changelog](CHANGELOG.md)
 
 ### Usage
 
