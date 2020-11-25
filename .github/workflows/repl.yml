@@ -31,7 +31,7 @@ jobs:
 
   release:
     name: Release to Github
-    if: github.repository == 'axetroy/changelog'
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/heads/master') && github.repository == 'axetroy/changelog'
     needs: [ci]
     runs-on: ubuntu-latest
     steps:
