@@ -59,8 +59,8 @@ export default defineComponent({
       template: TEMPLATE_DEFAULT,
       content: "",
       form: {
-        username: "axetroy",
-        repo: "vscode-deno",
+        username: "denoland",
+        repo: "deno",
         version: "HEAD~",
       },
     };
