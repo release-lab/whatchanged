@@ -24,9 +24,9 @@
   resolved "https://registry.npmjs.org/@ant-design/icons-svg/-/icons-svg-4.1.0.tgz#480b025f4b20ef7fe8f47d4a4846e4fee84ea06c"
   integrity sha512-Fi03PfuUqRs76aI3UWYpP864lkrfPo0hluwGqh7NJdLhvH4iRDc3jbJqZIvRDLHKbXrvAfPPV3+zjUccfFvWOQ==
 
-"@ant-design/icons-vue@^5.1.5":
+"@ant-design/icons-vue@^5.1.6":
   version "5.1.6"
-  resolved "https://registry.npmjs.org/@ant-design/icons-vue/-/icons-vue-5.1.6.tgz#af15cbf2375d95199e90166adce4c9f6ad1c17f1"
+  resolved "https://registry.yarnpkg.com/@ant-design/icons-vue/-/icons-vue-5.1.6.tgz#af15cbf2375d95199e90166adce4c9f6ad1c17f1"
   integrity sha512-1KY04c/0iDM88ICdu6EW2/ZPOrH+FyL0uvR350XnVqvnDiLijdcrRaLzkZgCdBcy7cy5t5+onXKocymndCOdRA==
   dependencies:
     "@ant-design/colors" "^5.0.0"
@@ -430,13 +430,13 @@ ansi-styles@^4.1.0:
   dependencies:
     color-convert "^2.0.1"
 
-ant-design-vue@2.0.0-rc.1:
-  version "2.0.0-rc.1"
-  resolved "https://registry.yarnpkg.com/ant-design-vue/-/ant-design-vue-2.0.0-rc.1.tgz#2ef02475f3aa4c1474f2fe3cf44a52c34787be02"
-  integrity sha512-iKXkFtTHarvLHV7LWmYh6g/Cmkv+xK+vS621A1Qvg37Z6lCGg3K9BGAizmklAYzOTiPz0Ltt63eSiNqYMGh52g==
+ant-design-vue@2.0.0-rc.2:
+  version "2.0.0-rc.2"
+  resolved "https://registry.yarnpkg.com/ant-design-vue/-/ant-design-vue-2.0.0-rc.2.tgz#fd3b4a5a64fccbb53ed488a194317a040de2223e"
+  integrity sha512-XA7X/7HHIveiTh41bZWGfoQ2Rys/rqWknK2zzdHwVnfw9ST3v+ciMKH0Uegyn7m14QL/EdUkC8zGsXpiSXqKNQ==
   dependencies:
     "@ant-design-vue/use" "^0.0.1-0"
-    "@ant-design/icons-vue" "^5.1.5"
+    "@ant-design/icons-vue" "^5.1.6"
     "@babel/runtime" "^7.10.5"
     "@simonwep/pickr" "~1.7.0"
     add-dom-event-listener "^1.0.2"
