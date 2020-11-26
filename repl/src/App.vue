@@ -67,8 +67,8 @@ function onSubmit() {
 
   notification.info({
     key: key,
-    message: "Processing",
-    description: "This may take a few minutes, please be patient",
+    message: "Generating",
+    description: "This may take a few minutes...",
   });
 
   fetch(
@@ -76,14 +76,9 @@ function onSubmit() {
       form.value.username || ""
     }&repo=${form.value.repo || ""}&version=${
       form.value.version || ""
-    }&template=${tpl || ""}`,
-    {
-      mode: "no-cors",
-    }
+    }&template=${tpl || ""}`
   )
-    .then((res) => {
-      return res.text();
-    })
+    .then((res) => res.text())
     .then((markdown) => {
       notification.close(key);
       content.value = markdown;

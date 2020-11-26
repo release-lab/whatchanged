@@ -21,7 +21,7 @@ type Commit struct {
 type TemplateContext struct {
 	Version         string
 	Build           []*Commit
-	CI              []*Commit
+	Ci              []*Commit
 	Chore           []*Commit
 	Docs            []*Commit
 	Feat            []*Commit
@@ -80,10 +80,10 @@ func Transform(g *client.GitClient, splices []*extractor.ExtractSplice) ([]*Temp
 					}
 					ctx.Build = append(ctx.Build, c)
 				case "ci":
-					if ctx.CI == nil {
-						ctx.CI = make([]*Commit, 0)
+					if ctx.Ci == nil {
+						ctx.Ci = make([]*Commit, 0)
 					}
-					ctx.CI = append(ctx.CI, c)
+					ctx.Ci = append(ctx.Ci, c)
 				case "chore":
 					if ctx.Chore == nil {
 						ctx.Chore = make([]*Commit, 0)
