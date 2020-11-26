@@ -8,32 +8,24 @@
       />
     </a-tab-pane>
     <a-tab-pane key="2" tab="Source">
-      <CodeMirror ref="CodeMirror" :content="content" :readonly="true" />
+      <CodeMirror ref="editor" :content="content" :readonly="true" />
     </a-tab-pane>
   </a-tabs>
 </template>
 
-<script>
-import { defineComponent } from "vue";
+<script setup>
+import { ref, watch, defineProps } from "vue";
 import Markdown from "./Markdown.vue";
 import CodeMirror from "./CodeMirror.vue";
 
-export default defineComponent({
-  components: {
-    Markdown,
-    CodeMirror,
-  },
-  props: {
-    content: { type: String },
-  },
-  watch: {
-    content(val) {
-      this.$refs.CodeMirror.update(val);
-    },
-  },
-  data() {
-    return {};
-  },
+const editor = ref(null);
+
+const { content } = defineProps({
+  content: { type: String },
+});
+
+watch(content, () => {
+  editor.update(val);
 });
 </script>
 

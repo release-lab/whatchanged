@@ -4,21 +4,11 @@
   </div>
 </template>
 
-<script>
-import { defineComponent } from "vue";
+<script setup>
+import { computed, defineProps } from "vue";
 import marked from "marked";
 
-export default defineComponent({
-  props: {
-    content: { type: String, default: () => "" },
-  },
-  data() {
-    return {};
-  },
-  computed: {
-    html() {
-      return marked(this.content);
-    },
-  },
-});
+const props = defineProps({ content: String, default: () => "" });
+
+const html = computed(() => marked(props.content));
 </script>

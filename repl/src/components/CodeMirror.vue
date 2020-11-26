@@ -4,41 +4,42 @@
   </div>
 </template>
 
-<script>
-import { defineComponent } from "vue";
+<script setup>
+import { onMounted, ref, defineEmit, defineProps } from "vue";
 import CodeMirror from "https://cdn.jsdelivr.net/npm/codemirror/src/codemirror.js";
-import "./CodeMirror.css";
 
-export default defineComponent({
-  props: {
-    content: { type: String },
-    readonly: { type: Boolean, default: () => false },
-  },
-  data() {
-    return {};
-  },
-  methods: {
-    update(value) {
-      this.editor.doc.setValue(value);
-    },
-  },
-  mounted() {
-    this.editor = CodeMirror.fromTextArea(this.$refs.input, {
-      lineNumbers: true,
-      readonly: !!this.readonly,
-    });
-    if (typeof this.content === "string") {
-      this.update(this.content);
-    }
-    this.editor.on("change", (instance, change) => {
-      const val = this.editor.doc.getValue();
-      this.$emit("update:content", val);
-    });
-  },
+const { content, readonly } = defineProps({
+  content: { type: String },
+  readonly: { type: Boolean, default: () => false },
 });
+
+const emit = defineEmit(["update:content"]);
+
+let editor;
+
+const input = ref(null);
+
+onMounted(() => {
+  editor = CodeMirror.fromTextArea(input.value, {
+    lineNumbers: true,
+    readonly: !!readonly,
+  });
+
+  if (typeof content === "string") {
+    update(content);
+  }
+  editor.on("change", (instance, change) => {
+    emit("update:content", editor.doc.getValue());
+  });
+});
+
+function update(value) {
+  editor.doc.setValue(value);
+}
 </script>
 
 <style lang="scss">
+@import "./CodeMirror.css";
 .my-editor {
   width: 100%;
   .CodeMirror {

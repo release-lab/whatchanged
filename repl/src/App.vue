@@ -41,54 +41,43 @@
   </div>
 </template>
 
-<script>
-import { defineComponent } from "vue";
+<script setup>
+import { ref } from "vue";
 import Render from "./components/Render.vue";
 import CodeMirror from "./components/CodeMirror.vue";
 import TEMPLATE_DEFAULT from "./template/default";
 
-export default defineComponent({
-  name: "App",
-  components: {
-    Render,
-    CodeMirror,
-  },
-  data() {
-    return {
-      loading: false,
-      template: TEMPLATE_DEFAULT,
-      content: "",
-      form: {
-        username: "denoland",
-        repo: "deno",
-        version: "HEAD~",
-      },
-    };
-  },
-  methods: {
-    onSubmit() {
-      const template = encodeURIComponent(this.template);
-
-      this.loading = true;
-      fetch(
-        `${import.meta.env.VITE_API_HOST}/?username=${
-          this.form.username || ""
-        }&repo=${this.form.repo || ""}&version=${
-          this.form.version || ""
-        }&template=${template || ""}`
-      )
-        .then((res) => {
-          return res.text();
-        })
-        .then((markdown) => {
-          this.content = markdown;
-        })
-        .finally(() => {
-          this.loading = false;
-        });
-    },
-  },
+const loading = ref(false);
+const template = ref(TEMPLATE_DEFAULT);
+const form = ref({
+  username: "denoland",
+  repo: "deno",
+  version: "HEAD~",
 });
+
+const content = ref("");
+
+function onSubmit() {
+  const tpl = encodeURIComponent(template.value);
+
+  loading.value = true;
+  fetch(
+    `${import.meta.env.VITE_API_HOST}/?username=${
+      form.value.username || ""
+    }&repo=${form.value.repo || ""}&version=${
+      form.value.version || ""
+    }&template=${tpl || ""}`
+  )
+    .then((res) => {
+      return res.text();
+    })
+    .then((markdown) => {
+      content.value = markdown;
+    })
+    .finally(() => {
+      loading.value = false;
+    });
+}
 </script>
 
 <style lang="scss" scoped>
