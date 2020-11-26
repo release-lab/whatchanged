@@ -17,4 +17,5 @@ type Options struct {
 	Format       Format
 	Preset       Preset
 	TemplateFile string // Priority is higher than preset
+	Silent       bool
 }

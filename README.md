@@ -45,15 +45,26 @@ ARGUMENTS:
 OPTIONS:
   --help        Print help information.
   --version     Print version information.
-  --dir         Specify the directory to be generated.
-                The directory should contain a .git folder. defaults to $PWD.
-  --file        Write output to file. default write to stdout.
-  --fmt         The changelog format. Available options are "md"/"json".
-                Defaults to "md".
-  --preset      Cli built-in markdown template. Available options are "default".
-                Only available when --fmt=md and --tpl is nil. Defaults to
-                "default".
-  --tpl         Specify the template file for generating. Only available when --fmt=md.
+  --project     Specify the project to be generated. It can be a relative path.
+                or an absolute path or even a remote Git URL. eg.
+                --project=/path/to/project/which/contains/.git/folder
+                --project=https://github.com/axetroy/whatchanged.git
+                Defaults to "$PWD".
+
+  --output      Write output to file. default write to stdout.
+  --fmt         Specify the changelog format. Available options:
+                --fmt=md
+                --fmt=json
+                Defaults to "--fmt=md".
+
+  --preset      Cli built-in markdown template. Available options:
+                --preset=default
+                --preset=full
+                Only available when --fmt=md and --tpl is nil.
+                Defaults to "default".
+
+  --tpl         Specify the template file for generating. Only available when
+                --fmt=md.
 
 EXAMPLES:
   # generate changelog from HEAD to <latest version>. equivalent to 'whatchanged HEAD~tag:0'
@@ -81,7 +92,10 @@ EXAMPLES:
   $ whatchanged 770ed02~585445d
 
   # Generate changelog for the specified project
-  $ whatchanged --dir=/path/to/project v1.0.0
+  $ whatchanged --project=/path/to/project v1.0.0
+
+  # Generate changelog for the specified project
+  $ whatchanged --project=https://github.com/axetroy/whatchanged.git v0.1.0
 
 SOURCE CODE:
   https://github.com/axetroy/whatchanged

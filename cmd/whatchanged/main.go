@@ -37,16 +37,26 @@ ARGUMENTS:
 OPTIONS:
   --help        Print help information.
   --version     Print version information.
-  --dir         Specify the directory to be generated.
-                The directory should contain a .git folder. defaults to $PWD.
-  --file        Write output to file. default write to stdout.
-  --fmt         The changelog format. Available options are "md"/"json".
-                Defaults to "md".
-  --preset      Cli built-in markdown template. Available options are "default"
-                /"full".
-                Only available when --fmt=md and --tpl is nil. Defaults to
-                "default".
-  --tpl         Specify the template file for generating. Only available when --fmt=md.
+  --project     Specify the project to be generated. It can be a relative path.
+                or an absolute path or even a remote Git URL. eg.
+                --project=/path/to/project/which/contains/.git/folder
+                --project=https://github.com/axetroy/whatchanged.git
+                Defaults to "$PWD".
+
+  --output      Write output to file. default write to stdout.
+  --fmt         Specify the changelog format. Available options:
+                --fmt=md
+                --fmt=json
+                Defaults to "--fmt=md".
+
+  --preset      Cli built-in markdown template. Available options:
+                --preset=default
+                --preset=full
+                Only available when --fmt=md and --tpl is nil.
+                Defaults to "default".
+
+  --tpl         Specify the template file for generating. Only available when
+                --fmt=md.
 
 EXAMPLES:
   # generate changelog from HEAD to <latest version>. equivalent to 'whatchanged HEAD~tag:0'
@@ -74,7 +84,10 @@ EXAMPLES:
   $ whatchanged 770ed02~585445d
 
   # Generate changelog for the specified project
-  $ whatchanged --dir=/path/to/project v1.0.0
+  $ whatchanged --project=/path/to/project v1.0.0
+
+  # Generate changelog for the specified project
+  $ whatchanged --project=https://github.com/axetroy/whatchanged.git v0.1.0
 
 SOURCE CODE:
   https://github.com/axetroy/whatchanged`)
@@ -84,7 +97,7 @@ func run() error {
 	var (
 		showHelp     bool
 		showVersion  bool
-		projectDir   string
+		project      string
 		preset       string
 		templateFile string
 		format       string
@@ -97,11 +110,11 @@ func run() error {
 		return errors.WithStack(err)
 	}
 
-	flag.StringVar(&projectDir, "dir", cwd, "Project dir")
-	flag.StringVar(&format, "fmt", "md", "The changelog format")
-	flag.StringVar(&preset, "preset", "default", "Cli built-in markdown template")
+	flag.StringVar(&project, "project", cwd, "Project filepath or remote URL")
+	flag.StringVar(&outputFile, "output", "", "Specify the file to be written")
+	flag.StringVar(&format, "fmt", string(option.FormatMarkdown), "The changelog format")
+	flag.StringVar(&preset, "preset", string(option.PresetDefault), "Cli built-in markdown template")
 	flag.StringVar(&templateFile, "tpl", "", "Specify the template when generating")
-	flag.StringVar(&outputFile, "file", "", "Specify output result to file.")
 	flag.BoolVar(&showHelp, "help", false, "Print help information")
 	flag.BoolVar(&showVersion, "version", false, "Print version information")
 
@@ -133,7 +146,7 @@ func run() error {
 		output = f
 	}
 
-	if err := whatchanged.Generate(projectDir, output, &option.Options{
+	if err := whatchanged.Generate(project, output, &option.Options{
 		Version:      version,
 		Preset:       option.Preset(preset),
 		Format:       option.Format(format),
