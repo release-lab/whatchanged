@@ -7,7 +7,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref, toRefs, defineEmit, defineProps } from "vue";
+import { onMounted, ref, toRefs, watch, defineEmit, defineProps } from "vue";
 import CodeMirror from "https://cdn.jsdelivr.net/npm/codemirror/src/codemirror.js";
 
 const props = defineProps({
@@ -23,6 +23,10 @@ const emit = defineEmit(["update:content"]);
 let editor;
 
 const input = ref(null);
+
+watch(content, (val) => {
+  update(val);
+});
 
 onMounted(() => {
   editor = CodeMirror.fromTextArea(input.value, {
