@@ -1,5 +1,6 @@
 builds:
   - binary: whatchanged
+    main: ./cmd/whatchanged/main.go
     goos:
       - windows
       - darwin
