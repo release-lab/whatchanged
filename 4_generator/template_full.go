@@ -33,6 +33,21 @@ const FULL_TEMPLATE = `# {{ .Version }}
 {{ template "body" .Perf }}
 {{- end -}}
 
+{{if .Build}}
+### Build system:
+{{ template "body" .Build }}
+{{- end -}}
+
+{{if .Ci}}
+### CI:
+{{ template "body" .Ci }}
+{{- end -}}
+
+{{if .Chore}}
+### Chore:
+{{ template "body" .Chore }}
+{{- end -}}
+
 {{if .Docs}}
 ### Documentation:
 {{ template "body" .Docs }}
