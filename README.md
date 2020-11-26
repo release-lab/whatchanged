@@ -45,24 +45,23 @@ ARGUMENTS:
 OPTIONS:
   --help        Print help information.
   --version     Print version information.
+
   --project     Specify the project to be generated. It can be a relative path.
                 or an absolute path or even a remote Git URL. eg.
                 --project=/path/to/project/which/contains/.git/folder
                 --project=https://github.com/axetroy/whatchanged.git
-                Defaults to "$PWD".
-
+                Defaults to "--project=$PWD".
   --output      Write output to file. default write to stdout.
+
   --fmt         Specify the changelog format. Available options:
                 --fmt=md
                 --fmt=json
                 Defaults to "--fmt=md".
-
   --preset      Cli built-in markdown template. Available options:
                 --preset=default
                 --preset=full
                 Only available when --fmt=md and --tpl is nil.
-                Defaults to "default".
-
+                Defaults to "--preset=default".
   --tpl         Specify the template file for generating. Only available when
                 --fmt=md.
 
@@ -94,7 +93,7 @@ EXAMPLES:
   # Generate changelog for the specified project
   $ whatchanged --project=/path/to/project v1.0.0
 
-  # Generate changelog for the specified project
+  # Generate changelog for the remote project
   $ whatchanged --project=https://github.com/axetroy/whatchanged.git v0.1.0
 
 SOURCE CODE:
