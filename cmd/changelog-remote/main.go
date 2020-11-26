@@ -70,6 +70,12 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", r.Header.Get("Origin"))
 	w.Header().Set("Access-Control-Allow-Methods", "GET")
 
+	if r.Method == http.MethodOptions {
+		w.WriteHeader(200)
+		_, _ = w.Write([]byte{})
+		return
+	}
+
 	query := r.URL.Query()
 
 	username := query.Get("username")

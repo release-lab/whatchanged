@@ -76,7 +76,10 @@ function onSubmit() {
       form.value.username || ""
     }&repo=${form.value.repo || ""}&version=${
       form.value.version || ""
-    }&template=${tpl || ""}`
+    }&template=${tpl || ""}`,
+    {
+      mode: "no-cors",
+    }
   )
     .then((res) => {
       return res.text();
