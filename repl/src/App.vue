@@ -63,7 +63,10 @@ function onSubmit() {
 
   loading.value = true;
 
+  const key = Math.random() + "";
+
   notification.info({
+    key: key,
     message: "Processing",
     description: "This may take a few minutes, please be patient",
   });
@@ -79,7 +82,15 @@ function onSubmit() {
       return res.text();
     })
     .then((markdown) => {
+      notification.close(key);
       content.value = markdown;
+    })
+    .catch((err) => {
+      notification.close(key);
+      notification.error({
+        message: "Error",
+        description: err.message,
+      });
     })
     .finally(() => {
       loading.value = false;
