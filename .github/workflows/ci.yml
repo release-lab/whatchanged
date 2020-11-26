@@ -48,7 +48,7 @@ jobs:
 
       - name: Generate changelog
         run: |
-          ./run.sh HEAD~
+          ./cmd/whatchanged/run.sh HEAD~
 
   release:
     name: Release to Github
