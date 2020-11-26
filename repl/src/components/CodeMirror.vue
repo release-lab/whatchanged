@@ -1,17 +1,22 @@
 <template>
-  <div class="my-editor" v-bind="$attrs">
-    <textarea ref="input"></textarea>
-  </div>
+  <a-spin :spinning="loading">
+    <div class="my-editor" v-bind="$attrs">
+      <textarea ref="input"></textarea>
+    </div>
+  </a-spin>
 </template>
 
 <script setup>
-import { onMounted, ref, defineEmit, defineProps } from "vue";
+import { onMounted, ref, toRefs, defineEmit, defineProps } from "vue";
 import CodeMirror from "https://cdn.jsdelivr.net/npm/codemirror/src/codemirror.js";
 
-const { content, readonly } = defineProps({
+const props = defineProps({
   content: { type: String },
   readonly: { type: Boolean, default: () => false },
+  loading: Boolean,
 });
+
+const { content, readonly, loading } = toRefs(props);
 
 const emit = defineEmit(["update:content"]);
 
@@ -25,8 +30,8 @@ onMounted(() => {
     readonly: !!readonly,
   });
 
-  if (typeof content === "string") {
-    update(content);
+  if (typeof content.value === "string") {
+    update(content.value);
   }
   editor.on("change", (instance, change) => {
     emit("update:content", editor.doc.getValue());

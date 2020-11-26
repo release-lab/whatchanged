@@ -1,4 +1,4 @@
-import { Button, Form, Input, Tabs } from "ant-design-vue";
+import { Button, Form, Input, Spin, Tabs } from "ant-design-vue";
 import "ant-design-vue/dist/antd.css";
 import { createApp } from "vue";
 import App from "./App.vue";
@@ -13,5 +13,6 @@ app.use(Form);
 app.use(Tabs);
 app.use(Tabs.TabPane);
 app.use(Tabs.TabContent);
+app.use(Spin);
 
 app.mount("#app");

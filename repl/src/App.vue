@@ -29,13 +29,13 @@
           <CodeMirror
             class="my-editor2"
             :content.sync="template"
-            @update:content="template = $event"
             :readonly="true"
+            @update:content="template = $event"
           />
         </div>
       </div>
       <div class="right">
-        <Render :content="content"></Render>
+        <Render :content="content" :loading="loading"></Render>
       </div>
     </div>
   </div>
@@ -43,6 +43,7 @@
 
 <script setup>
 import { ref } from "vue";
+import { notification } from "ant-design-vue";
 import Render from "./components/Render.vue";
 import CodeMirror from "./components/CodeMirror.vue";
 import TEMPLATE_DEFAULT from "./template/default";
@@ -61,6 +62,12 @@ function onSubmit() {
   const tpl = encodeURIComponent(template.value);
 
   loading.value = true;
+
+  notification.info({
+    message: "Processing",
+    description: "This may take a few minutes, please be patient",
+  });
+
   fetch(
     `${import.meta.env.VITE_API_HOST}/?username=${
       form.value.username || ""
@@ -84,7 +91,7 @@ function onSubmit() {
 $height: 60px;
 .toolbar {
   height: $height;
-  background: yellow;
+  background: #eeda7c;
   display: flex;
   align-items: center;
   padding: 0 10px;

@@ -3,30 +3,28 @@
     <a-tab-pane key="1" tab="Result">
       <Markdown
         :content="content"
+        :loading="loading"
         class="markdown"
         style="padding-left: 30px"
       />
     </a-tab-pane>
     <a-tab-pane key="2" tab="Source">
-      <CodeMirror ref="editor" :content="content" :readonly="true" />
+      <CodeMirror :content="content" :loading="loading" :readonly="true" />
     </a-tab-pane>
   </a-tabs>
 </template>
 
 <script setup>
-import { ref, watch, defineProps } from "vue";
+import { defineProps, toRefs } from "vue";
 import Markdown from "./Markdown.vue";
 import CodeMirror from "./CodeMirror.vue";
 
-const editor = ref(null);
-
-const { content } = defineProps({
-  content: { type: String },
+const props = defineProps({
+  content: String,
+  loading: Boolean,
 });
 
-watch(content, () => {
-  editor.update(val);
-});
+const { content, loading } = toRefs(props);
 </script>
 
 <style lang="scss">
