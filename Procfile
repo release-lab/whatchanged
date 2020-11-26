@@ -1,1 +1,1 @@
-web: ./bin/whatchanged-remote
+web: ./bin/whatchanged-server
