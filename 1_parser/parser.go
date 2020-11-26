@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/axetroy/changelog/internal/client"
+	"github.com/axetroy/whatchanged/internal/client"
 	"github.com/go-git/go-git/v5/plumbing/object"
 	"github.com/pkg/errors"
 )

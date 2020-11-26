@@ -7,13 +7,13 @@ import (
 	"os"
 	"path"
 
-	parser "github.com/axetroy/changelog/1_parser"
-	extractor "github.com/axetroy/changelog/2_extractor"
-	transformer "github.com/axetroy/changelog/3_transformer"
-	generator "github.com/axetroy/changelog/4_generator"
-	formatter "github.com/axetroy/changelog/5_formatter"
-	writer "github.com/axetroy/changelog/6_writer"
-	"github.com/axetroy/changelog/internal/client"
+	parser "github.com/axetroy/whatchanged/1_parser"
+	extractor "github.com/axetroy/whatchanged/2_extractor"
+	transformer "github.com/axetroy/whatchanged/3_transformer"
+	generator "github.com/axetroy/whatchanged/4_generator"
+	formatter "github.com/axetroy/whatchanged/5_formatter"
+	writer "github.com/axetroy/whatchanged/6_writer"
+	"github.com/axetroy/whatchanged/internal/client"
 	"github.com/pkg/errors"
 )
 
@@ -24,10 +24,10 @@ var (
 )
 
 func printHelp() {
-	fmt.Println(`changelog - a cli to generate changelog from git project
+	fmt.Println(`whatchanged - a cli to generate changelog from git project
 
 USAGE:
-  changelog [OPTIONS] [version]
+  whatchanged [OPTIONS] [version]
 
 ARGUMENTS:
   [version]     Optional version or version range.
@@ -56,35 +56,35 @@ OPTIONS:
   --tpl         Specify the template file for generating. Only available when --fmt=md.
 
 EXAMPLES:
-  # generate changelog from HEAD to <latest version>. equivalent to 'changelog HEAD~tag:0'
-  $ changelog
+  # generate changelog from HEAD to <latest version>. equivalent to 'whatchanged HEAD~tag:0'
+  $ whatchanged
 
   # generate changelog of the specified version
-  $ changelog v1.2.0
+  $ whatchanged v1.2.0
 
   # generate changelog within the specified range
-  $ changelog v1.3.0~v1.2.0
+  $ whatchanged v1.3.0~v1.2.0
 
   # generate changelog from HEAD to <Nth tag>
-  $ changelog ~tag:0
+  $ whatchanged ~tag:0
 
   # generate changelog from <0th tag> to <2th tag>
-  $ changelog tag:0~tag:2
+  $ whatchanged tag:0~tag:2
 
   # generate changelog from HEAD to specified version
-  $ changelog HEAD~v1.3.0
+  $ whatchanged HEAD~v1.3.0
 
   # generate all changelog
-  $ changelog HEAD~
+  $ whatchanged HEAD~
 
   # generate changelog from two commit hashes
-  $ changelog 770ed02~585445d
+  $ whatchanged 770ed02~585445d
 
   # Generate changelog for the specified project
-  $ changelog --dir=/path/to/project v1.0.0
+  $ whatchanged --dir=/path/to/project v1.0.0
 
 SOURCE CODE:
-  https://github.com/axetroy/changelog`)
+  https://github.com/axetroy/whatchanged`)
 }
 
 func run() error {

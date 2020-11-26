@@ -1,4 +1,4 @@
-module github.com/axetroy/changelog
+module github.com/axetroy/whatchanged
 
 go 1.15
 

@@ -1,1 +1,1 @@
-web: ./bin/changelog-remote
+web: ./bin/whatchanged-remote

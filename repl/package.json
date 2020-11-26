@@ -1,5 +1,5 @@
 {
-  "name": "changelog-repl",
+  "name": "whatchanged-repl",
   "version": "0.0.0",
   "scripts": {
     "dev": "cross-env NODE_ENV=development vite",

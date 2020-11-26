@@ -3,8 +3,8 @@ package extractor
 import (
 	"io"
 
-	parser "github.com/axetroy/changelog/1_parser"
-	"github.com/axetroy/changelog/internal/client"
+	parser "github.com/axetroy/whatchanged/1_parser"
+	"github.com/axetroy/whatchanged/internal/client"
 	"github.com/go-git/go-git/v5"
 	"github.com/go-git/go-git/v5/plumbing"
 	"github.com/go-git/go-git/v5/plumbing/object"

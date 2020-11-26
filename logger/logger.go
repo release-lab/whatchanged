@@ -9,11 +9,11 @@ import (
 var printter *log.Logger
 
 func init() {
-	printter = log.New(os.Stderr, "[changelog]: ", log.Ltime)
+	printter = log.New(os.Stderr, "[whatchanged]: ", log.Ltime)
 }
 
 func New(namespace string) *log.Logger {
-	return log.New(os.Stderr, fmt.Sprintf("[changelog %s]: ", namespace), log.Ltime)
+	return log.New(os.Stderr, fmt.Sprintf("[whatchanged %s]: ", namespace), log.Ltime)
 }
 
 func Printf(format string, v ...interface{}) {

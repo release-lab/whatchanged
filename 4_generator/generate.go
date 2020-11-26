@@ -8,8 +8,8 @@ import (
 	"net/url"
 	"strings"
 
-	transformer "github.com/axetroy/changelog/3_transformer"
-	"github.com/axetroy/changelog/internal/client"
+	transformer "github.com/axetroy/whatchanged/3_transformer"
+	"github.com/axetroy/whatchanged/internal/client"
 	"github.com/pkg/errors"
 	giturls "github.com/whilp/git-urls"
 )

@@ -1,5 +1,5 @@
 builds:
-  - binary: changelog
+  - binary: whatchanged
     goos:
       - windows
       - darwin
