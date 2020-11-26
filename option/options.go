@@ -15,7 +15,8 @@ const (
 type Options struct {
 	Version      string
 	Format       Format
-	Preset       Preset
-	TemplateFile string // Priority is higher than preset
+	Preset       Preset // Priority: 1 The higher the level, the more priority
+	TemplateFile string // Priority: 2
+	Template     string // Priority: 3
 	Silent       bool
 }

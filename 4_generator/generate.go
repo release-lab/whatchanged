@@ -16,11 +16,7 @@ import (
 	giturls "github.com/whilp/git-urls"
 )
 
-func Generate(g *client.GitClient, contexts []*transformer.TemplateContext, format option.Format, preset option.Preset, templateFile string) ([]byte, error) {
-	var (
-		templateStr string
-	)
-
+func Generate(g *client.GitClient, contexts []*transformer.TemplateContext, format option.Format, preset option.Preset, templateFile string, templateStr string) ([]byte, error) {
 	remote, err := g.GetRemote()
 
 	if err != nil {
@@ -73,7 +69,9 @@ func Generate(g *client.GitClient, contexts []*transformer.TemplateContext, form
 			return nil, errors.WithStack(err)
 		}
 
-		if templateFile == "" {
+		if templateStr != "" {
+			// ignore
+		} else if templateFile == "" {
 			switch preset {
 			case option.PresetDefault:
 				templateStr = DEFAULT_TEMPLATE

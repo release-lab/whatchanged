@@ -100,13 +100,13 @@ func Generate(project string, w io.Writer, options *option.Options) error {
 	if err != nil {
 		return errors.WithStack(err)
 	}
-	output, err := generator.Generate(g, ctxs, options.Format, options.Preset, options.TemplateFile)
+	output, err := generator.Generate(g, ctxs, options.Format, options.Preset, options.TemplateFile, options.Template)
 
 	if err != nil {
 		return errors.WithStack(err)
 	}
 
-	formattedOutput, err := formatter.Format(output, options.Format, options.TemplateFile)
+	formattedOutput, err := formatter.Format(output, options.Format)
 
 	if err != nil {
 		return errors.WithStack(err)
