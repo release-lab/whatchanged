@@ -1,16 +1,17 @@
 package formatter
 
 import (
+	"github.com/axetroy/whatchanged/option"
 	"github.com/pkg/errors"
 	"github.com/shurcooL/markdownfmt/markdown"
 )
 
-func Format(src []byte, format string, templateFile string) ([]byte, error) {
+func Format(src []byte, format option.Format, templateFile string) ([]byte, error) {
 
 	switch format {
-	case "json":
+	case option.FormatJSON:
 		return src, nil
-	case "md":
+	case option.FormatMarkdown:
 		var (
 			filename   string
 			isTerminal = true

@@ -31,8 +31,8 @@ jobs:
           version: v1.32.2
           args: --timeout=5m30s
 
-      - name: Format
-        run: make format-check
+      # - name: Format
+      #   run: make format-check
 
       - name: Test
         run: |

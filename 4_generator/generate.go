@@ -5,16 +5,22 @@ import (
 	"encoding/json"
 	"fmt"
 	"html/template"
+	"io/ioutil"
 	"net/url"
 	"strings"
 
 	transformer "github.com/axetroy/whatchanged/3_transformer"
 	"github.com/axetroy/whatchanged/internal/client"
+	"github.com/axetroy/whatchanged/option"
 	"github.com/pkg/errors"
 	giturls "github.com/whilp/git-urls"
 )
 
-func Generate(g *client.GitClient, contexts []*transformer.TemplateContext, format string, preset string, templateStr string) ([]byte, error) {
+func Generate(g *client.GitClient, contexts []*transformer.TemplateContext, format option.Format, preset option.Preset, templateFile string) ([]byte, error) {
+	var (
+		templateStr string
+	)
+
 	remote, err := g.GetRemote()
 
 	if err != nil {
@@ -52,7 +58,7 @@ func Generate(g *client.GitClient, contexts []*transformer.TemplateContext, form
 	}
 
 	switch format {
-	case "json":
+	case option.FormatJSON:
 		output, err := json.Marshal(contexts)
 
 		if err != nil {
@@ -60,21 +66,27 @@ func Generate(g *client.GitClient, contexts []*transformer.TemplateContext, form
 		}
 
 		return output, nil
-	case "md":
+	case option.FormatMarkdown:
 		var output []byte
 
 		if err != nil {
 			return nil, errors.WithStack(err)
 		}
 
-		if templateStr == "" {
+		if templateFile == "" {
 			switch preset {
-			case "default":
+			case option.PresetDefault:
 				templateStr = DEFAULT_TEMPLATE
-			case "full":
+			case option.PresetFull:
 				templateStr = FULL_TEMPLATE
 			default:
 				return nil, errors.Errorf("invalid preset '%s'", preset)
+			}
+		} else {
+			if b, err := ioutil.ReadFile(templateFile); err != nil {
+				return nil, err
+			} else {
+				templateStr = string(b)
 			}
 		}
 

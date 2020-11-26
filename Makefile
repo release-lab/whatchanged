@@ -11,4 +11,4 @@ format:
 	go fmt ./...
 
 format-check:
-	gofmt -l main.go
+	gofmt -l -d ./..

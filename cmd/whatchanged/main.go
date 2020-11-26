@@ -3,17 +3,10 @@ package main
 import (
 	"flag"
 	"fmt"
-	"io/ioutil"
 	"os"
-	"path"
 
-	parser "github.com/axetroy/whatchanged/1_parser"
-	extractor "github.com/axetroy/whatchanged/2_extractor"
-	transformer "github.com/axetroy/whatchanged/3_transformer"
-	generator "github.com/axetroy/whatchanged/4_generator"
-	formatter "github.com/axetroy/whatchanged/5_formatter"
-	writer "github.com/axetroy/whatchanged/6_writer"
-	"github.com/axetroy/whatchanged/internal/client"
+	"github.com/axetroy/whatchanged"
+	"github.com/axetroy/whatchanged/option"
 	"github.com/pkg/errors"
 )
 
@@ -126,60 +119,26 @@ func run() error {
 
 	version := flag.Arg(0)
 
-	client, err := client.NewGitClient(projectDir)
+	var output = os.Stdout
 
-	if err != nil {
-		return errors.WithStack(err)
-	}
-
-	scope, err := parser.Parse(client, version)
-
-	if err != nil {
-		return errors.WithStack(err)
-	}
-
-	splices, err := extractor.Extract(client, scope)
-
-	if err != nil {
-		return errors.WithStack(err)
-	}
-
-	ctxs, err := transformer.Transform(client, splices)
-
-	if err != nil {
-		return errors.WithStack(err)
-	}
-
-	var templateStr string
-
-	if templateFile != "" {
-		if !path.IsAbs(templateFile) {
-			templateFile = path.Join(cwd, templateFile)
-		}
-		fileBytes, err := ioutil.ReadFile(templateFile)
+	if outputFile != "" {
+		f, err := os.OpenFile(outputFile, os.O_RDWR|os.O_CREATE|os.O_TRUNC, os.ModePerm)
 
 		if err != nil {
 			return errors.WithStack(err)
 		}
 
-		templateStr = string(fileBytes)
+		defer f.Close()
+
+		output = f
 	}
 
-	output, err := generator.Generate(client, ctxs, format, preset, templateStr)
-
-	if err != nil {
-		return errors.WithStack(err)
-	}
-
-	formattedOutput, err := formatter.Format(output, format, templateFile)
-
-	if err != nil {
-		return errors.WithStack(err)
-	}
-
-	_, err = writer.Write(formattedOutput, outputFile)
-
-	if err != nil {
+	if err := whatchanged.Generate(projectDir, output, &option.Options{
+		Version:      version,
+		Preset:       option.Preset(preset),
+		Format:       option.Format(format),
+		TemplateFile: templateFile,
+	}); err != nil {
 		return errors.WithStack(err)
 	}
 
@@ -192,11 +151,6 @@ func main() {
 	)
 
 	defer func() {
-		// if r := recover(); r != nil {
-		// 	fmt.Printf("%+v\n", r)
-		// 	os.Exit(255)
-		// }
-
 		if err != nil {
 			fmt.Printf("%+v\n", err)
 			os.Exit(255)
