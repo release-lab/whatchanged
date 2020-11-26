@@ -50,12 +50,15 @@ type Message struct {
 	Header *Header
 	Body   string
 	Footer *Footer
+	Revert *string // if it is a revert commit. then this is a hash for that commit
 }
 
 var (
-	headerrPattern = regexp.MustCompile(`^(?:fixup!\s*)?(\w*)(\(([\w\$\.\*/-]*)\))?\: (.*)$`)
-	footerPattern  = regexp.MustCompile(`^BREAKING\sCHANGE:\s*(.*)$`)
-	closePattern   = regexp.MustCompile(`^Closes\s(.+)$`)
+	headerrPattern      = regexp.MustCompile(`^(?:fixup!\s*)?(\w*)(\(([\w\$\.\*/-]*)\))?\: (.*)$`)
+	footerPattern       = regexp.MustCompile(`^BREAKING\sCHANGE:\s*(.*)$`)
+	closePattern        = regexp.MustCompile(`^(?i)Closes\s(.+)$`)
+	revertHeaderPattern = regexp.MustCompile(`^(?i)revert\s(.*)$`)
+	revertBodyPattern   = regexp.MustCompile(`^(?i)This\sreverts\scommit\s(\w+)\.?$`)
 )
 
 func (m *Message) String() string {
@@ -87,9 +90,19 @@ func Parser(message string) *Message {
 				subject := headerMatchers[4]
 
 				m.Header = &Header{}
-				m.Header.Type = headerType
+				m.Header.Type = strings.ToLower(headerType)
 				m.Header.Scope = scope
 				m.Header.Subject = subject
+			} else {
+				revertHeaderMatchers := revertHeaderPattern.FindStringSubmatch(line)
+				if len(revertHeaderMatchers) != 0 {
+					subject := strings.Trim(revertHeaderMatchers[1], "\"")
+					subject = strings.Trim(subject, "'")
+					m.Header = &Header{
+						Type:    "revert",
+						Subject: subject,
+					}
+				}
 			}
 		}
 
@@ -141,6 +154,15 @@ func Parser(message string) *Message {
 			m.Footer.BreakingChange = &BreakingChange{}
 		}
 		m.Footer.BreakingChange.Content = strings.Trim(breakingChange, "\n")
+	}
+
+	if m.Header != nil && m.Header.Type == "revert" {
+		revertBodyMatcher := revertBodyPattern.FindStringSubmatch(m.Body)
+
+		if len(revertBodyMatcher) != 0 {
+			revertHash := revertBodyMatcher[1]
+			m.Revert = &revertHash
+		}
 	}
 
 	return &m

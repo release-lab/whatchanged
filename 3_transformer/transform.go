@@ -8,12 +8,13 @@ import (
 )
 
 type Commit struct {
-	Hash      string
-	Short     string
-	Message   string
-	Author    *object.Signature
-	Committer *object.Signature
-	Field     *parser.Message
+	Hash             string
+	Short            string
+	Message          string
+	Author           *object.Signature
+	Committer        *object.Signature
+	Field            *parser.Message
+	RevertCommitHash *string // revert hash
 }
 
 // https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit-message-header
@@ -65,6 +66,10 @@ func Transform(g *client.GitClient, splices []*extractor.ExtractSplice) ([]*Temp
 				}
 			}
 
+			if field.Revert != nil {
+				c.RevertCommitHash = field.Revert
+			}
+
 			ctx.Commits = append(ctx.Commits, c)
 
 			if field.Header != nil {
@@ -114,6 +119,11 @@ func Transform(g *client.GitClient, splices []*extractor.ExtractSplice) ([]*Temp
 						ctx.Test = make([]*Commit, 0)
 					}
 					ctx.Test = append(ctx.Test, c)
+				case "revert":
+					if ctx.Revert == nil {
+						ctx.Revert = make([]*Commit, 0)
+					}
+					ctx.Revert = append(ctx.Revert, c)
 				}
 
 			}

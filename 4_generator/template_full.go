@@ -53,6 +53,13 @@ const FULL_TEMPLATE = `# {{ .Version }}
 {{ template "body" .Docs }}
 {{- end -}}
 
+{{if .Revert}}
+### 🔙 Revert:
+{{range .Revert -}}
+- {{if .RevertCommitHash }}revert {{ hashURL .RevertCommitHash }}, {{ end }}{{ unescape .Field.Header.Subject }}({{ hashURL .Hash}})
+{{ end }}
+{{ end }}
+
 {{if .BreakingChanges}}
 ### BREAKING CHANGES:
 {{ range .BreakingChanges -}}

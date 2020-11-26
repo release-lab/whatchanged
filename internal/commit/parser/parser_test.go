@@ -6,6 +6,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+var revertHash = "667ecc1654a317a13331b17617d973392f415f02"
+
 func TestParser(t *testing.T) {
 	type args struct {
 		message string
@@ -15,6 +17,90 @@ func TestParser(t *testing.T) {
 		args args
 		want *Message
 	}{
+		{
+			name: "no format",
+			args: args{message: "hello world"},
+			want: &Message{
+				Title:  "hello world",
+				Header: nil,
+				Body:   "",
+			},
+		},
+		{
+			name: "no format with body",
+			args: args{message: `hello world
+
+this is body`},
+			want: &Message{
+				Title:  "hello world",
+				Header: nil,
+				Body:   "this is body",
+			},
+		},
+		{
+			name: "revert style 1",
+			args: args{message: `revert: feat(pencil): add 'graphiteWidth' option
+
+This reverts commit 667ecc1654a317a13331b17617d973392f415f02.`},
+			want: &Message{
+				Title: "revert: feat(pencil): add 'graphiteWidth' option",
+				Header: &Header{
+					Type:    "revert",
+					Scope:   "",
+					Subject: "feat(pencil): add 'graphiteWidth' option",
+				},
+				Body:   "This reverts commit 667ecc1654a317a13331b17617d973392f415f02.",
+				Revert: &revertHash,
+			},
+		},
+		{
+			name: "revert style 2",
+			args: args{message: `revert test1
+
+This reverts commit 667ecc1654a317a13331b17617d973392f415f02.`},
+			want: &Message{
+				Title: "revert test1",
+				Header: &Header{
+					Type:    "revert",
+					Scope:   "",
+					Subject: "test1",
+				},
+				Body:   "This reverts commit 667ecc1654a317a13331b17617d973392f415f02.",
+				Revert: &revertHash,
+			},
+		},
+		{
+			name: "revert style 3",
+			args: args{message: `revert "test1"
+
+This reverts commit 667ecc1654a317a13331b17617d973392f415f02.`},
+			want: &Message{
+				Title: `revert "test1"`,
+				Header: &Header{
+					Type:    "revert",
+					Scope:   "",
+					Subject: `test1`,
+				},
+				Body:   "This reverts commit 667ecc1654a317a13331b17617d973392f415f02.",
+				Revert: &revertHash,
+			},
+		},
+		{
+			name: "revert style 4",
+			args: args{message: `Revert "test1"
+
+This reverts commit 667ecc1654a317a13331b17617d973392f415f02.`},
+			want: &Message{
+				Title: `Revert "test1"`,
+				Header: &Header{
+					Type:    "revert",
+					Scope:   "",
+					Subject: `test1`,
+				},
+				Body:   "This reverts commit 667ecc1654a317a13331b17617d973392f415f02.",
+				Revert: &revertHash,
+			},
+		},
 		{
 			name: "basic",
 			args: args{message: "feat: add options for function"},
