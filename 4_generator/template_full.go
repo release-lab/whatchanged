@@ -63,9 +63,12 @@ const FULL_TEMPLATE = `# {{ .Version }}
 {{if .BreakingChanges}}
 ### ❤️ BREAKING CHANGES:
 {{ range .BreakingChanges -}}
+
 - {{if .Field.Footer.BreakingChange.Title}}{{ unescape .Field.Footer.BreakingChange.Title }}{{ else }}{{ unescape .Field.Title }}{{ end }}
+
 {{ unescape .Field.Footer.BreakingChange.Content }}
-{{- end -}}
+
+{{ end -}}
 {{ end }}
 
 ### 💪  Commits({{ len .Commits }}):
