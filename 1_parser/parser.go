@@ -111,12 +111,13 @@ func getCommit(git *client.GitClient, version string, isStart bool) (*object.Com
 	}
 }
 
-func Parse(git *client.GitClient, ranges string) (*Scope, error) {
+func Parse(git *client.GitClient, ranges string) ([]*Scope, error) {
 	ranges = strings.TrimSpace(ranges)
 	var (
 		startCommit *object.Commit
 		endCommit   *object.Commit
-		scope       = Scope{}
+		scopeRange  = make([]*Scope, 0)
+		scope       = &Scope{}
 		err         error
 	)
 
@@ -165,7 +166,18 @@ func Parse(git *client.GitClient, ranges string) (*Scope, error) {
 	} else if len(versions) == 1 {
 		var tag *client.Tag
 
-		if regTag.MatchString(ranges) {
+		multipleVersions := strings.Split(versions[0], ",")
+
+		if len(multipleVersions) > 1 {
+			for _, v := range multipleVersions {
+				if ss, err := Parse(git, v); err != nil {
+					return nil, errors.WithStack(err)
+				} else {
+					scopeRange = append(scopeRange, ss...)
+				}
+			}
+			return scopeRange, nil
+		} else if regTag.MatchString(ranges) {
 			matcher := regTag.FindStringSubmatch(ranges)
 
 			tagIndex, err := strconv.ParseInt(matcher[1], 10, 10)
@@ -238,5 +250,7 @@ func Parse(git *client.GitClient, ranges string) (*Scope, error) {
 
 	scope.Tags = tags
 
-	return &scope, nil
+	scopeRange = append(scopeRange, scope)
+
+	return scopeRange, nil
 }

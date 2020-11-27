@@ -66,11 +66,18 @@ OPTIONS:
                 --fmt=md.
 
 EXAMPLES:
-  # generate changelog from HEAD to <latest version>. equivalent to 'whatchanged HEAD~@0'
+  # generate changelog from HEAD to <latest version>.
+  # if HEAD is not the latest tag. then this should be a unreleased version
+  # otherwise it should be the latest version
   $ whatchanged
 
   # generate changelog of the specified version
   $ whatchanged v1.2.0
+
+  # Generate the specified two versions
+  # Separate by a comma, and only generate these two versions
+  # the middle version will not be generated
+  $ whatchanged v2.0.0,v1.0.0
 
   # generate changelog within the specified range
   $ whatchanged v1.3.0~v1.2.0

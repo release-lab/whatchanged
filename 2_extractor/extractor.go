@@ -27,91 +27,93 @@ func getTagOfCommit(tags []*client.Tag, commit *object.Commit) *client.Tag {
 	return nil
 }
 
-func Extract(g *client.GitClient, scope *parser.Scope) ([]*ExtractSplice, error) {
+func Extract(g *client.GitClient, scopes []*parser.Scope) ([]*ExtractSplice, error) {
 	splices := make([]*ExtractSplice, 0)
 
-	options := git.LogOptions{From: plumbing.NewHash(scope.Start.Commit.Hash.String())}
+	for _, scope := range scopes {
+		options := git.LogOptions{From: plumbing.NewHash(scope.Start.Commit.Hash.String())}
 
-	cIter, err := g.Repository.Log(&options)
+		cIter, err := g.Repository.Log(&options)
 
-	if err != nil {
-		return nil, errors.WithStack(err)
-	}
-
-	commits := make([]*object.Commit, 0)
-
-	for {
-		if commit, err := cIter.Next(); err == io.EOF {
-			break
-		} else if err != nil {
+		if err != nil {
 			return nil, errors.WithStack(err)
-		} else if commit == nil {
-			break
-		} else if commit.Hash.String() == scope.End.Commit.Hash.String() {
-			commits = append(commits, commit)
-			break
-		} else {
-			commits = append(commits, commit)
-		}
-	}
-
-	if err != nil {
-		return nil, errors.WithStack(err)
-	}
-
-	// if there is no tags in this scope
-	if scope.Tags == nil || len(scope.Tags) == 0 {
-		splices = append(splices, &ExtractSplice{
-			Name:   "Unreleased",
-			Commit: commits,
-			Tag:    nil,
-		})
-
-		return splices, nil
-	}
-
-	index := 0
-
-	for {
-		if index == len(commits) {
-			break
 		}
 
-		commit := commits[index]
+		commits := make([]*object.Commit, 0)
 
-		item := &ExtractSplice{
-			Name:   "Unreleased",
-			Commit: make([]*object.Commit, 0),
+		for {
+			if commit, err := cIter.Next(); err == io.EOF {
+				break
+			} else if err != nil {
+				return nil, errors.WithStack(err)
+			} else if commit == nil {
+				break
+			} else if commit.Hash.String() == scope.End.Commit.Hash.String() {
+				commits = append(commits, commit)
+				break
+			} else {
+				commits = append(commits, commit)
+			}
 		}
 
-		item.Commit = append(item.Commit, commit)
-
-		if tag := getTagOfCommit(scope.Tags, commit); tag != nil {
-			item.Tag = tag
-			item.Name = tag.Name
+		if err != nil {
+			return nil, errors.WithStack(err)
 		}
 
-		index++
+		// if there is no tags in this scope
+		if scope.Tags == nil || len(scope.Tags) == 0 {
+			splices = append(splices, &ExtractSplice{
+				Name:   "Unreleased",
+				Commit: commits,
+				Tag:    nil,
+			})
 
-	loop:
+			return splices, nil
+		}
+
+		index := 0
+
 		for {
 			if index == len(commits) {
-				break loop
+				break
 			}
 
-			nextCommit := commits[index]
+			commit := commits[index]
 
-			if t := getTagOfCommit(scope.Tags, nextCommit); t != nil {
-				break loop
+			item := &ExtractSplice{
+				Name:   "Unreleased",
+				Commit: make([]*object.Commit, 0),
 			}
 
-			item.Commit = append(item.Commit, nextCommit)
+			item.Commit = append(item.Commit, commit)
+
+			if tag := getTagOfCommit(scope.Tags, commit); tag != nil {
+				item.Tag = tag
+				item.Name = tag.Name
+			}
 
 			index++
+
+		loop:
+			for {
+				if index == len(commits) {
+					break loop
+				}
+
+				nextCommit := commits[index]
+
+				if t := getTagOfCommit(scope.Tags, nextCommit); t != nil {
+					break loop
+				}
+
+				item.Commit = append(item.Commit, nextCommit)
+
+				index++
+			}
+
+			splices = append(splices, item)
+
 		}
-
-		splices = append(splices, item)
-
 	}
 
 	return splices, nil

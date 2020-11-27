@@ -66,6 +66,11 @@ EXAMPLES:
   # generate changelog of the specified version
   $ whatchanged v1.2.0
 
+  # Generate the specified two versions
+  # Separate by a comma, and only generate these two versions
+  # the middle version will not be generated
+  $ whatchanged v2.0.0,v1.0.0
+
   # generate changelog within the specified range
   $ whatchanged v1.3.0~v1.2.0
 
