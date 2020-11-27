@@ -17,7 +17,7 @@ const TEMPLATE_DEFAULT = `# {{ .Version }}
 {{ end }}
 
 {{if .Refactor}}
-### 🔨 Code Refactoring:
+### 🔨 Code refactoring:
 {{ template "body" .Refactor }}
 {{- end -}}
 

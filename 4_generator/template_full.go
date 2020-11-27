@@ -19,7 +19,7 @@ const FULL_TEMPLATE = `# {{ .Version }}
 {{ end }}
 
 {{if .Refactor}}
-### 🔨 Code Refactoring:
+### 🔨 Code refactoring:
 {{ template "body" .Refactor }}
 {{- end -}}
 
