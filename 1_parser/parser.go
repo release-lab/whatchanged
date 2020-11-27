@@ -86,6 +86,10 @@ func getCommit(git *client.GitClient, version string, isStart bool) (*object.Com
 			return nil, errors.WithStack(err)
 		}
 
+		if tag == nil {
+			return nil, nil
+		}
+
 		return tag.Commit, nil
 	} else if regShortHash.MatchString(version) {
 		return git.CommitByShort(version)
@@ -132,12 +136,24 @@ func Parse(git *client.GitClient, ranges string) (*Scope, error) {
 			versions = append(versions, "")
 		}
 	} else if len(versions) == 1 {
-		// make sure the length is always 2
+		var tag *client.Tag
 
-		tag, err := git.TagName(ranges)
+		if regTag.MatchString(ranges) {
+			matcher := regTag.FindStringSubmatch(ranges)
 
-		if err != nil {
-			return nil, errors.WithStack(err)
+			tagIndex, err := strconv.ParseInt(matcher[1], 10, 10)
+
+			if err != nil {
+				return nil, errors.WithStack(err)
+			}
+
+			if tag, err = git.TagN(int(tagIndex)); err != nil {
+				return nil, errors.WithStack(err)
+			}
+		} else {
+			if tag, err = git.TagName(ranges); err != nil {
+				return nil, errors.WithStack(err)
+			}
 		}
 
 		if tag != nil {
