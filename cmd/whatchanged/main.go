@@ -20,17 +20,18 @@ func printHelp() {
 	println(`whatchanged - a cli to generate changelog from git project
 
 USAGE:
-  whatchanged [OPTIONS] [version]
+  whatchanged [OPTIONS] [version...]
 
 ARGUMENTS:
-  [version]     Optional version or version range.
+  [version...]  Optional version or version range.
                 1.null.
                   If you do not specify the version, then it will automatically
                   generate a change log from "HEAD~<latest version>" or
                   "HEAD~<earliest commit>" or "<latest version>-<last version>"
-                2.single version. eg. v1.2.0
+                2.single version. eg. "v1.2.0"
                   Generate a specific version of the changelog.
-                3.version range. eg v1.3.0~v1.2.0
+                3.multiple versions. eg. "v2.0.0 v1.0.0"
+                4.version range. eg v1.3.0~v1.2.0
                   Generate changelog within the specified range.
                   For more details, please check the following examples.
 
@@ -69,7 +70,10 @@ EXAMPLES:
   # Generate the specified two versions
   # Separate by a comma, and only generate these two versions
   # the middle version will not be generated
-  $ whatchanged v2.0.0,v1.0.0
+  $ whatchanged v2.0.0 v1.0.0
+
+  # generate HEAD to latest tag and <Nth tag>
+  $ whatchanged HEAD~@0 @1 @2
 
   # generate changelog within the specified range
   $ whatchanged v1.3.0~v1.2.0
@@ -138,7 +142,7 @@ func run() error {
 		os.Exit(0)
 	}
 
-	version := flag.Arg(0)
+	ranges := flag.Args()
 
 	var output = os.Stdout
 
@@ -155,7 +159,7 @@ func run() error {
 	}
 
 	if err := whatchanged.Generate(project, output, &option.Options{
-		Version:      version,
+		Version:      ranges,
 		Preset:       option.Preset(preset),
 		Format:       option.Format(format),
 		TemplateFile: templateFile,

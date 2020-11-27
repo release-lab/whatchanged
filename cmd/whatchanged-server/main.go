@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"regexp"
 
 	"github.com/axetroy/whatchanged"
 	"github.com/axetroy/whatchanged/option"
@@ -55,7 +56,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	url := fmt.Sprintf("https://github.com/%s/%s", username, repo)
 
 	if err = whatchanged.Generate(url, output, &option.Options{
-		Version:  version,
+		Version:  regexp.MustCompile(`\s+`).Split(version, -1),
 		Template: template,
 		Preset:   option.Preset(preset),
 	}); err != nil {

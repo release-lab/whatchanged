@@ -13,7 +13,7 @@ const (
 )
 
 type Options struct {
-	Version      string
+	Version      []string
 	Format       Format
 	Preset       Preset // Priority: 1 The higher the level, the more priority
 	TemplateFile string // Priority: 2
