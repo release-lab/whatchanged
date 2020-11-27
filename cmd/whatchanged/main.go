@@ -124,6 +124,8 @@ func run() error {
 	flag.BoolVar(&showHelp, "help", false, "Print help information")
 	flag.BoolVar(&showVersion, "version", false, "Print version information")
 
+	flag.Usage = printHelp
+
 	flag.Parse()
 
 	if showHelp {
