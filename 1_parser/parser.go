@@ -25,7 +25,7 @@ type Scope struct {
 var (
 	regShortHash = regexp.MustCompile(`^[a-z\d]{7}$`)
 	regLongHash  = regexp.MustCompile(`^[a-z\d]{40}$`)
-	regTag       = regexp.MustCompile(`^tag:(\d+)$`)
+	regTag       = regexp.MustCompile(`^@(\d+)$`)
 )
 
 func getCommitFromHEAD(git *client.GitClient) (*object.Commit, error) {

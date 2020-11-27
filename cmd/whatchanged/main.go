@@ -58,7 +58,7 @@ OPTIONS:
                 --fmt=md.
 
 EXAMPLES:
-  # generate changelog from HEAD to <latest version>. equivalent to 'whatchanged HEAD~tag:0'
+  # generate changelog from HEAD to <latest version>. equivalent to 'whatchanged HEAD~@0'
   $ whatchanged
 
   # generate changelog of the specified version
@@ -68,10 +68,10 @@ EXAMPLES:
   $ whatchanged v1.3.0~v1.2.0
 
   # generate changelog from HEAD to <Nth tag>
-  $ whatchanged ~tag:0
+  $ whatchanged ~@0
 
   # generate changelog from <0th tag> to <2th tag>
-  $ whatchanged tag:0~tag:2
+  $ whatchanged @0~@2
 
   # generate changelog from HEAD to specified version
   $ whatchanged HEAD~v1.3.0
