@@ -110,6 +110,27 @@ func (g *GitClient) TagN(offset int) (*Tag, error) {
 }
 
 // Get next tag from the specified tag
+func (g *GitClient) PrevTag(target *Tag) (*Tag, error) {
+	tags, err := g.Tags()
+
+	if err != nil {
+		return nil, errors.WithStack(err)
+	}
+
+	for index, tag := range tags {
+		if tag.Hash == target.Hash {
+			i := index - 1
+			if i < 0 {
+				return nil, nil
+			}
+			return tags[i], nil
+		}
+	}
+
+	return nil, nil
+}
+
+// Get next tag from the specified tag
 func (g *GitClient) NextTag(target *Tag) (*Tag, error) {
 	tags, err := g.Tags()
 
@@ -476,6 +497,45 @@ func (g *GitClient) GetLastCommitOfTag(tag *Tag) (*object.Commit, error) {
 
 		return lastCommit, nil
 	}
+}
+
+func (g *GitClient) GetPrevCommitOfTag(tag *Tag) (*object.Commit, error) {
+	prevTag, err := g.PrevTag(tag)
+
+	if err != nil {
+		return nil, errors.WithStack(err)
+	}
+
+	options := git.LogOptions{}
+
+	if prevTag != nil {
+		options.From = prevTag.Commit.Hash
+	}
+
+	cIter, err := g.Repository.Log(&options)
+
+	if err != nil {
+		return nil, errors.WithStack(err)
+	}
+
+	var prevCommit *object.Commit
+
+	for {
+		if commit, err := cIter.Next(); err == io.EOF {
+			break
+		} else if err != nil {
+			return nil, errors.WithStack(err)
+		} else if commit == nil {
+			break
+		} else {
+			if commit.Hash.String() == tag.Commit.Hash.String() {
+				return prevCommit, nil
+			}
+			prevCommit = commit
+		}
+	}
+
+	return prevCommit, nil
 }
 
 func (g *GitClient) GetRemote() (*config.RemoteConfig, error) {

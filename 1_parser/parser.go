@@ -131,7 +131,34 @@ func Parse(git *client.GitClient, ranges string) (*Scope, error) {
 		}
 
 		if latestTag != nil {
-			versions = append(versions, latestTag.Commit.Hash.String())
+			commit, err := git.GetPrevCommitOfTag(latestTag)
+
+			if err != nil {
+				return nil, errors.WithStack(err)
+			}
+
+			// if there is no prev tag
+			// tag is the HEAD
+			if commit == nil {
+				nextTag, err := git.NextTag(latestTag)
+
+				if err != nil {
+					return nil, errors.WithStack(err)
+				}
+
+				if nextTag != nil {
+					if commit, err := git.GetPrevCommitOfTag(nextTag); err != nil {
+						return nil, errors.WithStack(err)
+					} else {
+						versions = append(versions, commit.Hash.String())
+					}
+				} else {
+					versions = append(versions, "")
+				}
+			} else {
+				versions = append(versions, commit.Hash.String())
+			}
+
 		} else {
 			versions = append(versions, "")
 		}
