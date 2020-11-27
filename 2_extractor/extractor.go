@@ -79,61 +79,39 @@ func Extract(g *client.GitClient, scope *parser.Scope) ([]*ExtractSplice, error)
 
 		commit := commits[index]
 
-		if tag := getTagOfCommit(scope.Tags, commit); tag != nil {
-			splice := &ExtractSplice{
-				Name:   tag.Name,
-				Tag:    tag,
-				Commit: make([]*object.Commit, 0),
-			}
-			splice.Commit = append(splice.Commit, commit)
-			index++
-		internalLoop:
-			for {
-				if index == len(commits) {
-					break internalLoop
-				}
-
-				nextCommit := commits[index]
-
-				if t := getTagOfCommit(scope.Tags, nextCommit); t != nil {
-					break internalLoop
-				}
-
-				splice.Commit = append(splice.Commit, nextCommit)
-
-				index++
-			}
-
-			splices = append(splices, splice)
-		} else {
-			item := &ExtractSplice{
-				Name: "Unreleased",
-			}
-
-		internalLoop2:
-			for {
-				if index == len(commits) {
-					splices = append(splices, item)
-					break internalLoop2
-				}
-
-				nextCommit := commits[index]
-
-				if t := getTagOfCommit(scope.Tags, nextCommit); t != nil {
-					splices = append(splices, item)
-					break internalLoop2
-				}
-
-				if item.Commit == nil {
-					item.Commit = make([]*object.Commit, 0)
-				}
-
-				item.Commit = append(item.Commit, nextCommit)
-
-				index++
-			}
-
+		item := &ExtractSplice{
+			Name:   "Unreleased",
+			Commit: make([]*object.Commit, 0),
 		}
+
+		item.Commit = append(item.Commit, commit)
+
+		if tag := getTagOfCommit(scope.Tags, commit); tag != nil {
+			item.Tag = tag
+			item.Name = tag.Name
+		}
+
+		index++
+
+	loop:
+		for {
+			if index == len(commits) {
+				break loop
+			}
+
+			nextCommit := commits[index]
+
+			if t := getTagOfCommit(scope.Tags, nextCommit); t != nil {
+				break loop
+			}
+
+			item.Commit = append(item.Commit, nextCommit)
+
+			index++
+		}
+
+		splices = append(splices, item)
+
 	}
 
 	return splices, nil
