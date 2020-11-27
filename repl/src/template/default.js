@@ -51,6 +51,11 @@ const TEMPLATE_DEFAULT = `# {{ .Version }}
 {{ template "body" .Docs }}
 {{- end -}}
 
+{{if .Style}}
+### 🌇 Style:
+{{ template "body" .Style }}
+{{- end -}}
+
 {{if .Revert}}
 ### 🔙 Revert:
 {{range .Revert -}}

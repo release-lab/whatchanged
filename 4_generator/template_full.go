@@ -53,6 +53,11 @@ const FULL_TEMPLATE = `# {{ .Version }}
 {{ template "body" .Docs }}
 {{- end -}}
 
+{{if .Style}}
+### 🌇 Style:
+{{ template "body" .Style }}
+{{- end -}}
+
 {{if .Revert}}
 ### 🔙 Revert:
 {{range .Revert -}}

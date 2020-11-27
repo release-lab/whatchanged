@@ -29,6 +29,7 @@ type TemplateContext struct {
 	Perf            []*Commit
 	Refactor        []*Commit
 	Test            []*Commit
+	Style           []*Commit
 	Revert          []*Commit
 	BreakingChanges []*Commit
 	Commits         []*Commit
@@ -119,6 +120,11 @@ func Transform(g *client.GitClient, splices []*extractor.ExtractSplice) ([]*Temp
 						ctx.Test = make([]*Commit, 0)
 					}
 					ctx.Test = append(ctx.Test, c)
+				case "style":
+					if ctx.Style == nil {
+						ctx.Style = make([]*Commit, 0)
+					}
+					ctx.Style = append(ctx.Style, c)
 				case "revert":
 					if ctx.Revert == nil {
 						ctx.Revert = make([]*Commit, 0)
