@@ -17,7 +17,7 @@ var (
 )
 
 func printHelp() {
-	fmt.Println(`whatchanged - a cli to generate changelog from git project
+	println(`whatchanged - a cli to generate changelog from git project
 
 USAGE:
   whatchanged [OPTIONS] [version]
@@ -132,7 +132,7 @@ func run() error {
 	}
 
 	if showVersion {
-		fmt.Printf("%s %s %s\n", version, commit, date)
+		println(fmt.Sprintf("%s %s %s", version, commit, date))
 		os.Exit(0)
 	}
 
