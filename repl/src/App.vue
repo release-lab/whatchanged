@@ -42,7 +42,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { notification } from "ant-design-vue";
 import Render from "./components/Render.vue";
 import CodeMirror from "./components/CodeMirror.vue";
@@ -51,8 +51,8 @@ import TEMPLATE_DEFAULT from "./template/default";
 const loading = ref(false);
 const template = ref(TEMPLATE_DEFAULT);
 const form = ref({
-  username: "denoland",
-  repo: "deno",
+  username: "axetroy",
+  repo: "whatchanged",
   version: "HEAD~",
 });
 
@@ -94,6 +94,15 @@ function onSubmit() {
       loading.value = false;
     });
 }
+
+onMounted(() => {
+  notification.warn({
+    message: "IMPORTANT",
+    description:
+      "Hi ❤️ We are useing the free resources for backend and there is a limit to the memory size. so, it may fail to generate for large projects.",
+    duration: 30,
+  });
+});
 </script>
 
 <style lang="scss" scoped>
