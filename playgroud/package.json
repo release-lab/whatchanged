@@ -1,6 +1,7 @@
 {
-  "name": "whatchanged-repl",
+  "name": "whatchanged-playgroud",
   "version": "0.0.0",
+  "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development vite",
     "build": "cross-env NODE_ENV=production vite build"

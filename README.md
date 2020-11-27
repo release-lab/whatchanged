@@ -1,5 +1,5 @@
 [![Build Status](https://github.com/axetroy/whatchanged/workflows/ci/badge.svg)](https://github.com/axetroy/whatchanged/actions)
-[![Build Status](https://github.com/axetroy/whatchanged/workflows/repl/badge.svg)](https://github.com/axetroy/whatchanged/actions)
+[![Build Status](https://github.com/axetroy/whatchanged/workflows/playground/badge.svg)](https://github.com/axetroy/whatchanged/actions)
 [![Go Report Card](https://goreportcard.com/badge/github.com/axetroy/whatchanged)](https://goreportcard.com/report/github.com/axetroy/whatchanged)
 ![Latest Version](https://img.shields.io/github/v/release/axetroy/whatchanged.svg)
 ![License](https://img.shields.io/github/license/axetroy/whatchanged.svg)

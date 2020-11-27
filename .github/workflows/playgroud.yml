@@ -1,4 +1,4 @@
-name: repl
+name: playground
 
 on: [push, pull_request]
 
@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macOS-latest, windows-latest]
-    name: Repl in ${{ matrix.os }}
+    name: Playground in ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
 
@@ -19,15 +19,15 @@ jobs:
 
       - name: Build
         run: |
-          cd repl
+          cd playground
           yarn
           npm run build
 
       - uses: actions/upload-artifact@v2
         if: matrix.os == 'ubuntu-latest'
         with:
-          name: repl
-          path: ./repl/dist
+          name: playground
+          path: ./playground/dist
 
   release:
     name: Release to Github
@@ -39,7 +39,7 @@ jobs:
 
       - uses: actions/download-artifact@v2
         with:
-          name: repl
+          name: playground
           path: ./dist
 
       - name: Deploy 🚀
