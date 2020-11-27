@@ -23,7 +23,7 @@ type Scope struct {
 }
 
 var (
-	regShortHash = regexp.MustCompile(`^[a-z\d]{7}$`)
+	regShortHash = regexp.MustCompile(`^[a-z\d]{7,8}$`)
 	regLongHash  = regexp.MustCompile(`^[a-z\d]{40}$`)
 	regTag       = regexp.MustCompile(`^@(\d+)$`)
 )
