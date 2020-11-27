@@ -119,9 +119,9 @@ If you are using Linux/macOS. you can install it with the following command:
 # install latest version
 curl -fsSL https://raw.githubusercontent.com/axetroy/whatchanged/master/install.sh | bash
 # or install specified version
-curl -fsSL https://raw.githubusercontent.com/axetroy/whatchanged/master/install.sh | bash -s v0.1.0
+curl -fsSL https://raw.githubusercontent.com/axetroy/whatchanged/master/install.sh | bash -s v0.2.0
 # or install from gobinaries.com
-curl -sf https://gobinaries.com/axetroy/whatchanged@v0.1.0 | sh
+curl -sf https://gobinaries.com/axetroy/whatchanged@v0.2.0 | sh
 ```
 
 Or
