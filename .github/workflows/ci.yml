@@ -62,7 +62,7 @@ jobs:
 
       - name: Generate release.md
         run: |
-          ./cmd/whatchanged/run.sh --tpl=release.tpl --file=release.md
+          ./cmd/whatchanged/run.sh --tpl=release.tpl --output=release.md
 
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v2
