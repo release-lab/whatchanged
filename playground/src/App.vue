@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="toolbar">
+      <img src="../assets/logo.png" />
       <a-form
         layout="inline"
         :model="form"
@@ -8,17 +9,21 @@
         @submit.native.prevent
       >
         <a-form-item label="Username">
-          <a-input v-model:value="form.username"> </a-input>
+          <a-input v-model:value="form.username.value"> </a-input>
         </a-form-item>
         <a-form-item label="Repo">
-          <a-input v-model:value="form.repo"> </a-input>
+          <a-input v-model:value="form.repo.value"> </a-input>
         </a-form-item>
         <a-form-item label="Version">
-          <a-input v-model:value="form.version"> </a-input>
+          <a-input v-model:value="form.version.value"> </a-input>
         </a-form-item>
         <a-form-item>
           <a-button type="primary" html-type="submit" :loading="loading">
             Generate
+          </a-button>
+          <a-button type="info" @click="copyURL" style="margin-left: 20px">
+            <!-- <MessageOutlined :style="{ fontSize: '16px', color: '#08c' }" /> -->
+            Share
           </a-button>
         </a-form-item>
       </a-form>
@@ -42,19 +47,46 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import { notification } from "ant-design-vue";
+import { ref, reactive, onMounted, watch, toRefs } from "vue";
+import copy from "https://cdn.skypack.dev/copy-to-clipboard";
+import { message, notification } from "ant-design-vue";
 import Render from "./components/Render.vue";
 import CodeMirror from "./components/CodeMirror.vue";
 import TEMPLATE_DEFAULT from "./template/default";
 
 const loading = ref(false);
-const template = ref(TEMPLATE_DEFAULT);
-const form = ref({
+let template = ref(TEMPLATE_DEFAULT);
+
+const _form = reactive({
   username: "axetroy",
   repo: "whatchanged",
   version: "HEAD~",
 });
+
+const form = toRefs(_form);
+
+function watchAndUpdateQuery(field) {
+  watch(
+    () => _form[field],
+    (val) => {
+      syncQueryField(field, val);
+    }
+  );
+}
+
+function syncQueryField(field, val) {
+  const url = new URL(window.location.href);
+  if (url.searchParams.has(field)) {
+    url.searchParams.set(field, val);
+  } else {
+    url.searchParams.append(field, val);
+  }
+  window.history.pushState(null, null, url);
+}
+
+watchAndUpdateQuery("username");
+watchAndUpdateQuery("repo");
+watchAndUpdateQuery("version");
 
 const content = ref("");
 
@@ -72,11 +104,9 @@ function onSubmit() {
   });
 
   fetch(
-    `${import.meta.env.VITE_API_HOST}/?username=${
-      form.value.username || ""
-    }&repo=${form.value.repo || ""}&version=${
-      form.value.version || ""
-    }&template=${tpl || ""}`
+    `${import.meta.env.VITE_API_HOST}/?username=${_form.username || ""}&repo=${
+      _form.repo || ""
+    }&version=${_form.version || ""}&template=${tpl || ""}`
   )
     .then((res) => res.text())
     .then((markdown) => {
@@ -95,6 +125,16 @@ function onSubmit() {
     });
 }
 
+function copyURL() {
+  const url = new URL(window.location.href);
+
+  url.searchParams.append("tpl", template.value);
+
+  copy(url.href);
+
+  message.info("URL have been copy to clipboard.");
+}
+
 onMounted(() => {
   notification.warn({
     message: "IMPORTANT",
@@ -102,6 +142,33 @@ onMounted(() => {
       "Hi ❤️ We are useing the free resources for backend and there is a limit to the memory size. so, it may fail to generate for large projects.",
     duration: 30,
   });
+
+  const url = new URL(window.location.href);
+
+  let params = 0;
+
+  if (url.searchParams.has("username")) {
+    _form.username = url.searchParams.get("username");
+    params++;
+  }
+
+  if (url.searchParams.has("repo")) {
+    _form.repo = url.searchParams.get("repo");
+    params++;
+  }
+
+  if (url.searchParams.has("version")) {
+    _form.version = url.searchParams.get("version");
+  }
+
+  if (url.searchParams.has("tpl")) {
+    params++;
+    template.value = url.searchParams.get("tpl");
+  }
+
+  if (params === 3 && _form.username && _form.repo) {
+    onSubmit();
+  }
 });
 </script>
 

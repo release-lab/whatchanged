@@ -16,7 +16,6 @@
     "@vue/compiler-sfc": "3.0.3",
     "cross-env": "7.0.2",
     "import-http": "0.3.1",
-    "rollup-plugin-esm-import-to-url": "2.1.0",
     "sass": "1.29.0",
     "vite": "1.0.0-rc.13"
   }
