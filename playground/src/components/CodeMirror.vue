@@ -24,10 +24,6 @@ let editor;
 
 const input = ref(null);
 
-watch(content, (val) => {
-  update(val);
-});
-
 onMounted(() => {
   editor = CodeMirror.fromTextArea(input.value, {
     lineNumbers: true,

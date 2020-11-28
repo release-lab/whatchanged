@@ -21,7 +21,7 @@
           <a-button type="primary" html-type="submit" :loading="loading">
             Generate
           </a-button>
-          <a-button type="info" @click="copyURL" style="margin-left: 20px">
+          <a-button type="default" @click="copyURL" style="margin-left: 20px">
             <!-- <MessageOutlined :style="{ fontSize: '16px', color: '#08c' }" /> -->
             Share
           </a-button>
@@ -48,7 +48,7 @@
 
 <script setup>
 import { ref, reactive, onMounted, watch, toRefs } from "vue";
-import copy from "https://cdn.skypack.dev/copy-to-clipboard";
+import copy from "https://cdn.skypack.dev/copy-to-clipboard@3.3.1";
 import { message, notification } from "ant-design-vue";
 import Render from "./components/Render.vue";
 import CodeMirror from "./components/CodeMirror.vue";
@@ -57,17 +57,17 @@ import TEMPLATE_DEFAULT from "./template/default";
 const loading = ref(false);
 let template = ref(TEMPLATE_DEFAULT);
 
-const _form = reactive({
+const formReactive = reactive({
   username: "axetroy",
   repo: "whatchanged",
   version: "HEAD~",
 });
 
-const form = toRefs(_form);
+const form = toRefs(formReactive);
 
 function watchAndUpdateQuery(field) {
   watch(
-    () => _form[field],
+    () => formReactive[field],
     (val) => {
       syncQueryField(field, val);
     }
@@ -104,9 +104,11 @@ function onSubmit() {
   });
 
   fetch(
-    `${import.meta.env.VITE_API_HOST}/?username=${_form.username || ""}&repo=${
-      _form.repo || ""
-    }&version=${_form.version || ""}&template=${tpl || ""}`
+    `${import.meta.env.VITE_API_HOST}/?username=${
+      formReactive.username || ""
+    }&repo=${formReactive.repo || ""}&version=${
+      formReactive.version || ""
+    }&template=${tpl || ""}`
   )
     .then((res) => res.text())
     .then((markdown) => {
@@ -148,17 +150,17 @@ onMounted(() => {
   let params = 0;
 
   if (url.searchParams.has("username")) {
-    _form.username = url.searchParams.get("username");
+    formReactive.username = url.searchParams.get("username");
     params++;
   }
 
   if (url.searchParams.has("repo")) {
-    _form.repo = url.searchParams.get("repo");
+    formReactive.repo = url.searchParams.get("repo");
     params++;
   }
 
   if (url.searchParams.has("version")) {
-    _form.version = url.searchParams.get("version");
+    formReactive.version = url.searchParams.get("version");
   }
 
   if (url.searchParams.has("tpl")) {
@@ -166,7 +168,7 @@ onMounted(() => {
     template.value = url.searchParams.get("tpl");
   }
 
-  if (params === 3 && _form.username && _form.repo) {
+  if (params === 3 && formReactive.username && formReactive.repo) {
     onSubmit();
   }
 });
