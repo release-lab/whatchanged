@@ -48,7 +48,7 @@
 
 <script setup>
 import { ref, reactive, onMounted, watch, toRefs } from "vue";
-import copy from "https://cdn.skypack.dev/copy-to-clipboard@3.3.1";
+import copy from "https://esm.sh/copy-to-clipboard";
 import { message, notification } from "ant-design-vue";
 import Render from "./components/Render.vue";
 import CodeMirror from "./components/CodeMirror.vue";
