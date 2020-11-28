@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="toolbar">
-      <img src="../assets/logo.png" />
+      <!-- <img :src="require('@/assets/logo.png')" /> -->
       <a-form
         layout="inline"
         :model="form"
