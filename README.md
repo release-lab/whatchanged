@@ -20,6 +20,7 @@ Feature:
 - [x] Custom template file
 - [x] Conventional Commits Parser
 - [x] Generate multiple versions of change logs
+- [x] [Github Action](https://github.com/axetroy/setup-whatchanged)
 
 ### Usage
 
