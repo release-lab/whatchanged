@@ -27,6 +27,14 @@ func TestGenerate111(t *testing.T) {
 				Version: []string{"HEAD~"},
 			},
 		},
+		{
+			name:       "v",
+			Project:    "./__test__/v",
+			ResultFile: "./__test__/v.CHANGELOG.md",
+			options: &option.Options{
+				Version: []string{"HEAD~"},
+			},
+		},
 	}
 
 	for _, tt := range tests {
