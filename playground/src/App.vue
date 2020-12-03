@@ -1,5 +1,9 @@
 <template>
-  <div>
+  <div style="position: relative">
+    <img
+      src="/github.svg"
+      style="position: fixed; right: 0; top: 0"
+    />
     <div class="toolbar">
       <!-- <img :src="require('@/assets/logo.png')" /> -->
       <a-form
