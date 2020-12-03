@@ -5,6 +5,12 @@ v4.0.0
 
 -	deprecated([`7729788`](https://github.com//axetroy/vscode-deno/commit/7729788c37ae23fe206ca218a0bbf8253063077c)) (thanks @axetroy)
 
+### 🔙 Revert:
+
+-	revert [`bf08694`](https://github.com//axetroy/vscode-deno/commit/bf0869485d8e072fc6a6ebaeffbad67b5a0c1824), deprecated([`6d13713`](https://github.com//axetroy/vscode-deno/commit/6d1371328a843e0c937ea80ae81fb07400a9826a)\)
+-	revert [`c20037d`](https://github.com//axetroy/vscode-deno/commit/c20037dd95a828230277f12ff2e8c4b73bd05425), refactor: remove unused extension([`25b190b`](https://github.com//axetroy/vscode-deno/commit/25b190bf790d930962ab63faa285b0b51cbca9b3)\)
+-	revert [`cde4dda`](https://github.com//axetroy/vscode-deno/commit/cde4dda61a565370285cce8f14a3962c8b5d3f63), refactor: update([`479ecd2`](https://github.com//axetroy/vscode-deno/commit/479ecd2268b9b3edc087043cca6b4fce954959c0)\)
+
 ### 💪 Commits(16):
 
 -	[`151641e`](https://github.com//axetroy/vscode-deno/commit/151641e25161696d786241c4474e226345542d13) - 4.0.0
@@ -277,7 +283,9 @@ v3.3.0
 
 ### ❤️ BREAKING CHANGES:
 
--	no more use `deno.dts_file` anymore We think this configuration item is redundant
+-	no more use `deno.dts_file` anymore
+
+	We think this configuration item is redundant
 
 	You can configure external declaration files in `tsconfig.json`
 
@@ -491,6 +499,10 @@ v3.0.3
 -	can not set TextDocument's language mode correctly in Windows([`83d6e34`](https://github.com//axetroy/vscode-deno/commit/83d6e342d1795c15e1fdba9218bbcddae910e02e)) (thanks @axetroy)
 -	somethine server does not ready and send notify([`271c9cd`](https://github.com//axetroy/vscode-deno/commit/271c9cdda40556f8b8efe8280a7a323074d62544)) (thanks @axetroy)
 
+### 🔙 Revert:
+
+-	revert [`6170e21`](https://github.com//axetroy/vscode-deno/commit/6170e21417754dcca33bf1f9376dec37251ddc06), refactor: typescript-deno-plugin([`453a9b0`](https://github.com//axetroy/vscode-deno/commit/453a9b0240bda3d2521defa5f4dbf74faeeca7a4)\)
+
 ### 💪 Commits(20):
 
 -	[`09b4d0d`](https://github.com//axetroy/vscode-deno/commit/09b4d0d6b22b3a932fb3e45939ffd67f1c116c57) - 3.0.3
@@ -520,6 +532,10 @@ v3.0.2
 ### 🐛 Bugs fixed:
 
 -	parse .vscode/settings.json with json5([`b3de3d3`](https://github.com//axetroy/vscode-deno/commit/b3de3d352784c6dcbcbaf4cfb1aa4550b249b618)) (thanks @axetroy)
+
+### 🔙 Revert:
+
+-	revert [`da68d42`](https://github.com//axetroy/vscode-deno/commit/da68d4289b1713432a5b0203fa8f46f4008cab44), docs: add readme for typescript-deno-plugin([`1be0c24`](https://github.com//axetroy/vscode-deno/commit/1be0c24d49d811fb7a5499671d01fe5bcafae6f5)\)
 
 ### 💪 Commits(6):
 
@@ -865,6 +881,10 @@ v1.19.0
 
 v1.18.1
 =======
+
+### 🔙 Revert:
+
+-	revert [`cb0e592`](https://github.com//axetroy/vscode-deno/commit/cb0e592136f569e58daee56a7d2f46759b7ca946), feat: support top-level await with typescript 3.8([`341165e`](https://github.com//axetroy/vscode-deno/commit/341165e7d1c25e1a4f2d7aab8866f54fb9b8f110)\)
 
 ### 💪 Commits(2):
 
@@ -1286,6 +1306,10 @@ v1.2.1
 v1.2.0
 ======
 
+### 🔙 Revert:
+
+-	revert [`6927e6a`](https://github.com//axetroy/vscode-deno/commit/6927e6a2d0dd7ac88dcc82c4dba388ef6aae394c), implement auto format on save (#13)" (#19)([`8d29205`](https://github.com//axetroy/vscode-deno/commit/8d29205104fc6ca7e35de01a24ceb240f2ae7d77)\)
+
 ### 💪 Commits(14):
 
 -	[`ba3dfeb`](https://github.com//axetroy/vscode-deno/commit/ba3dfeb967ac9c154238392f52618eee97cb3bc9) - release v1.2.0 (#22)
@@ -1315,6 +1339,10 @@ v1.0.7
 
 v1.0.6
 ======
+
+### 🔙 Revert:
+
+-	revert [`20b683a`](https://github.com//axetroy/vscode-deno/commit/20b683ab0c7ebd0cdee71bebff58456e62df6aaa), bundling extension using webpack([`2b451ff`](https://github.com//axetroy/vscode-deno/commit/2b451ff9b6f50ccc7edab19d28f376f5ee19923d)\)
 
 ### 💪 Commits(2):
 
