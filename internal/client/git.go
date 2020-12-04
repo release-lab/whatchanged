@@ -4,9 +4,8 @@ import (
 	"io"
 	"io/ioutil"
 	"os"
-	"path"
+	"path/filepath"
 	"regexp"
-	"runtime"
 	"sort"
 	"strings"
 
@@ -19,8 +18,7 @@ import (
 )
 
 var (
-	versionRegexp         = regexp.MustCompile(`^v`)
-	winAbsolutePathRegegp = regexp.MustCompile(`^(?i)[a-z]:.+`)
+	versionRegexp = regexp.MustCompile(`^v`)
 )
 
 type Tag struct {
@@ -40,12 +38,8 @@ func NewGitClient(dir string) (*GitClient, error) {
 		return nil, errors.WithStack(err)
 	}
 
-	if runtime.GOOS == "windows" {
-		if !winAbsolutePathRegegp.MatchString(dir) {
-			dir = path.Join(cwd, dir)
-		}
-	} else if !path.IsAbs(dir) {
-		dir = path.Join(cwd, dir)
+	if !filepath.IsAbs(dir) {
+		dir = filepath.Join(cwd, dir)
 	}
 
 	files, err := ioutil.ReadDir(dir)
@@ -60,7 +54,7 @@ func NewGitClient(dir string) (*GitClient, error) {
 				isProjectDir = true
 			} else {
 				// git submodule
-				content, err := ioutil.ReadFile(path.Join(dir, file.Name()))
+				content, err := ioutil.ReadFile(filepath.Join(dir, file.Name()))
 
 				if err != nil {
 					return nil, errors.WithStack(err)
@@ -68,7 +62,7 @@ func NewGitClient(dir string) (*GitClient, error) {
 
 				matcher := regexp.MustCompile(`gitdir: (.*)`).FindStringSubmatch(string(content))
 
-				subModuleGitDir := path.Join(dir, matcher[1])
+				subModuleGitDir := filepath.Join(dir, matcher[1])
 
 				dir = subModuleGitDir
 			}
@@ -77,7 +71,7 @@ func NewGitClient(dir string) (*GitClient, error) {
 	}
 
 	if isProjectDir {
-		dir = path.Join(dir, ".git")
+		dir = filepath.Join(dir, ".git")
 	}
 
 	r, err := git.PlainOpen(dir)

@@ -4,7 +4,7 @@ import (
 	"context"
 	"io"
 	"os"
-	"path"
+	"path/filepath"
 	"regexp"
 
 	parser "github.com/axetroy/whatchanged/1_parser"
@@ -53,8 +53,8 @@ func Generate(project string, w io.Writer, options *option.Options) error {
 			return errors.WithStack(err)
 		}
 
-		if !path.IsAbs(options.TemplateFile) {
-			options.TemplateFile = path.Join(cwd, options.TemplateFile)
+		if !filepath.IsAbs(options.TemplateFile) {
+			options.TemplateFile = filepath.Join(cwd, options.TemplateFile)
 		}
 	}
 
