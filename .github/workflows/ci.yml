@@ -49,7 +49,7 @@ jobs:
 
       - name: Generate changelog
         run: |
-          ./cmd/whatchanged/run.sh HEAD~
+          go run -mod=vendor ./cmd/whatchanged/main.go HEAD~
 
   release:
     name: Release to Github
