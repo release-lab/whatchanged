@@ -6,6 +6,7 @@ import (
 	"os"
 	"path"
 	"regexp"
+	"runtime"
 	"sort"
 	"strings"
 
@@ -39,7 +40,11 @@ func NewGitClient(dir string) (*GitClient, error) {
 		return nil, errors.WithStack(err)
 	}
 
-	if !path.IsAbs(dir) && !winAbsolutePathRegegp.MatchString(dir) {
+	if runtime.GOOS == "windows" {
+		if !winAbsolutePathRegegp.MatchString(dir) {
+			dir = path.Join(cwd, dir)
+		}
+	} else if !path.IsAbs(dir) {
 		dir = path.Join(cwd, dir)
 	}
 
