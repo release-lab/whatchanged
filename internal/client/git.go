@@ -18,7 +18,8 @@ import (
 )
 
 var (
-	versionRegexp = regexp.MustCompile(`^v`)
+	versionRegexp         = regexp.MustCompile(`^v`)
+	winAbsolutePathRegegp = regexp.MustCompile(`^(?i)[a-z]:\.+`)
 )
 
 type Tag struct {
@@ -38,7 +39,7 @@ func NewGitClient(dir string) (*GitClient, error) {
 		return nil, errors.WithStack(err)
 	}
 
-	if !path.IsAbs(dir) {
+	if !path.IsAbs(dir) && !winAbsolutePathRegegp.MatchString(dir) {
 		dir = path.Join(cwd, dir)
 	}
 
