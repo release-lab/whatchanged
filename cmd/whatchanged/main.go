@@ -158,8 +158,6 @@ func run() error {
 		output = f
 	}
 
-	os.Stderr.WriteString(fmt.Sprintf("project: '%s', cwd: '%s'\n", project, cwd))
-
 	if err := whatchanged.Generate(project, output, &option.Options{
 		Version:      ranges,
 		Preset:       option.Preset(preset),
