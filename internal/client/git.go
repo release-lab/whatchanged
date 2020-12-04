@@ -19,7 +19,7 @@ import (
 
 var (
 	versionRegexp         = regexp.MustCompile(`^v`)
-	winAbsolutePathRegegp = regexp.MustCompile(`^(?i)[a-z]:\.+`)
+	winAbsolutePathRegegp = regexp.MustCompile(`^(?i)[a-z]:.+`)
 )
 
 type Tag struct {
