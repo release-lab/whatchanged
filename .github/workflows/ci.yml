@@ -65,10 +65,16 @@ jobs:
         run: |
           ./cmd/whatchanged/run.sh --tpl=release.tpl --output=release.md
 
-      - name: Run GoReleaser
+      - name: Release to Github
         uses: goreleaser/goreleaser-action@v2
         with:
           version: latest
           args: release --rm-dist --release-notes=./release.md
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      - name: Publish to NPM
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          package: ./npm/package.json
+          token: ${{ secrets.NPM_TOKEN }}

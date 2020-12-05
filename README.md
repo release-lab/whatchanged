@@ -114,6 +114,17 @@ SOURCE CODE:
 
 ### Installation
 
+#### Install via npm
+
+```bash
+# install in global
+npm install -g whatchanged
+# run the command once
+npx whatchanged
+```
+
+#### Install via shell
+
 If you are using Linux/macOS. you can install it with the following command:
 
 ```shell
@@ -122,10 +133,10 @@ curl -fsSL https://raw.githubusercontent.com/axetroy/whatchanged/master/install.
 # or install specified version
 curl -fsSL https://raw.githubusercontent.com/axetroy/whatchanged/master/install.sh | bash -s v0.2.1
 # or install from gobinaries.com
-curl -sf https://gobinaries.com/axetroy/whatchanged@v0.2.0 | sh
+curl -sf https://gobinaries.com/axetroy/whatchanged@v0.2.2 | sh
 ```
 
-Or
+#### Install from Github release page
 
 Download the executable file for your platform at [release page](https://github.com/axetroy/whatchanged/releases)
 
