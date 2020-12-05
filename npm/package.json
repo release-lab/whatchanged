@@ -7,7 +7,8 @@
     "README.md",
     "CHANGELOG.md",
     "LICENSE",
-    "bin/whatchanged.js"
+    "bin/whatchanged.js",
+    "scripts"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
