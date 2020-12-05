@@ -73,6 +73,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
+      - name: Prepare publish
+        run: |
+          cp README.md ./npm/README.md
+          cp release.md ./npm/CHANGELOG.md
+          cp LICENSE ./npm/LICENSE
+
       - name: Publish to NPM
         uses: JS-DevTools/npm-publish@v1
         with:

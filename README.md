@@ -118,9 +118,9 @@ SOURCE CODE:
 
 ```bash
 # install in global
-npm install -g whatchanged
+npm install -g @axetroy/whatchanged
 # run the command once
-npx whatchanged
+npx @axetroy/whatchanged
 ```
 
 #### Install via shell
