@@ -133,7 +133,7 @@ curl -fsSL https://raw.githubusercontent.com/axetroy/whatchanged/master/install.
 # or install specified version
 curl -fsSL https://raw.githubusercontent.com/axetroy/whatchanged/master/install.sh | bash -s v0.2.1
 # or install from gobinaries.com
-curl -sf https://gobinaries.com/axetroy/whatchanged@v0.2.2 | sh
+curl -sf https://gobinaries.com/axetroy/whatchanged@v0.2.3 | sh
 ```
 
 #### Install from Github release page
