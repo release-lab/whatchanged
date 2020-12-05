@@ -2,3 +2,5 @@ node_modules
 *.lock
 package-lock.json
 dist
+./bin/whatchanged
+./bin/whatchanged.exe
