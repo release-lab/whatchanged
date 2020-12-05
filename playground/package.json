@@ -12,7 +12,7 @@
     "vue": "3.0.4"
   },
   "devDependencies": {
-    "@types/marked": "1.2.0",
+    "@types/marked": "1.2.1",
     "@vue/compiler-sfc": "3.0.4",
     "cross-env": "7.0.3",
     "import-http": "0.3.1",
