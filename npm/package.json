@@ -1,14 +1,16 @@
 {
   "name": "@axetroy/whatchanged",
-  "version": "0.2.5",
+  "version": "0.0.0",
   "description": "An elegant changelog generator",
-  "bin": "./bin/whatchanged",
+  "bin": {
+    "whatchanged": "./bin/whatchanged"
+  },
   "files": [
     "README.md",
     "CHANGELOG.md",
     "LICENSE",
-    "bin/whatchanged.js",
-    "scripts"
+    "bin/whatchanged",
+    "scripts/postinstall.js"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
