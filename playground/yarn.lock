@@ -544,10 +544,10 @@ ansi-styles@^4.1.0:
   dependencies:
     color-convert "^2.0.1"
 
-ant-design-vue@2.0.0-rc.2:
-  version "2.0.0-rc.2"
-  resolved "https://registry.yarnpkg.com/ant-design-vue/-/ant-design-vue-2.0.0-rc.2.tgz#fd3b4a5a64fccbb53ed488a194317a040de2223e"
-  integrity sha512-XA7X/7HHIveiTh41bZWGfoQ2Rys/rqWknK2zzdHwVnfw9ST3v+ciMKH0Uegyn7m14QL/EdUkC8zGsXpiSXqKNQ==
+ant-design-vue@2.0.0-rc.3:
+  version "2.0.0-rc.3"
+  resolved "https://registry.yarnpkg.com/ant-design-vue/-/ant-design-vue-2.0.0-rc.3.tgz#22f81d0fc495d2aeff343925d5750e0e34106f86"
+  integrity sha512-dz7VOfxJZIHy7xCrMDBV8zYaVOyeuAFAxewWZy0StCWpbILqQWynb9sK4Nseh3N5ZMFPOD/e8FFiA9cXdNtEyw==
   dependencies:
     "@ant-design-vue/use" "^0.0.1-0"
     "@ant-design/icons-vue" "^5.1.6"

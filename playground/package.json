@@ -7,7 +7,7 @@
     "build": "cross-env NODE_ENV=production vite build"
   },
   "dependencies": {
-    "ant-design-vue": "2.0.0-rc.2",
+    "ant-design-vue": "2.0.0-rc.3",
     "marked": "1.2.5",
     "vue": "3.0.4"
   },
