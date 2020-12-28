@@ -66,6 +66,8 @@ OPTIONS:
                 Defaults to "--preset=default".
   --tpl         Specify the template file for generating. Only available when
                 --fmt=md.
+  --skip-format Skip the formatting process, which is very useful for keeping the
+                original format.
 
 EXAMPLES:
   # generate changelog from HEAD to <latest version>.

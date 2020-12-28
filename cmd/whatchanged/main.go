@@ -57,6 +57,8 @@ OPTIONS:
                 Defaults to "--preset=default".
   --tpl         Specify the template file for generating. Only available when
                 --fmt=md.
+  --skip-format Skip the formatting process, which is very useful for keeping the
+                original format.
 
 EXAMPLES:
   # generate changelog from HEAD to <latest version>.
@@ -112,6 +114,7 @@ func run() error {
 		templateFile string
 		format       string
 		outputFile   string
+		skipFormat   bool
 	)
 
 	cwd, err := os.Getwd()
@@ -125,6 +128,7 @@ func run() error {
 	flag.StringVar(&format, "fmt", string(option.FormatMarkdown), "The changelog format")
 	flag.StringVar(&preset, "preset", string(option.PresetDefault), "Cli built-in markdown template")
 	flag.StringVar(&templateFile, "tpl", "", "Specify the template when generating")
+	flag.BoolVar(&skipFormat, "skip-format", false, "Skip the formatting process, which is very useful for keeping the original format.")
 	flag.BoolVar(&showHelp, "help", false, "Print help information")
 	flag.BoolVar(&showVersion, "version", false, "Print version information")
 
@@ -162,6 +166,7 @@ func run() error {
 		Version:      ranges,
 		Preset:       option.Preset(preset),
 		Format:       option.Format(format),
+		SkipFormat:   skipFormat,
 		TemplateFile: templateFile,
 	}); err != nil {
 		return errors.WithStack(err)

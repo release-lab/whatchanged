@@ -106,17 +106,27 @@ func Generate(project string, w io.Writer, options *option.Options) error {
 		return errors.WithStack(err)
 	}
 
-	formattedOutput, err := formatter.Format(output, options.Format)
+	if options.SkipFormat {
+		_, err = writer.Write(output, w)
 
-	if err != nil {
-		return errors.WithStack(err)
+		if err != nil {
+			return errors.WithStack(err)
+		}
+
+		return nil
+	} else {
+		formattedOutput, err := formatter.Format(output, options.Format)
+
+		if err != nil {
+			return errors.WithStack(err)
+		}
+
+		_, err = writer.Write(formattedOutput, w)
+
+		if err != nil {
+			return errors.WithStack(err)
+		}
+
+		return nil
 	}
-
-	_, err = writer.Write(formattedOutput, w)
-
-	if err != nil {
-		return errors.WithStack(err)
-	}
-
-	return nil
 }
