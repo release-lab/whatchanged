@@ -111,10 +111,101 @@ func getCommit(git *client.GitClient, version string, isStart bool) (*object.Com
 	}
 }
 
+func resolveVersion(git *client.GitClient, versionRanges string) ([]string, error) {
+	versions := strings.Split(versionRanges, "~")
+
+	length := len(versions)
+
+	switch length {
+	case 0:
+		versions[0] = "HEAD"
+		latestTag, err := git.TagN(0)
+
+		if err != nil {
+			return nil, errors.WithStack(err)
+		}
+
+		if latestTag != nil {
+			commit, err := git.GetPrevCommitOfTag(latestTag)
+
+			if err != nil {
+				return nil, errors.WithStack(err)
+			}
+
+			// if there is no prev tag
+			// tag is the HEAD
+			if commit == nil {
+				nextTag, err := git.NextTag(latestTag)
+
+				if err != nil {
+					return nil, errors.WithStack(err)
+				}
+
+				if nextTag != nil {
+					if preCommitOfNextTag, err := git.GetPrevCommitOfTag(nextTag); err != nil {
+						return nil, errors.WithStack(err)
+					} else {
+						// if the pre-commit of the tag is nil
+						if preCommitOfNextTag == nil {
+							versions = append(versions, nextTag.Commit.Hash.String())
+						} else {
+							versions = append(versions, preCommitOfNextTag.Hash.String())
+						}
+					}
+				} else {
+					versions = append(versions, "")
+				}
+			} else {
+				versions = append(versions, commit.Hash.String())
+			}
+
+		} else {
+			versions = append(versions, "")
+		}
+	case 1:
+		var (
+			tag *client.Tag
+			err error
+		)
+
+		if regTag.MatchString(versionRanges) {
+			matcher := regTag.FindStringSubmatch(versionRanges)
+
+			tagIndex, err := strconv.ParseInt(matcher[1], 10, 10)
+
+			if err != nil {
+				return nil, errors.WithStack(err)
+			}
+
+			if tag, err = git.TagN(int(tagIndex)); err != nil {
+				return nil, errors.WithStack(err)
+			}
+		} else {
+			if tag, err = git.TagName(versionRanges); err != nil {
+				return nil, errors.WithStack(err)
+			}
+		}
+
+		if tag != nil {
+			commit, err := git.GetLastCommitOfTag(tag)
+
+			if err != nil {
+				return nil, errors.WithStack(err)
+			} else if commit != nil {
+				versions = append(versions, commit.Hash.String())
+			}
+
+		} else {
+			versions = append(versions, "")
+		}
+	}
+
+	return versions, nil
+}
+
 func Parse(git *client.GitClient, rangesSlice []string) ([]*Scope, error) {
 	var (
 		scopeRange = make([]*Scope, 0)
-		err        error
 	)
 
 	if len(rangesSlice) == 0 {
@@ -130,80 +221,10 @@ func Parse(git *client.GitClient, rangesSlice []string) ([]*Scope, error) {
 
 		ranges = strings.TrimSpace(ranges)
 
-		versions := strings.Split(ranges, "~")
+		versions, err := resolveVersion(git, ranges)
 
-		if ranges == "" {
-			versions[0] = "HEAD"
-			latestTag, err := git.TagN(0)
-
-			if err != nil {
-				return nil, errors.WithStack(err)
-			}
-
-			if latestTag != nil {
-				commit, err := git.GetPrevCommitOfTag(latestTag)
-
-				if err != nil {
-					return nil, errors.WithStack(err)
-				}
-
-				// if there is no prev tag
-				// tag is the HEAD
-				if commit == nil {
-					nextTag, err := git.NextTag(latestTag)
-
-					if err != nil {
-						return nil, errors.WithStack(err)
-					}
-
-					if nextTag != nil {
-						if commit, err := git.GetPrevCommitOfTag(nextTag); err != nil {
-							return nil, errors.WithStack(err)
-						} else {
-							versions = append(versions, commit.Hash.String())
-						}
-					} else {
-						versions = append(versions, "")
-					}
-				} else {
-					versions = append(versions, commit.Hash.String())
-				}
-
-			} else {
-				versions = append(versions, "")
-			}
-		} else if len(versions) == 1 {
-			var tag *client.Tag
-
-			if regTag.MatchString(ranges) {
-				matcher := regTag.FindStringSubmatch(ranges)
-
-				tagIndex, err := strconv.ParseInt(matcher[1], 10, 10)
-
-				if err != nil {
-					return nil, errors.WithStack(err)
-				}
-
-				if tag, err = git.TagN(int(tagIndex)); err != nil {
-					return nil, errors.WithStack(err)
-				}
-			} else {
-				if tag, err = git.TagName(ranges); err != nil {
-					return nil, errors.WithStack(err)
-				}
-			}
-
-			if tag != nil {
-				commit, err := git.GetLastCommitOfTag(tag)
-
-				if err != nil {
-					return nil, errors.WithStack(err)
-				}
-
-				versions = append(versions, commit.Hash.String())
-			} else {
-				versions = append(versions, "")
-			}
+		if err != nil {
+			return nil, errors.WithStack(err)
 		}
 
 		if startCommit, err = getCommit(git, versions[0], true); err != nil {
@@ -234,9 +255,10 @@ func Parse(git *client.GitClient, rangesSlice []string) ([]*Scope, error) {
 
 				if err != nil {
 					return nil, errors.WithStack(err)
+				} else if lastCommitOfTag != nil {
+					scope.End.Commit = lastCommitOfTag
 				}
 
-				scope.End.Commit = lastCommitOfTag
 			}
 		}
 
@@ -246,7 +268,9 @@ func Parse(git *client.GitClient, rangesSlice []string) ([]*Scope, error) {
 			return nil, errors.WithStack(err)
 		}
 
-		scope.Tags = tags
+		if len(tags) != 0 {
+			scope.Tags = tags
+		}
 
 		scopeRange = append(scopeRange, scope)
 	}

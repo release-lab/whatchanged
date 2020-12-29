@@ -17,14 +17,14 @@ type ExtractSplice struct {
 	Tag    *client.Tag      // If this splice is a tag splice
 }
 
-func getTagOfCommit(tags []*client.Tag, commit *object.Commit) *client.Tag {
+func getTagOfCommit(tags []*client.Tag, commit *object.Commit) (result []*client.Tag) {
 	for _, tag := range tags {
 		if tag.Commit.Hash.String() == commit.Hash.String() {
-			return tag
+			result = append(result, tag)
 		}
 	}
 
-	return nil
+	return
 }
 
 func Extract(g *client.GitClient, scopes []*parser.Scope) ([]*ExtractSplice, error) {
@@ -73,6 +73,8 @@ func Extract(g *client.GitClient, scopes []*parser.Scope) ([]*ExtractSplice, err
 
 		index := 0
 
+		tagIndex := 0
+
 		for {
 			if index == len(commits) {
 				break
@@ -85,11 +87,19 @@ func Extract(g *client.GitClient, scopes []*parser.Scope) ([]*ExtractSplice, err
 				Commit: make([]*object.Commit, 0),
 			}
 
-			item.Commit = append(item.Commit, commit)
-
-			if tag := getTagOfCommit(scope.Tags, commit); tag != nil {
-				item.Tag = tag
-				item.Name = tag.Name
+			if tags := getTagOfCommit(scope.Tags, commit); len(tags) != 0 {
+				if tagIndex+1 == len(tags) {
+					item.Tag = tags[tagIndex]
+					item.Name = tags[tagIndex].Name
+					item.Commit = append(item.Commit, commit)
+					tagIndex = 0 // reset tag index to zero
+				} else {
+					item.Tag = tags[tagIndex]
+					item.Name = tags[tagIndex].Name
+					splices = append(splices, item)
+					tagIndex++
+					continue
+				}
 			}
 
 			index++

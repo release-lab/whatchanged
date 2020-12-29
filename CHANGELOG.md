@@ -1,3 +1,114 @@
+# Unreleased
+
+### 🐛 Bugs fixed:
+
+- **deps**: update dependency ant-design-vue to v2.0.0-rc.3 (#14)([`e6275b7`](https://github.com/axetroy/changelog/commit/e6275b7d7f7b009e79a70f6f869efebb9dc7a866)) (thanks @renovate[bot])
+
+### 💪 Commits(2):
+
+- [`e6275b7`](https://github.com/axetroy/changelog/commit/e6275b7d7f7b009e79a70f6f869efebb9dc7a866) - fix(deps): update dependency ant-design-vue to v2.0.0-rc.3 (#14)
+- [`6ab9c0b`](https://github.com/axetroy/changelog/commit/6ab9c0ba085699192d64e856dae5bd9367296a5d) - chore: update golanglint
+
+# v0.2.6
+
+### 🐛 Bugs fixed:
+
+- npm binary([`8384bf7`](https://github.com/axetroy/changelog/commit/8384bf782d8adf1627082f3e9030ed4a88c0fa5a)) (thanks @axetroy)
+
+### 💪 Commits(3):
+
+- [`f055c6f`](https://github.com/axetroy/changelog/commit/f055c6f1033d3b559007f4e3449227067d31fdfb) - v0.2.6
+- [`46944c6`](https://github.com/axetroy/changelog/commit/46944c641ff26417b77c8210b89c5ca09a1d2480) - chore(npm): auto bump version
+- [`8384bf7`](https://github.com/axetroy/changelog/commit/8384bf782d8adf1627082f3e9030ed4a88c0fa5a) - fix: npm binary
+
+# v0.2.5
+
+### 🐛 Bugs fixed:
+
+- **npm**: missing postinstall script([`6209122`](https://github.com/axetroy/changelog/commit/6209122eacda6d86421a6955dad86785d0206b4b)) (thanks @axetroy)
+
+### 💪 Commits(3):
+
+- [`91f3fa9`](https://github.com/axetroy/changelog/commit/91f3fa9c27b6421694be6b67308533049d8adbf4) - v0.2.5
+- [`6209122`](https://github.com/axetroy/changelog/commit/6209122eacda6d86421a6955dad86785d0206b4b) - fix(npm): missing postinstall script
+- [`9650595`](https://github.com/axetroy/changelog/commit/9650595bba4aea0c11fbd1ec82eb6a676f7daa75) - chore(deps): update dependency sass to v1.30.0 (#13)
+
+# v0.2.4
+
+### 💪 Commits(3):
+
+- [`2872a05`](https://github.com/axetroy/changelog/commit/2872a056e2772feffbdcd0adc73bd1c0c64c6127) - v0.2.4
+- [`9dff4fc`](https://github.com/axetroy/changelog/commit/9dff4fc6a9d746ffd9dd10215cf04d2fec2edd2a) - update
+- [`c7bc358`](https://github.com/axetroy/changelog/commit/c7bc35835361afd5ddffaa8a157513cf83b4b24b) - chore: update
+
+# v0.2.3
+
+### 🔥 New feature:
+
+- add npm install([`89c46fe`](https://github.com/axetroy/changelog/commit/89c46feebf8a467567d192cf40324b50f3080437)) (thanks @axetroy)
+
+### 🐛 Bugs fixed:
+
+- **deps**: pin dependencies (#11)([`bfc347c`](https://github.com/axetroy/changelog/commit/bfc347c7d945e6ba47787758ba88bc6940d1341a)) (thanks @renovate[bot])
+
+### 💪 Commits(6):
+
+- [`4474fb8`](https://github.com/axetroy/changelog/commit/4474fb8b40e54b6cd6e776e53dc0df895379c048) - v0.2.3
+- [`09cb54d`](https://github.com/axetroy/changelog/commit/09cb54d8772bbecf03f98d5559bb02973423d14a) - ci: add npm publish
+- [`bfc347c`](https://github.com/axetroy/changelog/commit/bfc347c7d945e6ba47787758ba88bc6940d1341a) - fix(deps): pin dependencies (#11)
+- [`a349f8b`](https://github.com/axetroy/changelog/commit/a349f8b4418cec0230aea8e8be87d9bc9abe1ed3) - chore(deps): update dependency @types/marked to v1.2.1 (#12)
+- [`68df2e8`](https://github.com/axetroy/changelog/commit/68df2e8545288a36bc946b615bdb7eb1f115c6e9) - docs: update package.json
+- [`89c46fe`](https://github.com/axetroy/changelog/commit/89c46feebf8a467567d192cf40324b50f3080437) - feat: add npm install
+
+# v0.2.2
+
+### 🐛 Bugs fixed:
+
+- path handler([`58d7a2d`](https://github.com/axetroy/changelog/commit/58d7a2d8d04bc99adf0b6a19e0a74261ab48f477)) (thanks @axetroy)
+
+### 💪 Commits(1):
+
+- [`58d7a2d`](https://github.com/axetroy/changelog/commit/58d7a2d8d04bc99adf0b6a19e0a74261ab48f477) - fix: path handler
+
+# v0.2.1
+
+### 🔥 New feature:
+
+- add share button for playground([`e46ccfd`](https://github.com/axetroy/changelog/commit/e46ccfdf4075210534651209b60858103850a49f)) (thanks @axetroy)
+
+### 🐛 Bugs fixed:
+
+- regexp not correct([`5a8d338`](https://github.com/axetroy/changelog/commit/5a8d338b5c1b9f4abce79e9c248f160907da89b0)) (thanks @axetroy)
+- try fix path handler in windows([`a9c32a6`](https://github.com/axetroy/changelog/commit/a9c32a6e9ef7a629d2d13bc341e06f896a8abe15)) (thanks @axetroy)
+- update playground([`3a5437a`](https://github.com/axetroy/changelog/commit/3a5437acbd9b711e807a7f8019a6e6302dfe0646)) (thanks @axetroy)
+- playground([`a867126`](https://github.com/axetroy/changelog/commit/a8671265554c3ded3d20c8e1fbdb6e55ebc133f2)) (thanks @axetroy)
+- **playground**: error logo([`3fa90ed`](https://github.com/axetroy/changelog/commit/3fa90eda1cc98378f4d5a8197682405ebbe92532)) (thanks @axetroy)
+
+### 💪 Commits(22):
+
+- [`a94f18f`](https://github.com/axetroy/changelog/commit/a94f18fbd2561d9b12735544e9e9b632c4ab15b0) - docs: update readme
+- [`952ac0e`](https://github.com/axetroy/changelog/commit/952ac0ed4c34dacf55ae399b3b5d8a7f5cac0cfa) - refactor: remove console
+- [`2b7c5d4`](https://github.com/axetroy/changelog/commit/2b7c5d4dc4809ce00f5dc48bd15445fd10e8fcbd) - refactor: improve dir detect
+- [`5a8d338`](https://github.com/axetroy/changelog/commit/5a8d338b5c1b9f4abce79e9c248f160907da89b0) - fix: regexp not correct
+- [`a9c32a6`](https://github.com/axetroy/changelog/commit/a9c32a6e9ef7a629d2d13bc341e06f896a8abe15) - fix: try fix path handler in windows
+- [`5050ea4`](https://github.com/axetroy/changelog/commit/5050ea45deb73d861df1b2e62f945502a2c78c7d) - ci: update ci
+- [`505b899`](https://github.com/axetroy/changelog/commit/505b899c9f280ae89884ee171f4afb7cf460e3aa) - update
+- [`78dd79a`](https://github.com/axetroy/changelog/commit/78dd79a45745d6785856bc32c104fe436660bdb5) - chore(deps): pin dependencies (#10)
+- [`d06c3a6`](https://github.com/axetroy/changelog/commit/d06c3a617de0d768d345d5cda7912927c35b844f) - update playground
+- [`1db175c`](https://github.com/axetroy/changelog/commit/1db175cba538af330345ac53f4b4106e635ba882) - test: add more test for generation
+- [`e898be4`](https://github.com/axetroy/changelog/commit/e898be4385c738737c67e54eb2a2cd490eafd155) - test: add test
+- [`8642531`](https://github.com/axetroy/changelog/commit/8642531883c864bdd87a8c2cc9026f9614ca9d85) - docs: update readme
+- [`3a5437a`](https://github.com/axetroy/changelog/commit/3a5437acbd9b711e807a7f8019a6e6302dfe0646) - fix: update playground
+- [`a867126`](https://github.com/axetroy/changelog/commit/a8671265554c3ded3d20c8e1fbdb6e55ebc133f2) - fix: playground
+- [`3fa90ed`](https://github.com/axetroy/changelog/commit/3fa90eda1cc98378f4d5a8197682405ebbe92532) - fix(playground): error logo
+- [`e46ccfd`](https://github.com/axetroy/changelog/commit/e46ccfdf4075210534651209b60858103850a49f) - feat: add share button for playground
+- [`9b308bb`](https://github.com/axetroy/changelog/commit/9b308bb334f7be38403097c5b5b0e0e4d9e1c523) - refactor: rename repl to playground 2
+- [`d96bc10`](https://github.com/axetroy/changelog/commit/d96bc1032d854a02626695442518155970d84a53) - refactor: rename repl to playground
+- [`a9fa2e8`](https://github.com/axetroy/changelog/commit/a9fa2e843aa06927f37a629592d20dc06f8efcaa) - refactor: update preset=full template
+- [`69cb636`](https://github.com/axetroy/changelog/commit/69cb636c3a69e7f5e86d29125dde8a926f6f63c5) - refactor(repl): update default template and add warning on mounted
+- [`ce67088`](https://github.com/axetroy/changelog/commit/ce670883aa5a27b010d07cadec8aa1754a23f0bc) - ci: update release template
+- [`c489594`](https://github.com/axetroy/changelog/commit/c489594a58fcf9b1aa2cad887574712546001163) - docs: update changelog
+
 # v0.2.0
 
 ### 🔥 New feature:

@@ -76,7 +76,14 @@ const FULL_TEMPLATE = `# {{ .Version }}
 {{ end -}}
 {{ end }}
 
+{{ $length := len .Commits }}
+
+{{if gt $length 0}}
+
 ### 💪  Commits({{ len .Commits }}):
 {{range .Commits -}}
 - {{ hashURL .Hash}} - {{ unescape .Field.Title }}
-{{ end }}`
+{{ end }}
+
+{{ end }}
+`

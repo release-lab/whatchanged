@@ -42,7 +42,14 @@ const DEFAULT_TEMPLATE = `
 {{ end -}}
 {{ end }}
 
+{{ $length := len .Commits }}
+
+{{if gt $length 0}}
+
 ### 💪  Commits({{ len .Commits }}):
 {{range .Commits -}}
 - {{ hashURL .Hash}} - {{ unescape .Field.Title }}
-{{ end }}`
+{{ end }}
+
+{{ end }}
+`

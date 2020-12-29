@@ -1,7 +1,7 @@
 <template>
   <div style="position: relative">
     <img
-      src="/github.svg"
+      src="./assets/github.svg"
       style="position: fixed; right: 0; top: 0"
     />
     <div class="toolbar">

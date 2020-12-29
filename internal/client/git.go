@@ -421,7 +421,10 @@ func (g *GitClient) GetTagRangesByCommit(start *object.Commit, end *object.Commi
 
 	for _, tag := range tags {
 		tagTime := tag.Commit.Committer.When
-		if (tagTime.Before(start.Author.When) || tagTime.Equal(start.Author.When)) && (tagTime.After(end.Author.When) || tagTime.Equal(end.Author.When)) {
+		isCommitOfTag := tag.Commit.Hash.String() == start.Hash.String() || tag.Commit.Hash.String() == end.Hash.String()
+		isInTheTimeRange := (tagTime.Before(start.Author.When) || tagTime.Equal(start.Author.When)) && (tagTime.After(end.Author.When) || tagTime.Equal(end.Author.When))
+
+		if isCommitOfTag || isInTheTimeRange {
 			result = append(result, tag)
 		}
 	}
