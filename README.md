@@ -141,28 +141,10 @@ curl -sf https://gobinaries.com/axetroy/whatchanged@v0.3.1 | sh
 
 #### Install from Github release page
 
-Download the executable file for your platform at [release page](https://github.com/axetroy/whatchanged/releases)
-
-Then set the environment variable.
-
-eg, the executable file is in the `~/bin` directory.
-
-```bash
-# ~/.bash_profile
-export PATH="$PATH:$HOME/bin"
-```
-
-then, try it out.
+Download the executable file for your platform at [release page](https://github.com/axetroy/whatchanged/releases) and put the executable file to `$PATH` then try it.
 
 ```bash
 $ whatchanged --help
-```
-
-Finally, to use Deno correctly, you also need to set environment variables
-
-```bash
-# ~/.bash_profile
-export PATH="$PATH:$HOME/.deno/bin"
 ```
 
 ### Build from source code
