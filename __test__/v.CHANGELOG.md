@@ -11,9 +11,8 @@ Unreleased
 -	revert [`cc714ca`](https://github.com//vlang/v/commit/cc714ca5cc0e0500573a0aeae7636d1b77e23963), cgen: handle variables called "array([`333f355`](https://github.com//vlang/v/commit/333f355e23cd4a5a9c20a95699d09f86ecc8aa16)\)
 -	cgen: fix all -Wmissing-variable-declarations (#5802)([`2f6757a`](https://github.com//vlang/v/commit/2f6757a56af3d18eea662e3821f6910615c0000f)\)
 
-### 💪 Commits(1117):
+### 💪 Commits(1116):
 
--	[`2f6757b`](https://github.com//vlang/v/commit/2f6757b315fab11bea1d5cecbdae249a9fc46c8e) - binary_artifact.yml: chmod 755 the v executables before archiving them.
 -	[`b1e3db7`](https://github.com//vlang/v/commit/b1e3db712e85bf9d4b96f4784cdff74edebb61f9) - binary_artifact.yml: restore .ctags.d/ and .github/ (helps vim/emacs users and running CI tests locally)
 -	[`558a756`](https://github.com//vlang/v/commit/558a7564317fd7ab9b00a3d2c3219648227226d1) - parser: fix position offset by 1 (#7099)
 -	[`97ed2bf`](https://github.com//vlang/v/commit/97ed2bf211800cd812cc218ac30599e8a8b0af07) - make: remove obsolete references to /var/tmp/tcc
