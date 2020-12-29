@@ -42,17 +42,17 @@ func Extract(g *client.GitClient, scopes []*parser.Scope) ([]*ExtractSplice, err
 		commits := make([]*object.Commit, 0)
 
 		for {
-			if commit, err := cIter.Next(); err == io.EOF {
+			if c, err := cIter.Next(); err == io.EOF {
 				break
 			} else if err != nil {
 				return nil, errors.WithStack(err)
-			} else if commit == nil {
+			} else if c == nil {
 				break
-			} else if commit.Hash.String() == scope.End.Commit.Hash.String() {
-				commits = append(commits, commit)
+			} else if c.Hash.String() == scope.End.Commit.Hash.String() {
+				commits = append(commits, c)
 				break
 			} else {
-				commits = append(commits, commit)
+				commits = append(commits, c)
 			}
 		}
 
@@ -61,15 +61,15 @@ func Extract(g *client.GitClient, scopes []*parser.Scope) ([]*ExtractSplice, err
 		}
 
 		// if there is no tags in this scope
-		if scope.Tags == nil || len(scope.Tags) == 0 {
-			splices = append(splices, &ExtractSplice{
-				Name:   "Unreleased",
-				Commit: commits,
-				Tag:    nil,
-			})
+		// if scope.Tags == nil || len(scope.Tags) == 0 {
+		// 	splices = append(splices, &ExtractSplice{
+		// 		Name:   "Unreleased",
+		// 		Commit: commits,
+		// 		Tag:    nil,
+		// 	})
 
-			return splices, nil
-		}
+		// 	return splices, nil
+		// }
 
 		index := 0
 
@@ -87,22 +87,26 @@ func Extract(g *client.GitClient, scopes []*parser.Scope) ([]*ExtractSplice, err
 				Commit: make([]*object.Commit, 0),
 			}
 
-			if tags := getTagOfCommit(scope.Tags, commit); len(tags) != 0 {
-				if tagIndex+1 == len(tags) {
-					item.Tag = tags[tagIndex]
-					item.Name = tags[tagIndex].Name
-					item.Commit = append(item.Commit, commit)
-					tagIndex = 0 // reset tag index to zero
-				} else {
-					item.Tag = tags[tagIndex]
-					item.Name = tags[tagIndex].Name
-					splices = append(splices, item)
-					tagIndex++
-					continue
+			if len(scope.Tags) != 0 {
+				if tags := getTagOfCommit(scope.Tags, commit); len(tags) != 0 {
+					if tagIndex+1 == len(tags) {
+						item.Tag = tags[tagIndex]
+						item.Name = tags[tagIndex].Name
+						item.Commit = append(item.Commit, commit)
+						tagIndex = 0 // reset tag index to zero
+					} else {
+						item.Tag = tags[tagIndex]
+						item.Name = tags[tagIndex].Name
+						splices = append(splices, item)
+						tagIndex++
+						continue
+					}
 				}
 			}
 
 			index++
+
+			item.Commit = append(item.Commit, commit)
 
 		loop:
 			for {

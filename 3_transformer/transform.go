@@ -20,6 +20,7 @@ type Commit struct {
 // https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit-message-header
 type TemplateContext struct {
 	Version         string
+	Date            string
 	Build           []*Commit
 	Ci              []*Commit
 	Chore           []*Commit
@@ -42,6 +43,15 @@ func Transform(g *client.GitClient, splices []*extractor.ExtractSplice) ([]*Temp
 		ctx := &TemplateContext{
 			Version: splice.Name,
 		}
+
+		if splice.Tag != nil {
+			ctx.Date = splice.Tag.Date.Format("2006-01-02")
+		} else {
+			if len(splice.Commit) != 0 {
+				ctx.Date = splice.Commit[0].Committer.When.Format("2006-01-02")
+			}
+		}
+
 		if len(splice.Commit) != 0 {
 			ctx.Commits = make([]*Commit, 0)
 		}

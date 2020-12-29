@@ -8,6 +8,7 @@ import (
 	"regexp"
 	"sort"
 	"strings"
+	"time"
 
 	"github.com/blang/semver/v4"
 	"github.com/go-git/go-git/v5"
@@ -24,6 +25,7 @@ var (
 type Tag struct {
 	Name   string         // tag name
 	Hash   string         // tag hash
+	Date   time.Time      // tag time
 	Commit *object.Commit // commit
 }
 
@@ -207,8 +209,19 @@ func (g *GitClient) Tags() ([]*Tag, error) {
 				_, invalid := semver.New(version)
 
 				if invalid == nil {
+					var date time.Time = commit.Committer.When
+
+					if tagObject, err := g.Repository.TagObject(ref.Hash()); err != nil && err != plumbing.ErrObjectNotFound {
+						return nil, errors.WithStack(err)
+					} else {
+						if tagObject != nil {
+							date = tagObject.Tagger.When
+						}
+					}
+
 					tags = append(tags, &Tag{
 						Name:   name.Short(),
+						Date:   date,
 						Hash:   ref.Hash().String(),
 						Commit: commit,
 					})

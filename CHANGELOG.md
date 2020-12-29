@@ -1,47 +1,66 @@
-# Unreleased
+# Unreleased (2020-12-29)
+
+### 💪 Commits(1):
+
+- [`21817fa`](https://github.com/axetroy/changelog/commit/21817fa1aba8d1e71b5fe73ba4047dc08eae197b) - chore: update sum file
+
+# v0.2.7 (2020-12-29)
+
+### 🔥 New feature:
+
+- add --skip-format and flag options for generation([`a03b7cb`](https://github.com/axetroy/changelog/commit/a03b7cb49fa23436de43e6d3436cfd123d831ede)) (thanks @axetroy)
 
 ### 🐛 Bugs fixed:
 
+- generate incorrect in mutiple version for same commit. close #15([`8fd5818`](https://github.com/axetroy/changelog/commit/8fd58182b02ea657c37c09e4a734a48215eaffb6)) (thanks @axetroy)
 - **deps**: update dependency ant-design-vue to v2.0.0-rc.3 (#14)([`e6275b7`](https://github.com/axetroy/changelog/commit/e6275b7d7f7b009e79a70f6f869efebb9dc7a866)) (thanks @renovate[bot])
 
-### 💪 Commits(2):
+### 💪 Commits(7):
 
+- [`aa904db`](https://github.com/axetroy/changelog/commit/aa904db8a94b965365aa796518002c92e1158f4e) - v0.2.7
+- [`aa904db`](https://github.com/axetroy/changelog/commit/aa904db8a94b965365aa796518002c92e1158f4e) - v0.2.7
+- [`dd4c86f`](https://github.com/axetroy/changelog/commit/dd4c86f61ff127b74b82d48d0919fc603651163e) - test: update testcase
+- [`8fd5818`](https://github.com/axetroy/changelog/commit/8fd58182b02ea657c37c09e4a734a48215eaffb6) - fix: generate incorrect in mutiple version for same commit. close #15
+- [`a03b7cb`](https://github.com/axetroy/changelog/commit/a03b7cb49fa23436de43e6d3436cfd123d831ede) - feat: add --skip-format and flag options for generation
 - [`e6275b7`](https://github.com/axetroy/changelog/commit/e6275b7d7f7b009e79a70f6f869efebb9dc7a866) - fix(deps): update dependency ant-design-vue to v2.0.0-rc.3 (#14)
 - [`6ab9c0b`](https://github.com/axetroy/changelog/commit/6ab9c0ba085699192d64e856dae5bd9367296a5d) - chore: update golanglint
 
-# v0.2.6
+# v0.2.6 (2020-12-07)
 
 ### 🐛 Bugs fixed:
 
 - npm binary([`8384bf7`](https://github.com/axetroy/changelog/commit/8384bf782d8adf1627082f3e9030ed4a88c0fa5a)) (thanks @axetroy)
 
-### 💪 Commits(3):
+### 💪 Commits(4):
 
+- [`f055c6f`](https://github.com/axetroy/changelog/commit/f055c6f1033d3b559007f4e3449227067d31fdfb) - v0.2.6
 - [`f055c6f`](https://github.com/axetroy/changelog/commit/f055c6f1033d3b559007f4e3449227067d31fdfb) - v0.2.6
 - [`46944c6`](https://github.com/axetroy/changelog/commit/46944c641ff26417b77c8210b89c5ca09a1d2480) - chore(npm): auto bump version
 - [`8384bf7`](https://github.com/axetroy/changelog/commit/8384bf782d8adf1627082f3e9030ed4a88c0fa5a) - fix: npm binary
 
-# v0.2.5
+# v0.2.5 (2020-12-05)
 
 ### 🐛 Bugs fixed:
 
 - **npm**: missing postinstall script([`6209122`](https://github.com/axetroy/changelog/commit/6209122eacda6d86421a6955dad86785d0206b4b)) (thanks @axetroy)
 
-### 💪 Commits(3):
+### 💪 Commits(4):
 
+- [`91f3fa9`](https://github.com/axetroy/changelog/commit/91f3fa9c27b6421694be6b67308533049d8adbf4) - v0.2.5
 - [`91f3fa9`](https://github.com/axetroy/changelog/commit/91f3fa9c27b6421694be6b67308533049d8adbf4) - v0.2.5
 - [`6209122`](https://github.com/axetroy/changelog/commit/6209122eacda6d86421a6955dad86785d0206b4b) - fix(npm): missing postinstall script
 - [`9650595`](https://github.com/axetroy/changelog/commit/9650595bba4aea0c11fbd1ec82eb6a676f7daa75) - chore(deps): update dependency sass to v1.30.0 (#13)
 
-# v0.2.4
+# v0.2.4 (2020-12-05)
 
-### 💪 Commits(3):
+### 💪 Commits(4):
 
+- [`2872a05`](https://github.com/axetroy/changelog/commit/2872a056e2772feffbdcd0adc73bd1c0c64c6127) - v0.2.4
 - [`2872a05`](https://github.com/axetroy/changelog/commit/2872a056e2772feffbdcd0adc73bd1c0c64c6127) - v0.2.4
 - [`9dff4fc`](https://github.com/axetroy/changelog/commit/9dff4fc6a9d746ffd9dd10215cf04d2fec2edd2a) - update
 - [`c7bc358`](https://github.com/axetroy/changelog/commit/c7bc35835361afd5ddffaa8a157513cf83b4b24b) - chore: update
 
-# v0.2.3
+# v0.2.3 (2020-12-05)
 
 ### 🔥 New feature:
 
@@ -51,8 +70,9 @@
 
 - **deps**: pin dependencies (#11)([`bfc347c`](https://github.com/axetroy/changelog/commit/bfc347c7d945e6ba47787758ba88bc6940d1341a)) (thanks @renovate[bot])
 
-### 💪 Commits(6):
+### 💪 Commits(7):
 
+- [`4474fb8`](https://github.com/axetroy/changelog/commit/4474fb8b40e54b6cd6e776e53dc0df895379c048) - v0.2.3
 - [`4474fb8`](https://github.com/axetroy/changelog/commit/4474fb8b40e54b6cd6e776e53dc0df895379c048) - v0.2.3
 - [`09cb54d`](https://github.com/axetroy/changelog/commit/09cb54d8772bbecf03f98d5559bb02973423d14a) - ci: add npm publish
 - [`bfc347c`](https://github.com/axetroy/changelog/commit/bfc347c7d945e6ba47787758ba88bc6940d1341a) - fix(deps): pin dependencies (#11)
@@ -60,17 +80,19 @@
 - [`68df2e8`](https://github.com/axetroy/changelog/commit/68df2e8545288a36bc946b615bdb7eb1f115c6e9) - docs: update package.json
 - [`89c46fe`](https://github.com/axetroy/changelog/commit/89c46feebf8a467567d192cf40324b50f3080437) - feat: add npm install
 
-# v0.2.2
+# v0.2.2 (2020-12-04)
 
 ### 🐛 Bugs fixed:
 
 - path handler([`58d7a2d`](https://github.com/axetroy/changelog/commit/58d7a2d8d04bc99adf0b6a19e0a74261ab48f477)) (thanks @axetroy)
+- path handler([`58d7a2d`](https://github.com/axetroy/changelog/commit/58d7a2d8d04bc99adf0b6a19e0a74261ab48f477)) (thanks @axetroy)
 
-### 💪 Commits(1):
+### 💪 Commits(2):
 
 - [`58d7a2d`](https://github.com/axetroy/changelog/commit/58d7a2d8d04bc99adf0b6a19e0a74261ab48f477) - fix: path handler
+- [`58d7a2d`](https://github.com/axetroy/changelog/commit/58d7a2d8d04bc99adf0b6a19e0a74261ab48f477) - fix: path handler
 
-# v0.2.1
+# v0.2.1 (2020-12-04)
 
 ### 🔥 New feature:
 
@@ -84,8 +106,9 @@
 - playground([`a867126`](https://github.com/axetroy/changelog/commit/a8671265554c3ded3d20c8e1fbdb6e55ebc133f2)) (thanks @axetroy)
 - **playground**: error logo([`3fa90ed`](https://github.com/axetroy/changelog/commit/3fa90eda1cc98378f4d5a8197682405ebbe92532)) (thanks @axetroy)
 
-### 💪 Commits(22):
+### 💪 Commits(23):
 
+- [`a94f18f`](https://github.com/axetroy/changelog/commit/a94f18fbd2561d9b12735544e9e9b632c4ab15b0) - docs: update readme
 - [`a94f18f`](https://github.com/axetroy/changelog/commit/a94f18fbd2561d9b12735544e9e9b632c4ab15b0) - docs: update readme
 - [`952ac0e`](https://github.com/axetroy/changelog/commit/952ac0ed4c34dacf55ae399b3b5d8a7f5cac0cfa) - refactor: remove console
 - [`2b7c5d4`](https://github.com/axetroy/changelog/commit/2b7c5d4dc4809ce00f5dc48bd15445fd10e8fcbd) - refactor: improve dir detect
@@ -109,7 +132,7 @@
 - [`ce67088`](https://github.com/axetroy/changelog/commit/ce670883aa5a27b010d07cadec8aa1754a23f0bc) - ci: update release template
 - [`c489594`](https://github.com/axetroy/changelog/commit/c489594a58fcf9b1aa2cad887574712546001163) - docs: update changelog
 
-# v0.2.0
+# v0.2.0 (2020-11-27)
 
 ### 🔥 New feature:
 
@@ -170,8 +193,9 @@
   + $ whatchanged --help
   ```
 
-### 💪 Commits(58):
+### 💪 Commits(59):
 
+- [`f55c367`](https://github.com/axetroy/changelog/commit/f55c3677031bbcf295684d2f0510ef838ab10ad4) - ci: update whatchanged command options
 - [`f55c367`](https://github.com/axetroy/changelog/commit/f55c3677031bbcf295684d2f0510ef838ab10ad4) - ci: update whatchanged command options
 - [`749a021`](https://github.com/axetroy/changelog/commit/749a021a56fb4467d2e2bc5e4416ba3d87754c8d) - docs: update changelog
 - [`8608c37`](https://github.com/axetroy/changelog/commit/8608c37b4bffd7971f31333a13b06181daa5f9bd) - v0.2.0
@@ -231,7 +255,7 @@
 - [`e51a5c4`](https://github.com/axetroy/changelog/commit/e51a5c434629f49ca7b14787d7bcc28c16e23131) - Add renovate.json
 - [`f34fba7`](https://github.com/axetroy/changelog/commit/f34fba7c77e664954e2a954b23270b8bff25c84e) - chore: update install.sh
 
-# v0.1.0
+# v0.1.0 (2020-11-24)
 
 ### 🔥 New feature:
 
@@ -254,8 +278,9 @@
 - if empty argument for command line([`9c79fd9`](https://github.com/axetroy/changelog/commit/9c79fd91bbf88f7861b4aca89ced8384cf2b9bcd)) (thanks @axetroy)
 - **ci**: remove unsued code([`66bcf8f`](https://github.com/axetroy/changelog/commit/66bcf8f43db85409e0392c93f2e347ed91699e81)) (thanks @axetroy)
 
-### 💪 Commits(43):
+### 💪 Commits(44):
 
+- [`7a3fd6d`](https://github.com/axetroy/changelog/commit/7a3fd6de68462fb64266bf3f606e957d32cdc2ae) - ci: add release template
 - [`7a3fd6d`](https://github.com/axetroy/changelog/commit/7a3fd6de68462fb64266bf3f606e957d32cdc2ae) - ci: add release template
 - [`00d6cc7`](https://github.com/axetroy/changelog/commit/00d6cc7bdf42d6a0b58cf15e0aea65710f1efbf1) - ci: debug
 - [`e6f97da`](https://github.com/axetroy/changelog/commit/e6f97daba33e8c912ee738e4fceb2bf3da877cee) - ci: debug
