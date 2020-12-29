@@ -1,13 +1,27 @@
 Unreleased (2020-12-30)
 -----------------------
 
+### 💪 Commits(2):
+
+-	[`7c3db91`](https://github.com/axetroy/changelog/commit/7c3db918b94aa3027b9656d6b584a854129f1424) - docs: update
+-	[`1b863fa`](https://github.com/axetroy/changelog/commit/1b863fa926c473436e2b07b5b724b30af32bd221) - docs: update
+
+v0.3.1 (2020-12-30)
+-------------------
+
 ### 🔥 New feature:
 
 -	**BREAKING**: update generation template.([`20dfe73`](https://github.com/axetroy/changelog/commit/20dfe7361a679e64abd9ec2ba8d59f935627ebfe)) (thanks @axetroy)
 -	support release date for generation. close #16([`4e9b59a`](https://github.com/axetroy/changelog/commit/4e9b59a5fbbe8c62d782e0350273fb5980e52b48)) (thanks @axetroy)
 
-### 💪 Commits(4):
+### 🐛 Bugs fixed:
 
+-	Generate duplicate commit([`b7fa03c`](https://github.com/axetroy/changelog/commit/b7fa03c8e60d82fb4d06956a8f9c79c174bb227f)) (thanks @axetroy)
+
+### 💪 Commits(6):
+
+-	[`7c09a29`](https://github.com/axetroy/changelog/commit/7c09a2934698c1842f9d93d0c8ed414a34eed6bb) - v0.3.1
+-	[`b7fa03c`](https://github.com/axetroy/changelog/commit/b7fa03c8e60d82fb4d06956a8f9c79c174bb227f) - fix: Generate duplicate commit
 -	[`63d1118`](https://github.com/axetroy/changelog/commit/63d1118a4ce3051b91059be2dee52d595690628f) - v0.3.0
 -	[`20dfe73`](https://github.com/axetroy/changelog/commit/20dfe7361a679e64abd9ec2ba8d59f935627ebfe) - feat(BREAKING): update generation template.
 -	[`4e9b59a`](https://github.com/axetroy/changelog/commit/4e9b59a5fbbe8c62d782e0350273fb5980e52b48) - feat: support release date for generation. close #16
