@@ -1,7 +1,7 @@
 package generator
 
 const FULL_TEMPLATE = `
-# {{ .Version }} ({{ .Date }})
+## {{ .Version }} ({{ .Date }})
 
 {{- define "body" -}}
 {{range . -}}
