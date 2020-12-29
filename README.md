@@ -16,6 +16,7 @@ Focus on **Elegant**/**Simple**/**Efficient**/**Scalable**
 Feature:
 
 - [x] Cross-platform support
+- [x] Generation for local/Remote git repositories
 - [x] Preset template for generation
 - [x] Custom template file
 - [x] Conventional Commits Parser
