@@ -11,9 +11,8 @@ v4.0.0 (2020-05-27)
 -	revert [`c20037d`](https://github.com//axetroy/vscode-deno/commit/c20037dd95a828230277f12ff2e8c4b73bd05425), refactor: remove unused extension([`25b190b`](https://github.com//axetroy/vscode-deno/commit/25b190bf790d930962ab63faa285b0b51cbca9b3)\)
 -	revert [`cde4dda`](https://github.com//axetroy/vscode-deno/commit/cde4dda61a565370285cce8f14a3962c8b5d3f63), refactor: update([`479ecd2`](https://github.com//axetroy/vscode-deno/commit/479ecd2268b9b3edc087043cca6b4fce954959c0)\)
 
-### 💪 Commits(17):
+### 💪 Commits(16):
 
--	[`151641e`](https://github.com//axetroy/vscode-deno/commit/151641e25161696d786241c4474e226345542d13) - 4.0.0
 -	[`151641e`](https://github.com//axetroy/vscode-deno/commit/151641e25161696d786241c4474e226345542d13) - 4.0.0
 -	[`d30f167`](https://github.com//axetroy/vscode-deno/commit/d30f16792ed4f6a3a6f0d5257c36d078ff6f4062) - docs: update changelog
 -	[`7729788`](https://github.com//axetroy/vscode-deno/commit/7729788c37ae23fe206ca218a0bbf8253063077c) - feat: deprecated
@@ -39,9 +38,8 @@ v3.7.0 (2020-05-05)
 -	remove JSON import statement. Now, you cannot import JSON module.([`23ff6f3`](https://github.com//axetroy/vscode-deno/commit/23ff6f3fa6a5388273f2aeaedd8029b5d18b3e7d)) (thanks @axetroy)
 -	added unstable settings option (#167)([`1a4a230`](https://github.com//axetroy/vscode-deno/commit/1a4a230c57a670632c43f947305e7f5fa11d1531)) (thanks @Luca Casonato)
 
-### 💪 Commits(17):
+### 💪 Commits(16):
 
--	[`6ab3817`](https://github.com//axetroy/vscode-deno/commit/6ab38172ee6a8398b27ba0f0207dd1feb87ce854) - 3.7.0
 -	[`6ab3817`](https://github.com//axetroy/vscode-deno/commit/6ab38172ee6a8398b27ba0f0207dd1feb87ce854) - 3.7.0
 -	[`4e36065`](https://github.com//axetroy/vscode-deno/commit/4e36065947b3b1361f280a79dade27af7a7ae327) - docs: update changelog
 -	[`2f7845f`](https://github.com//axetroy/vscode-deno/commit/2f7845f1f898428bfa7867cb49a3db31d939de95) - docs: update i18n
@@ -67,9 +65,8 @@ v3.6.2 (2020-04-29)
 -	file protocol import statement not work. close #146([`67897bc`](https://github.com//axetroy/vscode-deno/commit/67897bc762b1c1b2997b36292ca91eb777a3e9bf)) (thanks @axetroy)
 -	not deno project also show deno deps tree view.([`81303df`](https://github.com//axetroy/vscode-deno/commit/81303df0e2cc8a942d4a5cd4a7c157b7bebeac5e)) (thanks @axetroy)
 
-### 💪 Commits(23):
+### 💪 Commits(22):
 
--	[`0e880a2`](https://github.com//axetroy/vscode-deno/commit/0e880a2cc505bd43ef9ad9179257091e5fce9ae1) - 3.6.2
 -	[`0e880a2`](https://github.com//axetroy/vscode-deno/commit/0e880a2cc505bd43ef9ad9179257091e5fce9ae1) - 3.6.2
 -	[`8a9ea10`](https://github.com//axetroy/vscode-deno/commit/8a9ea10773c0d86cbd551459530e53e4a7207894) - docs: update changelog
 -	[`67897bc`](https://github.com//axetroy/vscode-deno/commit/67897bc762b1c1b2997b36292ca91eb777a3e9bf) - fix: file protocol import statement not work. close #146
@@ -102,9 +99,8 @@ v3.6.1 (2020-04-17)
 -	**deps**: update dependency semver to v7.3.2 (#144)([`8496c84`](https://github.com//axetroy/vscode-deno/commit/8496c845e17d44e313b9e5139d7e993a865dd956)) (thanks @renovate[bot])
 -	**deps**: update dependency semver to v7.3.1 (#143)([`16a112b`](https://github.com//axetroy/vscode-deno/commit/16a112b69318b2ac1fd3cea6de8c4dcd75874e8e)) (thanks @renovate[bot])
 
-### 💪 Commits(10):
+### 💪 Commits(9):
 
--	[`19fdd52`](https://github.com//axetroy/vscode-deno/commit/19fdd5222adb5baec93af4a6693cc365dfb6dbec) - 3.6.1
 -	[`19fdd52`](https://github.com//axetroy/vscode-deno/commit/19fdd5222adb5baec93af4a6693cc365dfb6dbec) - 3.6.1
 -	[`963e134`](https://github.com//axetroy/vscode-deno/commit/963e134f2b10b8d709d100952d493e1ed8a3c888) - docs: update changelog
 -	[`a3a957f`](https://github.com//axetroy/vscode-deno/commit/a3a957f617617e19ea69e0941f961b57589574fc) - fix: In Deno's cache module, `x-typescript-types` and redirects are not parsed correctly. close #147
@@ -128,9 +124,8 @@ v3.6.0 (2020-04-14)
 -	**deps**: update dependency semver to v7.3.0 (#140)([`13e3947`](https://github.com//axetroy/vscode-deno/commit/13e3947928f1999963c6e2166f5c3e57d61aa67d)) (thanks @renovate[bot])
 -	**deps**: update dependency semver to v7.2.2 (#137)([`d9bd9c8`](https://github.com//axetroy/vscode-deno/commit/d9bd9c8df4ffbe0c8446909717a3ce751c43f5eb)) (thanks @renovate[bot])
 
-### 💪 Commits(13):
+### 💪 Commits(12):
 
--	[`8d1d3f7`](https://github.com//axetroy/vscode-deno/commit/8d1d3f78af035c2808d7098239c542bec944196c) - 3.6.0
 -	[`8d1d3f7`](https://github.com//axetroy/vscode-deno/commit/8d1d3f78af035c2808d7098239c542bec944196c) - 3.6.0
 -	[`41fbefe`](https://github.com//axetroy/vscode-deno/commit/41fbefeece6325a21125dd727d3c6a852588ee07) - docs: update changelog
 -	[`d5ecc7e`](https://github.com//axetroy/vscode-deno/commit/d5ecc7e2ead8df65fcbc30d1e1d08431b91b177e) - fix: import map with trailing slash (#142)
@@ -151,9 +146,8 @@ v3.5.1 (2020-04-09)
 
 -	add more test case for import_map. ref #132([`e4b1d6a`](https://github.com//axetroy/vscode-deno/commit/e4b1d6aee4f55f17f00ef204048e77285f5b5ee3)) (thanks @axetroy)
 
-### 💪 Commits(5):
+### 💪 Commits(4):
 
--	[`cc94bf2`](https://github.com//axetroy/vscode-deno/commit/cc94bf250b7734b3e8faaf395ba3e2751b2167c4) - 3.5.1
 -	[`cc94bf2`](https://github.com//axetroy/vscode-deno/commit/cc94bf250b7734b3e8faaf395ba3e2751b2167c4) - 3.5.1
 -	[`b7e2c14`](https://github.com//axetroy/vscode-deno/commit/b7e2c14f19bfdf91583239a85a3747cdc7753bb1) - docs: update changelog
 -	[`e4b1d6a`](https://github.com//axetroy/vscode-deno/commit/e4b1d6aee4f55f17f00ef204048e77285f5b5ee3) - fix: add more test case for import_map. ref #132
@@ -171,9 +165,8 @@ v3.5.0 (2020-04-09)
 
 -	refresh diagnostic not work([`f8e8e70`](https://github.com//axetroy/vscode-deno/commit/f8e8e706f9ef2e45b78aafd5a7b28ddd03c80679)) (thanks @axetroy)
 
-### 💪 Commits(9):
+### 💪 Commits(8):
 
--	[`5088826`](https://github.com//axetroy/vscode-deno/commit/508882629e66987efe0c2c1de24eccc7e494f9a1) - 3.5.0
 -	[`5088826`](https://github.com//axetroy/vscode-deno/commit/508882629e66987efe0c2c1de24eccc7e494f9a1) - 3.5.0
 -	[`d6f099e`](https://github.com//axetroy/vscode-deno/commit/d6f099e695f66c9cb19c70c8dcf3c539e553b2b1) - docs: update changelog
 -	[`f8e8e70`](https://github.com//axetroy/vscode-deno/commit/f8e8e706f9ef2e45b78aafd5a7b28ddd03c80679) - fix: refresh diagnostic not work
@@ -191,9 +184,8 @@ v3.4.2 (2020-04-08)
 -	if `x-typescript-types` do not exist. then fallback to origin file([`05496e3`](https://github.com//axetroy/vscode-deno/commit/05496e3022e371c5be7e821c9f778c8ed7cfbc77)) (thanks @axetroy)
 -	**deps**: update dependency semver to v7.2.1 (#128)([`90f4ad2`](https://github.com//axetroy/vscode-deno/commit/90f4ad2f94db9762f23fdd9b79d73572cf1db5e2)) (thanks @renovate[bot])
 
-### 💪 Commits(11):
+### 💪 Commits(10):
 
--	[`3944ed0`](https://github.com//axetroy/vscode-deno/commit/3944ed00b08ad7bba23edffec4d62017730c08d6) - 3.4.2
 -	[`3944ed0`](https://github.com//axetroy/vscode-deno/commit/3944ed00b08ad7bba23edffec4d62017730c08d6) - 3.4.2
 -	[`05496e3`](https://github.com//axetroy/vscode-deno/commit/05496e3022e371c5be7e821c9f778c8ed7cfbc77) - fix: if `x-typescript-types` do not exist. then fallback to origin file
 -	[`5ea1d19`](https://github.com//axetroy/vscode-deno/commit/5ea1d19bc23434154ab1c255e2e6f3425bc3e2ea) - refactor: add extension support for resolvedModule
@@ -212,9 +204,8 @@ v3.4.1 (2020-03-31)
 
 -	Tsserver crashes in some cases([`11563b4`](https://github.com//axetroy/vscode-deno/commit/11563b4df4e84b0c92bc256f2be6bf0dd6fc9954)) (thanks @axetroy)
 
-### 💪 Commits(10):
+### 💪 Commits(9):
 
--	[`783ade5`](https://github.com//axetroy/vscode-deno/commit/783ade54521dccefade9245c9a1cf2df6fcac29f) - 3.4.1
 -	[`783ade5`](https://github.com//axetroy/vscode-deno/commit/783ade54521dccefade9245c9a1cf2df6fcac29f) - 3.4.1
 -	[`27e717e`](https://github.com//axetroy/vscode-deno/commit/27e717e06e5a7792a043d7887a366129b9cd43f8) - docs: update changelog
 -	[`a2d7da1`](https://github.com//axetroy/vscode-deno/commit/a2d7da11eaf1513368f6504fd4a1311436a6cde8) - chore(deps): update dependency @types/node to v12.12.34 (#115)
@@ -236,9 +227,8 @@ v3.4.0 (2020-03-27)
 
 -	importmap not work when set to a relative path. close #103([`0e8398f`](https://github.com//axetroy/vscode-deno/commit/0e8398f0892f1a705cff6c4f8721e7b3f71dc948)) (thanks @axetroy)
 
-### 💪 Commits(5):
+### 💪 Commits(4):
 
--	[`0347042`](https://github.com//axetroy/vscode-deno/commit/0347042c4628baa35c0142148fa6acabf83c8452) - 3.4.0
 -	[`0347042`](https://github.com//axetroy/vscode-deno/commit/0347042c4628baa35c0142148fa6acabf83c8452) - 3.4.0
 -	[`8831fac`](https://github.com//axetroy/vscode-deno/commit/8831fac0f6c60f6f7192b334d751b9d253f03af3) - docs: update changelog
 -	[`b2f070a`](https://github.com//axetroy/vscode-deno/commit/b2f070a85058432542fe9721be2d3aa66e6901b3) - feat: add diagnostic for checking valid import statement
@@ -256,9 +246,8 @@ v3.3.1 (2020-03-27)
 -	**deps**: update dependency vscode-languageclient to v6.1.3 (#101)([`f5a743c`](https://github.com//axetroy/vscode-deno/commit/f5a743c51e789f79540244fc5599291fca9741ab)) (thanks @renovate[bot])
 -	**deps**: update dependency vscode-languageclient to v6.1.2 (#99)([`550f0bc`](https://github.com//axetroy/vscode-deno/commit/550f0bcf21b9d9a83107c65367a1bd375ccbdb1e)) (thanks @renovate[bot])
 
-### 💪 Commits(21):
+### 💪 Commits(20):
 
--	[`1809e70`](https://github.com//axetroy/vscode-deno/commit/1809e70c29c62b0e9a71f42754f9e14c773de36a) - 3.3.1
 -	[`1809e70`](https://github.com//axetroy/vscode-deno/commit/1809e70c29c62b0e9a71f42754f9e14c773de36a) - 3.3.1
 -	[`a7881b9`](https://github.com//axetroy/vscode-deno/commit/a7881b9affe5d14ce3f0446a8f4600729227a490) - docs: update changelog
 -	[`e381390`](https://github.com//axetroy/vscode-deno/commit/e381390ac9461f9bdc7b67a9228e071d64d2ac3b) - fix: Triple-Slash Directive does not work. ref #102
@@ -321,9 +310,8 @@ v3.3.0 (2020-03-16)
 
 	```
 
-### 💪 Commits(15):
+### 💪 Commits(14):
 
--	[`cc209c7`](https://github.com//axetroy/vscode-deno/commit/cc209c77093f4702a446131b175e27d9b45a3aca) - 3.3.0
 -	[`cc209c7`](https://github.com//axetroy/vscode-deno/commit/cc209c77093f4702a446131b175e27d9b45a3aca) - 3.3.0
 -	[`f9879b7`](https://github.com//axetroy/vscode-deno/commit/f9879b726c08dc7ecce1ca0fad341fe56ca80b0c) - test: improve test case
 -	[`3a4eec6`](https://github.com//axetroy/vscode-deno/commit/3a4eec610a63bc5b55a691c56fa82392a4463145) - docs: update changelog
@@ -352,9 +340,8 @@ v3.2.1 (2020-03-08)
 -	auto-import not work for some modules. close #44([`11d38b3`](https://github.com//axetroy/vscode-deno/commit/11d38b3f46b8521ec1ea89565f11ec65a9d2cb1d)) (thanks @axetroy)
 -	If query exists in url, module will not be parsed correctly([`a8965b5`](https://github.com//axetroy/vscode-deno/commit/a8965b5a5742b8ae473d3da85f8fe4829aee82ba)) (thanks @axetroy)
 
-### 💪 Commits(19):
+### 💪 Commits(18):
 
--	[`a4e1a14`](https://github.com//axetroy/vscode-deno/commit/a4e1a144949d22cfb06491bd459a21ef011264b9) - test: fix test
 -	[`a4e1a14`](https://github.com//axetroy/vscode-deno/commit/a4e1a144949d22cfb06491bd459a21ef011264b9) - test: fix test
 -	[`5c7604f`](https://github.com//axetroy/vscode-deno/commit/5c7604f6ed4649b4471a606805196c49e780109d) - docs: update changelog
 -	[`11d38b3`](https://github.com//axetroy/vscode-deno/commit/11d38b3f46b8521ec1ea89565f11ec65a9d2cb1d) - fix: auto-import not work for some modules. close #44
@@ -386,9 +373,8 @@ v3.2.0 (2020-03-05)
 
 -	improve performance for file_walker([`77ce898`](https://github.com//axetroy/vscode-deno/commit/77ce898b12c1e9ec9f995c1ae2b14342547f7cbd)) (thanks @axetroy)
 
-### 💪 Commits(27):
+### 💪 Commits(26):
 
--	[`1bb0cf9`](https://github.com//axetroy/vscode-deno/commit/1bb0cf94074fa0eb16c61c4f0852a6315b7af084) - 3.2.0
 -	[`1bb0cf9`](https://github.com//axetroy/vscode-deno/commit/1bb0cf94074fa0eb16c61c4f0852a6315b7af084) - 3.2.0
 -	[`1772477`](https://github.com//axetroy/vscode-deno/commit/17724773a0804708001fdfbb79187eb83a4b0478) - docs: update changelog
 -	[`fe1682f`](https://github.com//axetroy/vscode-deno/commit/fe1682f0bc1143d939e951b6501ce6615cc37e67) - refactor: improve diagnostics
@@ -423,9 +409,8 @@ v3.1.1 (2020-03-03)
 
 -	auto-import rewrite not work on Windows([`3602979`](https://github.com//axetroy/vscode-deno/commit/3602979225fac8a5ffb53e362ab473ea741a3bbf)) (thanks @axetroy)
 
-### 💪 Commits(4):
+### 💪 Commits(3):
 
--	[`fd71d0c`](https://github.com//axetroy/vscode-deno/commit/fd71d0c19ee6b3c957019cb0299e01ffca11051c) - 3.1.1
 -	[`fd71d0c`](https://github.com//axetroy/vscode-deno/commit/fd71d0c19ee6b3c957019cb0299e01ffca11051c) - 3.1.1
 -	[`d68d065`](https://github.com//axetroy/vscode-deno/commit/d68d0651271bb988f565a814aa7f9797442f917d) - docs: update changelog
 -	[`3602979`](https://github.com//axetroy/vscode-deno/commit/3602979225fac8a5ffb53e362ab473ea741a3bbf) - fix: auto-import rewrite not work on Windows
@@ -442,9 +427,8 @@ v3.1.0 (2020-03-03)
 
 -	normalize filepath([`f5ecd71`](https://github.com//axetroy/vscode-deno/commit/f5ecd71867f5ed6bf055d7606610c0079dc80065)) (thanks @axetroy)
 
-### 💪 Commits(10):
+### 💪 Commits(9):
 
--	[`c79a8d7`](https://github.com//axetroy/vscode-deno/commit/c79a8d7b98f502f410b233c4c16300446e77a55e) - 3.1.0
 -	[`c79a8d7`](https://github.com//axetroy/vscode-deno/commit/c79a8d7b98f502f410b233c4c16300446e77a55e) - 3.1.0
 -	[`521ca52`](https://github.com//axetroy/vscode-deno/commit/521ca52b34fe36015ab8b58b59d7e58fe90537b8) - docs: update changelog
 -	[`d2e2642`](https://github.com//axetroy/vscode-deno/commit/d2e264226970b0abf72dca288cd560a5531bccea) - chore: fix ci
@@ -462,9 +446,8 @@ v3.0.6 (2020-03-03)
 
 -	typescript server crash if create a new untitled typescript TextDocument ref: #86([`e5643e1`](https://github.com//axetroy/vscode-deno/commit/e5643e159042a72ce1871061ff5038be7b6cebb5)) (thanks @axetroy)
 
-### 💪 Commits(7):
+### 💪 Commits(6):
 
--	[`c790727`](https://github.com//axetroy/vscode-deno/commit/c790727f8c4adfdf6a1f3c0f44aa78ee96c4ec0d) - 3.0.6
 -	[`c790727`](https://github.com//axetroy/vscode-deno/commit/c790727f8c4adfdf6a1f3c0f44aa78ee96c4ec0d) - 3.0.6
 -	[`74c1954`](https://github.com//axetroy/vscode-deno/commit/74c19540f251e3e2b8338bf2185b171f6dfdd0fd) - docs: update changelog
 -	[`e5643e1`](https://github.com//axetroy/vscode-deno/commit/e5643e159042a72ce1871061ff5038be7b6cebb5) - fix: typescript server crash if create a new untitled typescript TextDocument ref: #86
@@ -479,9 +462,8 @@ v3.0.5 (2020-03-03)
 
 -	extension not work when project has tsconfig.json at root dir([`9ce2874`](https://github.com//axetroy/vscode-deno/commit/9ce2874230d4c66ea657f5d2de19c38eb8719df6)) (thanks @axetroy)
 
-### 💪 Commits(5):
+### 💪 Commits(4):
 
--	[`215d09c`](https://github.com//axetroy/vscode-deno/commit/215d09ce9af4f701cbefde08d1a921dd10b71504) - 3.0.5
 -	[`215d09c`](https://github.com//axetroy/vscode-deno/commit/215d09ce9af4f701cbefde08d1a921dd10b71504) - 3.0.5
 -	[`4517b41`](https://github.com//axetroy/vscode-deno/commit/4517b4141e6a09657ae9a478eca939461ea7d233) - docs: update readme and changelog
 -	[`9ce2874`](https://github.com//axetroy/vscode-deno/commit/9ce2874230d4c66ea657f5d2de19c38eb8719df6) - fix: extension not work when project has tsconfig.json at root dir
@@ -495,9 +477,8 @@ v3.0.4 (2020-03-02)
 -	invalid http tester regular expression([`3d51ab0`](https://github.com//axetroy/vscode-deno/commit/3d51ab04359ad8bd83b5564c144759d08f9d0237)) (thanks @axetroy)
 -	'fetch module' on work correctly for importmap module([`087d834`](https://github.com//axetroy/vscode-deno/commit/087d8345ca3a717d55822dce6ab64c6d9385e790)) (thanks @axetroy)
 
-### 💪 Commits(11):
+### 💪 Commits(10):
 
--	[`5b0bea7`](https://github.com//axetroy/vscode-deno/commit/5b0bea7d0451f89da21575f6513c02004aee6f8b) - 3.0.4
 -	[`5b0bea7`](https://github.com//axetroy/vscode-deno/commit/5b0bea7d0451f89da21575f6513c02004aee6f8b) - 3.0.4
 -	[`310f488`](https://github.com//axetroy/vscode-deno/commit/310f4880b21b9324f8ba47983dafa3917193688b) - docs: update readme
 -	[`e6d6e0a`](https://github.com//axetroy/vscode-deno/commit/e6d6e0a337307786ad6f608384d9c4bf356f7591) - docs: update changelog
@@ -522,9 +503,8 @@ v3.0.3 (2020-03-02)
 
 -	revert [`6170e21`](https://github.com//axetroy/vscode-deno/commit/6170e21417754dcca33bf1f9376dec37251ddc06), refactor: typescript-deno-plugin([`453a9b0`](https://github.com//axetroy/vscode-deno/commit/453a9b0240bda3d2521defa5f4dbf74faeeca7a4)\)
 
-### 💪 Commits(21):
+### 💪 Commits(20):
 
--	[`09b4d0d`](https://github.com//axetroy/vscode-deno/commit/09b4d0d6b22b3a932fb3e45939ffd67f1c116c57) - 3.0.3
 -	[`09b4d0d`](https://github.com//axetroy/vscode-deno/commit/09b4d0d6b22b3a932fb3e45939ffd67f1c116c57) - 3.0.3
 -	[`b50908b`](https://github.com//axetroy/vscode-deno/commit/b50908bc68cc77d258e3034e506a4f1ef0934e73) - docs: update changelog
 -	[`2cc71f9`](https://github.com//axetroy/vscode-deno/commit/2cc71f9679449a3c1445e4256e5a2bbb776f9f90) - chore: re-enable format test in Windows
@@ -557,9 +537,8 @@ v3.0.2 (2020-03-01)
 
 -	revert [`da68d42`](https://github.com//axetroy/vscode-deno/commit/da68d4289b1713432a5b0203fa8f46f4008cab44), docs: add readme for typescript-deno-plugin([`1be0c24`](https://github.com//axetroy/vscode-deno/commit/1be0c24d49d811fb7a5499671d01fe5bcafae6f5)\)
 
-### 💪 Commits(7):
+### 💪 Commits(6):
 
--	[`eae5fb6`](https://github.com//axetroy/vscode-deno/commit/eae5fb62d6776026db5e1ee0f7ed9a6b019bfb4b) - 3.0.2
 -	[`eae5fb6`](https://github.com//axetroy/vscode-deno/commit/eae5fb62d6776026db5e1ee0f7ed9a6b019bfb4b) - 3.0.2
 -	[`1ab3532`](https://github.com//axetroy/vscode-deno/commit/1ab3532c481dd25646f840e06e7ceaa9cba79974) - docs: update changelog
 -	[`30247f0`](https://github.com//axetroy/vscode-deno/commit/30247f09a9c97b1a1dce8832d29620b541441465) - chore(deps): pin dependency @types/json5 to 0.0.30 (#81)
@@ -574,9 +553,8 @@ v3.0.1 (2020-03-01)
 
 -	re-enable typescript-deno-plugin with workspace's typescript version. close #78([`7a53e70`](https://github.com//axetroy/vscode-deno/commit/7a53e7019a9aeba64e0494fe7d9f666540f8a6ce)) (thanks @axetroy)
 
-### 💪 Commits(4):
+### 💪 Commits(3):
 
--	[`27d417e`](https://github.com//axetroy/vscode-deno/commit/27d417e8b9be42bd0e88a9cfe0a3c4fe08a4dd7d) - 3.0.1
 -	[`27d417e`](https://github.com//axetroy/vscode-deno/commit/27d417e8b9be42bd0e88a9cfe0a3c4fe08a4dd7d) - 3.0.1
 -	[`6d856ee`](https://github.com//axetroy/vscode-deno/commit/6d856ee74c0ca1e975a5e6c4af8b6ff03e18eb53) - docs: update changelog
 -	[`7a53e70`](https://github.com//axetroy/vscode-deno/commit/7a53e7019a9aeba64e0494fe7d9f666540f8a6ce) - feat: re-enable typescript-deno-plugin with workspace's typescript version. close #78
@@ -611,9 +589,8 @@ v3.0.0 (2020-02-29)
 -	path resolution of Windows([`a9e3336`](https://github.com//axetroy/vscode-deno/commit/a9e33363da91ae45f4178db001a9deaedc858429)) (thanks @axetroy)
 -	**deps**: update dependency vscode-languageserver-textdocument to v1.0.1 (#66)([`c49b0fa`](https://github.com//axetroy/vscode-deno/commit/c49b0fac07f1a4d4cdc9a425ef666d9741e22a97)) (thanks @renovate[bot])
 
-### 💪 Commits(83):
+### 💪 Commits(82):
 
--	[`d612530`](https://github.com//axetroy/vscode-deno/commit/d61253078e25c7edca06bfa08112453ac335f118) - 3.0.0
 -	[`d612530`](https://github.com//axetroy/vscode-deno/commit/d61253078e25c7edca06bfa08112453ac335f118) - 3.0.0
 -	[`85b4c4f`](https://github.com//axetroy/vscode-deno/commit/85b4c4f70a0957687644bcb144459512b462d056) - docs: update changelog
 -	[`3aff7ed`](https://github.com//axetroy/vscode-deno/commit/3aff7edf1481a0a234a1b994b9f6cf692e444beb) - feat: Resurrected in Deno v0.35.0 🚀
@@ -704,9 +681,8 @@ v2.0.4 (2020-02-20)
 
 -	Try to fix the path processing under windows. ref: #61([`e3d5bf2`](https://github.com//axetroy/vscode-deno/commit/e3d5bf27fc0b678b0928caeb19a3735774179a36)) (thanks @axetroy)
 
-### 💪 Commits(4):
+### 💪 Commits(3):
 
--	[`cb399d1`](https://github.com//axetroy/vscode-deno/commit/cb399d1cb5b6b6390ab39c3cd25875ce39a17dc4) - 2.0.4
 -	[`cb399d1`](https://github.com//axetroy/vscode-deno/commit/cb399d1cb5b6b6390ab39c3cd25875ce39a17dc4) - 2.0.4
 -	[`a650f19`](https://github.com//axetroy/vscode-deno/commit/a650f1909d05d928b5bec08f9e8aeed92cea8126) - docs: update changelog
 -	[`e3d5bf2`](https://github.com//axetroy/vscode-deno/commit/e3d5bf27fc0b678b0928caeb19a3735774179a36) - fix: Try to fix the path processing under windows. ref: #61
@@ -718,9 +694,8 @@ v2.0.3 (2020-02-20)
 
 -	Try to fix the path processing under windows. ref: #61([`8c02221`](https://github.com//axetroy/vscode-deno/commit/8c02221cb2a5abfcafc108ecf2ae88afc3e90f3b)) (thanks @axetroy)
 
-### 💪 Commits(4):
+### 💪 Commits(3):
 
--	[`78e3f59`](https://github.com//axetroy/vscode-deno/commit/78e3f59454cdab6fd6b410c7d8f0e40c23263555) - 2.0.3
 -	[`78e3f59`](https://github.com//axetroy/vscode-deno/commit/78e3f59454cdab6fd6b410c7d8f0e40c23263555) - 2.0.3
 -	[`eeab8fb`](https://github.com//axetroy/vscode-deno/commit/eeab8fb001739379e90de860f358f0498a175bf7) - docs: update changelog
 -	[`8c02221`](https://github.com//axetroy/vscode-deno/commit/8c02221cb2a5abfcafc108ecf2ae88afc3e90f3b) - fix: Try to fix the path processing under windows. ref: #61
@@ -733,9 +708,8 @@ v2.0.2 (2020-02-19)
 -	Auto-Import for Deno module incorrectly. now use http protocol modules instead of relative paths. close #44([`df71fd1`](https://github.com//axetroy/vscode-deno/commit/df71fd1d4fa5f47423f1c00b9b181e81f0435dd4)) (thanks @axetroy)
 -	typescript-deno-plugin will be disable when open the file out of workspace.([`b0f3aa6`](https://github.com//axetroy/vscode-deno/commit/b0f3aa6d6646adf81a9ac091c2d89e82eda35e94)) (thanks @axetroy)
 
-### 💪 Commits(6):
+### 💪 Commits(5):
 
--	[`2415ae3`](https://github.com//axetroy/vscode-deno/commit/2415ae38269ab0e16747420b94500ad3dc5d64aa) - 2.0.2
 -	[`2415ae3`](https://github.com//axetroy/vscode-deno/commit/2415ae38269ab0e16747420b94500ad3dc5d64aa) - 2.0.2
 -	[`5cb1f61`](https://github.com//axetroy/vscode-deno/commit/5cb1f61e5f5b794fa086d997e1a0f1debfd0fd5b) - docs: update changelog
 -	[`df71fd1`](https://github.com//axetroy/vscode-deno/commit/df71fd1d4fa5f47423f1c00b9b181e81f0435dd4) - fix: Auto-Import for Deno module incorrectly. now use http protocol modules instead of relative paths. close #44
@@ -756,9 +730,8 @@ v2.0.1 (2020-02-18)
 -	**deps**: update dependency vscode-languageserver to v6.1.1 (#57)([`e687f20`](https://github.com//axetroy/vscode-deno/commit/e687f207960568e37bc445d63cd133bda413acff)) (thanks @renovate[bot])
 -	import module from 'file:///path/to/module/mod.ts' not work([`962411d`](https://github.com//axetroy/vscode-deno/commit/962411de1e6aa15d6a1eb122a6f0b3035017cc03)) (thanks @axetroy)
 
-### 💪 Commits(18):
+### 💪 Commits(17):
 
--	[`4b9579d`](https://github.com//axetroy/vscode-deno/commit/4b9579d7c1bb5194ade056d90109f2e073a5c0c6) - 2.0.1
 -	[`4b9579d`](https://github.com//axetroy/vscode-deno/commit/4b9579d7c1bb5194ade056d90109f2e073a5c0c6) - 2.0.1
 -	[`9eeac21`](https://github.com//axetroy/vscode-deno/commit/9eeac2111be0114176721956db8189b4dc66cb15) - docs: update changelog
 -	[`4a58f4e`](https://github.com//axetroy/vscode-deno/commit/4a58f4e5b979fe044d9327fd9720edb02b184747) - chore(deps): pin dependency @types/deep-equal to 1.0.1 (#59)
@@ -787,9 +760,8 @@ v2.0.0 (2020-02-14)
 -	remove `deno.enable` & `deno.disable` command (#48)([`8ecae2c`](https://github.com//axetroy/vscode-deno/commit/8ecae2c86e28138ac21d12ea29aba34860c3bb95)) (thanks @Axetroy)
 -	upgrade Deno formatter (#50)([`e872d1c`](https://github.com//axetroy/vscode-deno/commit/e872d1cee1af7d9bdf1227165dfecf1c69df8fbe)) (thanks @Axetroy)
 
-### 💪 Commits(9):
+### 💪 Commits(8):
 
--	[`b98eb3f`](https://github.com//axetroy/vscode-deno/commit/b98eb3f77102c4d677104741ef11a994746a6f7d) - 2.0.0
 -	[`b98eb3f`](https://github.com//axetroy/vscode-deno/commit/b98eb3f77102c4d677104741ef11a994746a6f7d) - 2.0.0
 -	[`ee36bd6`](https://github.com//axetroy/vscode-deno/commit/ee36bd6a4aa50dbb7de5b656228fde9468f9c6d4) - docs: update changelog
 -	[`ff14377`](https://github.com//axetroy/vscode-deno/commit/ff143772ba4d69f295d3f837ba7317c71faec855) - docs: update readme
@@ -808,9 +780,8 @@ v1.23.0 (2020-02-14)
 -	Now opening the js file will also launch the extension. the same with tsserver.([`d4a9beb`](https://github.com//axetroy/vscode-deno/commit/d4a9beb911cec9f02be8ce1faffe5bb4a10ba836)) (thanks @axetroy)
 -	support external type definitions with `X-TypeScript-Types` headers. close #35([`98253dd`](https://github.com//axetroy/vscode-deno/commit/98253dd0bda546b6f11beb83926d972540133e33)) (thanks @axetroy)
 
-### 💪 Commits(12):
+### 💪 Commits(11):
 
--	[`c99da81`](https://github.com//axetroy/vscode-deno/commit/c99da81a52b171f3f5dacc21029f60f2548651b5) - 1.23.0
 -	[`c99da81`](https://github.com//axetroy/vscode-deno/commit/c99da81a52b171f3f5dacc21029f60f2548651b5) - 1.23.0
 -	[`84ab4bd`](https://github.com//axetroy/vscode-deno/commit/84ab4bdb139fc81bd066d2b717eabc86f4094569) - docs: update changelog
 -	[`0194ff0`](https://github.com//axetroy/vscode-deno/commit/0194ff0489c12a4d532f83fb30d90571bc796633) - chore(deps): pin dependencies (#54)
@@ -836,9 +807,8 @@ v1.22.0 (2020-02-11)
 -	Module index is incorrect. close #47([`d69e90a`](https://github.com//axetroy/vscode-deno/commit/d69e90a90df3d7367eb9cb0bd10ec5f3ad21033a)) (thanks @axetroy)
 -	module import intelligent no work correctly when import from 'http/server.ts'([`055d062`](https://github.com//axetroy/vscode-deno/commit/055d062c26aff15c5336c45aa952a1d653ce9cbc)) (thanks @axetroy)
 
-### 💪 Commits(10):
+### 💪 Commits(9):
 
--	[`46dd9cc`](https://github.com//axetroy/vscode-deno/commit/46dd9ccfa838aecf5bc629dd7e5fe088c53b9e1b) - 1.22.0
 -	[`46dd9cc`](https://github.com//axetroy/vscode-deno/commit/46dd9ccfa838aecf5bc629dd7e5fe088c53b9e1b) - 1.22.0
 -	[`b98fe61`](https://github.com//axetroy/vscode-deno/commit/b98fe61cb350098aa18af5c319e21626ee034370) - docs: update changelog
 -	[`5a31ba3`](https://github.com//axetroy/vscode-deno/commit/5a31ba3da65c980af2a49d780c5c6750d78c545d) - docs: update changelog
@@ -856,9 +826,8 @@ v1.21.0 (2020-02-10)
 
 -	support external type definitions with '/// <reference types=https://raw.githubusercontent.com/date-fns/date-fns/master/typings.d.ts />'. ref: #35([`f7affb2`](https://github.com//axetroy/vscode-deno/commit/f7affb27fb073f22437db227b2c576e9406d4784)) (thanks @axetroy)
 
-### 💪 Commits(8):
+### 💪 Commits(7):
 
--	[`3afda31`](https://github.com//axetroy/vscode-deno/commit/3afda3117e08f73a2427e3052f714193a0de8d84) - 1.21.0
 -	[`3afda31`](https://github.com//axetroy/vscode-deno/commit/3afda3117e08f73a2427e3052f714193a0de8d84) - 1.21.0
 -	[`7f4509e`](https://github.com//axetroy/vscode-deno/commit/7f4509e4439f7f5a585f21cb684faf3e32fe9879) - docs: update changelog
 -	[`d46a3c2`](https://github.com//axetroy/vscode-deno/commit/d46a3c2257eb0e60b1ccbcf694396a693f693ffe) - chore: try ignore format check in windows
@@ -878,9 +847,8 @@ v1.20.0 (2020-02-10)
 
 -	update ignore diagnostics code. close #41([`34e6c10`](https://github.com//axetroy/vscode-deno/commit/34e6c1053c7c4c7928fd3e83a59fdd1e92a11f95)) (thanks @axetroy)
 
-### 💪 Commits(9):
+### 💪 Commits(8):
 
--	[`b33ea3c`](https://github.com//axetroy/vscode-deno/commit/b33ea3c6aa9f4396a92dd8b2b6b243694a03165e) - 1.20.0
 -	[`b33ea3c`](https://github.com//axetroy/vscode-deno/commit/b33ea3c6aa9f4396a92dd8b2b6b243694a03165e) - 1.20.0
 -	[`d054f27`](https://github.com//axetroy/vscode-deno/commit/d054f27e8e841e266ab9fa4066826b427ffab710) - docs: update changelog
 -	[`2480791`](https://github.com//axetroy/vscode-deno/commit/2480791f9c002b8d0706f2ffedb5b93ff3c3b407) - feat: remove `lock std version` and `prefer HTTPS` diagnostics. close #33
@@ -902,9 +870,8 @@ v1.19.0 (2020-02-08)
 
 -	esm module resolver([`ffe30fb`](https://github.com//axetroy/vscode-deno/commit/ffe30fbbde5e65b9d0741020b820d5b323db5cd1)) (thanks @axetroy)
 
-### 💪 Commits(7):
+### 💪 Commits(6):
 
--	[`17fac44`](https://github.com//axetroy/vscode-deno/commit/17fac446f78091f55fb52f62e7f169958356c5c3) - 1.19.0
 -	[`17fac44`](https://github.com//axetroy/vscode-deno/commit/17fac446f78091f55fb52f62e7f169958356c5c3) - 1.19.0
 -	[`56f5096`](https://github.com//axetroy/vscode-deno/commit/56f5096285650c99bd5f36e25cb18d014ada71e8) - docs: update changelog
 -	[`a7dffc8`](https://github.com//axetroy/vscode-deno/commit/a7dffc87becd86078d8fc9cd65a0b3615bda72b6) - docs: add screenshot
@@ -919,9 +886,8 @@ v1.18.1 (2020-02-07)
 
 -	revert [`cb0e592`](https://github.com//axetroy/vscode-deno/commit/cb0e592136f569e58daee56a7d2f46759b7ca946), feat: support top-level await with typescript 3.8([`341165e`](https://github.com//axetroy/vscode-deno/commit/341165e7d1c25e1a4f2d7aab8866f54fb9b8f110)\)
 
-### 💪 Commits(3):
+### 💪 Commits(2):
 
--	[`34dc130`](https://github.com//axetroy/vscode-deno/commit/34dc1307ee826f0fedc194c5955c8d4a8f544966) - 1.18.1
 -	[`34dc130`](https://github.com//axetroy/vscode-deno/commit/34dc1307ee826f0fedc194c5955c8d4a8f544966) - 1.18.1
 -	[`341165e`](https://github.com//axetroy/vscode-deno/commit/341165e7d1c25e1a4f2d7aab8866f54fb9b8f110) - Revert "feat: support top-level await with typescript 3.8"
 
@@ -938,9 +904,8 @@ v1.18.0 (2020-02-07)
 
 -	create local module no work([`bcceff2`](https://github.com//axetroy/vscode-deno/commit/bcceff232ded01eb28575db7151b4116968945c1)) (thanks @axetroy)
 
-### 💪 Commits(10):
+### 💪 Commits(9):
 
--	[`6c05649`](https://github.com//axetroy/vscode-deno/commit/6c0564943babb553e38f4967e24bc608d04818fc) - 1.18.0
 -	[`6c05649`](https://github.com//axetroy/vscode-deno/commit/6c0564943babb553e38f4967e24bc608d04818fc) - 1.18.0
 -	[`d35c922`](https://github.com//axetroy/vscode-deno/commit/d35c92253b09bc75dc4ced7f0d4fff1cecea4a1e) - docs: update CHANGELOG.md
 -	[`2a6f9da`](https://github.com//axetroy/vscode-deno/commit/2a6f9da82aac305431dccc6539b66eb66866155e) - feat: no more use workspace typescript version
@@ -962,9 +927,8 @@ v1.17.0 (2020-02-06)
 
 -	create a local module if is not relative or absolute path([`21bacce`](https://github.com//axetroy/vscode-deno/commit/21bacce8dbba3837a363aeb47ba8aefd262295a4)) (thanks @axetroy)
 
-### 💪 Commits(11):
+### 💪 Commits(10):
 
--	[`b53c414`](https://github.com//axetroy/vscode-deno/commit/b53c414c1e0182ac505a176971080e42a896018e) - 1.17.0
 -	[`b53c414`](https://github.com//axetroy/vscode-deno/commit/b53c414c1e0182ac505a176971080e42a896018e) - 1.17.0
 -	[`327782b`](https://github.com//axetroy/vscode-deno/commit/327782be4ace9c996bb1a38244940cab47f5af60) - docs: update changelog
 -	[`21bacce`](https://github.com//axetroy/vscode-deno/commit/21bacce8dbba3837a363aeb47ba8aefd262295a4) - fix: create a local module if is not relative or absolute path
@@ -985,9 +949,8 @@ v1.16.0 (2020-02-06)
 -	add lock deno_std version diagnostic([`8d9097e`](https://github.com//axetroy/vscode-deno/commit/8d9097e3cb23925966e7339b344fa99cd6d6d491)) (thanks @axetroy)
 -	add default content for creating a file when fix missing local module([`1404f2f`](https://github.com//axetroy/vscode-deno/commit/1404f2f712867116801cd09a0f1122298218fd42)) (thanks @axetroy)
 
-### 💪 Commits(7):
+### 💪 Commits(6):
 
--	[`b5cdaed`](https://github.com//axetroy/vscode-deno/commit/b5cdaeda5eeb576777150802954c5403c3caded4) - 1.16.0
 -	[`b5cdaed`](https://github.com//axetroy/vscode-deno/commit/b5cdaeda5eeb576777150802954c5403c3caded4) - 1.16.0
 -	[`ef03c70`](https://github.com//axetroy/vscode-deno/commit/ef03c70ce9ca0ddf9b29f93860cba74428c073a0) - docs: update CHANGELOG.md
 -	[`eb187af`](https://github.com//axetroy/vscode-deno/commit/eb187afd06685c9462fcdace820f29754385f860) - feat: support Import Maps for Deno. close #3
@@ -1007,9 +970,8 @@ v1.15.0 (2020-02-05)
 -	**deps**: pin dependency execa to 4.0.0 (#30)([`47ca6e4`](https://github.com//axetroy/vscode-deno/commit/47ca6e47d3dc0e8dbb350225d269ccae7daca278)) (thanks @renovate[bot])
 -	`typescript-deno-plugin` may not find modules and cause `typescript` to crash([`8bdc5db`](https://github.com//axetroy/vscode-deno/commit/8bdc5db5863212efee62e51b9965c811c1cdeb34)) (thanks @axetroy)
 
-### 💪 Commits(7):
+### 💪 Commits(6):
 
--	[`c0ea2d8`](https://github.com//axetroy/vscode-deno/commit/c0ea2d81f2d26de8964ac29f0d03c3786e97a909) - 1.15.0
 -	[`c0ea2d8`](https://github.com//axetroy/vscode-deno/commit/c0ea2d81f2d26de8964ac29f0d03c3786e97a909) - 1.15.0
 -	[`f059bc3`](https://github.com//axetroy/vscode-deno/commit/f059bc341480fe22690bb379fd8c6f48cc18f7bd) - docs: update CHANGELOG.md
 -	[`b6e6d76`](https://github.com//axetroy/vscode-deno/commit/b6e6d766ba81f76582e3f2965f5cb3409ecc4619) - docs: update README.md
@@ -1030,9 +992,8 @@ v1.14.0 (2020-02-05)
 
 -	lock prettier version to make sure formatter work on deno v0.32.0. We will switch to dprint in a future release and only suppport formatting typescript/javascipt code.([`78b3266`](https://github.com//axetroy/vscode-deno/commit/78b3266ab426b28e288ff02c677f44593647e2b9)) (thanks @axetroy)
 
-### 💪 Commits(11):
+### 💪 Commits(10):
 
--	[`6f35673`](https://github.com//axetroy/vscode-deno/commit/6f3567322e18c35784b93662c95edb42b10c8c6e) - 1.14.0
 -	[`6f35673`](https://github.com//axetroy/vscode-deno/commit/6f3567322e18c35784b93662c95edb42b10c8c6e) - 1.14.0
 -	[`4f14872`](https://github.com//axetroy/vscode-deno/commit/4f148724c2246d9be94d1d35e2f3e9153f5dc9f9) - docs: update changelog
 -	[`ca93cd2`](https://github.com//axetroy/vscode-deno/commit/ca93cd24b28924fd065554f748eb653d23b3a449) - feat: Added i18n support for Chinese Traditional
@@ -1051,9 +1012,8 @@ v1.13.1 (2020-02-04)
 
 -	cannot find module if redirected. close #27([`6fd7b13`](https://github.com//axetroy/vscode-deno/commit/6fd7b13dc1394687dbae6a6a6e5f60d01f72cd64)) (thanks @axetroy)
 
-### 💪 Commits(4):
+### 💪 Commits(3):
 
--	[`2600f45`](https://github.com//axetroy/vscode-deno/commit/2600f4542eb57ad9c437a79ef2754177468d37fb) - 1.13.1
 -	[`2600f45`](https://github.com//axetroy/vscode-deno/commit/2600f4542eb57ad9c437a79ef2754177468d37fb) - 1.13.1
 -	[`377ad30`](https://github.com//axetroy/vscode-deno/commit/377ad303c7c14dc5e23ffe17f64ef3afa72db264) - docs: update changelog
 -	[`6fd7b13`](https://github.com//axetroy/vscode-deno/commit/6fd7b13dc1394687dbae6a6a6e5f60d01f72cd64) - fix: cannot find module if redirected. close #27
@@ -1071,9 +1031,8 @@ v1.13.0 (2020-02-04)
 -	**deps**: pin dependency vscode-uri to 2.1.1 (#26)([`5cdf757`](https://github.com//axetroy/vscode-deno/commit/5cdf7571673a9c5fbfbfe8858488fbb7525e1027)) (thanks @renovate[bot])
 -	improve import module position([`8a999c6`](https://github.com//axetroy/vscode-deno/commit/8a999c667ea474ee769dbf72972a08f9d8f71465)) (thanks @axetroy)
 
-### 💪 Commits(11):
+### 💪 Commits(10):
 
--	[`cac5ef7`](https://github.com//axetroy/vscode-deno/commit/cac5ef762b6e66a73a88cdcb623d9e1fff6878dd) - 1.13.0
 -	[`cac5ef7`](https://github.com//axetroy/vscode-deno/commit/cac5ef762b6e66a73a88cdcb623d9e1fff6878dd) - 1.13.0
 -	[`ad95ce5`](https://github.com//axetroy/vscode-deno/commit/ad95ce58f783478670eaaca42d263617d632e96b) - docs: update changelog
 -	[`0169107`](https://github.com//axetroy/vscode-deno/commit/01691075d9d236b6a0780f960f871206788fea44) - fix: can not import module which end with `.ts`
@@ -1094,9 +1053,8 @@ v1.12.0 (2020-02-03)
 -	Warning when import from http([`72d9db3`](https://github.com//axetroy/vscode-deno/commit/72d9db3c7ce5b483ef0fb7d3e6310b7adf5974c2)) (thanks @axetroy)
 -	remove `deno.enable = true` by default([`532cdf0`](https://github.com//axetroy/vscode-deno/commit/532cdf0af76ac436243b20c885c406386a20f202)) (thanks @axetroy)
 
-### 💪 Commits(15):
+### 💪 Commits(14):
 
--	[`0f81618`](https://github.com//axetroy/vscode-deno/commit/0f8161802d2371573955a3aed7a243ee023cd7ae) - 1.12.0
 -	[`0f81618`](https://github.com//axetroy/vscode-deno/commit/0f8161802d2371573955a3aed7a243ee023cd7ae) - 1.12.0
 -	[`e8e5004`](https://github.com//axetroy/vscode-deno/commit/e8e50048ccfaa44fcad8c224b2405041777f8326) - docs: add CHANGELOG.md
 -	[`b6cd461`](https://github.com//axetroy/vscode-deno/commit/b6cd461c2b988e7912150002216d494a079dc2f7) - docs: fix typo
@@ -1125,9 +1083,8 @@ v1.11.0 (2020-01-31)
 -	add missing typescript deps([`751261a`](https://github.com//axetroy/vscode-deno/commit/751261aaeb8a6a2931687a8082b5bbce591d7ba2)) (thanks @axetroy)
 -	**deps**: pin dependency get-port to 5.1.1 (#18)([`d3cf219`](https://github.com//axetroy/vscode-deno/commit/d3cf21902f0b6930640cd7b1f603649746833ac5)) (thanks @renovate[bot])
 
-### 💪 Commits(8):
+### 💪 Commits(7):
 
--	[`1b6a2f8`](https://github.com//axetroy/vscode-deno/commit/1b6a2f8cdafb8b8ba61534639830fa84c22a1d0c) - 1.11.0
 -	[`1b6a2f8`](https://github.com//axetroy/vscode-deno/commit/1b6a2f8cdafb8b8ba61534639830fa84c22a1d0c) - 1.11.0
 -	[`3b3049c`](https://github.com//axetroy/vscode-deno/commit/3b3049c19d1438b3357eef77f4b6241b535db3d2) - fix(deps): pin dependency typescript to 3.7.5 (#21)
 -	[`751261a`](https://github.com//axetroy/vscode-deno/commit/751261aaeb8a6a2931687a8082b5bbce591d7ba2) - fix: add missing typescript deps
@@ -1143,9 +1100,8 @@ v1.10.1 (2020-01-31)
 
 -	formatter not run at workspace folder([`bf6195a`](https://github.com//axetroy/vscode-deno/commit/bf6195a1978787c53b5135a43245ee6295ca945f)) (thanks @axetroy)
 
-### 💪 Commits(3):
+### 💪 Commits(2):
 
--	[`34a7469`](https://github.com//axetroy/vscode-deno/commit/34a7469d18ab177a9c62c8e22577567a46a44fb9) - 1.10.1
 -	[`34a7469`](https://github.com//axetroy/vscode-deno/commit/34a7469d18ab177a9c62c8e22577567a46a44fb9) - 1.10.1
 -	[`bf6195a`](https://github.com//axetroy/vscode-deno/commit/bf6195a1978787c53b5135a43245ee6295ca945f) - fix: formatter not run at workspace folder
 
@@ -1156,9 +1112,8 @@ v1.10.0 (2020-01-31)
 
 -	completion show everywhere([`21741a2`](https://github.com//axetroy/vscode-deno/commit/21741a265e38c1187c9e8a8cc71465489a250db1)) (thanks @axetroy)
 
-### 💪 Commits(7):
+### 💪 Commits(6):
 
--	[`5b1d518`](https://github.com//axetroy/vscode-deno/commit/5b1d51826ba22cadf404fa5b54310469a2678751) - 1.10.0
 -	[`5b1d518`](https://github.com//axetroy/vscode-deno/commit/5b1d51826ba22cadf404fa5b54310469a2678751) - 1.10.0
 -	[`21741a2`](https://github.com//axetroy/vscode-deno/commit/21741a265e38c1187c9e8a8cc71465489a250db1) - fix: completion show everywhere
 -	[`a9760fe`](https://github.com//axetroy/vscode-deno/commit/a9760fe957b0de570be26a07de1a968a3fd12a71) - refactor: refactor code
@@ -1173,9 +1128,8 @@ v1.9.2 (2020-01-29)
 
 -	resolve can not import module not end with .ts when module does not found. close #5([`1143a97`](https://github.com//axetroy/vscode-deno/commit/1143a97d59672439bb5bf1e9b0fd5279df78d4eb)) (thanks @axetroy)
 
-### 💪 Commits(3):
+### 💪 Commits(2):
 
--	[`15c87ea`](https://github.com//axetroy/vscode-deno/commit/15c87eab00bda1227205c44ab8cba37833ec8774) - 1.9.2
 -	[`15c87ea`](https://github.com//axetroy/vscode-deno/commit/15c87eab00bda1227205c44ab8cba37833ec8774) - 1.9.2
 -	[`1143a97`](https://github.com//axetroy/vscode-deno/commit/1143a97d59672439bb5bf1e9b0fd5279df78d4eb) - fix: resolve can not import module not end with .ts when module does not found. close #5
 
@@ -1186,9 +1140,8 @@ v1.9.1 (2020-01-29)
 
 -	support top-level await. close #10([`d1cd97c`](https://github.com//axetroy/vscode-deno/commit/d1cd97ce0748ff1b4df96726efb6cda308197dd8)) (thanks @axetroy)
 
-### 💪 Commits(8):
+### 💪 Commits(7):
 
--	[`3b83508`](https://github.com//axetroy/vscode-deno/commit/3b8350856ef40161fc4011168273f8a5cbcd23e2) - 1.9.1
 -	[`3b83508`](https://github.com//axetroy/vscode-deno/commit/3b8350856ef40161fc4011168273f8a5cbcd23e2) - 1.9.1
 -	[`d1cd97c`](https://github.com//axetroy/vscode-deno/commit/d1cd97ce0748ff1b4df96726efb6cda308197dd8) - feat: support top-level await. close #10
 -	[`525abb1`](https://github.com//axetroy/vscode-deno/commit/525abb1cd87cc7498ace6a046d8b2415d61cd79a) - chore: add renovate.json
@@ -1205,9 +1158,8 @@ v1.9.0 (2020-01-26)
 -	enable jsx options by default for typescript-deno-plugin([`b9c2fba`](https://github.com//axetroy/vscode-deno/commit/b9c2fbaefe733288ec62e46e8798d6b634f7eea9)) (thanks @axetroy)
 -	support import installed module intelligent. close #4([`6d9baaa`](https://github.com//axetroy/vscode-deno/commit/6d9baaadf3ae1eeb75e9fd46e1e567c9c8c66086)) (thanks @axetroy)
 
-### 💪 Commits(4):
+### 💪 Commits(3):
 
--	[`7116565`](https://github.com//axetroy/vscode-deno/commit/711656565b5f9f98a80c2f427bb1eb332bc820cc) - 1.9.0
 -	[`7116565`](https://github.com//axetroy/vscode-deno/commit/711656565b5f9f98a80c2f427bb1eb332bc820cc) - 1.9.0
 -	[`b9c2fba`](https://github.com//axetroy/vscode-deno/commit/b9c2fbaefe733288ec62e46e8798d6b634f7eea9) - feat: enable jsx options by default for typescript-deno-plugin
 -	[`6d9baaa`](https://github.com//axetroy/vscode-deno/commit/6d9baaadf3ae1eeb75e9fd46e1e567c9c8c66086) - feat: support import installed module intelligent. close #4
@@ -1223,9 +1175,8 @@ v1.8.0 (2020-01-26)
 
 -	only allow .d.ts file for deno.dtsFilepaths([`8916695`](https://github.com//axetroy/vscode-deno/commit/8916695fe86b2281c66f2ca75642b6511e6a744c)) (thanks @axetroy)
 
-### 💪 Commits(7):
+### 💪 Commits(6):
 
--	[`4b6a23a`](https://github.com//axetroy/vscode-deno/commit/4b6a23a997d05610eb40d3dc2b1eda021a5aeee3) - 1.8.0
 -	[`4b6a23a`](https://github.com//axetroy/vscode-deno/commit/4b6a23a997d05610eb40d3dc2b1eda021a5aeee3) - 1.8.0
 -	[`8916695`](https://github.com//axetroy/vscode-deno/commit/8916695fe86b2281c66f2ca75642b6511e6a744c) - fix: only allow .d.ts file for deno.dtsFilepaths
 -	[`458666e`](https://github.com//axetroy/vscode-deno/commit/458666eba1c649a673c56e8d28179e4cd9860d6a) - feat: add deno.dtsFilepaths configuration
@@ -1240,9 +1191,8 @@ v1.7.0 (2020-01-25)
 
 -	enable/disable typescript-deno-plugin in extension scope([`fc2c197`](https://github.com//axetroy/vscode-deno/commit/fc2c1977fc320b0b4609ca50bb02466fdbc7cc23)) (thanks @axetroy)
 
-### 💪 Commits(3):
+### 💪 Commits(2):
 
--	[`72a6a31`](https://github.com//axetroy/vscode-deno/commit/72a6a31165191c6eb7cf68a390bba807da15f4d0) - 1.7.0
 -	[`72a6a31`](https://github.com//axetroy/vscode-deno/commit/72a6a31165191c6eb7cf68a390bba807da15f4d0) - 1.7.0
 -	[`fc2c197`](https://github.com//axetroy/vscode-deno/commit/fc2c1977fc320b0b4609ca50bb02466fdbc7cc23) - feat: enable/disable typescript-deno-plugin in extension scope
 
@@ -1253,9 +1203,8 @@ v1.6.1 (2020-01-25)
 
 -	support import.meta.url for Deno([`3a26287`](https://github.com//axetroy/vscode-deno/commit/3a26287d3d38a6aa9a55d87c2652c3839e91793c)) (thanks @axetroy)
 
-### 💪 Commits(3):
+### 💪 Commits(2):
 
--	[`56d1be0`](https://github.com//axetroy/vscode-deno/commit/56d1be0c4b6b47aaff5b757fcc6c1372a4f0866e) - 1.6.1
 -	[`56d1be0`](https://github.com//axetroy/vscode-deno/commit/56d1be0c4b6b47aaff5b757fcc6c1372a4f0866e) - 1.6.1
 -	[`3a26287`](https://github.com//axetroy/vscode-deno/commit/3a26287d3d38a6aa9a55d87c2652c3839e91793c) - fix: support import.meta.url for Deno
 
@@ -1267,9 +1216,8 @@ v1.6.0 (2020-01-24)
 -	try fix ci([`e21e3f9`](https://github.com//axetroy/vscode-deno/commit/e21e3f9a89bd3be7706a323af0e4e6b21450c77e)) (thanks @axetroy)
 -	use yarn package for vsce([`67b2efd`](https://github.com//axetroy/vscode-deno/commit/67b2efdc7363206efda14dd7c40c57db6b4162a2)) (thanks @axetroy)
 
-### 💪 Commits(9):
+### 💪 Commits(8):
 
--	[`00343fe`](https://github.com//axetroy/vscode-deno/commit/00343fe52581459c7f71fd097a3c6be528d4f0c5) - 1.6.0
 -	[`00343fe`](https://github.com//axetroy/vscode-deno/commit/00343fe52581459c7f71fd097a3c6be528d4f0c5) - 1.6.0
 -	[`e21e3f9`](https://github.com//axetroy/vscode-deno/commit/e21e3f9a89bd3be7706a323af0e4e6b21450c77e) - fix: try fix ci
 -	[`a4c9625`](https://github.com//axetroy/vscode-deno/commit/a4c96255d53d5532545598f6305f209137c80dc7) - chore: update package.json
@@ -1282,26 +1230,23 @@ v1.6.0 (2020-01-24)
 v1.5.0 (2020-01-23)
 -------------------
 
-### 💪 Commits(2):
+### 💪 Commits(1):
 
--	[`6a899f3`](https://github.com//axetroy/vscode-deno/commit/6a899f36086c5f2d194e31f5719be3224b462f1e) - update
 -	[`6a899f3`](https://github.com//axetroy/vscode-deno/commit/6a899f36086c5f2d194e31f5719be3224b462f1e) - update
 
 v1.4.1 (2020-01-23)
 -------------------
 
-### 💪 Commits(3):
+### 💪 Commits(2):
 
--	[`f04ce34`](https://github.com//axetroy/vscode-deno/commit/f04ce342c82d67281f43cb06e3ffdb3a0a2ea908) - update
 -	[`f04ce34`](https://github.com//axetroy/vscode-deno/commit/f04ce342c82d67281f43cb06e3ffdb3a0a2ea908) - update
 -	[`d537df8`](https://github.com//axetroy/vscode-deno/commit/d537df804d953c8db6b7720457cf50d15b4c925f) - rewrite vscode-deno
 
 v1.4.0 (2019-12-07)
 -------------------
 
-### 💪 Commits(7):
+### 💪 Commits(6):
 
--	[`e8a3b47`](https://github.com//axetroy/vscode-deno/commit/e8a3b47f47555403191a6463defc5736550fc6ad) - release v1.4.0
 -	[`e8a3b47`](https://github.com//axetroy/vscode-deno/commit/e8a3b47f47555403191a6463defc5736550fc6ad) - release v1.4.0
 -	[`8debe3a`](https://github.com//axetroy/vscode-deno/commit/8debe3afcb5a01c42cd661c15527a4a2111f0159) - suport vscode >= 1.14.0
 -	[`f1980d4`](https://github.com//axetroy/vscode-deno/commit/f1980d4bf5468a3fcea30640840d415c3da7ee92) - upgrade pkgs
@@ -1312,9 +1257,8 @@ v1.4.0 (2019-12-07)
 v1.3.3 (2019-08-29)
 -------------------
 
-### 💪 Commits(12):
+### 💪 Commits(11):
 
--	[`b0621e2`](https://github.com//axetroy/vscode-deno/commit/b0621e21f56638c41c6478182df1c5137497fe81) - release v1.3.3 (#53)
 -	[`b0621e2`](https://github.com//axetroy/vscode-deno/commit/b0621e21f56638c41c6478182df1c5137497fe81) - release v1.3.3 (#53)
 -	[`8880916`](https://github.com//axetroy/vscode-deno/commit/8880916d3970dd5779d9f119119a29cf36b1929f) - fix deno version for ci (#52)
 -	[`74d4dd0`](https://github.com//axetroy/vscode-deno/commit/74d4dd021bfb5943e5b2925b87978394c87c0ecd) - upgrade typescript-deno-plugin@1.2.7 (#51)
@@ -1334,9 +1278,8 @@ v1.3.2 (2019-06-06)
 
 -	add format provider (#32)([`9636ee2`](https://github.com//axetroy/vscode-deno/commit/9636ee26359339ffd2149557af2e76a8f29b6e29)) (thanks @Axetroy)
 
-### 💪 Commits(7):
+### 💪 Commits(6):
 
--	[`86e1969`](https://github.com//axetroy/vscode-deno/commit/86e1969f8dd2f945beb7b21b9f0a9a7a584e6e10) - Release v1.3.2 (#38)
 -	[`86e1969`](https://github.com//axetroy/vscode-deno/commit/86e1969f8dd2f945beb7b21b9f0a9a7a584e6e10) - Release v1.3.2 (#38)
 -	[`23078d6`](https://github.com//axetroy/vscode-deno/commit/23078d67dd2ae046aa2412191942607a20d5d8a3) - upgrade typescript-deno-plugin to 1.2.5 (#37)
 -	[`3df7c4e`](https://github.com//axetroy/vscode-deno/commit/3df7c4e9a86d1d25c0580c3459fe9bbb9666fd2e) - format code
@@ -1347,9 +1290,8 @@ v1.3.2 (2019-06-06)
 v1.3.0 (2019-04-28)
 -------------------
 
-### 💪 Commits(4):
+### 💪 Commits(3):
 
--	[`27f38c5`](https://github.com//axetroy/vscode-deno/commit/27f38c5d39017bd7ce5f68ffc85ac6e455f22800) - release v1.3.0 (#29)
 -	[`27f38c5`](https://github.com//axetroy/vscode-deno/commit/27f38c5d39017bd7ce5f68ffc85ac6e455f22800) - release v1.3.0 (#29)
 -	[`6fe2402`](https://github.com//axetroy/vscode-deno/commit/6fe240268a63a9aa0d57ede7c9e3797be31973b7) - Upgrade deno v0.3.9 check (#28)
 -	[`098939d`](https://github.com//axetroy/vscode-deno/commit/098939d47767c8af5b2422247cd1c93b6c4fd032) - Update LICENSE
@@ -1357,9 +1299,8 @@ v1.3.0 (2019-04-28)
 v1.2.1 (2019-04-19)
 -------------------
 
-### 💪 Commits(2):
+### 💪 Commits(1):
 
--	[`530775e`](https://github.com//axetroy/vscode-deno/commit/530775e3255792e4c1451339b92d4e66ea8ce86b) - release v1.2.1 (#24)
 -	[`530775e`](https://github.com//axetroy/vscode-deno/commit/530775e3255792e4c1451339b92d4e66ea8ce86b) - release v1.2.1 (#24)
 
 v1.2.0 (2019-04-19)
@@ -1369,9 +1310,8 @@ v1.2.0 (2019-04-19)
 
 -	revert [`6927e6a`](https://github.com//axetroy/vscode-deno/commit/6927e6a2d0dd7ac88dcc82c4dba388ef6aae394c), implement auto format on save (#13)" (#19)([`8d29205`](https://github.com//axetroy/vscode-deno/commit/8d29205104fc6ca7e35de01a24ceb240f2ae7d77)\)
 
-### 💪 Commits(15):
+### 💪 Commits(14):
 
--	[`ba3dfeb`](https://github.com//axetroy/vscode-deno/commit/ba3dfeb967ac9c154238392f52618eee97cb3bc9) - release v1.2.0 (#22)
 -	[`ba3dfeb`](https://github.com//axetroy/vscode-deno/commit/ba3dfeb967ac9c154238392f52618eee97cb3bc9) - release v1.2.0 (#22)
 -	[`cc6a95c`](https://github.com//axetroy/vscode-deno/commit/cc6a95c898f47d5cbab4ad18b70bf1b3b482c1dd) - Generate Deno's .d.ts file (#21)
 -	[`7fa51ec`](https://github.com//axetroy/vscode-deno/commit/7fa51ec3de0770d9a1d414081ce35ebc066643a0) - foramt package.json
@@ -1390,9 +1330,8 @@ v1.2.0 (2019-04-19)
 v1.0.7 (2019-03-11)
 -------------------
 
-### 💪 Commits(5):
+### 💪 Commits(4):
 
--	[`6899942`](https://github.com//axetroy/vscode-deno/commit/689994298a5cccb73f4d1f2566c6d42cf3551621) - release v1.0.7
 -	[`6899942`](https://github.com//axetroy/vscode-deno/commit/689994298a5cccb73f4d1f2566c6d42cf3551621) - release v1.0.7
 -	[`e1e7c25`](https://github.com//axetroy/vscode-deno/commit/e1e7c253a731a0cc3a62cf38184e89af8e1f83a7) - Merge pull request #8 from axetroy/snippets
 -	[`c3e5aa0`](https://github.com//axetroy/vscode-deno/commit/c3e5aa06269d2d32cb95489430bfddf3618c0393) - Merge pull request #7 from axetroy/disposables
@@ -1405,18 +1344,16 @@ v1.0.6 (2019-03-09)
 
 -	revert [`20b683a`](https://github.com//axetroy/vscode-deno/commit/20b683ab0c7ebd0cdee71bebff58456e62df6aaa), bundling extension using webpack([`2b451ff`](https://github.com//axetroy/vscode-deno/commit/2b451ff9b6f50ccc7edab19d28f376f5ee19923d)\)
 
-### 💪 Commits(3):
+### 💪 Commits(2):
 
--	[`a1a25f0`](https://github.com//axetroy/vscode-deno/commit/a1a25f031679ff353db5317227f42642df95e4ba) - release v1.0.6
 -	[`a1a25f0`](https://github.com//axetroy/vscode-deno/commit/a1a25f031679ff353db5317227f42642df95e4ba) - release v1.0.6
 -	[`2b451ff`](https://github.com//axetroy/vscode-deno/commit/2b451ff9b6f50ccc7edab19d28f376f5ee19923d) - Revert "bundling extension using webpack"
 
 v1.0.5 (2019-03-08)
 -------------------
 
-### 💪 Commits(5):
+### 💪 Commits(4):
 
--	[`20b683a`](https://github.com//axetroy/vscode-deno/commit/20b683ab0c7ebd0cdee71bebff58456e62df6aaa) - bundling extension using webpack
 -	[`20b683a`](https://github.com//axetroy/vscode-deno/commit/20b683ab0c7ebd0cdee71bebff58456e62df6aaa) - bundling extension using webpack
 -	[`61286ba`](https://github.com//axetroy/vscode-deno/commit/61286ba13f04cb97677dabb7bb2c598fc4df1c93) - add schemas & snippets
 -	[`99b13e8`](https://github.com//axetroy/vscode-deno/commit/99b13e80db162a3290c996d17bfa6982a28a6c35) - typo
@@ -1425,18 +1362,16 @@ v1.0.5 (2019-03-08)
 v1.0.4 (2019-03-07)
 -------------------
 
-### 💪 Commits(3):
+### 💪 Commits(2):
 
--	[`35297be`](https://github.com//axetroy/vscode-deno/commit/35297bed833f0ba761f6d83c8c207af62142b02d) - release v1.0.4
 -	[`35297be`](https://github.com//axetroy/vscode-deno/commit/35297bed833f0ba761f6d83c8c207af62142b02d) - release v1.0.4
 -	[`fbeb470`](https://github.com//axetroy/vscode-deno/commit/fbeb47015f90d1c065e30a175647537db5e9362c) - Merge pull request #3 from justjavac/fix-warning-on-found
 
 v1.0.3 (2019-03-07)
 -------------------
 
-### 💪 Commits(7):
+### 💪 Commits(6):
 
--	[`e357ebb`](https://github.com//axetroy/vscode-deno/commit/e357ebb803dfd8946b2da6257311edebaa0f0914) - fix 1.0.2 bug
 -	[`e357ebb`](https://github.com//axetroy/vscode-deno/commit/e357ebb803dfd8946b2da6257311edebaa0f0914) - fix 1.0.2 bug
 -	[`e381cd7`](https://github.com//axetroy/vscode-deno/commit/e381cd74e7c95fa1c8aebe8d3900f65cdf79e531) - release v1.0.3
 -	[`3883c63`](https://github.com//axetroy/vscode-deno/commit/3883c6328d099d0ef687e389b58498bb31b3f132) - add ISSUE_TEMPLATEs
@@ -1447,9 +1382,8 @@ v1.0.3 (2019-03-07)
 v1.0.2 (2019-03-07)
 -------------------
 
-### 💪 Commits(6):
+### 💪 Commits(5):
 
--	[`d51a951`](https://github.com//axetroy/vscode-deno/commit/d51a95108cc392aeab9ed4ab875ebcd674c3a075) - release v1.0.2
 -	[`d51a951`](https://github.com//axetroy/vscode-deno/commit/d51a95108cc392aeab9ed4ab875ebcd674c3a075) - release v1.0.2
 -	[`bf9c0b5`](https://github.com//axetroy/vscode-deno/commit/bf9c0b5a6fb3eb97ed6dbefb5b37437524ff3b30) - add screenshots
 -	[`1752c24`](https://github.com//axetroy/vscode-deno/commit/1752c248ab592c2d4846b776112d8d18693f498f) - add some ignores
@@ -1459,7 +1393,6 @@ v1.0.2 (2019-03-07)
 v1.0.1 (2019-03-07)
 -------------------
 
-### 💪 Commits(2):
+### 💪 Commits(1):
 
--	[`c0ae083`](https://github.com//axetroy/vscode-deno/commit/c0ae083f91d26799216689d3531417b95f2997e0) - first commit
 -	[`c0ae083`](https://github.com//axetroy/vscode-deno/commit/c0ae083f91d26799216689d3531417b95f2997e0) - first commit

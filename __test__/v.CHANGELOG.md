@@ -1142,9 +1142,8 @@ Unreleased (2020-12-03)
 -	revert [`6b2808a`](https://github.com//vlang/v/commit/6b2808a3f90b5664a78fe8593ee0a79ad7d891cd), fmt: re-format parser.v and cgen.v([`74af88b`](https://github.com//vlang/v/commit/74af88bc9261d615ea0a20d93bebcbccd9a17fb4)\)
 -	checker: error if variable used before decleration p1([`7bc9e23`](https://github.com//vlang/v/commit/7bc9e234a32f42ae9bbf05273e9cc5d6bf082205)\)
 
-### 💪 Commits(756):
+### 💪 Commits(755):
 
--	[`ce4ee2b`](https://github.com//vlang/v/commit/ce4ee2b247b04a18de1c4f5bb18b64c63354bc89) - v0.1.29
 -	[`ce4ee2b`](https://github.com//vlang/v/commit/ce4ee2b247b04a18de1c4f5bb18b64c63354bc89) - v0.1.29
 -	[`4568ce8`](https://github.com//vlang/v/commit/4568ce8f0070a80bde836819162b935cd9d44d03) - builtin: add sanity check on the number of returned frames by C.backtrace
 -	[`3a461e7`](https://github.com//vlang/v/commit/3a461e7cee4e28323fe1bb9a02d80e16c5286d47) - vfmt: update help
@@ -1914,9 +1913,8 @@ Unreleased (2020-12-03)
 -	revert [`538662d`](https://github.com//vlang/v/commit/538662d99a7d70ffb5ba1d65bc06617ae41f9a14), tests: add more tests on interfaces ([`2618b4f`](https://github.com//vlang/v/commit/2618b4fbd376b0054e2d37b08adcbd7003dace9e)\)
 -	revert [`1ea13ac`](https://github.com//vlang/v/commit/1ea13ac7f399ba7026e8f6e86d46e6bbdaf2309f), tests: valgrind: enable string tests([`6ea741e`](https://github.com//vlang/v/commit/6ea741e26ec08a2ac7b75cc5f0f179c25b1e81b8)\)
 
-### 💪 Commits(776):
+### 💪 Commits(775):
 
--	[`7be9526`](https://github.com//vlang/v/commit/7be952605b4f52b4c2fefcccd9e244048b41b7dc) - 0.1.28
 -	[`7be9526`](https://github.com//vlang/v/commit/7be952605b4f52b4c2fefcccd9e244048b41b7dc) - 0.1.28
 -	[`1d28d45`](https://github.com//vlang/v/commit/1d28d45c5cb662443af57f27fb41de8ee673922f) - builder: add -lpthread; x64: a+b, a-b
 -	[`947e892`](https://github.com//vlang/v/commit/947e8922f2639131babea919aa9bcd16c3773cea) - cgen: optimize the format of the generated code
@@ -2710,9 +2708,8 @@ Unreleased (2020-12-03)
 -	term: make compilable with v2 on windows([`b4561fa`](https://github.com//vlang/v/commit/b4561fa8149ecc876427759a52693a0d5a46ab1d)\)
 -	revert [`34d9263`](https://github.com//vlang/v/commit/34d926350b30c4577fc0ab5cacc10114960e05ed), map: use hashmap instead of b-tree([`f413b2f`](https://github.com//vlang/v/commit/f413b2fa49045bac5195e9b7c12f2a43f0cab662)\)
 
-### 💪 Commits(1839):
+### 💪 Commits(1838):
 
--	[`67351c7`](https://github.com//vlang/v/commit/67351c74c8809e543cc227f9f39e6958a5943d6b) - V 0.1.27
 -	[`67351c7`](https://github.com//vlang/v/commit/67351c74c8809e543cc227f9f39e6958a5943d6b) - V 0.1.27
 -	[`fe4c7b0`](https://github.com//vlang/v/commit/fe4c7b082b5f6436332f7a960a6b43bce7296b79) - changelog: 0.1.27
 -	[`67a50b5`](https://github.com//vlang/v/commit/67a50b5b34da0b97be334eaca92e0270910bef18) - mysql: simplify `Result.maps`
@@ -4564,9 +4561,8 @@ Unreleased (2020-12-03)
 -	revert [`507c71a`](https://github.com//vlang/v/commit/507c71ad80828a34f243df9d1203a3723ab73752), cgen.prepend_to_statement()([`47f9c02`](https://github.com//vlang/v/commit/47f9c02331f8d19bbf8ace7b4b14e80af4c644ef)\)
 -	revert [`9352903`](https://github.com//vlang/v/commit/93529031ded570fa0ff1d9b55bed2c70a041ec0a), use stdint.h with msvc([`b9a24e3`](https://github.com//vlang/v/commit/b9a24e3b51bd6dc993793f6753be3b4520974c85)\)
 
-### 💪 Commits(432):
+### 💪 Commits(431):
 
--	[`526f12f`](https://github.com//vlang/v/commit/526f12feff629228785c88f052db91d4fb8510ca) - ci.yml: fix run command
 -	[`526f12f`](https://github.com//vlang/v/commit/526f12feff629228785c88f052db91d4fb8510ca) - ci.yml: fix run command
 -	[`ae266f5`](https://github.com//vlang/v/commit/ae266f56e22b040ab632e42add2cd16776fdfccf) - ci: build examples on windows-prebuilt
 -	[`3d31b21`](https://github.com//vlang/v/commit/3d31b21df93236a0f5bc51b8ad006ba3747d4324) - ci.yml: use curl -L
@@ -5019,9 +5015,8 @@ Unreleased (2020-12-03)
 -	revert [`67ae167`](https://github.com//vlang/v/commit/67ae1670131cd51d11bd82eb9df46efcff401cfc), compiler: remove math dependency([`c3787e1`](https://github.com//vlang/v/commit/c3787e17fd64929c82433703bd2b8fa5043f6473)\)
 -	revert [`7eaf289`](https://github.com//vlang/v/commit/7eaf289e33f2ba39269e7b94cf03ea569396893f), remove accidental duplicate code([`7454133`](https://github.com//vlang/v/commit/745413331b9a1259bdb768776991b0c78544b402)\)
 
-### 💪 Commits(793):
+### 💪 Commits(792):
 
--	[`c4a4363`](https://github.com//vlang/v/commit/c4a43633da2bece85a64dbb395ba65212399987f) - i8, i18, u16 str()
 -	[`c4a4363`](https://github.com//vlang/v/commit/c4a43633da2bece85a64dbb395ba65212399987f) - i8, i18, u16 str()
 -	[`66f271f`](https://github.com//vlang/v/commit/66f271f100666edfd3c853c9c017b516557db157) - fix a string interpolation bug
 -	[`89d4056`](https://github.com//vlang/v/commit/89d40566f4808189efa9f03a3925e9201e8872da) - ci: build examples with prebuilt V binaries
@@ -5823,9 +5818,8 @@ Unreleased (2020-12-03)
 -	revert [`8992707`](https://github.com//vlang/v/commit/8992707fbbcbbe5eeee8fbd2665715726b3b4b2c), parser: cache tokens (first step)([`0fcdd7d`](https://github.com//vlang/v/commit/0fcdd7db358bf5580ca7a073faf7c2d109654f60)\)
 -	revert [`9d1814a`](https://github.com//vlang/v/commit/9d1814ab81f4de5405cf4176dcbbad7192e58c64), remove Travis: GitHub CI is a lot faster and more reliable([`b10886b`](https://github.com//vlang/v/commit/b10886bc217c22d18f9256a6351208df478c49c5)\)
 
-### 💪 Commits(163):
+### 💪 Commits(162):
 
--	[`5ac62bb`](https://github.com//vlang/v/commit/5ac62bbb75768d8501dd8240547feaf721dedcfe) - Update README.md
 -	[`5ac62bb`](https://github.com//vlang/v/commit/5ac62bbb75768d8501dd8240547feaf721dedcfe) - Update README.md
 -	[`f7c8e92`](https://github.com//vlang/v/commit/f7c8e923c000d038b990db1928a68c2f1d841b44) - compiler/lang: add variadic function args support
 -	[`5fb3c0e`](https://github.com//vlang/v/commit/5fb3c0e3a8a5ff1742cf0f7240a87728fc55f0b8) - compiler: add error when embedding struct in itself
@@ -5997,9 +5991,8 @@ Unreleased (2020-12-03)
 -	revert [`279f7d5`](https://github.com//vlang/v/commit/279f7d57cb53e10b7054fffb292de19e4d3b4133), os: fix get_line in windows([`57cfdee`](https://github.com//vlang/v/commit/57cfdeeaf01b48ad9b6d1f052d76567764239c78)\)
 -	revert [`982a162`](https://github.com//vlang/v/commit/982a162fbf1a0f166ea4e1c25ad11216b9cd9b8b), compiler: pass -l flags without space (needed for tcc)([`4a43c2f`](https://github.com//vlang/v/commit/4a43c2fa1a50ade5c7aa16c299c207b06934221f)\)
 
-### 💪 Commits(67):
+### 💪 Commits(66):
 
--	[`79a98d7`](https://github.com//vlang/v/commit/79a98d7bcf6cfd82e1835395c7ba13bd305931b9) - V 0.1.20 changelog
 -	[`79a98d7`](https://github.com//vlang/v/commit/79a98d7bcf6cfd82e1835395c7ba13bd305931b9) - V 0.1.20 changelog
 -	[`0a2f7a6`](https://github.com//vlang/v/commit/0a2f7a6ba703214003be680eb0592b5fc296e63e) - fix tests
 -	[`1397d53`](https://github.com//vlang/v/commit/1397d532c62c9f63010a9d0f303e275fa4ea3d6f) - compiler: check if mutable receivers are modified
@@ -6076,9 +6069,8 @@ Unreleased (2020-12-03)
 -	revert [`3bb559b`](https://github.com//vlang/v/commit/3bb559b4c83c8a7f04eeb5016ab0549624088390), Delete .gitattributes([`e38ee80`](https://github.com//vlang/v/commit/e38ee80c98fb6ccfc2c90d434d7d1ac73e438ac0)\)
 -	revert [`a43b831`](https://github.com//vlang/v/commit/a43b831965600bfc2502525b168784d94339f7dd), switch deprecation notice([`f6147b7`](https://github.com//vlang/v/commit/f6147b7ac7e06f1ab98138f62eb8eb8ef4f851db)\)
 
-### 💪 Commits(293):
+### 💪 Commits(292):
 
--	[`41734af`](https://github.com//vlang/v/commit/41734affb3cef63ef7c98643e9202cf0274b3950) - compiler: detect typos in function/variable/module names
 -	[`41734af`](https://github.com//vlang/v/commit/41734affb3cef63ef7c98643e9202cf0274b3950) - compiler: detect typos in function/variable/module names
 -	[`5055ac4`](https://github.com//vlang/v/commit/5055ac4b23b386a5b363da6e3313832ba4bc70cb) - makefile: now that v.c is regenerated after every commit, it is no longer needed to run "v -o v compiler"
 -	[`8fe46d5`](https://github.com//vlang/v/commit/8fe46d5db5035fea43a83cc6d939db7080482fdd) - compiler: call string method in C funtion parameter
@@ -6381,9 +6373,8 @@ Unreleased (2020-12-03)
 -	revert [`cdfc4c8`](https://github.com//vlang/v/commit/cdfc4c83725a171c87227d49b3aa7975169036ec), remove vlib/glfw (it's a vpm module now)([`8990eb0`](https://github.com//vlang/v/commit/8990eb06ec4a9f4b3a2771cc39e25f711131859e)\)
 -	revert [`acd28fa`](https://github.com//vlang/v/commit/acd28fa4952c00f1548041ede945493114969dcd), Support for the printf optimisation for windows and wide strings([`79be98d`](https://github.com//vlang/v/commit/79be98d2fb21a3f3b83e02a86a18dca38484bd5c)\)
 
-### 💪 Commits(260):
+### 💪 Commits(259):
 
--	[`c6e7838`](https://github.com//vlang/v/commit/c6e7838a443f856873892d9ae7e05d768fc85156) - V 0.1.18
 -	[`c6e7838`](https://github.com//vlang/v/commit/c6e7838a443f856873892d9ae7e05d768fc85156) - V 0.1.18
 -	[`a336775`](https://github.com//vlang/v/commit/a336775ae6afe95ef6004c0b2695a690046ce159) - Makefile: use ./v
 -	[`94b900b`](https://github.com//vlang/v/commit/94b900bd0a4b77a6b7e4e7f4c0dfc77b4a44f747) - map: allow array values
@@ -6655,9 +6646,8 @@ Unreleased (2020-12-03)
 
 -	revert [`d38940a`](https://github.com//vlang/v/commit/d38940ad576ade8aea17011c033bd0a591394c0b), modules: fix "is not a directory" error([`dbb64ec`](https://github.com//vlang/v/commit/dbb64ec14917e93019a6adc1080a6db0e4cdd1f3)\)
 
-### 💪 Commits(69):
+### 💪 Commits(68):
 
--	[`54f847a`](https://github.com//vlang/v/commit/54f847a85bfe0a69a31799aaa3191158c6fcfe84) - V 0.1.17
 -	[`54f847a`](https://github.com//vlang/v/commit/54f847a85bfe0a69a31799aaa3191158c6fcfe84) - V 0.1.17
 -	[`ce1288e`](https://github.com//vlang/v/commit/ce1288e946f77dafac9026dca945a36cf2b6f279) - clean up
 -	[`207bab5`](https://github.com//vlang/v/commit/207bab5f7901c0754a982e088f607a4f9fcffeb8) - generics, vweb, comptime codegen, etc
@@ -6735,9 +6725,8 @@ Unreleased (2020-12-03)
 -	revert [`8462e99`](https://github.com//vlang/v/commit/8462e99bc5af9c28248225784204996e6afbd49c), Windows Unicode support([`2291e9f`](https://github.com//vlang/v/commit/2291e9fcfe88460f628f3adfe63e2f669a19bc16)\)
 -	revert [`3e00507`](https://github.com//vlang/v/commit/3e005074a34e3bf8c26a0aa1c16b5e95c375468e), Windows Unicode I/O ([`23c5f88`](https://github.com//vlang/v/commit/23c5f88f3e7dd5a6fc6f0e78dfe66a7f352f14ff)\)
 
-### 💪 Commits(103):
+### 💪 Commits(102):
 
--	[`13e1b4e`](https://github.com//vlang/v/commit/13e1b4edb181e693ecf274be523f2c87b13e93e3) - V 0.1.16
 -	[`13e1b4e`](https://github.com//vlang/v/commit/13e1b4edb181e693ecf274be523f2c87b13e93e3) - V 0.1.16
 -	[`6eb8766`](https://github.com//vlang/v/commit/6eb8766e593cc974540c96cd085ff39a38764b26) - http.new_request: Don't ignore mutated variables url, data
 -	[`d72c859`](https://github.com//vlang/v/commit/d72c859bf99679699b12c18e90f514ca4b290bbb) - net: socket error handling
@@ -6844,9 +6833,8 @@ Unreleased (2020-12-03)
 0.1.15 (2019-07-16)
 -------------------
 
-### 💪 Commits(123):
+### 💪 Commits(122):
 
--	[`5d0cb14`](https://github.com//vlang/v/commit/5d0cb1437c124a6cb2ae5ecd591c146d172bcc69) - Add support for VFLAGS environment variable, merged with cmd args.
 -	[`5d0cb14`](https://github.com//vlang/v/commit/5d0cb1437c124a6cb2ae5ecd591c146d172bcc69) - Add support for VFLAGS environment variable, merged with cmd args.
 -	[`17580f3`](https://github.com//vlang/v/commit/17580f30136e8dd54f536fd9b47fe482fc392b48) - Support for passing different options to the C compiler backend.
 -	[`47b0221`](https://github.com//vlang/v/commit/47b0221b8238ded368a2c291c1603f860e4e900e) - os: hostname function
@@ -6978,9 +6966,8 @@ v0.1.13 (2019-07-10)
 -	revert [`0f0ed8d`](https://github.com//vlang/v/commit/0f0ed8d716485b2a8bc8c5bbac9a01f9ba4bbdbc), make function arguments immutable([`d47e2f1`](https://github.com//vlang/v/commit/d47e2f113fb419e8a4309364d4c53e34f26045ed)\)
 -	revert [`adef37f`](https://github.com//vlang/v/commit/adef37f0f47ca0c67791a5af38a19e276767e06c), Added const INVALID_HANDLE_VALUE([`ebbea9f`](https://github.com//vlang/v/commit/ebbea9f560c70c94842f12772b483b3de2d8b957)\)
 
-### 💪 Commits(55):
+### 💪 Commits(54):
 
--	[`c44d54f`](https://github.com//vlang/v/commit/c44d54fb4ca2a3bbb78615489a8222e270aaa842) - V 0.1.13
 -	[`c44d54f`](https://github.com//vlang/v/commit/c44d54fb4ca2a3bbb78615489a8222e270aaa842) - V 0.1.13
 -	[`26ef992`](https://github.com//vlang/v/commit/26ef99293da4f6d9cb0d4bc22637ae52c6d6e7df) - new enum syntax; update the compiler (`p.tok == .name`\)
 -	[`385f47c`](https://github.com//vlang/v/commit/385f47c0cd7f4618640eee84124acdeea51cbb5a) - add abs for complex, add tests (#1043)
@@ -7043,9 +7030,8 @@ v0.1.12 (2019-07-04)
 
 -	revert [`ae1313a`](https://github.com//vlang/v/commit/ae1313a35ccc76d72b87d3e5a4e6d36ae58c3af3), Added permission bits.([`95841a3`](https://github.com//vlang/v/commit/95841a31d40f62659b12ea068d3fb05a78ec0f2a)\)
 
-### 💪 Commits(48):
+### 💪 Commits(47):
 
--	[`68ed555`](https://github.com//vlang/v/commit/68ed555e91cc9520e49b041721bb9422365b360e) - V 0.1.12
 -	[`68ed555`](https://github.com//vlang/v/commit/68ed555e91cc9520e49b041721bb9422365b360e) - V 0.1.12
 -	[`4d9c619`](https://github.com//vlang/v/commit/4d9c6197fdc051581c358a5f5193a3de9cbd6df8) - initial Implementation of ls() for windows
 -	[`155e1fa`](https://github.com//vlang/v/commit/155e1fa96175212be8ad8ab9ae102a9580b95ccb) - FIX #202
@@ -7097,9 +7083,8 @@ v0.1.12 (2019-07-04)
 v0.1.11 (2019-07-01)
 --------------------
 
-### 💪 Commits(41):
+### 💪 Commits(40):
 
--	[`4c3f138`](https://github.com//vlang/v/commit/4c3f1386ef17f584ae075e2ab952742256a0ac4f) - V 0.1.11
 -	[`4c3f138`](https://github.com//vlang/v/commit/4c3f1386ef17f584ae075e2ab952742256a0ac4f) - V 0.1.11
 -	[`99a9a65`](https://github.com//vlang/v/commit/99a9a6572ad5d974c1ce1a9a1cbfb751f589cce9) - lots of Windows fixes and cross compilation for Windows
 -	[`e71213b`](https://github.com//vlang/v/commit/e71213ba4f72abe2a0aac3ccd7192ef5b43f69be) - Update README.md
@@ -7144,9 +7129,8 @@ v0.1.11 (2019-07-01)
 v0.1.10 (2019-06-29)
 --------------------
 
-### 💪 Commits(8):
+### 💪 Commits(7):
 
--	[`1bcf94f`](https://github.com//vlang/v/commit/1bcf94f7f486d0fd93e5d3606202fc5350525000) - Windows: another \r\n fix
 -	[`1bcf94f`](https://github.com//vlang/v/commit/1bcf94f7f486d0fd93e5d3606202fc5350525000) - Windows: another \r\n fix
 -	[`1852592`](https://github.com//vlang/v/commit/18525922fd2c318e4ed2701211ddc4363dce3c2a) - Windows fixes
 -	[`1808227`](https://github.com//vlang/v/commit/18082274cadc3766d0f13ae0565a9a2f3c57ddce) - clean up: remove redundant spaces
@@ -7162,9 +7146,8 @@ v0.1.9 (2019-06-29)
 
 -	compiler: allow mut passed as argument to be modified'. This broke([`249fa95`](https://github.com//vlang/v/commit/249fa95eab6c80267bb753a52481bc0315cb8737)\)
 
-### 💪 Commits(40):
+### 💪 Commits(39):
 
--	[`08c8b4b`](https://github.com//vlang/v/commit/08c8b4ba22406df42a42aabf633aa67fc42d8475) - V 0.1.9
 -	[`08c8b4b`](https://github.com//vlang/v/commit/08c8b4ba22406df42a42aabf633aa67fc42d8475) - V 0.1.9
 -	[`fd610b9`](https://github.com//vlang/v/commit/fd610b97d2e343d5abf87562ef2af1983f12ec56) - Azure: remove `cd compiler`
 -	[`9af2e4a`](https://github.com//vlang/v/commit/9af2e4a62e65705474731c85492ac6b4976347c7) - travis: remove `cd compiler`
@@ -7208,9 +7191,8 @@ v0.1.9 (2019-06-29)
 v0.1.8 (2019-06-28)
 -------------------
 
-### 💪 Commits(10):
+### 💪 Commits(9):
 
--	[`50012ae`](https://github.com//vlang/v/commit/50012ae57b2f60e35beb78b0457a7b34e77bf984) - V 0.1.8
 -	[`50012ae`](https://github.com//vlang/v/commit/50012ae57b2f60e35beb78b0457a7b34e77bf984) - V 0.1.8
 -	[`bd49977`](https://github.com//vlang/v/commit/bd49977feb360bdee5452b81ec6bb0270981b43c) - fix single file programs without `fn main` and REPL (allow imports,
 -	[`fd9163f`](https://github.com//vlang/v/commit/fd9163f7151c4b5a412d0ad2ab24c57da357f1c9) - update Makefile clean old file in all
@@ -7224,9 +7206,8 @@ v0.1.8 (2019-06-28)
 v0.1.7 (2019-06-27)
 -------------------
 
-### 💪 Commits(9):
+### 💪 Commits(8):
 
--	[`dc161fb`](https://github.com//vlang/v/commit/dc161fb20f8d3a38e5a289d9691119f5ff5735b8) - V 0.1.7
 -	[`dc161fb`](https://github.com//vlang/v/commit/dc161fb20f8d3a38e5a289d9691119f5ff5735b8) - V 0.1.7
 -	[`6824e6e`](https://github.com//vlang/v/commit/6824e6e7db477c89a29138c2c4c974cdbfed54ee) - Replace all remaining C code with V in the compiler and vlib (hoorah!)
 -	[`554f083`](https://github.com//vlang/v/commit/554f083543e3e6c9e3d25a922450451dc099ea55) - Create Changelog.md
@@ -7239,9 +7220,8 @@ v0.1.7 (2019-06-27)
 v0.1.6 (2019-06-27)
 -------------------
 
-### 💪 Commits(8):
+### 💪 Commits(7):
 
--	[`f39111b`](https://github.com//vlang/v/commit/f39111bdffeba4fa5ebdf7578c70c8f910a9bb55) - V 0.1.6
 -	[`f39111b`](https://github.com//vlang/v/commit/f39111bdffeba4fa5ebdf7578c70c8f910a9bb55) - V 0.1.6
 -	[`494010d`](https://github.com//vlang/v/commit/494010d2af08c05a4f850af844acc81c4a5b6a07) - os.v: replace remaining C code with V
 -	[`c83ebe2`](https://github.com//vlang/v/commit/c83ebe2c665b6a5b060938463e447c80b3dd5bc0) - compiler & builtin: bitshifts CAO fix and C code removal in utf8
@@ -7261,9 +7241,8 @@ v0.1.5 (2019-06-27)
 -	revert [`f6a401a`](https://github.com//vlang/v/commit/f6a401aa025c603b58056a3d008fe03827796a34), removed bits C code inside utf8 builtin([`b901180`](https://github.com//vlang/v/commit/b9011804fc87b762ac99840e604f18121e9759fd)\)
 -	revert [`d24be8c`](https://github.com//vlang/v/commit/d24be8cf6c6b13ad36743b7f6436b7673424de04), getline: check if newline at the end to not cut end of line([`bda50e9`](https://github.com//vlang/v/commit/bda50e96f047ea9ff447ea57df0b0126734827b1)\)
 
-### 💪 Commits(59):
+### 💪 Commits(58):
 
--	[`b846d02`](https://github.com//vlang/v/commit/b846d02cb2c188d1a890be0a5e49cd48f2b93ef4) - V 0.1.5
 -	[`b846d02`](https://github.com//vlang/v/commit/b846d02cb2c188d1a890be0a5e49cd48f2b93ef4) - V 0.1.5
 -	[`b018237`](https://github.com//vlang/v/commit/b018237c7226b5aed0bd5c2b002d413d631b1d5f) - 1
 -	[`90c0791`](https://github.com//vlang/v/commit/90c0791345d2da24e4b9f85e3a4e9b2e4c694647) - replace ugly `tos2(bytes)` with `string(bytes)`
@@ -7330,9 +7309,8 @@ v0.1.4 (2019-06-26)
 
 -	revert [`8ef27f0`](https://github.com//vlang/v/commit/8ef27f0bb32f36770d2fff0668009a1b9f092086), add log replace color([`b00a47b`](https://github.com//vlang/v/commit/b00a47be66e868b087146feb7999fd72f2af3da0)\)
 
-### 💪 Commits(47):
+### 💪 Commits(46):
 
--	[`fa925f3`](https://github.com//vlang/v/commit/fa925f30920dc00fae66e05d5b68d70b4c73c185) - os.v: clean up, remove C code, os.exec()
 -	[`fa925f3`](https://github.com//vlang/v/commit/fa925f30920dc00fae66e05d5b68d70b4c73c185) - os.v: clean up, remove C code, os.exec()
 -	[`3dea0ac`](https://github.com//vlang/v/commit/3dea0ac8e1d55ba2b1a96549936f3c1e740a4af2) - Update PULL_REQUEST_TEMPLATE
 -	[`61e4367`](https://github.com//vlang/v/commit/61e4367aa8a6e17231f6d20f27e780c952d8e619) - :+1: Fix up redundant type declare and remove space (#603)
@@ -7392,9 +7370,8 @@ v0.1.3 (2019-06-25)
 
 -	revert [`8f6ca60`](https://github.com//vlang/v/commit/8f6ca60876b3be552899ccd3ecea6fe84d625722), fixed indentation on multiline condition([`056b415`](https://github.com//vlang/v/commit/056b41521abc1dd276afeeeea66fcaebd5752e04)\)
 
-### 💪 Commits(162):
+### 💪 Commits(161):
 
--	[`0c8afdf`](https://github.com//vlang/v/commit/0c8afdfe13917e3c98d014e88592658a4e1af818) - Fix Issues #553
 -	[`0c8afdf`](https://github.com//vlang/v/commit/0c8afdfe13917e3c98d014e88592658a4e1af818) - Fix Issues #553
 -	[`056b415`](https://github.com//vlang/v/commit/056b41521abc1dd276afeeeea66fcaebd5752e04) - Revert "fixed indentation on multiline condition"
 -	[`8f6ca60`](https://github.com//vlang/v/commit/8f6ca60876b3be552899ccd3ecea6fe84d625722) - fixed indentation on multiline condition

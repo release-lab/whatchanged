@@ -80,33 +80,31 @@ func Extract(g *client.GitClient, scopes []*parser.Scope) ([]*ExtractSplice, err
 				break
 			}
 
-			commit := commits[index]
+			currentCommit := commits[index]
 
 			item := &ExtractSplice{
 				Name:   "Unreleased",
 				Commit: make([]*object.Commit, 0),
 			}
 
-			if len(scope.Tags) != 0 {
-				if tags := getTagOfCommit(scope.Tags, commit); len(tags) != 0 {
-					if tagIndex+1 == len(tags) {
-						item.Tag = tags[tagIndex]
-						item.Name = tags[tagIndex].Name
-						item.Commit = append(item.Commit, commit)
-						tagIndex = 0 // reset tag index to zero
-					} else {
-						item.Tag = tags[tagIndex]
-						item.Name = tags[tagIndex].Name
-						splices = append(splices, item)
-						tagIndex++
-						continue
-					}
+			if tags := getTagOfCommit(scope.Tags, currentCommit); len(tags) != 0 {
+				if tagIndex+1 == len(tags) {
+					item.Tag = tags[tagIndex]
+					item.Name = tags[tagIndex].Name
+					item.Commit = append(item.Commit, currentCommit)
+					tagIndex = 0 // reset tag index to zero
+				} else {
+					item.Tag = tags[tagIndex]
+					item.Name = tags[tagIndex].Name
+					splices = append(splices, item)
+					tagIndex++
+					continue
 				}
+			} else {
+				item.Commit = append(item.Commit, currentCommit)
 			}
 
 			index++
-
-			item.Commit = append(item.Commit, commit)
 
 		loop:
 			for {
