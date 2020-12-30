@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestGenerate111(t *testing.T) {
+func TestGenerate(t *testing.T) {
 	type TestCase struct {
 		name       string
 		options    *option.Options
