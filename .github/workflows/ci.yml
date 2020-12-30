@@ -64,6 +64,7 @@ jobs:
       - name: Generate release.md
         run: |
           ./cmd/whatchanged/run.sh --tpl=release.tpl --output=release.md
+          cat release.md
 
       - name: Release to Github
         uses: goreleaser/goreleaser-action@v2
