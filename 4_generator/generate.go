@@ -42,7 +42,7 @@ func Generate(g *client.GitClient, contexts []*transformer.TemplateContext, form
 			case "http":
 				fallthrough
 			case "https":
-				if remoteURL, err = url.Parse(fmt.Sprintf("%s://%s/%s", remoteURL.Scheme, remoteURL.Host, urlPath)); err != nil {
+				if remoteURL, err = url.Parse(fmt.Sprintf("%s://%s%s", remoteURL.Scheme, remoteURL.Host, urlPath)); err != nil {
 					return nil, errors.WithStack(err)
 				}
 			case "ssh":
