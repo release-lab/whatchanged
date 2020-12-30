@@ -116,8 +116,8 @@ func resolveVersion(git *client.GitClient, versionRanges string) ([]string, erro
 
 	length := len(versions)
 
-	switch length {
-	case 0:
+	switch true {
+	case versionRanges == "":
 		versions[0] = "HEAD"
 		latestTag, err := git.TagN(0)
 
@@ -162,7 +162,7 @@ func resolveVersion(git *client.GitClient, versionRanges string) ([]string, erro
 		} else {
 			versions = append(versions, "")
 		}
-	case 1:
+	case length == 2:
 		var (
 			tag *client.Tag
 			err error
