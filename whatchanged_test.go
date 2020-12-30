@@ -35,6 +35,22 @@ func TestGenerate111(t *testing.T) {
 				Version: []string{"HEAD~"},
 			},
 		},
+		{
+			name:       "whatchanged single version",
+			Project:    "./",
+			ResultFile: "./__test__/whatchanged-[v0.2.0].CHANGELOG.md",
+			options: &option.Options{
+				Version: []string{"v0.2.0"},
+			},
+		},
+		{
+			name:       "whatchanged version range",
+			Project:    "./",
+			ResultFile: "./__test__/whatchanged-[v0.2.0~v0.1.0].CHANGELOG.md",
+			options: &option.Options{
+				Version: []string{"v0.2.0~v0.1.0"},
+			},
+		},
 	}
 
 	for _, tt := range tests {

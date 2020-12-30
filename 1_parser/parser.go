@@ -162,7 +162,7 @@ func resolveVersion(git *client.GitClient, versionRanges string) ([]string, erro
 		} else {
 			versions = append(versions, "")
 		}
-	case length == 2:
+	case length == 1:
 		var (
 			tag *client.Tag
 			err error
