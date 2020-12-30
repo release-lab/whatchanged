@@ -1,8 +1,29 @@
 Unreleased (2020-12-30)
 -----------------------
 
-### 💪 Commits(2):
+### 🐛 Bugs fixed:
 
+-	generate version range([`b0dca5d`](https://github.com/axetroy/changelog/commit/b0dca5dd226046c131165a8f211b8f190c54d04b)) (thanks @axetroy)
+
+### 💪 Commits(1):
+
+-	[`b0dca5d`](https://github.com/axetroy/changelog/commit/b0dca5dd226046c131165a8f211b8f190c54d04b) - fix: generate version range
+
+v0.3.2 (2020-12-30)
+-------------------
+
+### 🐛 Bugs fixed:
+
+-	When generating an uncertain version, the generated range is incorrect([`7e1db8d`](https://github.com/axetroy/changelog/commit/7e1db8dd3a4e3a6970672139552c9bf42b10edba)) (thanks @axetroy)
+
+### 💪 Commits(8):
+
+-	[`2db6d7c`](https://github.com/axetroy/changelog/commit/2db6d7c984d042e00493bbc8621d39c680f6d708) - v0.3.2
+-	[`17d4565`](https://github.com/axetroy/changelog/commit/17d4565edd6f0334fc01b08b33a77110fa1f6d24) - chore: update makefile
+-	[`7e1db8d`](https://github.com/axetroy/changelog/commit/7e1db8dd3a4e3a6970672139552c9bf42b10edba) - fix: When generating an uncertain version, the generated range is incorrect
+-	[`e177518`](https://github.com/axetroy/changelog/commit/e17751864ceb762d598c44e2d861be00b26847c5) - chore: support build armv5
+-	[`97ccdec`](https://github.com/axetroy/changelog/commit/97ccdecde838f5c03516fde5dcb23fcf26d0c928) - chore: update ci
+-	[`44f28da`](https://github.com/axetroy/changelog/commit/44f28da30b079c97444b4868cf67c044c4bb9525) - docs: update changelog
 -	[`7c3db91`](https://github.com/axetroy/changelog/commit/7c3db918b94aa3027b9656d6b584a854129f1424) - docs: update
 -	[`1b863fa`](https://github.com/axetroy/changelog/commit/1b863fa926c473436e2b07b5b724b30af32bd221) - docs: update
 
