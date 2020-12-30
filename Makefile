@@ -1,5 +1,5 @@
 test:
-	go test --cover -covermode=count -coverprofile=coverage.out ./...
+	go test -v --cover -covermode=count -coverprofile=coverage.out ./...
 
 build:
 	goreleaser release --snapshot --rm-dist --skip-publish
