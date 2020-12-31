@@ -28,10 +28,12 @@ jobs:
           go env
 
       - name: Lint
-        uses: golangci/golangci-lint-action@v2
+        # uses: golangci/golangci-lint-action@v2
+        uses: golangci/golangci-lint-action@fix-75
         with:
           version: v1.33.0
           args: --timeout=5m30s
+          skip-go-installation: true
 
       # - name: Format
       #   run: make format-check
