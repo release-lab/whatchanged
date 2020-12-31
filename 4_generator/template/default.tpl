@@ -1,6 +1,3 @@
-package generator
-
-const FULL_TEMPLATE = `
 ## {{ .Version }} ({{ .Date }})
 
 {{- define "body" -}}
@@ -19,45 +16,10 @@ const FULL_TEMPLATE = `
 {{ template "body" .Fix }}
 {{ end }}
 
-{{if .Refactor}}
-### 🔨 Code refactoring:
-{{ template "body" .Refactor }}
-{{- end -}}
-
-{{if .Test}}
-### 🧪 Testing:
-{{ template "body" .Test }}
-{{- end -}}
-
 {{if .Perf}}
 ### ⚡️ Performance improves:
 {{ template "body" .Perf }}
 {{ end }}
-
-{{if .Build}}
-### 🏗️ Build system:
-{{ template "body" .Build }}
-{{- end -}}
-
-{{if .Ci}}
-### 🚗 CI:
-{{ template "body" .Ci }}
-{{- end -}}
-
-{{if .Chore}}
-### 💡 Chore:
-{{ template "body" .Chore }}
-{{- end -}}
-
-{{if .Docs}}
-### 📚 Documentation:
-{{ template "body" .Docs }}
-{{- end -}}
-
-{{if .Style}}
-### 🌇 Style:
-{{ template "body" .Style }}
-{{- end -}}
 
 {{if .Revert}}
 ### 🔙 Revert:
@@ -87,4 +49,3 @@ const FULL_TEMPLATE = `
 {{ end }}
 
 {{ end }}
-`

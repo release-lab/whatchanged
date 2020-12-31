@@ -2,6 +2,7 @@ package generator
 
 import (
 	"bytes"
+	"embed"
 	"encoding/json"
 	"fmt"
 	"html/template"
@@ -15,6 +16,9 @@ import (
 	"github.com/pkg/errors"
 	giturls "github.com/whilp/git-urls"
 )
+
+//go:embed template/*.tpl
+var templateFS embed.FS
 
 func Generate(g *client.GitClient, contexts []*transformer.TemplateContext, format option.Format, preset option.Preset, templateFile string, templateStr string) ([]byte, error) {
 	remote, err := g.GetRemote()
@@ -74,9 +78,15 @@ func Generate(g *client.GitClient, contexts []*transformer.TemplateContext, form
 		} else if templateFile == "" {
 			switch preset {
 			case option.PresetDefault:
-				templateStr = DEFAULT_TEMPLATE
+				fallthrough
 			case option.PresetFull:
-				templateStr = FULL_TEMPLATE
+				b, err := templateFS.ReadFile(fmt.Sprintf("template/%s.tpl", preset))
+
+				if err != nil {
+					return nil, errors.WithStack(err)
+				}
+
+				templateStr = string(b)
 			default:
 				return nil, errors.Errorf("invalid preset '%s'", preset)
 			}
