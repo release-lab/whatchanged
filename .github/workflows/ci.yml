@@ -29,7 +29,7 @@ jobs:
 
       - name: Lint
         # uses: golangci/golangci-lint-action@v2
-        uses: golangci/golangci-lint-action@fix-75
+        uses: golangci/golangci-lint-action@e4e910b0cea5459cf5f459ac51f61ebb51934e36fix-75
         with:
           version: v1.33.0
           args: --timeout=5m30s
