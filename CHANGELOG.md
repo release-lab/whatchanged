@@ -1,8 +1,13 @@
-Unreleased (2020-12-31)
+Unreleased (2021-01-03)
 -----------------------
 
-### 💪 Commits(2):
+### 💪 Commits(7):
 
+-	[`53e9214`](https://github.com/axetroy/whatchanged/commit/53e9214e2030eb5e830726bc5a6ba26968ef5725) - ci: fix lint
+-	[`2bbc17d`](https://github.com/axetroy/whatchanged/commit/2bbc17d5dfb0184c5772f36a80b320ba71c83d73) - ci: fix lint
+-	[`3f32b0b`](https://github.com/axetroy/whatchanged/commit/3f32b0bfd50e65ebd320282c40c6e9841b485751) - docs: add custom template docs. close #17
+-	[`257f6a4`](https://github.com/axetroy/whatchanged/commit/257f6a4bb1c3dd8a7edb195c3cbbe818a1fad5ec) - test: add more test
+-	[`9b8a6dd`](https://github.com/axetroy/whatchanged/commit/9b8a6dd8b5554cd8296c74455aee4240abaa42cd) - update changelog
 -	[`23448a5`](https://github.com/axetroy/whatchanged/commit/23448a5482359f28a0089b17280dd2a0a0eaef26) - chore: skip install golang in golanglint
 -	[`a3dfef7`](https://github.com/axetroy/whatchanged/commit/a3dfef78486dfa612db49ae67ed155962fecefa3) - chore: build with go1.16-beta1
 
