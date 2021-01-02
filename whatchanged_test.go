@@ -51,6 +51,14 @@ func TestGenerate(t *testing.T) {
 				Version: []string{"v0.2.0~v0.1.0"},
 			},
 		},
+		{
+			name:       "whatchanged version range",
+			Project:    "./",
+			ResultFile: "./__test__/whatchanged-[23448a5482359f28a0089b17280dd2a0a0eaef26~9dff4fc6a9d746ffd9dd10215cf04d2fec2edd2a].CHANGELOG.md",
+			options: &option.Options{
+				Version: []string{"23448a5482359f28a0089b17280dd2a0a0eaef26~9dff4fc6a9d746ffd9dd10215cf04d2fec2edd2a"},
+			},
+		},
 	}
 
 	for _, tt := range tests {
