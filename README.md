@@ -163,9 +163,10 @@ $ make build
 $ make test
 ```
 
-### How it works?
+### FAQ
 
-[detail](HOW_IT_WORKS.md)
+1. [How it works?](HOW_IT_WORKS.md)
+2. [How to custom generation template?](CUSTOM_TEMPLATE.md)
 
 ### License
 
