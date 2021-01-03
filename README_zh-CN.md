@@ -15,7 +15,7 @@
 
 [在线感受魔法](https://axetroy.github.io/whatchanged/)
 
-Feature:
+特性:
 
 - [x] 跨平台支持
 - [x] 生成 本地/远程 的git仓库
@@ -65,6 +65,7 @@ OPTIONS:
   --preset      Cli built-in markdown template. Available options:
                 --preset=default
                 --preset=full
+                --preset=simple
                 Only available when --fmt=md and --tpl is nil.
                 Defaults to "--preset=default".
   --tpl         Specify the template file for generating. Only available when

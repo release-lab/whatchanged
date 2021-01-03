@@ -10,6 +10,7 @@ const (
 	// preset
 	PresetDefault Preset = "default"
 	PresetFull    Preset = "full"
+	PresetSimple  Preset = "simple"
 )
 
 type Options struct {

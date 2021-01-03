@@ -79,6 +79,8 @@ func Generate(g *client.GitClient, contexts []*transformer.TemplateContext, form
 			switch preset {
 			case option.PresetDefault:
 				fallthrough
+			case option.PresetSimple:
+				fallthrough
 			case option.PresetFull:
 				b, err := templateFS.ReadFile(fmt.Sprintf("template/%s.tpl", preset))
 
