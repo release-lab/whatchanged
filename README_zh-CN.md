@@ -1,4 +1,4 @@
-English | [中文简体](README_zh-CN.md)
+[English](README.md) | 中文简体
 
 [![Build Status](https://github.com/axetroy/whatchanged/workflows/ci/badge.svg)](https://github.com/axetroy/whatchanged/actions)
 [![Build Status](https://github.com/axetroy/whatchanged/workflows/playground/badge.svg)](https://github.com/axetroy/whatchanged/actions)
@@ -9,23 +9,23 @@ English | [中文简体](README_zh-CN.md)
 
 ## whatchanged
 
-An elegant changelog generator.
+一个优雅的变更日志生成器
 
-Focus on **Elegant**/**Simple**/**Efficient**/**Scalable**
+致力于**优雅**/**简单**/**高效**/**可扩展**
 
-[Feel the magic online](https://axetroy.github.io/whatchanged/)
+[在线感受魔法](https://axetroy.github.io/whatchanged/)
 
 Feature:
 
-- [x] Cross-platform support
-- [x] Generation for local/Remote git repositories
-- [x] Preset template for generation
-- [x] Custom template file
-- [x] Conventional Commits Parser
-- [x] Generate multiple versions of change logs
+- [x] 跨平台支持
+- [x] 生成 本地/远程 的git仓库
+- [x] 内置预设的生成模板
+- [x] 自定义模版文件
+- [x] 常规的 commit 解析器
+- [x] 支持多个版本的变更日志生成
 - [x] [Github Action](https://github.com/axetroy/setup-whatchanged)
 
-### Usage
+### 使用
 
 ```bash
 $ whatchanged --help
@@ -117,9 +117,9 @@ SOURCE CODE:
   https://github.com/axetroy/whatchanged
 ```
 
-### Installation
+### 安装
 
-#### Install via npm
+#### 通过 npm 安装
 
 ```bash
 # install in global
@@ -128,30 +128,30 @@ npm install -g @axetroy/whatchanged
 npx @axetroy/whatchanged
 ```
 
-#### Install via shell
+#### 通过 shell 安装
 
-If you are using Linux/macOS. you can install it with the following command:
+如果你使用的是 Linux/macOS，你可以通过以下命令进行安装
 
 ```shell
-# install latest version
+# 安装最新版本
 curl -fsSL https://raw.githubusercontent.com/axetroy/whatchanged/master/install.sh | bash
-# or install specified version
+# 或者安装指定版本
 curl -fsSL https://raw.githubusercontent.com/axetroy/whatchanged/master/install.sh | bash -s v0.3.3
-# or install from gobinaries.com
+# 或者通过 gobinaries.com 安装
 curl -sf https://gobinaries.com/axetroy/whatchanged@v0.3.3 | sh
 ```
 
-#### Install from Github release page
+#### 通过 Github release 页面下载安装
 
-Download the executable file for your platform at [release page](https://github.com/axetroy/whatchanged/releases) and put the executable file to `$PATH` then try it.
+从[release page](https://github.com/axetroy/whatchanged/releases)页面下载对应平台的可执行文件，并且把它加入到 `$PATH` 环境变量中，并尝试以下命令
 
 ```bash
 $ whatchanged --help
 ```
 
-### Build from source code
+### 从源码中构建
 
-Make sure you have `Golang@v1.16.x` and [goreleaser](https://github.com/goreleaser/goreleaser) installed.
+确保你已安装 `Golang@v1.16.x` 和 [goreleaser](https://github.com/goreleaser/goreleaser)
 
 ```shell
 $ git clone https://github.com/axetroy/whatchanged.git $GOPATH/src/github.com/axetroy/whatchanged
@@ -159,17 +159,17 @@ $ cd $GOPATH/src/github.com/axetroy/whatchanged
 $ make build
 ```
 
-### Test
+### 测试
 
 ```bash
 $ make test
 ```
 
-### FAQ
+### 常见问题
 
-1. [How it works?](HOW_IT_WORKS.md)
-2. [How to custom generation template?](CUSTOM_TEMPLATE.md)
+1. [它是如何工作的?](HOW_IT_WORKS.md)
+2. [如何自定义生成的模版?](CUSTOM_TEMPLATE.md)
 
-### License
+### 开源许可
 
 The [MIT License](LICENSE)
