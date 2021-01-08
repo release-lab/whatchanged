@@ -1,8 +1,9 @@
 <template>
   <div style="position: relative">
     <img
-      src="./assets/github.svg"
-      style="position: fixed; right: 0; top: 0"
+      :src="githubLogoUrl"
+      style="position: fixed; right: 0; top: 0; height: 60px"
+      @click="open('https://github.com/axetroy/whatchanged')"
     />
     <div class="toolbar">
       <!-- <img :src="require('@/assets/logo.png')" /> -->
@@ -13,13 +14,13 @@
         @submit.native.prevent
       >
         <a-form-item label="Username">
-          <a-input v-model:value="form.username.value"> </a-input>
+          <a-input v-model:value="form.username.value" />
         </a-form-item>
         <a-form-item label="Repo">
-          <a-input v-model:value="form.repo.value"> </a-input>
+          <a-input v-model:value="form.repo.value" />
         </a-form-item>
         <a-form-item label="Version">
-          <a-input v-model:value="form.version.value"> </a-input>
+          <a-input v-model:value="form.version.value" />
         </a-form-item>
         <a-form-item>
           <a-button type="primary" html-type="submit" :loading="loading">
@@ -57,6 +58,9 @@ import { message, notification } from "ant-design-vue";
 import Render from "./components/Render.vue";
 import CodeMirror from "./components/CodeMirror.vue";
 import TEMPLATE_DEFAULT from "./template/default";
+import github from "./assets/github.svg";
+
+const githubLogoUrl = ref(github);
 
 const loading = ref(false);
 let template = ref(TEMPLATE_DEFAULT);
