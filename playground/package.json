@@ -7,19 +7,19 @@
     "build": "cross-env NODE_ENV=production vite build"
   },
   "dependencies": {
-    "ant-design-vue": "^2.0.0-rc.8",
-    "indexof": "^0.0.1",
+    "ant-design-vue": "2.0.0-rc.8",
+    "indexof": "0.0.1",
     "marked": "1.2.7",
     "vue": "3.0.5"
   },
   "devDependencies": {
     "@types/marked": "1.2.1",
-    "@types/node": "^14.14.20",
-    "@vitejs/plugin-vue": "^1.0.5",
+    "@types/node": "14.14.20",
+    "@vitejs/plugin-vue": "1.0.5",
     "@vue/compiler-sfc": "3.0.5",
     "cross-env": "7.0.3",
     "import-http": "0.3.1",
     "sass": "1.32.2",
-    "vite": "^2.0.0-beta.21"
+    "vite": "2.0.0-beta.21"
   }
 }
