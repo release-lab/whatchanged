@@ -4,7 +4,7 @@
 [![Build Status](https://github.com/axetroy/whatchanged/workflows/playground/badge.svg)](https://github.com/axetroy/whatchanged/actions)
 [![Go Report Card](https://goreportcard.com/badge/github.com/axetroy/whatchanged)](https://goreportcard.com/report/github.com/axetroy/whatchanged)
 ![Latest Version](https://img.shields.io/github/v/release/axetroy/whatchanged.svg)
-![License](https://img.shields.io/github/license/axetroy/whatchanged.svg)
+[![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
 ![Repo Size](https://img.shields.io/github/repo-size/axetroy/whatchanged.svg)
 
 ## whatchanged
@@ -173,4 +173,4 @@ $ make test
 
 ### 开源许可
 
-The [MIT License](LICENSE)
+The [Anti-996 License](LICENSE-zh-CN)
