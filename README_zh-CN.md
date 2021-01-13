@@ -173,4 +173,4 @@ $ make test
 
 ### 开源许可
 
-The [Anti-996 License](LICENSE-zh-CN)
+The [Anti-996 License](LICENSE_zh-CN)
