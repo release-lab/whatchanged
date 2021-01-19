@@ -137,9 +137,9 @@ npx @axetroy/whatchanged
 # 安装最新版本
 curl -fsSL https://raw.githubusercontent.com/axetroy/whatchanged/master/install.sh | bash
 # 或者安装指定版本
-curl -fsSL https://raw.githubusercontent.com/axetroy/whatchanged/master/install.sh | bash -s v0.3.4
+curl -fsSL https://raw.githubusercontent.com/axetroy/whatchanged/master/install.sh | bash -s v0.3.5
 # 或者通过 gobinaries.com 安装
-curl -sf https://gobinaries.com/axetroy/whatchanged@v0.3.4 | sh
+curl -sf https://gobinaries.com/axetroy/whatchanged@v0.3.5 | sh
 ```
 
 #### 通过 Github release 页面下载安装
