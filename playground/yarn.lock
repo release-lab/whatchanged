@@ -89,10 +89,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.20.tgz#f7974863edd21d1f8a494a73e8e2b3658615c340"
   integrity sha512-Y93R97Ouif9JEOWPIUyU+eyIdyRqQR0I8Ez1dzku4hDx34NWh4HbtIc3WNzwB1Y9ULvNGeu5B8h8bVL5cAk4/A==
 
-"@vitejs/plugin-vue@1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@vitejs/plugin-vue/-/plugin-vue-1.0.5.tgz#2639178e975bebc505e9be1c88d25faf9bc4dd06"
-  integrity sha512-Fq/Z1rTs7j3QhvmIjeIHqInw2YneXa8Td3z7cYQhyAZXF/WmGMegbapeBqGAoAcGSOfWpOO7Tr0c/T+Qke0O6Q==
+"@vitejs/plugin-vue@1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@vitejs/plugin-vue/-/plugin-vue-1.1.0.tgz#8ae0b11388897b07259c9e5198c0e3fb5e4b37d9"
+  integrity sha512-ExlAt3nb3PB31jV9AgRZSMoGd+aQRU53fc/seghV8/l0JCzaX2mqlgpG8iytWkRxbBPgtAx4TpCPdiVKnTFT/A==
 
 "@vue/compiler-core@3.0.5":
   version "3.0.5"
