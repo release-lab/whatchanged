@@ -1,25 +1,26 @@
 {
-  "name": "@axetroy/whatchanged",
-  "version": "0.0.0",
-  "description": "An elegant changelog generator",
+  "author": "Axetroy",
   "bin": {
     "whatchanged": "./bin/whatchanged"
   },
+  "dependencies": {
+    "download": "8.0.0",
+    "progress": "2.0.3"
+  },
+  "description": "An elegant changelog generator",
   "files": [
     "README.md",
     "CHANGELOG.md",
     "LICENSE",
     "bin/whatchanged",
-    "scripts/postinstall.js"
+    "scripts/postinstall.js",
+    "download/.gitkeep"
   ],
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "node scripts/postinstall.js"
-  },
-  "author": "Axetroy",
   "license": "MIT",
-  "dependencies": {
-    "download": "8.0.0",
-    "progress": "2.0.3"
-  }
+  "name": "@axetroy/whatchanged",
+  "scripts": {
+    "postinstall": "node scripts/postinstall.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "0.0.0"
 }
