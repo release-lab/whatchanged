@@ -1,4 +1,4 @@
-const TEMPLATE_DEFAULT = `# {{ .Version }}
+const TEMPLATE_DEFAULT = `## {{ .Version }} ({{ .Date }})
 
 {{- define "body" -}}
 {{range . -}}
@@ -16,45 +16,10 @@ const TEMPLATE_DEFAULT = `# {{ .Version }}
 {{ template "body" .Fix }}
 {{ end }}
 
-{{if .Refactor}}
-### 🔨 Code refactoring:
-{{ template "body" .Refactor }}
-{{- end -}}
-
-{{if .Test}}
-### 🧪 Testing:
-{{ template "body" .Test }}
-{{- end -}}
-
 {{if .Perf}}
 ### ⚡️ Performance improves:
 {{ template "body" .Perf }}
 {{ end }}
-
-{{if .Build}}
-### 🏗️ Build system:
-{{ template "body" .Build }}
-{{- end -}}
-
-{{if .Ci}}
-### 🚗 CI:
-{{ template "body" .Ci }}
-{{- end -}}
-
-{{if .Chore}}
-### 💡 Chore:
-{{ template "body" .Chore }}
-{{- end -}}
-
-{{if .Docs}}
-### 📚 Documentation:
-{{ template "body" .Docs }}
-{{- end -}}
-
-{{if .Style}}
-### 🌇 Style:
-{{ template "body" .Style }}
-{{- end -}}
 
 {{if .Revert}}
 ### 🔙 Revert:
@@ -74,9 +39,15 @@ const TEMPLATE_DEFAULT = `# {{ .Version }}
 {{ end -}}
 {{ end }}
 
+{{ $length := len .Commits }}
+
+{{if gt $length 0}}
+
 ### 💪  Commits({{ len .Commits }}):
 {{range .Commits -}}
 - {{ hashURL .Hash}} - {{ unescape .Field.Title }}
+{{ end }}
+
 {{ end }}
 `;
 
