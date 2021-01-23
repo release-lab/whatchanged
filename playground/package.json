@@ -20,6 +20,6 @@
     "cross-env": "7.0.3",
     "import-http": "0.3.1",
     "sass": "1.32.2",
-    "vite": "2.0.0-beta.21"
+    "vite": "2.0.0-beta.37"
   }
 }
