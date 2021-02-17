@@ -8,7 +8,7 @@ jobs:
     timeout-minutes: 30
     strategy:
       matrix:
-        go: ["1.16.0-beta1"]
+        go: ["^1.16.0"]
         os: [ubuntu-latest, macOS-latest, windows-latest]
     name: Go ${{ matrix.go }} in ${{ matrix.os }}
     steps:
@@ -28,8 +28,7 @@ jobs:
           go env
 
       - name: Lint
-        # uses: golangci/golangci-lint-action@v2
-        uses: golangci/golangci-lint-action@e4e910b0cea5459cf5f459ac51f61ebb51934e36
+        uses: golangci/golangci-lint-action@v2
         with:
           version: v1.33.0
           args: --timeout=5m30s
@@ -67,7 +66,7 @@ jobs:
       - uses: actions/setup-go@v2
         with:
           stable: '!contains(${{ matrix.go }}, "beta") && !contains(${{ matrix.go }}, "rc")'
-          go-version: 1.16.0-beta1
+          go-version: ^1.16.0
 
       - name: Generate release.md
         run: |
