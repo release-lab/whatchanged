@@ -207,10 +207,10 @@ ansi-styles@^3.2.1:
   dependencies:
     color-convert "^1.9.0"
 
-ant-design-vue@2.0.0-rc.9:
-  version "2.0.0-rc.9"
-  resolved "https://registry.yarnpkg.com/ant-design-vue/-/ant-design-vue-2.0.0-rc.9.tgz#9f4d89b02bf2c6f3295633048001b2e13c229f1e"
-  integrity sha512-lnDKOXkaxWGnV3nEzSl0bggnM1F568sBMD2ctPLLctdhYBAKZQto+4my4p8RbLHfvZVE/xVDE80HYgufibTMYw==
+ant-design-vue@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/ant-design-vue/-/ant-design-vue-2.0.0.tgz#d30ec06938dc3b43b08a117818fab91d7b083e5f"
+  integrity sha512-Uv35Z9V+8iT1PBO0QOqWHaVE4Gju94UfikL8NGxtAqy/yZDnTn8K2gz5n7PfQbB5oBqkEyn2O0mtOpUBUEXZ+g==
   dependencies:
     "@ant-design-vue/use" "^0.0.1-0"
     "@ant-design/icons-vue" "^6.0.0"
