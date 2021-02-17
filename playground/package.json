@@ -9,7 +9,7 @@
   "dependencies": {
     "ant-design-vue": "2.0.0-rc.9",
     "indexof": "0.0.1",
-    "marked": "1.2.7",
+    "marked": "2.0.0",
     "vue": "3.0.5"
   },
   "devDependencies": {
