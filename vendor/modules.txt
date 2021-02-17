@@ -91,7 +91,7 @@ github.com/shurcooL/go/indentwriter
 # github.com/shurcooL/markdownfmt v0.0.0-20191117054414-21fe95c248e9
 ## explicit
 github.com/shurcooL/markdownfmt/markdown
-# github.com/stretchr/testify v1.6.1
+# github.com/stretchr/testify v1.7.0
 ## explicit
 github.com/stretchr/testify/assert
 # github.com/whilp/git-urls v1.0.0
