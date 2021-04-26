@@ -207,10 +207,10 @@ ansi-styles@^3.2.1:
   dependencies:
     color-convert "^1.9.0"
 
-ant-design-vue@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/ant-design-vue/-/ant-design-vue-2.0.0.tgz#d30ec06938dc3b43b08a117818fab91d7b083e5f"
-  integrity sha512-Uv35Z9V+8iT1PBO0QOqWHaVE4Gju94UfikL8NGxtAqy/yZDnTn8K2gz5n7PfQbB5oBqkEyn2O0mtOpUBUEXZ+g==
+ant-design-vue@2.1.3:
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/ant-design-vue/-/ant-design-vue-2.1.3.tgz#d535f4f88f7405c1c2dfdf27d0d1b39438b28a21"
+  integrity sha512-pJy8fiMXXkqrFaarTWdi3gkJWfkmR9xomdTj2/YCoU9lIXT7O++JHhamDQkUyHQXCj1OHaLwWp2POeNWS1gaUQ==
   dependencies:
     "@ant-design-vue/use" "^0.0.1-0"
     "@ant-design/icons-vue" "^6.0.0"
@@ -220,7 +220,6 @@ ant-design-vue@2.0.0:
     async-validator "^3.3.0"
     dom-align "^1.10.4"
     dom-scroll-into-view "^2.0.0"
-    is-mobile "^2.2.1"
     lodash-es "^4.17.15"
     moment "^2.27.0"
     omit.js "^2.0.0"
@@ -504,11 +503,6 @@ is-glob@^4.0.1, is-glob@~4.0.1:
   integrity sha512-5G0tKtBTFImOqDnLB2hG6Bp2qcKEFduo4tZu9MT/H6NQv/ghhy30o55ufafxJ/LdH79LLs2Kfrn85TLKyA7BUg==
   dependencies:
     is-extglob "^2.1.1"
-
-is-mobile@^2.2.1:
-  version "2.2.2"
-  resolved "https://registry.npmjs.org/is-mobile/-/is-mobile-2.2.2.tgz#f6c9c5d50ee01254ce05e739bdd835f1ed4e9954"
-  integrity sha512-wW/SXnYJkTjs++tVK5b6kVITZpAZPtUrt9SF80vvxGiF/Oywal+COk1jlRkiVq15RFNEQKQY31TkV24/1T5cVg==
 
 is-number@^7.0.0:
   version "7.0.0"
