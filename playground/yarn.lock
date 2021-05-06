@@ -96,10 +96,10 @@
   resolved "https://registry.npmjs.org/@types/lodash/-/lodash-4.14.167.tgz#ce7d78553e3c886d4ea643c37ec7edc20f16765e"
   integrity sha512-w7tQPjARrvdeBkX/Rwg95S592JwxqOjmms3zWQ0XZgSyxSLdzWaYH3vErBhdVS/lRBX7F8aBYcYJYTr5TMGOzw==
 
-"@types/marked@1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@types/marked/-/marked-1.2.2.tgz#1f858a0e690247ecf3b2eef576f98f86e8d960d4"
-  integrity sha512-wLfw1hnuuDYrFz97IzJja0pdVsC0oedtS4QsKH1/inyW9qkLQbXgMUqEQT0MVtUBx3twjWeInUfjQbhBVLECXw==
+"@types/marked@2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@types/marked/-/marked-2.0.2.tgz#33a15106383f6e42cd6bdd38093e6b19904e29e1"
+  integrity sha512-P4zanhCQKs4tiWPPBGpB7lHflgFCP9DFGNI5YtpW9MALKoy2qs9rHNWJ+z55cegD9uCfnmsKuaosq9FNvbxrOw==
 
 "@types/node@14.14.44":
   version "14.14.44"
@@ -554,10 +554,10 @@ magic-string@^0.25.7:
   dependencies:
     sourcemap-codec "^1.4.4"
 
-marked@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/marked/-/marked-2.0.0.tgz#9662bbcb77ebbded0662a7be66ff929a8611cee5"
-  integrity sha512-NqRSh2+LlN2NInpqTQnS614Y/3NkVMFFU6sJlRFEpxJ/LHuK/qJECH7/fXZjk4VZstPW/Pevjil/VtSONsLc7Q==
+marked@2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-2.0.3.tgz#3551c4958c4da36897bda2a16812ef1399c8d6b0"
+  integrity sha512-5otztIIcJfPc2qGTN8cVtOJEjNJZ0jwa46INMagrYfk0EvqtRuEHLsEe0LrFS0/q+ZRKT0+kXK7P2T1AN5lWRA==
 
 merge-source-map@^1.1.0:
   version "1.1.0"
