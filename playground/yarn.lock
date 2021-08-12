@@ -2,16 +2,6 @@
 # yarn lockfile v1
 
 
-"@ant-design-vue/use@^0.0.1-0":
-  version "0.0.1-alpha.7"
-  resolved "https://registry.npmjs.org/@ant-design-vue/use/-/use-0.0.1-alpha.7.tgz#8b8d0bc808ca5fa4f012bbd9ba24387769c6e502"
-  integrity sha512-Ear31Zc9nqt8LVGcpN/4ZzPUrTfdjCvxhw7zVHJ6dx5dPqSwtHq0qMn+sxSM3MyokSD160tZbGYmPkk20fkp3g==
-  dependencies:
-    "@vue/runtime-dom" "^3.0.0"
-    async-validator "^3.4.0"
-    lodash-es "^4.17.15"
-    resize-observer-polyfill "^1.5.1"
-
 "@ant-design/colors@^5.0.0":
   version "5.0.0"
   resolved "https://registry.npmjs.org/@ant-design/colors/-/colors-5.0.0.tgz#46b73b4cc6935b35fc8b84555e8e42c8cfc190e6"
@@ -166,27 +156,12 @@
     "@vue/compiler-dom" "3.1.4"
     "@vue/shared" "3.1.4"
 
-"@vue/reactivity@3.0.2":
-  version "3.0.2"
-  resolved "https://registry.npmjs.org/@vue/reactivity/-/reactivity-3.0.2.tgz#42ed5af6025b494a5e69b05169fcddf04eebfe77"
-  integrity sha512-GdRloNcBar4yqWGXOcba1t//j/WizwfthfPUYkjcIPHjYnA/vTEQYp0C9+ZjPdinv1WRK1BSMeN/xj31kQES4A==
-  dependencies:
-    "@vue/shared" "3.0.2"
-
 "@vue/reactivity@3.1.4":
   version "3.1.4"
   resolved "https://registry.yarnpkg.com/@vue/reactivity/-/reactivity-3.1.4.tgz#d926ed46fb0d48582ccf8665b062d37b5d35ba99"
   integrity sha512-YDlgii2Cr9yAoKVZFzgY4j0mYlVT73986X3e5SPp6ifqckSEoFSUWXZK2Tb53TB/9qO29BEEbspnKD3m3wAwkA==
   dependencies:
     "@vue/shared" "3.1.4"
-
-"@vue/runtime-core@3.0.2":
-  version "3.0.2"
-  resolved "https://registry.npmjs.org/@vue/runtime-core/-/runtime-core-3.0.2.tgz#d7ed462af1cb0bf9836668e4e6fab3f2f4b1bc00"
-  integrity sha512-3m/jOs2xSipEFah9FgpEzvC9nERFonVGLN06+pf8iYPIy54Nlv7D2cyrk3Lhbjz4w3PbIrkxJnoTJYvJM7HDfA==
-  dependencies:
-    "@vue/reactivity" "3.0.2"
-    "@vue/shared" "3.0.2"
 
 "@vue/runtime-core@3.1.4":
   version "3.1.4"
@@ -205,38 +180,24 @@
     "@vue/shared" "3.1.4"
     csstype "^2.6.8"
 
-"@vue/runtime-dom@^3.0.0":
-  version "3.0.2"
-  resolved "https://registry.npmjs.org/@vue/runtime-dom/-/runtime-dom-3.0.2.tgz#9d166d03225558025d3d80f5039b646e0051b71c"
-  integrity sha512-vqC1KK1yWthTw1FKzajT0gYQaEqAq7bpeeXQC473nllGC5YHbJhNAJLSmrDun1tjXqGF0UNCWYljYm+++BJv6w==
-  dependencies:
-    "@vue/runtime-core" "3.0.2"
-    "@vue/shared" "3.0.2"
-    csstype "^2.6.8"
-
-"@vue/shared@3.0.2":
-  version "3.0.2"
-  resolved "https://registry.npmjs.org/@vue/shared/-/shared-3.0.2.tgz#419bd85a2ebdbd4f42963e98c5a1b103452176d9"
-  integrity sha512-Zx869zlNoujFOclKIoYmkh8ES2RcS/+Jn546yOiPyZ+3+Ejivnr+fb8l+DdXUEFjo+iVDNR3KyLzg03aBFfZ4Q==
-
 "@vue/shared@3.1.4":
   version "3.1.4"
   resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.1.4.tgz#c14c461ec42ea2c1556e86f60b0354341d91adc3"
   integrity sha512-6O45kZAmkLvzGLToBxEz4lR2W6kXohCtebV2UxjH9GXjd8X9AhEn68FN9eNanFtWNzvgw1hqd6HkPRVQalqf7Q==
 
-ant-design-vue@2.1.3:
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/ant-design-vue/-/ant-design-vue-2.1.3.tgz#d535f4f88f7405c1c2dfdf27d0d1b39438b28a21"
-  integrity sha512-pJy8fiMXXkqrFaarTWdi3gkJWfkmR9xomdTj2/YCoU9lIXT7O++JHhamDQkUyHQXCj1OHaLwWp2POeNWS1gaUQ==
+ant-design-vue@2.2.6:
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/ant-design-vue/-/ant-design-vue-2.2.6.tgz#2acf45ea8bb2bb8a0e48a83fa9c6a827fef5236f"
+  integrity sha512-WgZow4FtrsAZON01wv+ObuXWL1Elaq/fhPRdmOEfFx5f8azTDBYL75A8dVl59TNBKW8FdSGBTl9PZYzW5eO6Gw==
   dependencies:
-    "@ant-design-vue/use" "^0.0.1-0"
     "@ant-design/icons-vue" "^6.0.0"
     "@babel/runtime" "^7.10.5"
     "@simonwep/pickr" "~1.8.0"
     array-tree-filter "^2.1.0"
     async-validator "^3.3.0"
-    dom-align "^1.10.4"
+    dom-align "^1.12.1"
     dom-scroll-into-view "^2.0.0"
+    lodash "^4.17.21"
     lodash-es "^4.17.15"
     moment "^2.27.0"
     omit.js "^2.0.0"
@@ -259,7 +220,7 @@ array-tree-filter@^2.1.0:
   resolved "https://registry.npmjs.org/array-tree-filter/-/array-tree-filter-2.1.0.tgz#873ac00fec83749f255ac8dd083814b4f6329190"
   integrity sha512-4ROwICNlNw/Hqa9v+rk5h22KjmzB1JGTMVKP2AKJBOCgb0yL0ASf0+YvCcLNNwquOHNX48jkeZIJ3a+oOQqKcw==
 
-async-validator@^3.3.0, async-validator@^3.4.0:
+async-validator@^3.3.0:
   version "3.5.1"
   resolved "https://registry.npmjs.org/async-validator/-/async-validator-3.5.1.tgz#cd62b9688b2465f48420e27adb47760ab1b5559f"
   integrity sha512-DDmKA7sdSAJtTVeNZHrnr2yojfFaoeW8MfQN8CeuXg8DDQHTqKk9Fdv38dSvnesHoO8MUwMI2HphOeSyIF+wmQ==
@@ -354,10 +315,10 @@ csstype@^2.6.8:
   resolved "https://registry.npmjs.org/csstype/-/csstype-2.6.14.tgz#004822a4050345b55ad4dcc00be1d9cf2f4296de"
   integrity sha512-2mSc+VEpGPblzAxyeR+vZhJKgYg0Og0nnRi7pmRXFYYxSfnOnW8A5wwQb4n4cE2nIOzqKOAzLCaEX6aBmNEv8A==
 
-dom-align@^1.10.4:
-  version "1.12.0"
-  resolved "https://registry.npmjs.org/dom-align/-/dom-align-1.12.0.tgz#56fb7156df0b91099830364d2d48f88963f5a29c"
-  integrity sha512-YkoezQuhp3SLFGdOlr5xkqZ640iXrnHAwVYcDg8ZKRUtO7mSzSC2BA5V0VuyAwPSJA4CLIc6EDDJh4bEsD2+zA==
+dom-align@^1.12.1:
+  version "1.12.2"
+  resolved "https://registry.yarnpkg.com/dom-align/-/dom-align-1.12.2.tgz#0f8164ebd0c9c21b0c790310493cd855892acd4b"
+  integrity sha512-pHuazgqrsTFrGU2WLDdXxCFabkdQDx72ddkraZNih1KsMcN5qsRSTR9O4VJRlwTPCPb5COYg3LOfiMHHcPInHg==
 
 dom-scroll-into-view@^2.0.0:
   version "2.0.1"
@@ -533,6 +494,11 @@ lodash@^4.17.15, lodash@^4.17.19:
   version "4.17.20"
   resolved "https://registry.npmjs.org/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
   integrity sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
+
+lodash@^4.17.21:
+  version "4.17.21"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
+  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
 
 loose-envify@^1.0.0:
   version "1.4.0"
