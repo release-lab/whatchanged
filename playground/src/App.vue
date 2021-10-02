@@ -114,7 +114,7 @@ function onSubmit() {
   url.searchParams.append("repo", formReactive.repo || "");
   url.searchParams.append("branch", formReactive.branch || "");
   url.searchParams.append("version", formReactive.version || "");
-  url.searchParams.append("template", formReactive.template || "");
+  url.searchParams.append("template", tpl || "");
 
   fetch(url, {
     mode: "no-cors",
