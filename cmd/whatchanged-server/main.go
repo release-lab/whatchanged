@@ -49,6 +49,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 	username := query.Get("username")
 	repo := query.Get("repo")
+	branch := query.Get("branch")
 	version := query.Get("version")
 	template := query.Get("template")
 	preset := query.Get("preset")
@@ -57,6 +58,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 	if err = whatchanged.Generate(url, output, &option.Options{
 		Version:  regexp.MustCompile(`\s+`).Split(version, -1),
+		Branch:   branch,
 		Template: template,
 		Preset:   option.Preset(preset),
 	}); err != nil {

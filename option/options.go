@@ -15,6 +15,7 @@ const (
 
 type Options struct {
 	Version      []string
+	Branch       string
 	Format       Format
 	SkipFormat   bool
 	Preset       Preset // Priority: 1 The higher the level, the more priority

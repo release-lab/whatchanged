@@ -16,6 +16,7 @@ import (
 	"github.com/axetroy/whatchanged/internal/client"
 	"github.com/axetroy/whatchanged/option"
 	"github.com/go-git/go-git/v5"
+	"github.com/go-git/go-git/v5/plumbing"
 	"github.com/go-git/go-git/v5/storage/memory"
 	"github.com/pkg/errors"
 )
@@ -46,6 +47,10 @@ func Generate(project string, w io.Writer, options *option.Options) error {
 		}
 	}
 
+	if options.Branch == "" {
+		options.Branch = "master"
+	}
+
 	if options.TemplateFile != "" {
 		cwd, err := os.Getwd()
 
@@ -62,10 +67,11 @@ func Generate(project string, w io.Writer, options *option.Options) error {
 
 	if gitHTTPURLReg.MatchString(project) || gitSSHURLReg.MatchString(project) {
 		repo, err := git.CloneContext(context.Background(), memory.NewStorage(), nil, &git.CloneOptions{
-			URL:          project,
-			Progress:     os.Stderr,
-			SingleBranch: true,
-			Tags:         git.AllTags,
+			URL:           project,
+			Progress:      os.Stderr,
+			SingleBranch:  true,
+			ReferenceName: plumbing.NewBranchReferenceName(options.Branch),
+			Tags:          git.AllTags,
 		})
 
 		if err != nil {
