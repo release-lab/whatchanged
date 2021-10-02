@@ -1,9 +1,6 @@
 name: playground
 
-on:
-  push:
-    paths:
-      - "playground/**/*"
+on: [push, pull_request]
 
 jobs:
   ci:
