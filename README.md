@@ -152,7 +152,7 @@ $ whatchanged --help
 
 ### Build from source code
 
-Make sure you have `Golang@v1.16.x` and [goreleaser](https://github.com/goreleaser/goreleaser) installed.
+Make sure you have `Golang@v1.17.x` and [goreleaser](https://github.com/goreleaser/goreleaser) installed.
 
 ```shell
 $ git clone https://github.com/axetroy/whatchanged.git $GOPATH/src/github.com/axetroy/whatchanged

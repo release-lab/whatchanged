@@ -152,7 +152,7 @@ $ whatchanged --help
 
 ### 从源码中构建
 
-确保你已安装 `Golang@v1.16.x` 和 [goreleaser](https://github.com/goreleaser/goreleaser)
+确保你已安装 `Golang@v1.17.x` 和 [goreleaser](https://github.com/goreleaser/goreleaser)
 
 ```shell
 $ git clone https://github.com/axetroy/whatchanged.git $GOPATH/src/github.com/axetroy/whatchanged
