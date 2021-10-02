@@ -44,6 +44,9 @@ OPTIONS:
                 --project=/path/to/project/which/contains/.git/folder
                 --project=https://github.com/whatchanged-community/whatchanged.git
                 Defaults to "--project=$PWD".
+
+  --branch      Specify clone branch. only works for remote git project.
+
   --output      Write output to file. default write to stdout.
 
   --fmt         Specify the changelog format. Available options:
@@ -115,6 +118,7 @@ func run() error {
 		templateFile string
 		format       string
 		outputFile   string
+		branch       string
 		skipFormat   bool
 	)
 
@@ -126,6 +130,7 @@ func run() error {
 
 	flag.StringVar(&project, "project", cwd, "Project filepath or remote URL")
 	flag.StringVar(&outputFile, "output", "", "Specify the file to be written")
+	flag.StringVar(&branch, "branch", "master", "Specify branch for remote git project")
 	flag.StringVar(&format, "fmt", string(option.FormatMarkdown), "The changelog format")
 	flag.StringVar(&preset, "preset", string(option.PresetDefault), "Cli built-in markdown template")
 	flag.StringVar(&templateFile, "tpl", "", "Specify the template when generating")
@@ -165,6 +170,7 @@ func run() error {
 
 	if err := whatchanged.Generate(project, output, &option.Options{
 		Version:      ranges,
+		Branch:       branch,
 		Preset:       option.Preset(preset),
 		Format:       option.Format(format),
 		SkipFormat:   skipFormat,
