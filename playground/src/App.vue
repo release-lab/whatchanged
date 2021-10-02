@@ -89,6 +89,7 @@ function syncQueryField(field, val) {
 }
 
 watchAndUpdateQuery("username");
+watchAndUpdateQuery("branch");
 watchAndUpdateQuery("repo");
 watchAndUpdateQuery("version");
 
