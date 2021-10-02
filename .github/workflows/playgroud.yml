@@ -3,7 +3,7 @@ name: playground
 on:
   push:
     paths:
-      - "playground"
+      - "playground/**/*"
 
 jobs:
   ci:
