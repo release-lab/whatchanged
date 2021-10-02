@@ -7,7 +7,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref, toRefs, watch, defineEmit, defineProps } from "vue";
+import { onMounted, ref, toRefs } from "vue";
 import CodeMirror from "https://cdn.jsdelivr.net/npm/codemirror/src/codemirror.js";
 
 const props = defineProps({

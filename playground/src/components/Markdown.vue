@@ -7,7 +7,7 @@
 </template>
 
 <script setup>
-import { computed, defineProps, toRefs } from "vue";
+import { computed, toRefs } from "vue";
 import marked from "marked";
 
 const props = defineProps({

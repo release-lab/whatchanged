@@ -1,31 +1,26 @@
 <template>
   <div style="position: relative">
-    <img
-      :src="githubLogoUrl"
-      style="position: fixed; right: 0; top: 0; height: 60px"
-      @click="open('https://github.com/axetroy/whatchanged')"
-    />
+    <a src="https://github.com/axetroy/whatchanged">
+      <img :src="githubLogoUrl" style="position: fixed; right: 0; top: 0; height: 60px" />
+    </a>
+
     <div class="toolbar">
-      <!-- <img :src="require('@/assets/logo.png')" /> -->
-      <a-form
-        layout="inline"
-        :model="form"
-        @submit="onSubmit"
-        @submit.native.prevent
-      >
+      <img style="max-width: 100%; max-height: 100%" src="./assets/logo.png" />
+      <a-form layout="inline" :model="form" @submit.native.prevent="onSubmit">
         <a-form-item label="Username">
           <a-input v-model:value="form.username.value" />
         </a-form-item>
         <a-form-item label="Repo">
           <a-input v-model:value="form.repo.value" />
         </a-form-item>
+        <a-form-item label="Branch">
+          <a-input v-model:value="form.branch.value" />
+        </a-form-item>
         <a-form-item label="Version">
           <a-input v-model:value="form.version.value" />
         </a-form-item>
         <a-form-item>
-          <a-button type="primary" html-type="submit" :loading="loading">
-            Generate
-          </a-button>
+          <a-button type="primary" html-type="submit" :loading="loading"> Generate </a-button>
           <a-button type="default" @click="copyURL" style="margin-left: 20px">
             <!-- <MessageOutlined :style="{ fontSize: '16px', color: '#08c' }" /> -->
             Share
@@ -68,6 +63,7 @@ let template = ref(TEMPLATE_DEFAULT);
 const formReactive = reactive({
   username: "axetroy",
   repo: "whatchanged",
+  branch: "master",
   version: "HEAD~",
 });
 
@@ -112,11 +108,9 @@ function onSubmit() {
   });
 
   fetch(
-    `${import.meta.env.VITE_API_HOST}/?username=${
-      formReactive.username || ""
-    }&repo=${formReactive.repo || ""}&version=${
-      formReactive.version || ""
-    }&template=${tpl || ""}`
+    `${import.meta.env.VITE_API_HOST}/?username=${formReactive.username || ""}&repo=${formReactive.repo || ""}&branch=${
+      formReactive.branch
+    }&version=${formReactive.version || ""}&template=${tpl || ""}`
   )
     .then((res) => res.text())
     .then((markdown) => {
@@ -164,6 +158,11 @@ onMounted(() => {
 
   if (url.searchParams.has("repo")) {
     formReactive.repo = url.searchParams.get("repo");
+    params++;
+  }
+
+  if (url.searchParams.has("branch")) {
+    formReactive.repo = url.searchParams.get("branch");
     params++;
   }
 

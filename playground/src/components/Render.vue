@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import { defineProps, toRefs } from "vue";
+import { toRefs } from "vue";
 import Markdown from "./Markdown.vue";
 import CodeMirror from "./CodeMirror.vue";
 
