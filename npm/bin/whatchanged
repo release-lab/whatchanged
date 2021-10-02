@@ -12,7 +12,7 @@ const argv = process.argv;
 
 if (!fs.existsSync(bin)) {
   console.error(
-    `whatchanged did not downloaded. please run the following command 'node node_modules/@axetroy/whatchanged/scripts/postinstall.js'`
+    `whatchanged did not downloaded. please run the following command 'node node_modules/@whatchanged-community/whatchanged/scripts/postinstall.js'`
   );
   os.exit(1);
 }

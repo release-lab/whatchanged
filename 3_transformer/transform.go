@@ -1,10 +1,10 @@
 package transformer
 
 import (
-	extractor "github.com/axetroy/whatchanged/2_extractor"
-	"github.com/axetroy/whatchanged/internal/client"
-	"github.com/axetroy/whatchanged/internal/commit/parser"
 	"github.com/go-git/go-git/v5/plumbing/object"
+	extractor "github.com/whatchanged-community/whatchanged/2_extractor"
+	"github.com/whatchanged-community/whatchanged/internal/client"
+	"github.com/whatchanged-community/whatchanged/internal/commit/parser"
 )
 
 type Commit struct {

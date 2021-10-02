@@ -7,18 +7,18 @@ import (
 	"path/filepath"
 	"regexp"
 
-	parser "github.com/axetroy/whatchanged/1_parser"
-	extractor "github.com/axetroy/whatchanged/2_extractor"
-	transformer "github.com/axetroy/whatchanged/3_transformer"
-	generator "github.com/axetroy/whatchanged/4_generator"
-	formatter "github.com/axetroy/whatchanged/5_formatter"
-	writer "github.com/axetroy/whatchanged/6_writer"
-	"github.com/axetroy/whatchanged/internal/client"
-	"github.com/axetroy/whatchanged/option"
 	"github.com/go-git/go-git/v5"
 	"github.com/go-git/go-git/v5/plumbing"
 	"github.com/go-git/go-git/v5/storage/memory"
 	"github.com/pkg/errors"
+	parser "github.com/whatchanged-community/whatchanged/1_parser"
+	extractor "github.com/whatchanged-community/whatchanged/2_extractor"
+	transformer "github.com/whatchanged-community/whatchanged/3_transformer"
+	generator "github.com/whatchanged-community/whatchanged/4_generator"
+	formatter "github.com/whatchanged-community/whatchanged/5_formatter"
+	writer "github.com/whatchanged-community/whatchanged/6_writer"
+	"github.com/whatchanged-community/whatchanged/internal/client"
+	"github.com/whatchanged-community/whatchanged/option"
 )
 
 var (

@@ -6,9 +6,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/axetroy/whatchanged/internal/client"
 	"github.com/go-git/go-git/v5/plumbing/object"
 	"github.com/pkg/errors"
+	"github.com/whatchanged-community/whatchanged/internal/client"
 )
 
 type Range struct {

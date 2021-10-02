@@ -1,11 +1,11 @@
 [English](README.md) | 中文简体
 
-[![Build Status](https://github.com/axetroy/whatchanged/workflows/ci/badge.svg)](https://github.com/axetroy/whatchanged/actions)
-[![Build Status](https://github.com/axetroy/whatchanged/workflows/playground/badge.svg)](https://github.com/axetroy/whatchanged/actions)
-[![Go Report Card](https://goreportcard.com/badge/github.com/axetroy/whatchanged)](https://goreportcard.com/report/github.com/axetroy/whatchanged)
-![Latest Version](https://img.shields.io/github/v/release/axetroy/whatchanged.svg)
+[![Build Status](https://github.com/whatchanged-community/whatchanged/workflows/ci/badge.svg)](https://github.com/whatchanged-community/whatchanged/actions)
+[![Build Status](https://github.com/whatchanged-community/whatchanged/workflows/playground/badge.svg)](https://github.com/whatchanged-community/whatchanged/actions)
+[![Go Report Card](https://goreportcard.com/badge/github.com/whatchanged-community/whatchanged)](https://goreportcard.com/report/github.com/whatchanged-community/whatchanged)
+![Latest Version](https://img.shields.io/github/v/release/whatchanged-community/whatchanged.svg)
 [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
-![Repo Size](https://img.shields.io/github/repo-size/axetroy/whatchanged.svg)
+![Repo Size](https://img.shields.io/github/repo-size/whatchanged-community/whatchanged.svg)
 
 ## whatchanged
 
@@ -54,7 +54,7 @@ OPTIONS:
   --project     Specify the project to be generated. It can be a relative path.
                 or an absolute path or even a remote Git URL. eg.
                 --project=/path/to/project/which/contains/.git/folder
-                --project=https://github.com/axetroy/whatchanged.git
+                --project=https://github.com/whatchanged-community/whatchanged.git
                 Defaults to "--project=$PWD".
   --output      Write output to file. default write to stdout.
 
@@ -112,10 +112,10 @@ EXAMPLES:
   $ whatchanged --project=/path/to/project v1.0.0
 
   # Generate changelog for the remote project
-  $ whatchanged --project=https://github.com/axetroy/whatchanged.git v0.1.0
+  $ whatchanged --project=https://github.com/whatchanged-community/whatchanged.git v0.1.0
 
 SOURCE CODE:
-  https://github.com/axetroy/whatchanged
+  https://github.com/whatchanged-community/whatchanged
 ```
 
 ### 安装
@@ -124,9 +124,9 @@ SOURCE CODE:
 
 ```bash
 # install in global
-npm install -g @axetroy/whatchanged
+npm install -g @whatchanged-community/whatchanged
 # run the command once
-npx @axetroy/whatchanged
+npx @whatchanged-community/whatchanged
 ```
 
 #### 通过 shell 安装
@@ -135,16 +135,16 @@ npx @axetroy/whatchanged
 
 ```shell
 # 安装最新版本
-curl -fsSL https://raw.githubusercontent.com/axetroy/whatchanged/master/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/whatchanged-community/whatchanged/master/install.sh | bash
 # 或者安装指定版本
-curl -fsSL https://raw.githubusercontent.com/axetroy/whatchanged/master/install.sh | bash -s v0.3.6
+curl -fsSL https://raw.githubusercontent.com/whatchanged-community/whatchanged/master/install.sh | bash -s v0.3.6
 # 或者通过 gobinaries.com 安装
-curl -sf https://gobinaries.com/axetroy/whatchanged@v0.3.6 | sh
+curl -sf https://gobinaries.com/whatchanged-community/whatchanged@v0.3.6 | sh
 ```
 
 #### 通过 Github release 页面下载安装
 
-从[release page](https://github.com/axetroy/whatchanged/releases)页面下载对应平台的可执行文件，并且把它加入到 `$PATH` 环境变量中，并尝试以下命令
+从[release page](https://github.com/whatchanged-community/whatchanged/releases)页面下载对应平台的可执行文件，并且把它加入到 `$PATH` 环境变量中，并尝试以下命令
 
 ```bash
 $ whatchanged --help
@@ -155,8 +155,8 @@ $ whatchanged --help
 确保你已安装 `Golang@v1.17.x` 和 [goreleaser](https://github.com/goreleaser/goreleaser)
 
 ```shell
-$ git clone https://github.com/axetroy/whatchanged.git $GOPATH/src/github.com/axetroy/whatchanged
-$ cd $GOPATH/src/github.com/axetroy/whatchanged
+$ git clone https://github.com/whatchanged-community/whatchanged.git $GOPATH/src/github.com/whatchanged-community/whatchanged
+$ cd $GOPATH/src/github.com/whatchanged-community/whatchanged
 $ make build
 ```
 

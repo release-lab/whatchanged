@@ -31,14 +31,14 @@ main() {
 
     if [[ $# -eq 0 ]]; then
         asset_path=$(
-            command curl -sSf https://github.com/axetroy/whatchanged/releases |
-                command grep -o "/axetroy/whatchanged/releases/download/.*/whatchanged_${os}_${arch}\\.tar.gz" |
+            command curl -sSf https://github.com/whatchanged-community/whatchanged/releases |
+                command grep -o "/whatchanged-community/whatchanged/releases/download/.*/whatchanged_${os}_${arch}\\.tar.gz" |
                 command head -n 1
         )
         if [[ ! "$asset_path" ]]; then exit 1; fi
         asset_uri="https://github.com${asset_path}"
     else
-        asset_uri="https://github.com/axetroy/whatchanged/releases/download/${1}/whatchanged_${os}_${arch}\\.tar.gz"
+        asset_uri="https://github.com/whatchanged-community/whatchanged/releases/download/${1}/whatchanged_${os}_${arch}\\.tar.gz"
     fi
 
     mkdir -p ${downloadFolder}

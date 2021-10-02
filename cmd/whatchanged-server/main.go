@@ -8,9 +8,9 @@ import (
 	"os"
 	"regexp"
 
-	"github.com/axetroy/whatchanged"
-	"github.com/axetroy/whatchanged/option"
 	"github.com/pkg/errors"
+	"github.com/whatchanged-community/whatchanged"
+	"github.com/whatchanged-community/whatchanged/option"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {

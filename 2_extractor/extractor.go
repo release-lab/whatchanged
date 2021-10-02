@@ -3,12 +3,12 @@ package extractor
 import (
 	"io"
 
-	parser "github.com/axetroy/whatchanged/1_parser"
-	"github.com/axetroy/whatchanged/internal/client"
 	"github.com/go-git/go-git/v5"
 	"github.com/go-git/go-git/v5/plumbing"
 	"github.com/go-git/go-git/v5/plumbing/object"
 	"github.com/pkg/errors"
+	parser "github.com/whatchanged-community/whatchanged/1_parser"
+	"github.com/whatchanged-community/whatchanged/internal/client"
 )
 
 type ExtractSplice struct {

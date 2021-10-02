@@ -10,10 +10,10 @@ import (
 	"net/url"
 	"strings"
 
-	transformer "github.com/axetroy/whatchanged/3_transformer"
-	"github.com/axetroy/whatchanged/internal/client"
-	"github.com/axetroy/whatchanged/option"
 	"github.com/pkg/errors"
+	transformer "github.com/whatchanged-community/whatchanged/3_transformer"
+	"github.com/whatchanged-community/whatchanged/internal/client"
+	"github.com/whatchanged-community/whatchanged/option"
 	giturls "github.com/whilp/git-urls"
 )
 

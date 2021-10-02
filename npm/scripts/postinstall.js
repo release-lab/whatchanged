@@ -36,7 +36,7 @@ function getPlatform() {
 }
 
 function getDownloadURL(version) {
-  const url = `https://github.com/axetroy/whatchanged/releases/download/${version}/whatchanged_${getPlatform()}_${getArch()}.tar.gz`;
+  const url = `https://github.com/whatchanged-community/whatchanged/releases/download/${version}/whatchanged_${getPlatform()}_${getArch()}.tar.gz`;
   return url;
 }
 

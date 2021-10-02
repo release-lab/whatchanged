@@ -1,6 +1,6 @@
 <template>
   <div style="position: relative">
-    <a src="https://github.com/axetroy/whatchanged">
+    <a src="https://github.com/whatchanged-community/whatchanged">
       <img :src="githubLogoUrl" style="position: fixed; right: 0; top: 0; height: 60px" />
     </a>
 

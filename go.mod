@@ -1,4 +1,4 @@
-module github.com/axetroy/whatchanged
+module github.com/whatchanged-community/whatchanged
 
 go 1.17
 

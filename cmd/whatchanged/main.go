@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/axetroy/whatchanged"
-	"github.com/axetroy/whatchanged/option"
 	"github.com/pkg/errors"
+	"github.com/whatchanged-community/whatchanged"
+	"github.com/whatchanged-community/whatchanged/option"
 )
 
 var (
@@ -42,7 +42,7 @@ OPTIONS:
   --project     Specify the project to be generated. It can be a relative path.
                 or an absolute path or even a remote Git URL. eg.
                 --project=/path/to/project/which/contains/.git/folder
-                --project=https://github.com/axetroy/whatchanged.git
+                --project=https://github.com/whatchanged-community/whatchanged.git
                 Defaults to "--project=$PWD".
   --output      Write output to file. default write to stdout.
 
@@ -100,10 +100,10 @@ EXAMPLES:
   $ whatchanged --project=/path/to/project v1.0.0
 
   # Generate changelog for the remote project
-  $ whatchanged --project=https://github.com/axetroy/whatchanged.git v0.1.0
+  $ whatchanged --project=https://github.com/whatchanged-community/whatchanged.git v0.1.0
 
 SOURCE CODE:
-  https://github.com/axetroy/whatchanged`)
+  https://github.com/whatchanged-community/whatchanged`)
 }
 
 func run() error {

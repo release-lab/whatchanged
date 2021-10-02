@@ -5,8 +5,8 @@ import (
 	"io/ioutil"
 	"testing"
 
-	"github.com/axetroy/whatchanged/option"
 	"github.com/stretchr/testify/assert"
+	"github.com/whatchanged-community/whatchanged/option"
 )
 
 func TestGenerate(t *testing.T) {
