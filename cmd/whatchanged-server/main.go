@@ -20,7 +20,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	)
 	// cors
 	w.Header().Set("Access-Control-Allow-Origin", r.Header.Get("Origin"))
-	w.Header().Set("Access-Control-Allow-Methods", "GET")
+	w.Header().Set("Access-Control-Allow-Methods", http.MethodGet)
 
 	if r.Method == http.MethodOptions {
 		w.WriteHeader(200)

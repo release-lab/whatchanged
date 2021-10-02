@@ -108,11 +108,17 @@ function onSubmit() {
     description: "This may take a few minutes...",
   });
 
-  fetch(
-    `${import.meta.env.VITE_API_HOST}/?username=${formReactive.username || ""}&repo=${formReactive.repo || ""}&branch=${
-      formReactive.branch
-    }&version=${formReactive.version || ""}&template=${tpl || ""}`
-  )
+  const url = new URL(import.meta.env.VITE_API_HOST);
+
+  url.searchParams.append("username", formReactive.username || "");
+  url.searchParams.append("repo", formReactive.repo || "");
+  url.searchParams.append("branch", formReactive.branch || "");
+  url.searchParams.append("version", formReactive.version || "");
+  url.searchParams.append("template", formReactive.template || "");
+
+  fetch(url, {
+    mode: "no-cors",
+  })
     .then((res) => res.text())
     .then((markdown) => {
       notification.close(key);
