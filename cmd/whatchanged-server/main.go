@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"regexp"
+	"strings"
 
 	"github.com/pkg/errors"
 	"github.com/whatchanged-community/whatchanged"
@@ -19,8 +20,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		output = bytes.NewBuffer([]byte{})
 	)
 	// cors
-	w.Header().Set("Access-Control-Allow-Origin", r.Header.Get("Origin"))
-	w.Header().Set("Access-Control-Allow-Methods", http.MethodGet)
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", strings.Join([]string{http.MethodGet, http.MethodPost, http.MethodPut, http.MethodDelete}, " ,"))
 
 	if r.Method == http.MethodOptions {
 		w.WriteHeader(200)

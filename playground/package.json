@@ -8,7 +8,6 @@
   },
   "dependencies": {
     "ant-design-vue": "2.2.8",
-    "indexof": "0.0.1",
     "marked": "3.0.4",
     "vue": "3.2.19"
   },

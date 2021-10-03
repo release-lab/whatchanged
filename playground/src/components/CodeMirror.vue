@@ -18,7 +18,7 @@ const props = defineProps({
 
 const { content, readonly, loading } = toRefs(props);
 
-const emit = defineEmit(["update:content"]);
+const emit = defineEmits(["update:content"]);
 
 let editor;
 
