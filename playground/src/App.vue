@@ -5,7 +5,7 @@
     </a>
 
     <div class="toolbar">
-      <img style="max-width: 100%; max-height: 100%" src="./assets/logo.png" />
+      <!-- <img style="max-width: 100%; max-height: 100%" src="./assets/logo.png" /> -->
       <a-form layout="inline" :model="form" @submit.native.prevent="onSubmit">
         <a-form-item label="Username">
           <a-input v-model:value="form.username.value" />
