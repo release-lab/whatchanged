@@ -126,9 +126,9 @@ SOURCE CODE:
 # install latest version
 curl -fsSL https://raw.githubusercontent.com/whatchanged-community/whatchanged/master/install.sh | bash
 # or install specified version
-curl -fsSL https://raw.githubusercontent.com/whatchanged-community/whatchanged/master/install.sh | bash -s v0.3.6
+curl -fsSL https://raw.githubusercontent.com/whatchanged-community/whatchanged/master/install.sh | bash -s v0.4.0
 # or install from gobinaries.com
-curl -sf https://gobinaries.com/whatchanged-community/whatchanged@v0.3.6 | sh
+curl -sf https://gobinaries.com/whatchanged-community/whatchanged@v0.4.0 | sh
 ```
 
 2. PowerShell (Windows):
@@ -137,7 +137,7 @@ curl -sf https://gobinaries.com/whatchanged-community/whatchanged@v0.3.6 | sh
 # install latest version
 iwr https://github.com/whatchanged-community/whatchanged/raw/master/install.ps1 -useb | iex
 # or install specified version
-$v="v0.3.6"; iwr https://github.com/whatchanged-community/whatchanged/raw/master/install.ps1 -useb | iex
+$v="v0.4.0"; iwr https://github.com/whatchanged-community/whatchanged/raw/master/install.ps1 -useb | iex
 ```
 
 3. [Github release page](https://github.com/whatchanged-community/whatchanged/releases) (All platforms)
@@ -151,7 +151,7 @@ $ whatchanged --help
 4. Build and install from source using [Golang](https://golang.org) (All platforms)
 
 ```bash
-go install github.com/whatchanged-community/whatchanged@0.3.6
+go install github.com/whatchanged-community/whatchanged@0.4.0
 ```
 
 ### FAQ

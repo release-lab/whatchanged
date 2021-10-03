@@ -126,9 +126,9 @@ SOURCE CODE:
 # 安装最新版本
 curl -fsSL https://raw.githubusercontent.com/whatchanged-community/whatchanged/master/install.sh | bash
 # 或者安装指定版本
-curl -fsSL https://raw.githubusercontent.com/whatchanged-community/whatchanged/master/install.sh | bash -s v0.3.6
+curl -fsSL https://raw.githubusercontent.com/whatchanged-community/whatchanged/master/install.sh | bash -s v0.4.0
 # 或者通过 gobinaries.com 安装
-curl -sf https://gobinaries.com/whatchanged-community/whatchanged@v0.3.6 | sh
+curl -sf https://gobinaries.com/whatchanged-community/whatchanged@v0.4.0 | sh
 ```
 
 2. PowerShell (Windows):
@@ -137,7 +137,7 @@ curl -sf https://gobinaries.com/whatchanged-community/whatchanged@v0.3.6 | sh
 # 安装最新版本
 iwr https://github.com/whatchanged-community/whatchanged/raw/master/install.ps1 -useb | iex
 # 或者安装指定版本
-$v="v0.3.6"; iwr https://github.com/whatchanged-community/whatchanged/raw/master/install.ps1 -useb | iex
+$v="v0.4.0"; iwr https://github.com/whatchanged-community/whatchanged/raw/master/install.ps1 -useb | iex
 ```
 
 3. [Github release page](https://github.com/whatchanged-community/whatchanged/releases) (全平台支持))
@@ -151,7 +151,7 @@ $ whatchanged --help
 1. 使用 [Golang](https://golang.org) 从源码中构建并安装 (全平台支持)
 
 ```bash
-go install github.com/whatchanged-community/whatchanged@0.3.6
+go install github.com/whatchanged-community/whatchanged@0.4.0
 ```
 
 ### 常见问题
