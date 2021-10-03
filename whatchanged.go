@@ -106,6 +106,7 @@ func Generate(ctx context.Context, project string, w io.Writer, options *option.
 	if err != nil {
 		return errors.WithStack(err)
 	}
+
 	output, err := generator.Generate(g, ctxs, options.Format, options.Preset, options.TemplateFile, options.Template)
 
 	if err != nil {

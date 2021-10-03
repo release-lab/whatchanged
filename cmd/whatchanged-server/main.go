@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"net/url"
 	"os"
 	"regexp"
 	"strings"
@@ -54,6 +55,14 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	version := query.Get("version")
 	template := query.Get("template")
 	preset := query.Get("preset")
+
+	if templateDecoded, err := url.QueryUnescape(template); err == nil {
+		template = templateDecoded
+	}
+
+	if branchDecoded, err := url.QueryUnescape(branch); err == nil {
+		branch = branchDecoded
+	}
 
 	url := fmt.Sprintf("https://github.com/%s/%s", username, repo)
 

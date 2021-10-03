@@ -125,7 +125,7 @@ func Generate(g *client.GitClient, contexts []*transformer.TemplateContext, form
 			if t, err := t.Parse(templateStr); err != nil {
 				return nil, errors.WithStack(err)
 			} else {
-				b := bytes.NewBuffer([]byte{})
+				b := bytes.NewBuffer(nil)
 				if err := t.Execute(b, ctx); err != nil {
 					return nil, errors.WithStack(err)
 				}

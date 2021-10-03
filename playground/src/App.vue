@@ -116,9 +116,7 @@ function onSubmit() {
   url.searchParams.append("version", formReactive.version || "");
   url.searchParams.append("template", tpl || "");
 
-  fetch(url, {
-    mode: "no-cors",
-  })
+  fetch(url)
     .then((res) => res.text())
     .then((markdown) => {
       notification.close(key);
