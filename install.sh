@@ -35,20 +35,20 @@ dest_file="${downloadFolder}/whatchanged_${os}_${arch}.tar.gz"
 if [ $# -eq 0 ]; then
     asset_path=$(
         command curl -sSf https://github.com/whatchanged-community/whatchanged/releases |
-            command grep -o "/whatchanged-community/whatchanged/releases/download/.*/whatchanged_${os}_${arch}\\.tar.gz" |
+            command grep -o "/whatchanged-community/whatchanged/releases/download/.*/whatchanged_${os}_${arch}.tar.gz" |
             command head -n 1
     )
     if [[ ! "$asset_path" ]]; then exit 1; fi
     asset_uri="https://github.com${asset_path}"
 else
-    asset_uri="https://github.com/whatchanged-community/whatchanged/releases/download/${1}/whatchanged_${os}_${arch}\\.tar.gz"
+    asset_uri="https://github.com/whatchanged-community/whatchanged/releases/download/${1}/whatchanged_${os}_${arch}.tar.gz"
 fi
 
 mkdir -p ${downloadFolder}
 
 echo "[1/3] Download ${asset_uri} to ${downloadFolder}"
 rm -f ${dest_file}
-curl --location --output "${dest_file}" "${asset_uri}"
+curl --fail --location --output "${dest_file}" "${asset_uri}"
 
 binDir=/usr/local/bin
 
