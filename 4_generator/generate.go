@@ -104,7 +104,6 @@ func Generate(g *client.GitClient, contexts []*transformer.TemplateContext, form
 			t := template.New(ctx.Version)
 
 			t.Funcs(template.FuncMap{
-				"stringsJoin": strings.Join,
 				"unescape": func(s string) template.HTML {
 					return template.HTML(s)
 				},

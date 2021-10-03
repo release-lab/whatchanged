@@ -19,7 +19,7 @@ type BreakingChange struct {
 
 type Footer struct {
 	BreakingChange *BreakingChange
-	Closes         []string
+	Closes         string
 }
 
 /*
@@ -126,7 +126,7 @@ func Parser(message string) *Message {
 			for i, issue := range issues {
 				issues[i] = strings.TrimRight(strings.TrimSpace(issue), ".")
 			}
-			m.Footer.Closes = issues
+			m.Footer.Closes = strings.Join(issues, ", ")
 			continue
 		} else if len(breakingChangeFooterMatchers) != 0 {
 			isBreakingChangeBlock = true

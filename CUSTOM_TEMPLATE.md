@@ -32,7 +32,6 @@ There are 3 parts in Context
 
    1. **unescape(text string)**: unescape the string
    2. **hashURL(commitHashString string)**: Add URL to commit
-   3. **stringsJoin(arr []string)**: Join string
 
 source code:
 
@@ -79,7 +78,7 @@ type BreakingChange struct {
 
 type Footer struct {
 	BreakingChange *BreakingChange
-	Closes         []string
+	Closes         string
 }
 
 
