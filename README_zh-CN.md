@@ -151,7 +151,7 @@ $ whatchanged --help
 1. 使用 [Golang](https://golang.org) 从源码中构建并安装 (全平台支持)
 
 ```bash
-go install github.com/whatchanged-community/whatchanged@v0.4.0/cmd/whatchanged
+go install github.com/whatchanged-community/whatchanged/cmd/whatchanged@v0.4.0
 ```
 
 ### 常见问题

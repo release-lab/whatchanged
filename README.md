@@ -151,7 +151,7 @@ $ whatchanged --help
 4. Build and install from source using [Golang](https://golang.org) (All platforms)
 
 ```bash
-go install github.com/whatchanged-community/whatchanged@v0.4.0/cmd/whatchanged
+go install github.com/whatchanged-community/whatchanged/cmd/whatchanged@v0.4.0
 ```
 
 ### FAQ
