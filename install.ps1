@@ -5,8 +5,9 @@
 $ErrorActionPreference = 'Stop'
 
 if ($v) {
-  $Version = "v${v}"
+  $Version = "${v}"
 }
+
 if ($args.Length -eq 1) {
   $Version = $args.Get(0)
 }

@@ -134,7 +134,10 @@ curl -sf https://gobinaries.com/whatchanged-community/whatchanged@v0.3.6 | sh
 2. PowerShell (Windows):
 
 ```bash
+# install latest version
 iwr https://github.com/whatchanged-community/whatchanged/raw/master/install.ps1 -useb | iex
+# or install specified version
+$v="v0.3.6"; iwr https://github.com/whatchanged-community/whatchanged/raw/master/install.ps1 -useb | iex
 ```
 
 3. [Github release page](https://github.com/whatchanged-community/whatchanged/releases) (All platforms)
