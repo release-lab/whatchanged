@@ -18,7 +18,7 @@
 特性:
 
 - [x] 跨平台支持
-- [x] 生成 本地/远程 的git仓库
+- [x] 生成 本地/远程 的 git 仓库
 - [x] 内置预设的生成模板
 - [x] 自定义模版文件
 - [x] 常规的 commit 解析器
@@ -119,15 +119,6 @@ SOURCE CODE:
 ```
 
 ### 安装
-
-#### 通过 npm 安装
-
-```bash
-# install in global
-npm install -g @whatchanged-community/whatchanged
-# run the command once
-npx @whatchanged-community/whatchanged
-```
 
 #### 通过 shell 安装
 

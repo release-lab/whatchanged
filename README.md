@@ -120,15 +120,6 @@ SOURCE CODE:
 
 ### Installation
 
-#### Install via npm
-
-```bash
-# install in global
-npm install -g @whatchanged-community/whatchanged
-# run the command once
-npx @whatchanged-community/whatchanged
-```
-
 #### Install via shell
 
 If you are using Linux/macOS. you can install it with the following command:
