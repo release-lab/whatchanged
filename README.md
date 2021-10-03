@@ -118,13 +118,11 @@ SOURCE CODE:
   https://github.com/whatchanged-community/whatchanged
 ```
 
-### Installation
+### Install
 
-#### Install via shell
+Shell(Mac/Linux)
 
-If you are using Linux/macOS. you can install it with the following command:
-
-```shell
+```bash
 # install latest version
 curl -fsSL https://raw.githubusercontent.com/whatchanged-community/whatchanged/master/install.sh | bash
 # or install specified version
@@ -133,28 +131,24 @@ curl -fsSL https://raw.githubusercontent.com/whatchanged-community/whatchanged/m
 curl -sf https://gobinaries.com/whatchanged-community/whatchanged@v0.3.6 | sh
 ```
 
-#### Install from Github release page
+PowerShell (Windows):
 
-Download the executable file for your platform at [release page](https://github.com/whatchanged-community/whatchanged/releases) and put the executable file to `$PATH` then try it.
+```bash
+iwr https://github.com/whatchanged-community/whatchanged/raw/master/install.ps1 -useb | iex
+```
+
+Github release page(All platforms)
+
+Download the executable file for your platform at [release page](https://github.com/whatchanged-community/whatchanged/releases) and put the executable file to `$PATH` then try the following command:
 
 ```bash
 $ whatchanged --help
 ```
 
-### Build from source code
-
-Make sure you have `Golang@v1.17.x` and [goreleaser](https://github.com/goreleaser/goreleaser) installed.
-
-```shell
-$ git clone https://github.com/whatchanged-community/whatchanged.git $GOPATH/src/github.com/whatchanged-community/whatchanged
-$ cd $GOPATH/src/github.com/whatchanged-community/whatchanged
-$ make build
-```
-
-### Test
+Build and install from source using [Golang](https://golang.org):
 
 ```bash
-$ make test
+go install github.com/whatchanged-community/whatchanged@0.3.6
 ```
 
 ### FAQ
