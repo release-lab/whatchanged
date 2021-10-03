@@ -215,7 +215,8 @@ after: http.request
 
 this is the second commit body
 
-this is the third commit body`, Footer: &Footer{
+this is the third commit body`,
+				Footer: &Footer{
 					BreakingChange: &BreakingChange{
 						Title: "this is breaking change",
 						Content: `before: http.post
@@ -263,6 +264,35 @@ this is the third commit body`, Footer: &Footer{
 		after: http.request`,
 					},
 					Closes: "#102, #103, #104",
+				},
+			},
+		},
+		{
+			name: "breaking change",
+			args: args{message: `feat(BREAKING): remove npm publish
+
+BREAKING CHANGE: remove npm publish
+
+"""diff
+- npm install @axetroy/whatchanged -g
+"""
+  `},
+			want: &Message{
+				Title: "feat(BREAKING): remove npm publish",
+				Header: &Header{
+					Type:    "feat",
+					Scope:   "BREAKING",
+					Subject: "remove npm publish",
+				},
+				Body: ``,
+				Footer: &Footer{
+					BreakingChange: &BreakingChange{
+						Title: "remove npm publish",
+						Content: `"""diff
+- npm install @axetroy/whatchanged -g
+"""
+  `,
+					},
 				},
 			},
 		},
