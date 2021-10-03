@@ -3,6 +3,7 @@ Unreleased (2021-10-03)
 
 ### 🔥 New feature:
 
+-	**BREAKING**: remove hashURL function in template render([`fdb9eec`](https://github.com/whatchanged-community/whatchanged/commit/fdb9eecf708fa1eeb12e591d76d9f7dc9a7425f4)) (@Axetroy)
 -	**BREAKING**: remove stringsJoin method in template renderer and make([`cf4cb17`](https://github.com/whatchanged-community/whatchanged/commit/cf4cb179c62063ee97b89c9526f0e2b20d048a39)) (@Axetroy)
 -	**BREAKING**: remove npm publish([`307a4ad`](https://github.com/whatchanged-community/whatchanged/commit/307a4ad842182e0edc8cd1bc3c7c45fa16fd2a87)) (@Axetroy)
 
@@ -21,6 +22,22 @@ Unreleased (2021-10-03)
 -	vite config([`c13faa1`](https://github.com/whatchanged-community/whatchanged/commit/c13faa11061e22dc359fd6fc040e48752b5cb83b)) (@axetroy)
 
 ### ❤️ BREAKING CHANGES:
+
+-	feat(BREAKING): remove hashURL function in template render
+
+before:
+
+```
+{{ hashURL .Hash}}
+{{ hashURL .RevertCommitHash }}
+```
+
+after:
+
+```
+{{ .HashURL }}
+{{ .RevertCommitHashURL }}
+```
 
 -	feat(BREAKING): remove stringsJoin method in template renderer and make
 
@@ -42,8 +59,9 @@ Closes: {{ .Field.Footer.Closes }}
 	- npm install @axetroy/whatchanged -g
 	```
 
-### 💪 Commits(62):
+### 💪 Commits(63):
 
+-	[`fdb9eec`](https://github.com/whatchanged-community/whatchanged/commit/fdb9eecf708fa1eeb12e591d76d9f7dc9a7425f4) - feat(BREAKING): remove hashURL function in template render
 -	[`ae56529`](https://github.com/whatchanged-community/whatchanged/commit/ae56529432ddbd415762c82196fa5a3cf87eea05) - fix test
 -	[`47cea0c`](https://github.com/whatchanged-community/whatchanged/commit/47cea0c02f27514ac542004dbaafcfdba74217c0) - update template
 -	[`2082a2d`](https://github.com/whatchanged-community/whatchanged/commit/2082a2d32f354b9d8ac3b3368e400a89d817ef80) - fix: lint
