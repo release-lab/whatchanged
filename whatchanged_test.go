@@ -2,6 +2,7 @@ package whatchanged
 
 import (
 	"bytes"
+	"context"
 	"io/ioutil"
 	"testing"
 
@@ -64,7 +65,7 @@ func TestGenerate(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			w := &bytes.Buffer{}
-			if err := Generate(tt.Project, w, tt.options); err != tt.wantErr {
+			if err := Generate(context.Background(), tt.Project, w, tt.options); err != tt.wantErr {
 				t.Errorf("Generate() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
