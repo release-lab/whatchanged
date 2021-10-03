@@ -120,11 +120,9 @@ SOURCE CODE:
 
 ### 安装
 
-#### 通过 shell 安装
+1. Shell (Mac/Linux)
 
-如果你使用的是 Linux/macOS，你可以通过以下命令进行安装
-
-```shell
+```bash
 # 安装最新版本
 curl -fsSL https://raw.githubusercontent.com/whatchanged-community/whatchanged/master/install.sh | bash
 # 或者安装指定版本
@@ -133,28 +131,24 @@ curl -fsSL https://raw.githubusercontent.com/whatchanged-community/whatchanged/m
 curl -sf https://gobinaries.com/whatchanged-community/whatchanged@v0.3.6 | sh
 ```
 
-#### 通过 Github release 页面下载安装
+2. PowerShell (Windows):
 
-从[release page](https://github.com/whatchanged-community/whatchanged/releases)页面下载对应平台的可执行文件，并且把它加入到 `$PATH` 环境变量中，并尝试以下命令
+```bash
+iwr https://github.com/whatchanged-community/whatchanged/raw/master/install.ps1 -useb | iex
+```
+
+3. [Github release page](https://github.com/whatchanged-community/whatchanged/releases) (全平台支持))
+
+下载可执行文件，并且把它加入到`$PATH` 环境变量中，然后尝试以下命令：
 
 ```bash
 $ whatchanged --help
 ```
 
-### 从源码中构建
-
-确保你已安装 `Golang@v1.17.x` 和 [goreleaser](https://github.com/goreleaser/goreleaser)
-
-```shell
-$ git clone https://github.com/whatchanged-community/whatchanged.git $GOPATH/src/github.com/whatchanged-community/whatchanged
-$ cd $GOPATH/src/github.com/whatchanged-community/whatchanged
-$ make build
-```
-
-### 测试
+1. 使用 [Golang](https://golang.org) 从源码中构建并安装 (全平台支持)
 
 ```bash
-$ make test
+go install github.com/whatchanged-community/whatchanged@0.3.6
 ```
 
 ### 常见问题
