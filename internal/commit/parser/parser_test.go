@@ -262,7 +262,7 @@ this is the third commit body`, Footer: &Footer{
 
 		after: http.request`,
 					},
-					Closes: []string{"#102", "#103", "#104"},
+					Closes: "#102, #103, #104",
 				},
 			},
 		},
