@@ -39,5 +39,5 @@
 
 ### 💪  Commits({{ len .Commits }}):
 {{range .Commits -}}
-- {{ hashURL .Hash}} - {{ unescape .Field.Title }}
+- {{ .HashURL }} - {{ unescape .Field.Title }}
 {{ end }}
