@@ -13,7 +13,7 @@
 
 致力于**优雅**/**简单**/**高效**/**可扩展**
 
-[在线感受魔法](https://whatchanged-community.github.io/whatchanged/)
+[在线感受魔法](https://whatchanged-community.github.io)
 
 特性:
 

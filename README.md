@@ -13,7 +13,7 @@ An elegant changelog generator.
 
 Focus on **Elegant**/**Simple**/**Efficient**/**Scalable**
 
-[Feel the magic online](https://whatchanged-community.github.io/whatchanged/)
+[Feel the magic online](https://whatchanged-community.github.io)
 
 Feature:
 
