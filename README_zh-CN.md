@@ -13,7 +13,7 @@
 
 致力于**优雅**/**简单**/**高效**/**可扩展**
 
-[在线感受魔法](https://axetroy.github.io/whatchanged/)
+[在线感受魔法](https://whatchanged-community.github.io/whatchanged/)
 
 特性:
 
@@ -23,7 +23,7 @@
 - [x] 自定义模版文件
 - [x] 常规的 commit 解析器
 - [x] 支持多个版本的变更日志生成
-- [x] [Github Action](https://github.com/axetroy/setup-whatchanged)
+- [x] [Github Action](https://github.com/whatchanged-community/setup-whatchanged)
 
 ### 使用
 
@@ -50,18 +50,14 @@ ARGUMENTS:
 OPTIONS:
   --help        Print help information.
   --version     Print version information.
-
   --project     Specify the project to be generated. It can be a relative path.
                 or an absolute path or even a remote Git URL. eg.
                 --project=/path/to/project/which/contains/.git/folder
                 --project=https://github.com/whatchanged-community/whatchanged.git
                 Defaults to "--project=$PWD".
-
   --branch      Specify clone branch. only works for remote git project.
                 Defaults to "--branch=master"
-
   --output      Write output to file. default write to stdout.
-
   --fmt         Specify the changelog format. Available options:
                 --fmt=md
                 --fmt=json

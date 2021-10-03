@@ -39,18 +39,14 @@ ARGUMENTS:
 OPTIONS:
   --help        Print help information.
   --version     Print version information.
-
   --project     Specify the project to be generated. It can be a relative path.
                 or an absolute path or even a remote Git URL. eg.
                 --project=/path/to/project/which/contains/.git/folder
                 --project=https://github.com/whatchanged-community/whatchanged.git
                 Defaults to "--project=$PWD".
-
   --branch      Specify clone branch. only works for remote git project.
                 Defaults to "--branch=master"
-
   --output      Write output to file. default write to stdout.
-
   --fmt         Specify the changelog format. Available options:
                 --fmt=md
                 --fmt=json
