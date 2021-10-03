@@ -28,7 +28,7 @@ var (
 
 // generate changelog
 // project: it could be a file path or a git URL
-func Generate(project string, w io.Writer, options *option.Options) error {
+func Generate(ctx context.Context, project string, w io.Writer, options *option.Options) error {
 	var (
 		err error
 	)
@@ -66,7 +66,7 @@ func Generate(project string, w io.Writer, options *option.Options) error {
 	var g *client.GitClient
 
 	if gitHTTPURLReg.MatchString(project) || gitSSHURLReg.MatchString(project) {
-		repo, err := git.CloneContext(context.Background(), memory.NewStorage(), nil, &git.CloneOptions{
+		repo, err := git.CloneContext(ctx, memory.NewStorage(), nil, &git.CloneOptions{
 			URL:           project,
 			Progress:      os.Stderr,
 			SingleBranch:  true,

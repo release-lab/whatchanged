@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
 	"os"
@@ -169,7 +170,7 @@ func run() error {
 		output = f
 	}
 
-	if err := whatchanged.Generate(project, output, &option.Options{
+	if err := whatchanged.Generate(context.Background(), project, output, &option.Options{
 		Version:      ranges,
 		Branch:       branch,
 		Preset:       option.Preset(preset),

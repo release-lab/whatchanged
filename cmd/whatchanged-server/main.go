@@ -57,7 +57,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 	url := fmt.Sprintf("https://github.com/%s/%s", username, repo)
 
-	if err = whatchanged.Generate(url, output, &option.Options{
+	if err = whatchanged.Generate(r.Context(), url, output, &option.Options{
 		Version:  regexp.MustCompile(`\s+`).Split(version, -1),
 		Branch:   branch,
 		Template: template,
