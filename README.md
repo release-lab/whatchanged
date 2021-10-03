@@ -137,7 +137,7 @@ curl -sf https://gobinaries.com/whatchanged-community/whatchanged@v0.3.6 | sh
 iwr https://github.com/whatchanged-community/whatchanged/raw/master/install.ps1 -useb | iex
 ```
 
-3. [Github release page](https://github.com/whatchanged-community/whatchanged/releases)(All platforms)
+3. [Github release page](https://github.com/whatchanged-community/whatchanged/releases) (All platforms)
 
 download the executable file and put the executable file to `$PATH` then try the following command:
 
@@ -145,7 +145,7 @@ download the executable file and put the executable file to `$PATH` then try the
 $ whatchanged --help
 ```
 
-4. Build and install from source using [Golang](https://golang.org):
+4. Build and install from source using [Golang](https://golang.org) (All platforms)
 
 ```bash
 go install github.com/whatchanged-community/whatchanged@0.3.6
