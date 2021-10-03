@@ -1,7 +1,11 @@
 <template>
   <div style="position: relative">
-    <a src="https://github.com/whatchanged-community/whatchanged">
-      <img :src="githubLogoUrl" style="position: fixed; right: 0; top: 0; height: 60px" />
+    <a
+      src="https://github.com/whatchanged-community/whatchanged"
+      target="_blank"
+      style="position: fixed; right: 0; top: 0"
+    >
+      <img :src="githubLogoUrl" style="width: 60px; height: 60px" />
     </a>
 
     <div class="toolbar">
