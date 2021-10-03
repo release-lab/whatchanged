@@ -148,7 +148,7 @@ $v="v0.4.0"; iwr https://github.com/whatchanged-community/whatchanged/raw/master
 $ whatchanged --help
 ```
 
-1. 使用 [Golang](https://golang.org) 从源码中构建并安装 (全平台支持)
+4. 使用 [Golang](https://golang.org) 从源码中构建并安装 (全平台支持)
 
 ```bash
 go install github.com/whatchanged-community/whatchanged/cmd/whatchanged@v0.4.0
