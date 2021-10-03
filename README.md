@@ -120,7 +120,7 @@ SOURCE CODE:
 
 ### Install
 
-Shell (Mac/Linux)
+1. Shell (Mac/Linux)
 
 ```bash
 # install latest version
@@ -131,13 +131,13 @@ curl -fsSL https://raw.githubusercontent.com/whatchanged-community/whatchanged/m
 curl -sf https://gobinaries.com/whatchanged-community/whatchanged@v0.3.6 | sh
 ```
 
-PowerShell (Windows):
+2. PowerShell (Windows):
 
 ```bash
 iwr https://github.com/whatchanged-community/whatchanged/raw/master/install.ps1 -useb | iex
 ```
 
-[Github release page](https://github.com/whatchanged-community/whatchanged/releases)(All platforms)
+3. [Github release page](https://github.com/whatchanged-community/whatchanged/releases)(All platforms)
 
 download the executable file and put the executable file to `$PATH` then try the following command:
 
@@ -145,7 +145,7 @@ download the executable file and put the executable file to `$PATH` then try the
 $ whatchanged --help
 ```
 
-Build and install from source using [Golang](https://golang.org):
+4. Build and install from source using [Golang](https://golang.org):
 
 ```bash
 go install github.com/whatchanged-community/whatchanged@0.3.6
