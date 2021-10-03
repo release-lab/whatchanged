@@ -56,6 +56,10 @@ OPTIONS:
                 --project=/path/to/project/which/contains/.git/folder
                 --project=https://github.com/whatchanged-community/whatchanged.git
                 Defaults to "--project=$PWD".
+
+  --branch      Specify clone branch. only works for remote git project.
+                Defaults to "--branch=master"
+
   --output      Write output to file. default write to stdout.
 
   --fmt         Specify the changelog format. Available options:

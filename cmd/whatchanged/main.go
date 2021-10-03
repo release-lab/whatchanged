@@ -46,6 +46,7 @@ OPTIONS:
                 Defaults to "--project=$PWD".
 
   --branch      Specify clone branch. only works for remote git project.
+                Defaults to "--branch=master"
 
   --output      Write output to file. default write to stdout.
 
