@@ -1,20 +1,28 @@
 package transformer
 
 import (
+	"fmt"
+	"net/url"
+	"strings"
+
 	"github.com/go-git/go-git/v5/plumbing/object"
+	"github.com/pkg/errors"
 	extractor "github.com/whatchanged-community/whatchanged/2_extractor"
 	"github.com/whatchanged-community/whatchanged/internal/client"
 	"github.com/whatchanged-community/whatchanged/internal/commit/parser"
+	giturls "github.com/whilp/git-urls"
 )
 
 type Commit struct {
-	Hash             string
-	Short            string
-	Message          string
-	Author           *object.Signature
-	Committer        *object.Signature
-	Field            *parser.Message
-	RevertCommitHash *string // revert hash
+	Hash                string
+	HashURL             string
+	Short               string
+	Message             string
+	Author              *object.Signature
+	Committer           *object.Signature
+	Field               *parser.Message
+	RevertCommitHash    *string // revert hash
+	RevertCommitHashURL *string // revert hash URL
 }
 
 // https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit-message-header
@@ -36,8 +44,58 @@ type TemplateContext struct {
 	Commits         []*Commit
 }
 
+func generateCommitHashURL(remoteURL *url.URL, longHash string) string {
+	shortHash := string(longHash[0:7])
+
+	if remoteURL != nil {
+		u, _ := url.Parse(remoteURL.String())
+
+		u.Path = u.Path + "/commit/" + longHash
+
+		return fmt.Sprintf("[`%s`](%s)", shortHash, u.String())
+	} else {
+		return shortHash
+	}
+}
+
 func Transform(g *client.GitClient, splices []*extractor.ExtractSplice) ([]*TemplateContext, error) {
 	context := make([]*TemplateContext, 0)
+
+	remote, err := g.GetRemote()
+
+	if err != nil {
+		return nil, errors.WithStack(err)
+	}
+
+	var remoteURL *url.URL
+
+	if remote != nil || len(remote.URLs) > 0 {
+		for _, urlStr := range remote.URLs {
+			if remoteURL, err = giturls.Parse(urlStr); err != nil {
+				return nil, errors.WithStack(err)
+			} else {
+				if remoteURL.Host == "github.com" || remoteURL.Host == "gitlab.com" {
+					break
+				}
+			}
+		}
+
+		if remoteURL != nil {
+			urlPath := strings.TrimSuffix(remoteURL.Path, ".git")
+			switch remoteURL.Scheme {
+			case "http":
+				fallthrough
+			case "https":
+				if remoteURL, err = url.Parse(fmt.Sprintf("%s://%s%s", remoteURL.Scheme, remoteURL.Host, urlPath)); err != nil {
+					return nil, errors.WithStack(err)
+				}
+			case "ssh":
+				if remoteURL, err = url.Parse(fmt.Sprintf("https://%s/%s", remoteURL.Host, urlPath)); err != nil {
+					return nil, errors.WithStack(err)
+				}
+			}
+		}
+	}
 
 	for _, splice := range splices {
 		ctx := &TemplateContext{
@@ -59,6 +117,7 @@ func Transform(g *client.GitClient, splices []*extractor.ExtractSplice) ([]*Temp
 			hash := commit.Hash.String()
 			c := &Commit{
 				Hash:      hash,
+				HashURL:   generateCommitHashURL(remoteURL, hash),
 				Short:     string(hash[0:7]),
 				Message:   commit.Message,
 				Author:    &commit.Author,
@@ -79,6 +138,8 @@ func Transform(g *client.GitClient, splices []*extractor.ExtractSplice) ([]*Temp
 
 			if field.Revert != nil {
 				c.RevertCommitHash = field.Revert
+				revertHashURL := generateCommitHashURL(remoteURL, *field.Revert)
+				c.RevertCommitHashURL = &revertHashURL
 			}
 
 			ctx.Commits = append(ctx.Commits, c)

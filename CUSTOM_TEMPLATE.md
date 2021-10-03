@@ -31,19 +31,20 @@ There are 3 parts in Context
 2. Method
 
    1. **unescape(text string)**: unescape the string
-   2. **hashURL(commitHashString string)**: Add URL to commit
 
 source code:
 
 ```go
 type Commit struct {
-	Hash             string
-	Short            string
-	Message          string
-	Author           *object.Signature
-	Committer        *object.Signature
-	Field            *parser.Message
-	RevertCommitHash *string // revert hash
+	Hash                string
+	HashURL             string
+	Short               string
+	Message             string
+	Author              *object.Signature
+	Committer           *object.Signature
+	Field               *parser.Message
+	RevertCommitHash    *string // revert hash
+	RevertCommitHashURL *string // revert hash URL
 }
 
 // https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit-message-header

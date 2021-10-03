@@ -2,7 +2,7 @@
 
 {{- define "body" -}}
 {{range . -}}
-- {{if .Field.Header.Scope }}**{{ unescape .Field.Header.Scope }}**: {{ end }}{{ unescape .Field.Header.Subject }}({{ hashURL .Hash}}) (@{{ unescape .Author.Name }}){{if .Field.Footer }} {{if .Field.Footer.Closes }}, Closes: {{ .Field.Footer.Closes }} {{- end }}  {{- end}}
+- {{if .Field.Header.Scope }}**{{ unescape .Field.Header.Scope }}**: {{ end }}{{ unescape .Field.Header.Subject }}({{ .HashURL }}) (@{{ unescape .Author.Name }}){{if .Field.Footer }} {{if .Field.Footer.Closes }}, Closes: {{ .Field.Footer.Closes }} {{- end }}  {{- end}}
 {{ end }}
 {{- end -}}
 
@@ -59,7 +59,7 @@
 {{if .Revert}}
 ### 🔙 Revert:
 {{range .Revert -}}
-- {{if .RevertCommitHash }}revert {{ hashURL .RevertCommitHash }}, {{ end }}{{ unescape .Field.Header.Subject }}({{ hashURL .Hash}})
+- {{if .RevertCommitHash }}revert {{ .RevertCommitHashURL }}, {{ end }}{{ unescape .Field.Header.Subject }}({{ .HashURL }})
 {{ end }}
 {{ end }}
 
@@ -80,7 +80,7 @@
 
 ### 💪  Commits({{ len .Commits }}):
 {{range .Commits -}}
-- {{ hashURL .Hash}} - {{ unescape .Field.Title }}
+- {{ .HashURL }} - {{ unescape .Field.Title }}
 {{ end }}
 
 {{ end }}
