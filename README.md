@@ -120,7 +120,7 @@ SOURCE CODE:
 
 ### Install
 
-Shell(Mac/Linux)
+Shell (Mac/Linux)
 
 ```bash
 # install latest version
