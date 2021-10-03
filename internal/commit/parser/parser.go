@@ -55,9 +55,9 @@ type Message struct {
 
 var (
 	headerrPattern      = regexp.MustCompile(`^(?:fixup!\s*)?(\w*)(\(([\w\$\.\*/-]*)\))?\: (.*)$`)
-	footerPattern       = regexp.MustCompile(`^BREAKING\sCHANGE:\s*(.*)$`)
-	closePattern        = regexp.MustCompile(`^(?i)Closes\s(.+)$`)
-	revertHeaderPattern = regexp.MustCompile(`^(?i)revert\s(.*)$`)
+	footerPattern       = regexp.MustCompile(`^BREAKING\s+CHANGES?:\s*(.*)$`)
+	closePattern        = regexp.MustCompile(`^(?i)Closes\s+(.+)$`)
+	revertHeaderPattern = regexp.MustCompile(`^(?i)revert\s+(.*)$`)
 	revertBodyPattern   = regexp.MustCompile(`^(?i)This\sreverts\scommit\s(\w+)\.?$`)
 )
 
