@@ -137,9 +137,9 @@ PowerShell (Windows):
 iwr https://github.com/whatchanged-community/whatchanged/raw/master/install.ps1 -useb | iex
 ```
 
-Github release page(All platforms)
+[Github release page](https://github.com/whatchanged-community/whatchanged/releases)(All platforms)
 
-Download the executable file for your platform at [release page](https://github.com/whatchanged-community/whatchanged/releases) and put the executable file to `$PATH` then try the following command:
+download the executable file and put the executable file to `$PATH` then try the following command:
 
 ```bash
 $ whatchanged --help
