@@ -80,3 +80,42 @@ func TestGenerate(t *testing.T) {
 		})
 	}
 }
+
+func TestGenerateForTestRepo(t *testing.T) {
+	type TestCase struct {
+		name       string
+		options    *option.Options
+		Project    string
+		ResultFile string
+		wantErr    error
+	}
+
+	var tests = []TestCase{
+		{
+			name:       "whatchanged-community/test-first-commit",
+			Project:    "https://github.com/whatchanged-community/test-first-commit.git",
+			ResultFile: "fixtures/test-first-commit.md",
+			options: &option.Options{
+				Version: []string{"HEAD~"},
+			},
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			w := &bytes.Buffer{}
+			if err := Generate(context.Background(), tt.Project, w, tt.options); err != tt.wantErr {
+				t.Errorf("Generate() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+
+			if b, err := ioutil.ReadFile(tt.ResultFile); err != nil {
+				t.Errorf("Generate() error = %v, wantErr %v", err, tt.wantErr)
+			} else {
+				if gotW := w.String(); gotW != string(b) {
+					assert.Equal(t, w.String(), string(b), tt.name)
+				}
+			}
+		})
+	}
+}
