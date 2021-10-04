@@ -3,12 +3,14 @@ package whatchanged
 import (
 	"context"
 	"io"
+	"net/url"
 	"os"
 	"path/filepath"
 	"regexp"
 
 	"github.com/go-git/go-git/v5"
 	"github.com/go-git/go-git/v5/plumbing"
+	"github.com/go-git/go-git/v5/plumbing/transport/http"
 	"github.com/go-git/go-git/v5/storage/memory"
 	"github.com/pkg/errors"
 	parser "github.com/whatchanged-community/whatchanged/1_parser"
@@ -22,7 +24,7 @@ import (
 )
 
 var (
-	gitHTTPURLReg = regexp.MustCompile(`^http?s:\/\/.+$`)
+	gitHTTPURLReg = regexp.MustCompile(`^https?:\/\/.+$`)
 	gitSSHURLReg  = regexp.MustCompile(`^git@.+$`)
 )
 
@@ -66,13 +68,37 @@ func Generate(ctx context.Context, project string, w io.Writer, options *option.
 	var g *client.GitClient
 
 	if gitHTTPURLReg.MatchString(project) || gitSSHURLReg.MatchString(project) {
-		repo, err := git.CloneContext(ctx, memory.NewStorage(), nil, &git.CloneOptions{
+		cloneOptions := git.CloneOptions{
 			URL:           project,
 			Progress:      os.Stderr,
 			SingleBranch:  true,
 			ReferenceName: plumbing.NewBranchReferenceName(options.Branch),
 			Tags:          git.AllTags,
-		})
+		}
+
+		if gitHTTPURLReg.MatchString(project) {
+			u, err := url.Parse(project)
+
+			if err != nil {
+				return errors.WithStack(err)
+			}
+
+			// if url has contains the user infomation
+			if u.User != nil {
+				auth := &http.BasicAuth{
+					Username: u.User.Username(),
+				}
+
+				if pwd, isSetPwd := u.User.Password(); isSetPwd {
+					auth.Password = pwd
+				}
+
+				cloneOptions.Auth = auth
+			}
+
+		}
+
+		repo, err := git.CloneContext(ctx, memory.NewStorage(), nil, &cloneOptions)
 
 		if err != nil {
 			return errors.WithStack(err)
