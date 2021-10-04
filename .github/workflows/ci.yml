@@ -70,7 +70,7 @@ jobs:
 
       - name: Generate release.md
         run: |
-          ./cmd/whatchanged/run.sh --tpl=release.tpl --output=release.md
+          ./cmd/whatchanged/run.sh --output=release.md
           cat release.md
 
       - name: Release to Github
