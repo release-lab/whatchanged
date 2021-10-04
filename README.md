@@ -1,4 +1,4 @@
-English | [中文简体](README_zh-CN.md)
+[English](README.md) | 中文简体
 
 [![Build Status](https://github.com/whatchanged-community/whatchanged/workflows/ci/badge.svg)](https://github.com/whatchanged-community/whatchanged/actions)
 [![Build Status](https://github.com/whatchanged-community/whatchanged/workflows/playground/badge.svg)](https://github.com/whatchanged-community/whatchanged/actions)
@@ -9,156 +9,152 @@ English | [中文简体](README_zh-CN.md)
 
 ## whatchanged
 
-An elegant changelog generator.
+一个优雅的变更日志生成器
 
-Focus on **Elegant**/**Simple**/**Efficient**/**Scalable**
+致力于**优雅**/**简单**/**高效**/**可扩展**
 
-[Feel the magic online](https://whatchanged-community.github.io)
+[在线感受魔法](https://whatchanged-community.github.io)
 
-Feature:
+特性:
 
-- [x] Cross-platform support
-- [x] Generation for local/Remote git repositories
-- [x] Preset template for generation
-- [x] Custom template file
-- [x] Conventional Commits Parser
-- [x] Generate multiple versions of change logs
+- [x] 跨平台支持
+- [x] 生成 本地/远程 的 git 仓库
+- [x] 内置预设的生成模板
+- [x] 自定义模版文件
+- [x] 常规的 commit 解析器
+- [x] 支持多个版本的变更日志生成
 - [x] [Github Action](https://github.com/whatchanged-community/setup-whatchanged)
 
-### Usage
+### 使用
 
 ```bash
 $ whatchanged --help
-whatchanged - a cli to generate changelog from git project
+whatchanged - 一个为 Git 项目生成变更日志的命令行工具
 
 USAGE:
-  whatchanged [OPTIONS] [version...]
+  whatchanged [OPTIONS] [ARGUMENTS...]
 
 ARGUMENTS:
-  [version...]  Optional version or version range.
+  [version...]  可选的版本或者版本范围，它有一下几种值
                 1.null.
-                  If you do not specify the version, then it will automatically
-                  generate a change log from "HEAD~<latest version>" or
-                  "HEAD~<earliest commit>" or "<latest version>-<last version>"
-                2.single version. eg. "v1.2.0"
-                  Generate a specific version of the changelog.
-                3.multiple versions. eg. "v2.0.0 v1.0.0"
-                4.version range. eg v1.3.0~v1.2.0
-                  Generate changelog within the specified range.
-                  For more details, please check the following examples.
+                  如果你没有指定版本，则会自动从 "HEAD~<latest tag>" /
+                  "HEAD~<earliest commit>" / "<latest tag>-<prev tag>"
+                  中选择一个进行生成
+                2.单版本，例如 "v1.2.0"
+                  生成单个指定版本的变更日志
+                3.多版本，例如 "v2.0.0 v1.0.0"
+                4.版本范围，例如 v1.3.0~v1.2.0
+                  生成这两个版本以及中间版本的变更日志。
+                  格式: <开始>~<结束>
 
 OPTIONS:
-  --help        Print help information.
-  --version     Print version information.
-  --project     Specify the project to be generated. It can be a relative path.
-                or an absolute path or even a remote Git URL. eg.
+  --help        打印帮助信息。
+  --version     打印版本信息。
+  --project     指定要生成的 Git 项目，它可以是一个相对/绝对路径或者远程地址。例如：
                 --project=/path/to/project/which/contains/.git/folder
                 --project=https://github.com/whatchanged-community/whatchanged.git
-                Defaults to "--project=$PWD".
-  --branch      Specify clone branch. only works for remote git project.
-                Defaults to "--branch=master"
-  --output      Write output to file. default write to stdout.
-  --fmt         Specify the changelog format. Available options:
+                默认值: "--project=$PWD".
+  --branch      指定要克隆的分支，仅在生成远程仓库时有效。
+                默认值: "--branch=master"
+  --output      指定输入文件，默认输出到 stdout（标准输出流）。
+  --fmt         指定生成的格式，可选项：
                 --fmt=md
                 --fmt=json
-                Defaults to "--fmt=md".
-  --preset      Cli built-in markdown template. Available options:
+                默认值: "--fmt=md".
+  --preset      指定内置的 markdown 预设模版. 可选项:
                 --preset=default
                 --preset=full
                 --preset=simple
-                Only available when --fmt=md and --tpl is nil.
-                Defaults to "--preset=default".
-  --tpl         Specify the template file for generating. Only available when
-                --fmt=md.
-  --skip-format Skip the formatting process, which is very useful for keeping the
-                original format.
+                仅在设置 --fmt=md 并且 --tpl 为空时有效。
+                默认值: "--preset=default".
+  --tpl         指定渲染的 markdown 模版。仅在 --fmt=md 时有效。
+  --skip-format 跳过格式化过程，一般情况下可以忽略
 
 EXAMPLES:
-  # generate changelog from HEAD to <latest version>.
-  # if HEAD is not the latest tag. then this should be a unreleased version
-  # otherwise it should be the latest version
+  # 生成从 HEAD 到 <latest tag> 的变更日志。
+  # 如果 HEAD 不是最新的 tag，则变更日志应该是一个未发布版本。
+  # 否则生成最新版
   $ whatchanged
 
-  # generate changelog of the specified version
+  # 生成指定版本的变更日志
   $ whatchanged v1.2.0
 
-  # Generate the specified two versions
-  # Separate by a comma, and only generate these two versions
-  # the middle version will not be generated
+  # 生成指定两个版本的变更日志
+  # 只会生成这两个版本的日志，中间版本会被忽略
   $ whatchanged v2.0.0 v1.0.0
 
-  # generate HEAD to latest tag and <Nth tag>
+  # 生成从 HEAD 到最新一个 tag 和第 N 个 tag 的变更日志
   $ whatchanged HEAD~@0 @1 @2
 
-  # generate changelog within the specified range
+  # 生成两个版本范围内的变更日志，中间版本也会生成，例如 v1.3.0, v1.2.1, v1.2.0
   $ whatchanged v1.3.0~v1.2.0
 
-  # generate changelog from HEAD to <Nth tag>
+  # 生成从 HEAD 到第 N 个 tag 的变更日志
   $ whatchanged ~@0
 
-  # generate changelog from <0th tag> to <2th tag>
+  # 生成第 0 个 tag 到第 2 个tag 的变更日志
   $ whatchanged @0~@2
 
-  # generate changelog from HEAD to specified version
+  # 生成 HEAD 到指定版本的变更日志
   $ whatchanged HEAD~v1.3.0
 
-  # generate all changelog
+  # 生成所有的变更日志
   $ whatchanged HEAD~
 
-  # generate changelog from two commit hashes
+  # 生成两次提交之间的变更日志
   $ whatchanged 770ed02~585445d
 
-  # Generate changelog for the specified project
+  # 生成本地项目的变更日志
   $ whatchanged --project=/path/to/project v1.0.0
 
-  # Generate changelog for the remote project
+  # 生成远程项目的变更日志
   $ whatchanged --project=https://github.com/whatchanged-community/whatchanged.git v0.1.0
 
 SOURCE CODE:
   https://github.com/whatchanged-community/whatchanged
 ```
 
-### Install
+### 安装
 
 1. Shell (Mac/Linux)
 
 ```bash
-# install latest version
+# 安装最新版本
 curl -fsSL https://raw.githubusercontent.com/whatchanged-community/whatchanged/master/install.sh | bash
-# or install specified version
+# 或者安装指定版本
 curl -fsSL https://raw.githubusercontent.com/whatchanged-community/whatchanged/master/install.sh | bash -s v0.4.0
-# or install from gobinaries.com
+# 或者通过 gobinaries.com 安装
 curl -sf https://gobinaries.com/whatchanged-community/whatchanged@v0.4.0 | sh
 ```
 
 2. PowerShell (Windows):
 
 ```bash
-# install latest version
+# 安装最新版本
 iwr https://github.com/whatchanged-community/whatchanged/raw/master/install.ps1 -useb | iex
-# or install specified version
+# 或者安装指定版本
 $v="v0.4.0"; iwr https://github.com/whatchanged-community/whatchanged/raw/master/install.ps1 -useb | iex
 ```
 
-3. [Github release page](https://github.com/whatchanged-community/whatchanged/releases) (All platforms)
+3. [Github release page](https://github.com/whatchanged-community/whatchanged/releases) (全平台支持))
 
-download the executable file and put the executable file to `$PATH` then try the following command:
+下载可执行文件，并且把它加入到`$PATH` 环境变量中，然后尝试以下命令：
 
 ```bash
 $ whatchanged --help
 ```
 
-4. Build and install from source using [Golang](https://golang.org) (All platforms)
+4. 使用 [Golang](https://golang.org) 从源码中构建并安装 (全平台支持)
 
 ```bash
 go install github.com/whatchanged-community/whatchanged/cmd/whatchanged@v0.4.0
 ```
 
-### FAQ
+### 常见问题
 
-1. [How it works?](HOW_IT_WORKS.md)
-2. [How to custom generation template?](CUSTOM_TEMPLATE.md)
+1. [它是如何工作的?](HOW_IT_WORKS.md)
+2. [如何自定义生成的模版?](CUSTOM_TEMPLATE.md)
 
-### License
+### 开源许可
 
-The [Anti-996 License](LICENSE)
+The [Anti-996 License](LICENSE_zh-CN)
