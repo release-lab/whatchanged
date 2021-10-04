@@ -49,7 +49,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 	query := r.URL.Query()
 
-	username := query.Get("username")
 	repo := query.Get("repo")
 	branch := query.Get("branch")
 	version := query.Get("version")
@@ -64,9 +63,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		branch = branchDecoded
 	}
 
-	url := fmt.Sprintf("https://github.com/%s/%s", username, repo)
-
-	if err = whatchanged.Generate(r.Context(), url, output, &option.Options{
+	if err = whatchanged.Generate(r.Context(), repo, output, &option.Options{
 		Version:  regexp.MustCompile(`\s+`).Split(version, -1),
 		Branch:   branch,
 		Template: template,
