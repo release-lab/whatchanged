@@ -1,0 +1,86 @@
+whatchanged - a cli to generate changelog from git project
+
+USAGE:
+  whatchanged [OPTIONS] [ARGUMENTS...]
+
+ARGUMENTS:
+  [version...]  Optional version or version range.
+                1.null.
+                  If you do not specify the version, then it will automatically
+                  generate a change log from "HEAD~<latest version>" or
+                  "HEAD~<earliest commit>" or "<latest version>-<last version>"
+                2.single version. eg. "v1.2.0"
+                  Generate a specific version of the changelog.
+                3.multiple versions. eg. "v2.0.0 v1.0.0"
+                4.version range. eg v1.3.0~v1.2.0
+                  Generate changelog within the specified range.
+                  For more details, please check the following examples.
+
+OPTIONS:
+  --help        Print help information.
+  --version     Print version information.
+  --project     Specify the project to be generated. It can be a relative path.
+                or an absolute path or even a remote Git URL. eg.
+                --project=/path/to/project/which/contains/.git/folder
+                --project=https://github.com/whatchanged-community/whatchanged.git
+                Defaults to "--project=$PWD".
+  --branch      Specify clone branch. only works for remote git project.
+                Defaults to "--branch=master"
+  --output      Write output to file. default write to stdout.
+  --fmt         Specify the changelog format. Available options:
+                --fmt=md
+                --fmt=json
+                Defaults to "--fmt=md".
+  --preset      Cli built-in markdown template. Available options:
+                --preset=default
+                --preset=full
+                --preset=simple
+                Only available when --fmt=md and --tpl is nil.
+                Defaults to "--preset=default".
+  --tpl         Specify the template file for generating. Only available when
+                --fmt=md.
+  --skip-format Skip the formatting process, which is very useful for keeping the
+                original format.
+
+EXAMPLES:
+  # generate changelog from HEAD to <latest tag>.
+  # if HEAD is not the latest tag. then this should be a unreleased version
+  # otherwise it should be the latest tag
+  $ whatchanged
+
+  # generate changelog of the specified version
+  $ whatchanged v1.2.0
+
+  # Generate the specified two versions
+  # the middle version will not be generated
+  $ whatchanged v2.0.0 v1.0.0
+
+  # generate HEAD to latest tag and <Nth tag>
+  $ whatchanged HEAD~@0 @1 @2
+
+  # generate changelog within the specified range
+  $ whatchanged v1.3.0~v1.2.0
+
+  # generate changelog from HEAD to <Nth tag>
+  $ whatchanged ~@0
+
+  # generate changelog from <0th tag> to <2th tag>
+  $ whatchanged @0~@2
+
+  # generate changelog from HEAD to specified version
+  $ whatchanged HEAD~v1.3.0
+
+  # generate all changelog
+  $ whatchanged HEAD~
+
+  # generate changelog from two commit hashes
+  $ whatchanged 770ed02~585445d
+
+  # Generate changelog for the specified project
+  $ whatchanged --project=/path/to/project v1.0.0
+
+  # Generate changelog for the remote project
+  $ whatchanged --project=https://github.com/whatchanged-community/whatchanged.git v0.1.0
+
+SOURCE CODE:
+  https://github.com/whatchanged-community/whatchanged

@@ -26,6 +26,9 @@ github.com/acomagu/bufpipe
 # github.com/blang/semver/v4 v4.0.0
 ## explicit; go 1.14
 github.com/blang/semver/v4
+# github.com/cloudfoundry/jibber_jabber v0.0.0-20151120183258-bcc4c8345a21
+## explicit
+github.com/cloudfoundry/jibber_jabber
 # github.com/davecgh/go-spew v1.1.1
 ## explicit
 github.com/davecgh/go-spew/spew
