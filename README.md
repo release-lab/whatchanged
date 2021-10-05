@@ -24,6 +24,7 @@
 - [x] 常规的 commit 解析器
 - [x] 支持多个版本的变更日志生成
 - [x] [Github Action](https://github.com/whatchanged-community/setup-whatchanged)
+- [x] [Visual Studio Code extension](https://github.com/whatchanged-community/vscode-whatchanged)
 
 ### 使用
 

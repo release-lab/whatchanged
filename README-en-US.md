@@ -24,6 +24,7 @@ Feature:
 - [x] Conventional Commits Parser
 - [x] Generate multiple versions of change logs
 - [x] [Github Action](https://github.com/whatchanged-community/setup-whatchanged)
+- [x] [Visual Studio Code extension](https://github.com/whatchanged-community/vscode-whatchanged)
 
 ### Usage
 
