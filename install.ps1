@@ -4,6 +4,10 @@
 
 $ErrorActionPreference = 'Stop'
 
+$owner = "whatchanged-community"
+$repo = "whatchanged"
+$exeName = "whatchanged"
+
 if ($v) {
   $Version = "${v}"
 }
@@ -19,24 +23,24 @@ if (Test-Path C:\Windows\SysNative) {
 }
 
 $BinDir = "$Home\bin"
-$WhatchangedTarGz = "$BinDir\whatchanged.tar.gz"
-$WhatchangedExe = "$BinDir\whatchanged.exe"
+$downloadedTagGz = "$BinDir\${exeName}.tar.gz"
+$downloadedExe = "$BinDir\${exeName}.exe"
 $Target = "windows_$arch"
 
 # GitHub requires TLS 1.2
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 $ResourceUri = if (!$Version) {
-  "https://github.com/whatchanged-community/whatchanged/releases/latest/download/whatchanged_${Target}.tar.gz"
+  "https://github.com/${owner}/${repo}/releases/latest/download/${exeName}_${Target}.tar.gz"
 } else {
-  "https://github.com/whatchanged-community/whatchanged/releases/download/${Version}/whatchanged_${Target}.tar.gz"
+  "https://github.com/${owner}/${repo}/releases/download/${Version}/${exeName}_${Target}.tar.gz"
 }
 
 if (!(Test-Path $BinDir)) {
   New-Item $BinDir -ItemType Directory | Out-Null
 }
 
-Invoke-WebRequest $ResourceUri -OutFile $WhatchangedTarGz -UseBasicParsing
+Invoke-WebRequest $ResourceUri -OutFile $downloadedTagGz -UseBasicParsing
 
 function Check-Command {
   param($Command)
@@ -55,7 +59,7 @@ function Check-Command {
 }
 
 if (Check-Command -Command tar) {
-  Invoke-Expression "tar -xvzf $WhatchangedTarGz -C $BinDir"
+  Invoke-Expression "tar -xvzf $downloadedTagGz -C $BinDir"
 } else {
   function Expand-Tar($tarFile, $dest) {
 
@@ -66,10 +70,10 @@ if (Check-Command -Command tar) {
       Expand-7Zip $tarFile $dest
   }
 
-  Expand-Tar $WhatchangedTarGz $BinDir
+  Expand-Tar $downloadedTagGz $BinDir
 }
 
-Remove-Item $WhatchangedTarGz
+Remove-Item $downloadedTagGz
 
 $User = [EnvironmentVariableTarget]::User
 $Path = [Environment]::GetEnvironmentVariable('Path', $User)
@@ -78,5 +82,5 @@ if (!(";$Path;".ToLower() -like "*;$BinDir;*".ToLower())) {
   $Env:Path += ";$BinDir"
 }
 
-Write-Output "Whatchanged was installed successfully to $WhatchangedExe"
-Write-Output "Run 'whatchanged --help' to get started"
+Write-Output "${exeName} was installed successfully to $downloadedExe"
+Write-Output "Run '${exeName} --help' to get started"
