@@ -19,7 +19,6 @@ if (Test-Path C:\Windows\SysNative) {
 }
 
 $BinDir = "$Home\bin"
-$is64Bit = Test-Path C:\Windows\SysNative
 $WhatchangedTarGz = "$BinDir\whatchanged.tar.gz"
 $WhatchangedExe = "$BinDir\whatchanged.exe"
 $Target = "windows_$arch"
@@ -39,14 +38,35 @@ if (!(Test-Path $BinDir)) {
 
 Invoke-WebRequest $ResourceUri -OutFile $WhatchangedTarGz -UseBasicParsing
 
-if (Get-Command Expand-Archive -ErrorAction SilentlyContinue) {
-  Expand-Archive $WhatchangedTarGz -Destination $BinDir -Force
-} else {
-  if (Test-Path $WhatchangedExe) {
-    Remove-Item $WhatchangedExe
+function Check-Command {
+  param($Command)
+  $found = $false
+  try
+  {
+      $Command | Out-Null
+      $found = $true
   }
-  Add-Type -AssemblyName System.IO.Compression.FileSystem
-  [IO.Compression.ZipFile]::ExtractToDirectory($WhatchangedTarGz, $BinDir)
+  catch [System.Management.Automation.CommandNotFoundException]
+  {
+      $found = $false
+  }
+
+  $found
+}
+
+if (Check-Command -Command tar) {
+  Invoke-Expression "tar -xvzf $WhatchangedTarGz -C $BinDir"
+} else {
+  function Expand-Tar($tarFile, $dest) {
+
+      if (-not (Get-Command Expand-7Zip -ErrorAction Ignore)) {
+          Install-Package -Scope CurrentUser -Force 7Zip4PowerShell > $null
+      }
+
+      Expand-7Zip $tarFile $dest
+  }
+
+  Expand-Tar $WhatchangedTarGz $BinDir
 }
 
 Remove-Item $WhatchangedTarGz
