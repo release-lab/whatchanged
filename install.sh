@@ -3,6 +3,9 @@
 set -e
 
 downloadFolder="${HOME}/Downloads"
+owner="whatchanged-community"
+repo="whatchanged"
+exe_name="whatchanged"
 
 mkdir -p ${downloadFolder}
 
@@ -30,18 +33,18 @@ get_os(){
 
 os=$(get_os)
 arch=$(get_arch)
-dest_file="${downloadFolder}/whatchanged_${os}_${arch}.tar.gz"
+dest_file="${downloadFolder}/${exe_name}_${os}_${arch}.tar.gz"
 
 if [ $# -eq 0 ]; then
     asset_path=$(
-        command curl -sSf https://github.com/whatchanged-community/whatchanged/releases |
-            command grep -o "/whatchanged-community/whatchanged/releases/download/.*/whatchanged_${os}_${arch}.tar.gz" |
+        command curl -sSf https://github.com/${owner}/${repo}/releases |
+            command grep -o "/${owner}/${repo}/releases/download/.*/${exe_name}_${os}_${arch}.tar.gz" |
             command head -n 1
     )
     if [[ ! "$asset_path" ]]; then exit 1; fi
     asset_uri="https://github.com${asset_path}"
 else
-    asset_uri="https://github.com/whatchanged-community/whatchanged/releases/download/${1}/whatchanged_${os}_${arch}.tar.gz"
+    asset_uri="https://github.com/${owner}/${repo}/releases/download/${1}/${exe_name}_${os}_${arch}.tar.gz"
 fi
 
 mkdir -p ${downloadFolder}
@@ -52,16 +55,16 @@ curl --fail --location --output "${dest_file}" "${asset_uri}"
 
 binDir=/usr/local/bin
 
-echo "[2/3] Install whatchanged to the ${binDir}"
+echo "[2/3] Install ${exe_name} to the ${binDir}"
 mkdir -p ${HOME}/bin
 tar -xz -f ${dest_file} -C ${binDir}
-exe=${binDir}/whatchanged
+exe=${binDir}/${exe_name}
 chmod +x ${exe}
 
 echo "[3/3] Set environment variables"
-echo "whatchanged was installed successfully to ${exe}"
-if command -v whatchanged --version >/dev/null; then
-    echo "Run 'whatchanged --help' to get started"
+echo "${exe_name} was installed successfully to ${exe}"
+if command -v $exe_name --version >/dev/null; then
+    echo "Run '$exe_name --help' to get started"
 else
     echo "Manually add the directory to your \$HOME/.bash_profile (or similar)"
     echo "  export PATH=${HOME}/bin:\$PATH"
