@@ -1,11 +1,11 @@
 [English](README.md) | 中文简体
 
-[![Build Status](https://github.com/whatchanged-community/whatchanged/workflows/ci/badge.svg)](https://github.com/whatchanged-community/whatchanged/actions)
-[![Build Status](https://github.com/whatchanged-community/whatchanged/workflows/playground/badge.svg)](https://github.com/whatchanged-community/whatchanged/actions)
-[![Go Report Card](https://goreportcard.com/badge/github.com/whatchanged-community/whatchanged)](https://goreportcard.com/report/github.com/whatchanged-community/whatchanged)
-![Latest Version](https://img.shields.io/github/v/release/whatchanged-community/whatchanged.svg)
+[![Build Status](https://github.com/release-lab/whatchanged/workflows/ci/badge.svg)](https://github.com/release-lab/whatchanged/actions)
+[![Build Status](https://github.com/release-lab/whatchanged/workflows/playground/badge.svg)](https://github.com/release-lab/whatchanged/actions)
+[![Go Report Card](https://goreportcard.com/badge/github.com/release-lab/whatchanged)](https://goreportcard.com/report/github.com/release-lab/whatchanged)
+![Latest Version](https://img.shields.io/github/v/release/release-lab/whatchanged.svg)
 [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
-![Repo Size](https://img.shields.io/github/repo-size/whatchanged-community/whatchanged.svg)
+![Repo Size](https://img.shields.io/github/repo-size/release-lab/whatchanged.svg)
 
 ## whatchanged
 
@@ -13,7 +13,7 @@
 
 致力于**优雅**/**简单**/**高效**/**可扩展**
 
-[在线感受魔法](https://whatchanged-community.github.io)
+[在线感受魔法](https://release-lab.github.io)
 
 特性:
 
@@ -23,8 +23,8 @@
 - [x] 自定义模版文件
 - [x] 常规的 commit 解析器
 - [x] 支持多个版本的变更日志生成
-- [x] [Github Action](https://github.com/whatchanged-community/setup-whatchanged)
-- [x] [Visual Studio Code extension](https://github.com/whatchanged-community/vscode-whatchanged)
+- [x] [Github Action](https://github.com/release-lab/setup-whatchanged)
+- [x] [Visual Studio Code extension](https://github.com/release-lab/vscode-whatchanged)
 
 ### 使用
 
@@ -53,7 +53,7 @@ OPTIONS:
   --version     打印版本信息。
   --project     指定要生成的 Git 项目，它可以是一个相对/绝对路径或者远程地址。例如：
                 --project=/path/to/project/which/contains/.git/folder
-                --project=https://github.com/whatchanged-community/whatchanged.git
+                --project=https://github.com/release-lab/whatchanged.git
                 默认值: "--project=$PWD".
   --branch      指定要克隆的分支，仅在生成远程仓库时有效。
                 默认值: "--branch=master"
@@ -109,10 +109,10 @@ EXAMPLES:
   $ whatchanged --project=/path/to/project v1.0.0
 
   # 生成远程项目的变更日志
-  $ whatchanged --project=https://github.com/whatchanged-community/whatchanged.git v0.1.0
+  $ whatchanged --project=https://github.com/release-lab/whatchanged.git v0.1.0
 
 SOURCE CODE:
-  https://github.com/whatchanged-community/whatchanged
+  https://github.com/release-lab/whatchanged
 ```
 
 ### 安装
@@ -121,23 +121,23 @@ SOURCE CODE:
 
 ```bash
 # 安装最新版本
-curl -fsSL https://raw.githubusercontent.com/whatchanged-community/whatchanged/master/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/release-lab/whatchanged/master/install.sh | bash
 # 或者安装指定版本
-curl -fsSL https://raw.githubusercontent.com/whatchanged-community/whatchanged/master/install.sh | bash -s v0.4.1
+curl -fsSL https://raw.githubusercontent.com/release-lab/whatchanged/master/install.sh | bash -s v0.4.1
 # 或者通过 gobinaries.com 安装
-curl -sf https://gobinaries.com/whatchanged-community/whatchanged@v0.4.1 | sh
+curl -sf https://gobinaries.com/release-lab/whatchanged@v0.4.1 | sh
 ```
 
 2. PowerShell (Windows):
 
 ```bash
 # 安装最新版本
-iwr https://github.com/whatchanged-community/whatchanged/raw/master/install.ps1 -useb | iex
+iwr https://github.com/release-lab/whatchanged/raw/master/install.ps1 -useb | iex
 # 或者安装指定版本
-$v="v0.4.1"; iwr https://github.com/whatchanged-community/whatchanged/raw/master/install.ps1 -useb | iex
+$v="v0.4.1"; iwr https://github.com/release-lab/whatchanged/raw/master/install.ps1 -useb | iex
 ```
 
-3. [Github release page](https://github.com/whatchanged-community/whatchanged/releases) (全平台支持))
+3. [Github release page](https://github.com/release-lab/whatchanged/releases) (全平台支持))
 
 下载可执行文件，并且把它加入到`$PATH` 环境变量中，然后尝试以下命令：
 
@@ -148,7 +148,7 @@ $ whatchanged --help
 4. 使用 [Golang](https://golang.org) 从源码中构建并安装 (全平台支持)
 
 ```bash
-go install github.com/whatchanged-community/whatchanged/cmd/whatchanged@v0.4.1
+go install github.com/release-lab/whatchanged/cmd/whatchanged@v0.4.1
 ```
 
 ### 常见问题

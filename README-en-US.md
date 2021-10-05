@@ -1,11 +1,11 @@
 English | [中文简体](README_zh-CN.md)
 
-[![Build Status](https://github.com/whatchanged-community/whatchanged/workflows/ci/badge.svg)](https://github.com/whatchanged-community/whatchanged/actions)
-[![Build Status](https://github.com/whatchanged-community/whatchanged/workflows/playground/badge.svg)](https://github.com/whatchanged-community/whatchanged/actions)
-[![Go Report Card](https://goreportcard.com/badge/github.com/whatchanged-community/whatchanged)](https://goreportcard.com/report/github.com/whatchanged-community/whatchanged)
-![Latest Version](https://img.shields.io/github/v/release/whatchanged-community/whatchanged.svg)
+[![Build Status](https://github.com/release-lab/whatchanged/workflows/ci/badge.svg)](https://github.com/release-lab/whatchanged/actions)
+[![Build Status](https://github.com/release-lab/whatchanged/workflows/playground/badge.svg)](https://github.com/release-lab/whatchanged/actions)
+[![Go Report Card](https://goreportcard.com/badge/github.com/release-lab/whatchanged)](https://goreportcard.com/report/github.com/release-lab/whatchanged)
+![Latest Version](https://img.shields.io/github/v/release/release-lab/whatchanged.svg)
 [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
-![Repo Size](https://img.shields.io/github/repo-size/whatchanged-community/whatchanged.svg)
+![Repo Size](https://img.shields.io/github/repo-size/release-lab/whatchanged.svg)
 
 ## whatchanged
 
@@ -13,7 +13,7 @@ An elegant changelog generator.
 
 Focus on **Elegant**/**Simple**/**Efficient**/**Scalable**
 
-[Feel the magic online](https://whatchanged-community.github.io)
+[Feel the magic online](https://release-lab.github.io)
 
 Feature:
 
@@ -23,8 +23,8 @@ Feature:
 - [x] Custom template file
 - [x] Conventional Commits Parser
 - [x] Generate multiple versions of change logs
-- [x] [Github Action](https://github.com/whatchanged-community/setup-whatchanged)
-- [x] [Visual Studio Code extension](https://github.com/whatchanged-community/vscode-whatchanged)
+- [x] [Github Action](https://github.com/release-lab/setup-whatchanged)
+- [x] [Visual Studio Code extension](https://github.com/release-lab/vscode-whatchanged)
 
 ### Usage
 
@@ -54,7 +54,7 @@ OPTIONS:
   --project     Specify the project to be generated. It can be a relative path.
                 or an absolute path or even a remote Git URL. eg.
                 --project=/path/to/project/which/contains/.git/folder
-                --project=https://github.com/whatchanged-community/whatchanged.git
+                --project=https://github.com/release-lab/whatchanged.git
                 Defaults to "--project=$PWD".
   --branch      Specify clone branch. only works for remote git project.
                 Defaults to "--branch=master"
@@ -113,10 +113,10 @@ EXAMPLES:
   $ whatchanged --project=/path/to/project v1.0.0
 
   # Generate changelog for the remote project
-  $ whatchanged --project=https://github.com/whatchanged-community/whatchanged.git v0.1.0
+  $ whatchanged --project=https://github.com/release-lab/whatchanged.git v0.1.0
 
 SOURCE CODE:
-  https://github.com/whatchanged-community/whatchanged
+  https://github.com/release-lab/whatchanged
 ```
 
 ### Install
@@ -125,23 +125,23 @@ SOURCE CODE:
 
 ```bash
 # install latest version
-curl -fsSL https://raw.githubusercontent.com/whatchanged-community/whatchanged/master/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/release-lab/whatchanged/master/install.sh | bash
 # or install specified version
-curl -fsSL https://raw.githubusercontent.com/whatchanged-community/whatchanged/master/install.sh | bash -s v0.4.1
+curl -fsSL https://raw.githubusercontent.com/release-lab/whatchanged/master/install.sh | bash -s v0.4.1
 # or install from gobinaries.com
-curl -sf https://gobinaries.com/whatchanged-community/whatchanged@v0.4.1 | sh
+curl -sf https://gobinaries.com/release-lab/whatchanged@v0.4.1 | sh
 ```
 
 2. PowerShell (Windows):
 
 ```bash
 # install latest version
-iwr https://github.com/whatchanged-community/whatchanged/raw/master/install.ps1 -useb | iex
+iwr https://github.com/release-lab/whatchanged/raw/master/install.ps1 -useb | iex
 # or install specified version
-$v="v0.4.1"; iwr https://github.com/whatchanged-community/whatchanged/raw/master/install.ps1 -useb | iex
+$v="v0.4.1"; iwr https://github.com/release-lab/whatchanged/raw/master/install.ps1 -useb | iex
 ```
 
-3. [Github release page](https://github.com/whatchanged-community/whatchanged/releases) (All platforms)
+3. [Github release page](https://github.com/release-lab/whatchanged/releases) (All platforms)
 
 download the executable file and put the executable file to `$PATH` then try the following command:
 
@@ -152,7 +152,7 @@ $ whatchanged --help
 4. Build and install from source using [Golang](https://golang.org) (All platforms)
 
 ```bash
-go install github.com/whatchanged-community/whatchanged/cmd/whatchanged@v0.4.1
+go install github.com/release-lab/whatchanged/cmd/whatchanged@v0.4.1
 ```
 
 ### FAQ

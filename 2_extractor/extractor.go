@@ -7,8 +7,8 @@ import (
 	"github.com/go-git/go-git/v5/plumbing"
 	"github.com/go-git/go-git/v5/plumbing/object"
 	"github.com/pkg/errors"
-	parser "github.com/whatchanged-community/whatchanged/1_parser"
-	"github.com/whatchanged-community/whatchanged/internal/client"
+	parser "github.com/release-lab/whatchanged/1_parser"
+	"github.com/release-lab/whatchanged/internal/client"
 )
 
 type ExtractSplice struct {

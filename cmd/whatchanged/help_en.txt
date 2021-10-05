@@ -22,7 +22,7 @@ OPTIONS:
   --project     Specify the project to be generated. It can be a relative path.
                 or an absolute path or even a remote Git URL. eg.
                 --project=/path/to/project/which/contains/.git/folder
-                --project=https://github.com/whatchanged-community/whatchanged.git
+                --project=https://github.com/release-lab/whatchanged.git
                 Defaults to "--project=$PWD".
   --branch      Specify clone branch. only works for remote git project.
                 Defaults to "--branch=master"
@@ -80,7 +80,7 @@ EXAMPLES:
   $ whatchanged --project=/path/to/project v1.0.0
 
   # Generate changelog for the remote project
-  $ whatchanged --project=https://github.com/whatchanged-community/whatchanged.git v0.1.0
+  $ whatchanged --project=https://github.com/release-lab/whatchanged.git v0.1.0
 
 SOURCE CODE:
-  https://github.com/whatchanged-community/whatchanged
+  https://github.com/release-lab/whatchanged

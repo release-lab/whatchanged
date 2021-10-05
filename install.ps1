@@ -4,7 +4,7 @@
 
 $ErrorActionPreference = 'Stop'
 
-$owner = "whatchanged-community"
+$owner = "release-lab"
 $repo = "whatchanged"
 $exeName = "whatchanged"
 

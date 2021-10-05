@@ -3,7 +3,7 @@ package formatter
 import (
 	"github.com/pkg/errors"
 	"github.com/shurcooL/markdownfmt/markdown"
-	"github.com/whatchanged-community/whatchanged/option"
+	"github.com/release-lab/whatchanged/option"
 )
 
 func Format(src []byte, format option.Format) ([]byte, error) {

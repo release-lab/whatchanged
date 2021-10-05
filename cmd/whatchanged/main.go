@@ -9,8 +9,8 @@ import (
 
 	"github.com/cloudfoundry/jibber_jabber"
 	"github.com/pkg/errors"
-	"github.com/whatchanged-community/whatchanged"
-	"github.com/whatchanged-community/whatchanged/option"
+	"github.com/release-lab/whatchanged"
+	"github.com/release-lab/whatchanged/option"
 )
 
 var (

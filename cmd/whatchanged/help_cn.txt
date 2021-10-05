@@ -21,7 +21,7 @@ OPTIONS:
   --version     打印版本信息。
   --project     指定要生成的 Git 项目，它可以是一个相对/绝对路径或者远程地址。例如：
                 --project=/path/to/project/which/contains/.git/folder
-                --project=https://github.com/whatchanged-community/whatchanged.git
+                --project=https://github.com/release-lab/whatchanged.git
                 默认值: "--project=$PWD".
   --branch      指定要克隆的分支，仅在生成远程仓库时有效。
                 默认值: "--branch=master"
@@ -77,7 +77,7 @@ EXAMPLES:
   $ whatchanged --project=/path/to/project v1.0.0
 
   # 生成远程项目的变更日志
-  $ whatchanged --project=https://github.com/whatchanged-community/whatchanged.git v0.1.0
+  $ whatchanged --project=https://github.com/release-lab/whatchanged.git v0.1.0
 
 SOURCE CODE:
-  https://github.com/whatchanged-community/whatchanged
+  https://github.com/release-lab/whatchanged

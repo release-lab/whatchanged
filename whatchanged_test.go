@@ -6,8 +6,8 @@ import (
 	"io/ioutil"
 	"testing"
 
+	"github.com/release-lab/whatchanged/option"
 	"github.com/stretchr/testify/assert"
-	"github.com/whatchanged-community/whatchanged/option"
 )
 
 func TestGenerate(t *testing.T) {
@@ -92,8 +92,8 @@ func TestGenerateForTestRepo(t *testing.T) {
 
 	var tests = []TestCase{
 		{
-			name:       "whatchanged-community/test-first-commit",
-			Project:    "https://github.com/whatchanged-community/test-first-commit.git",
+			name:       "release-lab/test-first-commit",
+			Project:    "https://github.com/release-lab/test-first-commit.git",
 			ResultFile: "fixtures/test-first-commit.md",
 			options: &option.Options{
 				Version: []string{"HEAD~"},

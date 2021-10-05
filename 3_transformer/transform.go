@@ -7,9 +7,9 @@ import (
 
 	"github.com/go-git/go-git/v5/plumbing/object"
 	"github.com/pkg/errors"
-	extractor "github.com/whatchanged-community/whatchanged/2_extractor"
-	"github.com/whatchanged-community/whatchanged/internal/client"
-	"github.com/whatchanged-community/whatchanged/internal/commit/parser"
+	extractor "github.com/release-lab/whatchanged/2_extractor"
+	"github.com/release-lab/whatchanged/internal/client"
+	"github.com/release-lab/whatchanged/internal/commit/parser"
 	giturls "github.com/whilp/git-urls"
 )
 

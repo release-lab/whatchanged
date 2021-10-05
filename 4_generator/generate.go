@@ -9,9 +9,9 @@ import (
 	"io/ioutil"
 
 	"github.com/pkg/errors"
-	transformer "github.com/whatchanged-community/whatchanged/3_transformer"
-	"github.com/whatchanged-community/whatchanged/internal/client"
-	"github.com/whatchanged-community/whatchanged/option"
+	transformer "github.com/release-lab/whatchanged/3_transformer"
+	"github.com/release-lab/whatchanged/internal/client"
+	"github.com/release-lab/whatchanged/option"
 )
 
 //go:embed template/*.tpl

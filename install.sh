@@ -3,7 +3,7 @@
 set -e
 
 downloadFolder="${HOME}/Downloads"
-owner="whatchanged-community"
+owner="release-lab"
 repo="whatchanged"
 exe_name="whatchanged"
 

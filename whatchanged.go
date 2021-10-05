@@ -13,14 +13,14 @@ import (
 	"github.com/go-git/go-git/v5/plumbing/transport/http"
 	"github.com/go-git/go-git/v5/storage/memory"
 	"github.com/pkg/errors"
-	parser "github.com/whatchanged-community/whatchanged/1_parser"
-	extractor "github.com/whatchanged-community/whatchanged/2_extractor"
-	transformer "github.com/whatchanged-community/whatchanged/3_transformer"
-	generator "github.com/whatchanged-community/whatchanged/4_generator"
-	formatter "github.com/whatchanged-community/whatchanged/5_formatter"
-	writer "github.com/whatchanged-community/whatchanged/6_writer"
-	"github.com/whatchanged-community/whatchanged/internal/client"
-	"github.com/whatchanged-community/whatchanged/option"
+	parser "github.com/release-lab/whatchanged/1_parser"
+	extractor "github.com/release-lab/whatchanged/2_extractor"
+	transformer "github.com/release-lab/whatchanged/3_transformer"
+	generator "github.com/release-lab/whatchanged/4_generator"
+	formatter "github.com/release-lab/whatchanged/5_formatter"
+	writer "github.com/release-lab/whatchanged/6_writer"
+	"github.com/release-lab/whatchanged/internal/client"
+	"github.com/release-lab/whatchanged/option"
 )
 
 var (

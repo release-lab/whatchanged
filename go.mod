@@ -1,4 +1,4 @@
-module github.com/whatchanged-community/whatchanged
+module github.com/release-lab/whatchanged
 
 go 1.17
 
