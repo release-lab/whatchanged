@@ -129,13 +129,9 @@ curl -fsSL https://github.com/release-lab/install/raw/master/install.sh | bash -
 $repo="release-lab/whatchanged";iwr https://github.com/release-lab/install/raw/master/install.ps1 -useb | iex
 ```
 
-3. [Github release page](https://github.com/release-lab/whatchanged/releases) (全平台支持)
+3. 从 [Github Release Page](https://github.com/release-lab/whatchanged/releases) 下载 (全平台支持)
 
-下载可执行文件，并且把它加入到`$PATH` 环境变量中，然后尝试以下命令：
-
-```bash
-$ whatchanged --help
-```
+> 下载可执行文件，并且把它加入到`$PATH` 环境变量中
 
 4. 使用 [Golang](https://golang.org) 从源码中构建并安装 (全平台支持)
 
