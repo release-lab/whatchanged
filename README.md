@@ -120,24 +120,16 @@ SOURCE CODE:
 1. Shell (Mac/Linux)
 
 ```bash
-# 安装最新版本
-curl -fsSL https://raw.githubusercontent.com/release-lab/whatchanged/master/install.sh | bash
-# 或者安装指定版本
-curl -fsSL https://raw.githubusercontent.com/release-lab/whatchanged/master/install.sh | bash -s v0.4.1
-# 或者通过 gobinaries.com 安装
-curl -sf https://gobinaries.com/release-lab/whatchanged@v0.4.1 | sh
+curl -fsSL https://github.com/release-lab/install/raw/master/install.sh | bash -s release-lab/whatchanged
 ```
 
 2. PowerShell (Windows):
 
-```bash
-# 安装最新版本
-iwr https://github.com/release-lab/whatchanged/raw/master/install.ps1 -useb | iex
-# 或者安装指定版本
-$v="v0.4.1"; iwr https://github.com/release-lab/whatchanged/raw/master/install.ps1 -useb | iex
+```powershell
+$repo="release-lab/whatchanged";iwr https://github.com/release-lab/install/raw/master/install.ps1 -useb | iex
 ```
 
-3. [Github release page](https://github.com/release-lab/whatchanged/releases) (全平台支持))
+3. [Github release page](https://github.com/release-lab/whatchanged/releases) (全平台支持)
 
 下载可执行文件，并且把它加入到`$PATH` 环境变量中，然后尝试以下命令：
 

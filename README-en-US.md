@@ -124,21 +124,13 @@ SOURCE CODE:
 1. Shell (Mac/Linux)
 
 ```bash
-# install latest version
-curl -fsSL https://raw.githubusercontent.com/release-lab/whatchanged/master/install.sh | bash
-# or install specified version
-curl -fsSL https://raw.githubusercontent.com/release-lab/whatchanged/master/install.sh | bash -s v0.4.1
-# or install from gobinaries.com
-curl -sf https://gobinaries.com/release-lab/whatchanged@v0.4.1 | sh
+curl -fsSL https://github.com/release-lab/install/raw/master/install.sh | bash -s release-lab/whatchanged
 ```
 
 2. PowerShell (Windows):
 
-```bash
-# install latest version
-iwr https://github.com/release-lab/whatchanged/raw/master/install.ps1 -useb | iex
-# or install specified version
-$v="v0.4.1"; iwr https://github.com/release-lab/whatchanged/raw/master/install.ps1 -useb | iex
+```powershell
+$repo="release-lab/whatchanged";iwr https://github.com/release-lab/install/raw/master/install.ps1 -useb | iex
 ```
 
 3. [Github release page](https://github.com/release-lab/whatchanged/releases) (All platforms)
