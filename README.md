@@ -120,13 +120,13 @@ SOURCE CODE:
 1. Shell (Mac/Linux)
 
 ```bash
-curl -fsSL https://github.com/release-lab/install/raw/master/install.sh | bash -s release-lab/whatchanged
+curl -fsSL https://github.com/release-lab/install/raw/v1/install.sh | bash -s -- -r=release-lab/whatchanged
 ```
 
 2. PowerShell (Windows):
 
 ```powershell
-$repo="release-lab/whatchanged";iwr https://github.com/release-lab/install/raw/master/install.ps1 -useb | iex
+$r="release-lab/whatchanged";iwr https://github.com/release-lab/install/raw/v1/install.ps1 -useb | iex
 ```
 
 3. 从 [Github Release Page](https://github.com/release-lab/whatchanged/releases) 下载 (全平台支持)
