@@ -1,4 +1,4 @@
-English | [中文简体](README_zh-CN.md)
+English | [中文简体](README.md)
 
 [![Build Status](https://github.com/release-lab/whatchanged/workflows/ci/badge.svg)](https://github.com/release-lab/whatchanged/actions)
 [![Build Status](https://github.com/release-lab/whatchanged/workflows/playground/badge.svg)](https://github.com/release-lab/whatchanged/actions)
@@ -124,22 +124,18 @@ SOURCE CODE:
 1. Shell (Mac/Linux)
 
 ```bash
-curl -fsSL https://github.com/release-lab/install/raw/master/install.sh | bash -s release-lab/whatchanged
+curl -fsSL https://github.com/release-lab/install/raw/v1/install.sh | bash -s -- -r=release-lab/whatchanged
 ```
 
 2. PowerShell (Windows):
 
 ```powershell
-$repo="release-lab/whatchanged";iwr https://github.com/release-lab/install/raw/master/install.ps1 -useb | iex
+$r="release-lab/whatchanged";iwr https://github.com/release-lab/install/raw/v1/install.ps1 -useb | iex
 ```
 
 3. [Github release page](https://github.com/release-lab/whatchanged/releases) (All platforms)
 
-download the executable file and put the executable file to `$PATH` then try the following command:
-
-```bash
-$ whatchanged --help
-```
+> download the executable file and put the executable file to `$PATH`
 
 4. Build and install from source using [Golang](https://golang.org) (All platforms)
 

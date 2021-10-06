@@ -1,4 +1,4 @@
-[English](README.md) | 中文简体
+[English](README-en-US.md) | 中文简体
 
 [![Build Status](https://github.com/release-lab/whatchanged/workflows/ci/badge.svg)](https://github.com/release-lab/whatchanged/actions)
 [![Build Status](https://github.com/release-lab/whatchanged/workflows/playground/badge.svg)](https://github.com/release-lab/whatchanged/actions)
