@@ -158,7 +158,7 @@ func Transform(g *client.GitClient, splices []*extractor.ExtractSplice) ([]*Temp
 			}
 
 			msg := conventionalcommitparser.Parse(commit.Message)
-			header := msg.GetHeader()
+			header := msg.ParseHeader()
 
 			field := msg
 
@@ -169,7 +169,7 @@ func Transform(g *client.GitClient, splices []*extractor.ExtractSplice) ([]*Temp
 			}
 
 			if field.Footer != nil && len(field.Footer) > 0 {
-				breakingChangeFooter := field.GetFooterField("BREAKING CHANGE", "BREAKING CHANGES", "BREAKING-CHANGE", "BREAKING-CHANGES")
+				breakingChangeFooter := field.GetFooterByField("BREAKING CHANGE", "BREAKING CHANGES", "BREAKING-CHANGE", "BREAKING-CHANGES")
 
 				if breakingChangeFooter != nil {
 					if ctx.BreakingChanges == nil {
@@ -187,7 +187,7 @@ func Transform(g *client.GitClient, splices []*extractor.ExtractSplice) ([]*Temp
 			}
 
 			if header.Type == "revert" {
-				revertFooter := field.GetFooterField("revert", "Revert")
+				revertFooter := field.GetFooterByField("revert", "Revert")
 
 				if revertFooter != nil {
 					revertHash := revertFooter.Content
