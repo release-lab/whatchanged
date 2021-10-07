@@ -10,7 +10,6 @@ import (
 	"github.com/cloudfoundry/jibber_jabber"
 	"github.com/pkg/errors"
 	"github.com/release-lab/whatchanged"
-	"github.com/release-lab/whatchanged/option"
 )
 
 var (
@@ -56,8 +55,8 @@ func run() error {
 	flag.StringVar(&project, "project", cwd, "Project filepath or remote URL")
 	flag.StringVar(&outputFile, "output", "", "Specify the file to be written")
 	flag.StringVar(&branch, "branch", "master", "Specify branch for remote git project")
-	flag.StringVar(&format, "fmt", string(option.FormatMarkdown), "The changelog format")
-	flag.StringVar(&preset, "preset", string(option.PresetDefault), "Cli built-in markdown template")
+	flag.StringVar(&format, "fmt", string(whatchanged.FormatMarkdown), "The changelog format")
+	flag.StringVar(&preset, "preset", string(whatchanged.PresetDefault), "Cli built-in markdown template")
 	flag.StringVar(&templateFile, "tpl", "", "Specify the template when generating")
 	flag.BoolVar(&skipFormat, "skip-format", false, "Skip the formatting process, which is very useful for keeping the original format.")
 	flag.BoolVar(&showHelp, "help", false, "Print help information")
@@ -93,11 +92,11 @@ func run() error {
 		output = f
 	}
 
-	if err := whatchanged.Generate(context.Background(), project, output, &option.Options{
+	if err := whatchanged.Generate(context.Background(), project, output, &whatchanged.Options{
 		Version:      ranges,
 		Branch:       branch,
-		Preset:       option.Preset(preset),
-		Format:       option.Format(format),
+		Preset:       whatchanged.EnumPreset(preset),
+		Format:       whatchanged.EnumFormat(format),
 		SkipFormat:   skipFormat,
 		TemplateFile: templateFile,
 	}); err != nil {

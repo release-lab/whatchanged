@@ -12,8 +12,6 @@ import (
 
 	"github.com/pkg/errors"
 	"github.com/release-lab/whatchanged"
-	generator "github.com/release-lab/whatchanged/4_generator"
-	"github.com/release-lab/whatchanged/option"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -49,7 +47,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	}()
 
 	if r.URL.Path == "/template" {
-		b, err := generator.TemplateFS.ReadFile("template/full.tpl")
+		b, err := whatchanged.TemplateFS.ReadFile("template/full.tpl")
 
 		if err != nil {
 			_, _ = w.Write([]byte(err.Error()))
@@ -76,11 +74,11 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		branch = branchDecoded
 	}
 
-	if err = whatchanged.Generate(r.Context(), repo, output, &option.Options{
+	if err = whatchanged.Generate(r.Context(), repo, output, &whatchanged.Options{
 		Version:  regexp.MustCompile(`\s+`).Split(version, -1),
 		Branch:   branch,
 		Template: template,
-		Preset:   option.Preset(preset),
+		Preset:   whatchanged.EnumPreset(preset),
 	}); err != nil {
 		err = errors.WithStack(err)
 	}

@@ -13,14 +13,7 @@ import (
 	"github.com/go-git/go-git/v5/plumbing/transport/http"
 	"github.com/go-git/go-git/v5/storage/memory"
 	"github.com/pkg/errors"
-	parser "github.com/release-lab/whatchanged/1_parser"
-	extractor "github.com/release-lab/whatchanged/2_extractor"
-	transformer "github.com/release-lab/whatchanged/3_transformer"
-	generator "github.com/release-lab/whatchanged/4_generator"
-	formatter "github.com/release-lab/whatchanged/5_formatter"
-	writer "github.com/release-lab/whatchanged/6_writer"
 	"github.com/release-lab/whatchanged/internal/client"
-	"github.com/release-lab/whatchanged/option"
 )
 
 var (
@@ -30,22 +23,22 @@ var (
 
 // generate changelog
 // project: it could be a file path or a git URL
-func Generate(ctx context.Context, project string, w io.Writer, options *option.Options) error {
+func Generate(ctx context.Context, project string, w io.Writer, options *Options) error {
 	var (
 		err error
 	)
 
 	if options == nil {
-		options = &option.Options{
-			Format: option.FormatMarkdown,
-			Preset: option.PresetDefault,
+		options = &Options{
+			Format: FormatMarkdown,
+			Preset: PresetDefault,
 		}
 	} else {
 		if options.Format == "" {
-			options.Format = option.FormatMarkdown
+			options.Format = FormatMarkdown
 		}
 		if options.Preset == "" {
-			options.Preset = option.PresetDefault
+			options.Preset = PresetDefault
 		}
 	}
 
@@ -115,32 +108,32 @@ func Generate(ctx context.Context, project string, w io.Writer, options *option.
 		}
 	}
 
-	scope, err := parser.Parse(g, options.Version)
+	scope, err := Parse(g, options.Version)
 
 	if err != nil {
 		return errors.WithStack(err)
 	}
 
-	splices, err := extractor.Extract(g, scope)
+	splices, err := Extract(g, scope)
 
 	if err != nil {
 		return errors.WithStack(err)
 	}
 
-	ctxs, err := transformer.Transform(g, splices)
+	ctxs, err := Transform(g, splices)
 
 	if err != nil {
 		return errors.WithStack(err)
 	}
 
-	output, err := generator.Generate(g, ctxs, options.Format, options.Preset, options.TemplateFile, options.Template)
+	output, err := GenerateFromContext(g, ctxs, options.Format, options.Preset, options.TemplateFile, options.Template)
 
 	if err != nil {
 		return errors.WithStack(err)
 	}
 
 	if options.SkipFormat {
-		_, err = writer.Write(output, w)
+		_, err = Write(output, w)
 
 		if err != nil {
 			return errors.WithStack(err)
@@ -148,13 +141,13 @@ func Generate(ctx context.Context, project string, w io.Writer, options *option.
 
 		return nil
 	} else {
-		formattedOutput, err := formatter.Format(output, options.Format)
+		formattedOutput, err := Format(output, options.Format)
 
 		if err != nil {
 			return errors.WithStack(err)
 		}
 
-		_, err = writer.Write(formattedOutput, w)
+		_, err = Write(formattedOutput, w)
 
 		if err != nil {
 			return errors.WithStack(err)

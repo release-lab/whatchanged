@@ -1,4 +1,4 @@
-package extractor
+package whatchanged
 
 import (
 	"io"
@@ -7,7 +7,6 @@ import (
 	"github.com/go-git/go-git/v5/plumbing"
 	"github.com/go-git/go-git/v5/plumbing/object"
 	"github.com/pkg/errors"
-	parser "github.com/release-lab/whatchanged/1_parser"
 	"github.com/release-lab/whatchanged/internal/client"
 )
 
@@ -27,7 +26,7 @@ func getTagOfCommit(tags []*client.Tag, commit *object.Commit) (result []*client
 	return
 }
 
-func Extract(g *client.GitClient, scopes []*parser.Scope) ([]*ExtractSplice, error) {
+func Extract(g *client.GitClient, scopes []*Scope) ([]*ExtractSplice, error) {
 	splices := make([]*ExtractSplice, 0)
 
 	for _, scope := range scopes {

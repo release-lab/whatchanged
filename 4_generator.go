@@ -1,4 +1,4 @@
-package generator
+package whatchanged
 
 import (
 	"bytes"
@@ -9,17 +9,15 @@ import (
 	"io/ioutil"
 
 	"github.com/pkg/errors"
-	transformer "github.com/release-lab/whatchanged/3_transformer"
 	"github.com/release-lab/whatchanged/internal/client"
-	"github.com/release-lab/whatchanged/option"
 )
 
 //go:embed template/*.tpl
 var TemplateFS embed.FS
 
-func Generate(g *client.GitClient, contexts []*transformer.TemplateContext, format option.Format, preset option.Preset, templateFile string, templateStr string) ([]byte, error) {
+func GenerateFromContext(g *client.GitClient, contexts []*TemplateContext, format EnumFormat, preset EnumPreset, templateFile string, templateStr string) ([]byte, error) {
 	switch format {
-	case option.FormatJSON:
+	case FormatJSON:
 		output, err := json.Marshal(contexts)
 
 		if err != nil {
@@ -27,16 +25,16 @@ func Generate(g *client.GitClient, contexts []*transformer.TemplateContext, form
 		}
 
 		return output, nil
-	case option.FormatMarkdown:
+	case FormatMarkdown:
 		var output []byte
 
 		if templateStr != "" {
 			// ignore
 		} else if templateFile == "" {
 			switch preset {
-			case option.PresetDefault:
+			case PresetDefault:
 				fallthrough
-			case option.PresetFull:
+			case PresetFull:
 				b, err := TemplateFS.ReadFile(fmt.Sprintf("template/%s.tpl", preset))
 
 				if err != nil {

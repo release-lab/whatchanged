@@ -6,14 +6,13 @@ import (
 	"io/ioutil"
 	"testing"
 
-	"github.com/release-lab/whatchanged/option"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestGenerate(t *testing.T) {
 	type TestCase struct {
 		name       string
-		options    *option.Options
+		options    *Options
 		Project    string
 		ResultFile string
 		wantErr    error
@@ -24,7 +23,7 @@ func TestGenerate(t *testing.T) {
 			name:       "vscode-deno",
 			Project:    "./__test__/vscode-deno",
 			ResultFile: "./__test__/vscode-deno.CHANGELOG.md",
-			options: &option.Options{
+			options: &Options{
 				Version: []string{"HEAD~"},
 			},
 		},
@@ -32,7 +31,7 @@ func TestGenerate(t *testing.T) {
 			name:       "v",
 			Project:    "./__test__/v",
 			ResultFile: "./__test__/v.CHANGELOG.md",
-			options: &option.Options{
+			options: &Options{
 				Version: []string{"HEAD~"},
 			},
 		},
@@ -40,7 +39,7 @@ func TestGenerate(t *testing.T) {
 			name:       "whatchanged single version",
 			Project:    "./",
 			ResultFile: "./__test__/whatchanged-[v0.2.0].CHANGELOG.md",
-			options: &option.Options{
+			options: &Options{
 				Version: []string{"v0.2.0"},
 			},
 		},
@@ -48,7 +47,7 @@ func TestGenerate(t *testing.T) {
 			name:       "whatchanged version range",
 			Project:    "./",
 			ResultFile: "./__test__/whatchanged-[v0.2.0~v0.1.0].CHANGELOG.md",
-			options: &option.Options{
+			options: &Options{
 				Version: []string{"v0.2.0~v0.1.0"},
 			},
 		},
@@ -56,7 +55,7 @@ func TestGenerate(t *testing.T) {
 			name:       "whatchanged version range",
 			Project:    "./",
 			ResultFile: "./__test__/whatchanged-[23448a5482359f28a0089b17280dd2a0a0eaef26~9dff4fc6a9d746ffd9dd10215cf04d2fec2edd2a].CHANGELOG.md",
-			options: &option.Options{
+			options: &Options{
 				Version: []string{"23448a5482359f28a0089b17280dd2a0a0eaef26~9dff4fc6a9d746ffd9dd10215cf04d2fec2edd2a"},
 			},
 		},

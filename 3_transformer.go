@@ -1,4 +1,4 @@
-package transformer
+package whatchanged
 
 import (
 	"fmt"
@@ -8,7 +8,6 @@ import (
 	"github.com/go-git/go-git/v5/plumbing/object"
 	"github.com/pkg/errors"
 	conventionalcommitparser "github.com/release-lab/conventional-commit-parser"
-	extractor "github.com/release-lab/whatchanged/2_extractor"
 	"github.com/release-lab/whatchanged/internal/client"
 	giturls "github.com/whilp/git-urls"
 )
@@ -91,7 +90,7 @@ func generateCommitHashURL(remoteURL *url.URL, longHash string) string {
 	}
 }
 
-func Transform(g *client.GitClient, splices []*extractor.ExtractSplice) ([]*TemplateContext, error) {
+func Transform(g *client.GitClient, splices []*ExtractSplice) ([]*TemplateContext, error) {
 	context := make([]*TemplateContext, 0)
 
 	remote, err := g.GetRemote()
