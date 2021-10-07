@@ -1,6 +1,6 @@
 ## v0.2.0 (2020-11-27)
 
-### 🔥  New feature:
+### New feature:
 
 - refactor multiple version generation([`65c50c6`](https://github.com/release-lab/whatchanged/commit/65c50c6b30f5dfc608c260c73d55cc8601041bdf)) (@axetroy)
 - unified usage when invalid options([`dde4ece`](https://github.com/release-lab/whatchanged/commit/dde4ecee3db8925c804db839bed098eb4a0f82ec)) (@axetroy)
@@ -16,7 +16,7 @@
 - add changelog repl. generate changelog online almose done.([`c7127b1`](https://github.com/release-lab/whatchanged/commit/c7127b1b0e3869854d293b536eb2f21c4e0c8e3c)) (@axetroy)
 - enabled cors for changelog-remote([`8b5f7fb`](https://github.com/release-lab/whatchanged/commit/8b5f7fbda0f6aefbc933de757a13ed34d105990f)) (@axetroy)
 
-### 🐛  Bugs fixed:
+### Bugs fixed:
 
 - the breaking change block is generate in incorrect format([`5bf4bee`](https://github.com/release-lab/whatchanged/commit/5bf4beea7124cac872598c5487657548e7a826c9)) (@axetroy)
 - the incorrect range generated when there are no parameters([`bbf648e`](https://github.com/release-lab/whatchanged/commit/bbf648e756ab74abb25764ee9ead032343832b3b)) (@axetroy)
@@ -31,7 +31,7 @@
 - **repl**: production assets should be set publicPath([`89ea856`](https://github.com/release-lab/whatchanged/commit/89ea856f4f2046f7347a5ebd2c9d60e3a3650595)) (@axetroy)
 - **repl**: markdown render style([`acebfd0`](https://github.com/release-lab/whatchanged/commit/acebfd0bd736dac9c811186c82ba241d7b1e05e1)) (@axetroy)
 
-### ❤️ BREAKING CHANGES:
+### BREAKING CHANGES:
 
 - rename
 
@@ -63,7 +63,7 @@ Closes #6
 
 ## v0.1.0 (2020-11-24)
 
-### 🔥  New feature:
+### New feature:
 
 - link commit for generation([`b9432db`](https://github.com/release-lab/whatchanged/commit/b9432db1d1f5afe170296b9e0bfebee1aa62fabb)) (@axetroy)
 - add full preset template([`7553570`](https://github.com/release-lab/whatchanged/commit/7553570590b571bd33e10a4f80ec5639d0613042)) (@axetroy)
@@ -76,7 +76,7 @@ Closes #6
 - support version range. eg v2.0.0~v1.0.0([`a65a4a8`](https://github.com/release-lab/whatchanged/commit/a65a4a8bd0122e41c7b20c98676e9def76e786d3)) (@axetroy)
 - parse commit message and generate to template([`7f67e78`](https://github.com/release-lab/whatchanged/commit/7f67e783926fed647d2ad5414f31448eea106fc3)) (@axetroy)
 
-### 🐛  Bugs fixed:
+### Bugs fixed:
 
 - improve ssh git url parser([`9993ee6`](https://github.com/release-lab/whatchanged/commit/9993ee600c84cf77d3a0c634e8fa83c2580e137f)) (@axetroy)
 - commit range not include commit of tag([`f8df0ba`](https://github.com/release-lab/whatchanged/commit/f8df0ba654c8faf67eccf98262cd55807e53e597)) (@axetroy)
