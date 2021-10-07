@@ -28,12 +28,54 @@ type Footer struct {
 }
 
 var (
-	EMPTY_LINE_PATTERN    = regexp.MustCompile(`^\s*$`)
-	HEADER_PATTERN        = regexp.MustCompile(`^(?:fixup!\s*)?(\w*)(\(([\w\$\.\*/-]*)\))?(!?):\s(.*)$`)
-	FOOTER_PATTERN        = regexp.MustCompile(`(?i)^([a-z]+((\s|-)[a-z]+)*):\s?(.*)$`)
-	REVERT_HEADER_PATTERN = regexp.MustCompile(`^(?i)revert\s(.*)$`)
-	REVERT_BODY_PATTERN   = regexp.MustCompile(`(?i)This\sreverts\scommit\s(\w+)\.?`)
+	EMPTY_LINE_PATTERN             = regexp.MustCompile(`^\s*$`)
+	HEADER_PATTERN                 = regexp.MustCompile(`^(?:fixup!\s*)?(\w*)(\(([\w\$\.\*/-]*)\))?(!?):\s(.*)$`)
+	FOOTER_TAG_PATTERN             = regexp.MustCompile(`(?i)^([a-z]+(-[a-z]+)*):\s?(.*)$`)
+	FOOTER_HASH_PATTERN            = regexp.MustCompile(`^(?i)^([a-z][a-z]+)\s(((,\s*)?#\d+(,\s)?)+)$`)
+	FOOTER_BREAKING_CHANGE_PATTERN = regexp.MustCompile(`^(BREAKING\sCHANGE):\s?(.*)$`)
+	REVERT_HEADER_PATTERN          = regexp.MustCompile(`^(?i)revert\s(.*)$`)
+	REVERT_BODY_PATTERN            = regexp.MustCompile(`(?i)This\sreverts\scommit\s(\w+)\.?`)
 )
+
+func paseFooterParagraph(txt string) Footer {
+	footer := Footer{}
+
+	tagMatcher := FOOTER_TAG_PATTERN.FindStringSubmatch(txt)
+	breakingChangeMatcher := FOOTER_BREAKING_CHANGE_PATTERN.FindStringSubmatch(txt)
+	hashTagMatcher := FOOTER_HASH_PATTERN.FindStringSubmatch(txt)
+
+	if len(breakingChangeMatcher) != 0 {
+		footer.Tag = strings.TrimSpace(breakingChangeMatcher[1])
+		footer.Title = strings.TrimSpace(breakingChangeMatcher[2])
+	} else if len(tagMatcher) != 0 {
+		footer.Tag = strings.TrimSpace(tagMatcher[1])
+		footer.Title = strings.TrimSpace(tagMatcher[3])
+	} else if len(hashTagMatcher) != 0 {
+		footer.Tag = strings.TrimSpace(hashTagMatcher[1])
+		footer.Title = strings.TrimSpace(hashTagMatcher[2])
+	} else {
+		footer.Tag = ""
+		footer.Title = txt
+	}
+
+	return footer
+}
+
+func isFooterParagraph(txt string) bool {
+	if FOOTER_BREAKING_CHANGE_PATTERN.MatchString(txt) {
+		return true
+	}
+
+	if FOOTER_TAG_PATTERN.MatchString(txt) {
+		return true
+	}
+
+	if FOOTER_HASH_PATTERN.MatchString(txt) {
+		return true
+	}
+
+	return false
+}
 
 func splitToLines(text string) []string {
 	return strings.Split(strings.ReplaceAll(text, "\r\n", "\n"), "\n")
@@ -76,15 +118,9 @@ func (m Message) ParseFooter() []Footer {
 	lineLoop:
 		for index, line := range lines {
 			if index == 0 {
-				matcher := FOOTER_PATTERN.FindStringSubmatch(line)
-
-				if len(matcher) == 0 {
-					footer.Tag = ""
-					footer.Title = line
-				} else {
-					footer.Tag = strings.TrimSpace(matcher[1])
-					footer.Title = strings.TrimSpace(matcher[4])
-				}
+				f := paseFooterParagraph(line)
+				footer.Tag = f.Tag
+				footer.Title = f.Title
 				continue lineLoop
 			} else {
 				contents = append(contents, line)
@@ -116,6 +152,29 @@ func (m Message) ParseFooter() []Footer {
 	}
 
 	return footers
+}
+
+func (m Message) GetCloses() []string {
+	footer := m.GetFooterByField("Close", "close", "Closes", "closes", "Fix", "fix", "Fixes", "fixes")
+
+	closes := make([]string, 0)
+
+	if footer == nil {
+		return nil
+	}
+
+	// #1, #2, #3,#4, #110,#123
+	arr := strings.Split(footer.Title, ",")
+
+	for _, r := range arr {
+		hash := strings.TrimSpace(r)
+
+		if hash != "" {
+			closes = append(closes, strings.TrimSpace(r))
+		}
+	}
+
+	return closes
 }
 
 func (m Message) GetFooterByField(tags ...string) *Footer {
@@ -198,7 +257,7 @@ func Parse(message string) Message {
 		previousLine := lines[index-1]
 
 		// if is a footer start
-		if FOOTER_PATTERN.MatchString(line) && (EMPTY_LINE_PATTERN.MatchString(previousLine) || FOOTER_PATTERN.MatchString(previousLine)) {
+		if isFooterParagraph(line) && (EMPTY_LINE_PATTERN.MatchString(previousLine) || isFooterParagraph(previousLine)) {
 			footerContent := []string{line}
 
 			index++
@@ -219,7 +278,7 @@ func Parse(message string) Message {
 				line := lines[index]
 
 				// if match the next footer tag
-				if FOOTER_PATTERN.MatchString(line) {
+				if isFooterParagraph(line) {
 					footer = append(footer, strings.TrimSpace(strings.Join(footerContent, "\n")))
 					break innerLoop
 				} else {

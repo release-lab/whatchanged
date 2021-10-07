@@ -59,8 +59,6 @@
 + $ whatchanged --help
 ```
 
-Closes #6
-
 ## v0.1.0 (2020-11-24)
 
 ### New feature:

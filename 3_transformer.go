@@ -45,8 +45,9 @@ type Commit struct {
 	Author              *object.Signature
 	Committer           *object.Signature
 	Field               Message
-	RevertCommitHash    *string // revert hash
-	RevertCommitHashURL *string // revert hash URL
+	RevertCommitHash    *string   // Revert hash
+	RevertCommitHashURL *string   // Revert hash URL
+	Closes              *[]string // Closes issues
 }
 
 // https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit-message-header
@@ -168,7 +169,9 @@ func Transform(g *client.GitClient, splices []*ExtractSplice) ([]*TemplateContex
 			}
 
 			if field.Footer != nil && len(field.Footer) > 0 {
-				breakingChangeFooter := field.GetFooterByField("BREAKING CHANGE", "BREAKING CHANGES", "BREAKING-CHANGE", "BREAKING-CHANGES")
+				// Specification
+				// BREAKING-CHANGE MUST be synonymous with BREAKING CHANGE, when used as a token in a footer.
+				breakingChangeFooter := field.GetFooterByField("BREAKING CHANGE", "BREAKING-CHANGE")
 
 				if breakingChangeFooter != nil {
 					if ctx.BreakingChanges == nil {
@@ -182,6 +185,12 @@ func Transform(g *client.GitClient, splices []*ExtractSplice) ([]*TemplateContex
 							Content: breakingChangeFooter.Content,
 						},
 					}
+				}
+
+				closes := field.GetCloses()
+
+				if len(closes) != 0 {
+					c.Closes = &closes
 				}
 			}
 

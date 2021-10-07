@@ -8,7 +8,7 @@ require (
 	github.com/cloudfoundry/jibber_jabber v0.0.0-20151120183258-bcc4c8345a21
 	github.com/go-git/go-git/v5 v5.4.2
 	github.com/pkg/errors v0.9.1
-	github.com/release-lab/conventional-commit-parser v0.1.6
+	github.com/release-lab/conventional-commit-parser v0.1.7
 	github.com/stretchr/testify v1.7.0
 	github.com/whilp/git-urls v1.0.0
 )

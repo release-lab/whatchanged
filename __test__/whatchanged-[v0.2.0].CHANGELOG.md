@@ -58,5 +58,3 @@
 - $ changelog --help
 + $ whatchanged --help
 ```
-
-Closes #6

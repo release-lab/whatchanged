@@ -237,6 +237,8 @@ github.com/release-lab/conventional-commit-parser v0.1.5 h1:r4kWlRbh5V4Y0ne3j2A4
 github.com/release-lab/conventional-commit-parser v0.1.5/go.mod h1:J56B1fNHAVNm5SynjINkz1mThTKqN0KQnFH54Fuz2KQ=
 github.com/release-lab/conventional-commit-parser v0.1.6 h1:GsmmsOBnYtuWubjaTkQYp7KqkvdHNbOirxGtWsUWAww=
 github.com/release-lab/conventional-commit-parser v0.1.6/go.mod h1:J56B1fNHAVNm5SynjINkz1mThTKqN0KQnFH54Fuz2KQ=
+github.com/release-lab/conventional-commit-parser v0.1.7 h1:aoyrKdOg3rDVhOci6kgqXzLFHV9AJLY58WHbgD3SQaQ=
+github.com/release-lab/conventional-commit-parser v0.1.7/go.mod h1:J56B1fNHAVNm5SynjINkz1mThTKqN0KQnFH54Fuz2KQ=
 github.com/rogpeppe/fastuuid v0.0.0-20150106093220-6724a57986af/go.mod h1:XWv6SoW27p1b0cqNHllgS5HIMJraePCO15w5zCzIWYg=
 github.com/rogpeppe/go-internal v1.3.0/go.mod h1:M8bDsm7K2OlrFYOpmOWEs/qY81heoFRclV5y23lUDJ4=
 github.com/russross/blackfriday/v2 v2.0.1/go.mod h1:+Rmxgy9KzJVeS9/2gXHxylqXiyQDYRxCVz55jmeOWTM=
