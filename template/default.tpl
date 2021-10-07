@@ -17,7 +17,7 @@
 {{ end }}
 
 {{if .Perf}}
-### ⚡️ Performance improves:
+### Performance improves:
 {{ template "body" .Perf }}
 {{ end }}
 
