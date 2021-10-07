@@ -1,34 +1,45 @@
-## Unreleased (2021-10-07)
+## v0.5.1 (2021-10-08)
 
-### 🔥  New feature:
+### New feature:
+
+- improve closes issue handler([`6599bc0`](https://github.com/release-lab/whatchanged/commit/6599bc077e80df7577e64e48d153fc028d2d75b3)) (@Axetroy)
+
+### Bugs fixed:
+
+- improve close and fix footer parser([`7200e5f`](https://github.com/release-lab/whatchanged/commit/7200e5fa5f9d8cad23142ac4f4adad1e3d8632d2)) (@Axetroy)
+
+## v0.5.0 (2021-10-07)
+
+### New feature:
 
 - **whatchanged-server**: return template from api([`422ad63`](https://github.com/release-lab/whatchanged/commit/422ad63765f76c59eabffa74322c0530b12c718e)) (@Axetroy)
 
-### 🐛  Bugs fixed:
+### Bugs fixed:
 
+- footer parser([`fc06812`](https://github.com/release-lab/whatchanged/commit/fc068125a2df7ce0f3f37231ed8ad41537cacf2c)) (@Axetroy)
 - api([`cd655b3`](https://github.com/release-lab/whatchanged/commit/cd655b35f1eac1a724bb3f4880350f46a015508f)) (@Axetroy)
 - **deps**: update module github.com/release-lab/conventional-commit-parser to v0.1.5 (#74)([`b987d0b`](https://github.com/release-lab/whatchanged/commit/b987d0b004105d68a8de3b851a0430e7fddd9df9)) (@renovate[bot])
 - install.ps1 for PowerShell([`2801600`](https://github.com/release-lab/whatchanged/commit/2801600ab1bd3c8e052017b3c5dfa676d3e2aac9)) (@Axetroy)
 
 ## v0.4.1 (2021-10-04)
 
-### 🔥  New feature:
+### New feature:
 
 - support generate for remote repo with username and password([`2dce123`](https://github.com/release-lab/whatchanged/commit/2dce12399baa9f8434b56b0ff2705a83df4c8272)) (@Axetroy)
 
-### 🐛  Bugs fixed:
+### Bugs fixed:
 
 - install script([`b5d6e7f`](https://github.com/release-lab/whatchanged/commit/b5d6e7f52fc6c21414b6a2de63b394082194d9ba)) (@Axetroy)
 
 ## v0.4.0 (2021-10-03)
 
-### 🔥  New feature:
+### New feature:
 
 - **BREAKING**: remove hashURL function in template render([`35a348f`](https://github.com/release-lab/whatchanged/commit/35a348f3bbcb16afa4d74356899a2c651905bf12)) (@Axetroy)
 - **BREAKING**: remove stringsJoin method in template renderer and make([`cf4cb17`](https://github.com/release-lab/whatchanged/commit/cf4cb179c62063ee97b89c9526f0e2b20d048a39)) (@Axetroy)
 - **BREAKING**: remove npm publish([`307a4ad`](https://github.com/release-lab/whatchanged/commit/307a4ad842182e0edc8cd1bc3c7c45fa16fd2a87)) (@Axetroy)
 
-### 🐛  Bugs fixed:
+### Bugs fixed:
 
 - lint([`2082a2d`](https://github.com/release-lab/whatchanged/commit/2082a2d32f354b9d8ac3b3368e400a89d817ef80)) (@Axetroy)
 - **deps**: update dependency marked to v3.0.4 (#67)([`837dd74`](https://github.com/release-lab/whatchanged/commit/837dd747f672bad269f4e433a2ba4960a33308b5)) (@renovate[bot])
@@ -42,7 +53,7 @@
 - **deps**: update dependency ant-design-vue to v2.1.3 (#52)([`3ae4ad6`](https://github.com/release-lab/whatchanged/commit/3ae4ad603ee81a5b1045c248b080ee9c362637ea)) (@renovate[bot])
 - vite config([`c13faa1`](https://github.com/release-lab/whatchanged/commit/c13faa11061e22dc359fd6fc040e48752b5cb83b)) (@axetroy)
 
-### ❤️ BREAKING CHANGES:
+### BREAKING CHANGES:
 
 - remove hashURL function in template render
 - remove stringsJoin method in template renderer and make
@@ -54,7 +65,7 @@
 
 ## v0.3.6 (2021-02-18)
 
-### 🐛  Bugs fixed:
+### Bugs fixed:
 
 - **deps**: update dependency ant-design-vue to v2.0.0 (#39)([`3c827b3`](https://github.com/release-lab/whatchanged/commit/3c827b326e2741bfc6e2b2354fec7387e15db97a)) (@renovate[bot])
 - **deps**: update dependency marked to v2 [security] (#41)([`e607ad2`](https://github.com/release-lab/whatchanged/commit/e607ad207894f735ae1578a0558213c9086e1238)) (@renovate[bot])
@@ -62,63 +73,63 @@
 
 ## v0.3.5 (2021-01-20)
 
-### 🐛  Bugs fixed:
+### Bugs fixed:
 
 - npm install in windows([`fb012b7`](https://github.com/release-lab/whatchanged/commit/fb012b75380178856f6eb1a822d04f5078e2c2ac)) (@axetroy)
 - **playground**: build([`b2fc9b7`](https://github.com/release-lab/whatchanged/commit/b2fc9b7ed85e1fb711b54268148f5675640ad742)) (@axetroy)
 
 ## v0.3.4 (2021-01-04)
 
-### 🔥  New feature:
+### New feature:
 
 - add simple preset template([`4e54f2e`](https://github.com/release-lab/whatchanged/commit/4e54f2e43ca49d52d3c3cad409402dcfc6e5ab26)) (@axetroy)
 
 ## v0.3.3 (2020-12-31)
 
-### 🐛  Bugs fixed:
+### Bugs fixed:
 
 - generate url for commit([`bba03df`](https://github.com/release-lab/whatchanged/commit/bba03dfa1ed948d3f5309b67cf5a357c978fd2ed)) (@axetroy)
 - generate version range([`b0dca5d`](https://github.com/release-lab/whatchanged/commit/b0dca5dd226046c131165a8f211b8f190c54d04b)) (@axetroy)
 
 ## v0.3.2 (2020-12-30)
 
-### 🐛  Bugs fixed:
+### Bugs fixed:
 
 - When generating an uncertain version, the generated range is incorrect([`7e1db8d`](https://github.com/release-lab/whatchanged/commit/7e1db8dd3a4e3a6970672139552c9bf42b10edba)) (@axetroy)
 
 ## v0.3.1 (2020-12-30)
 
-### 🐛  Bugs fixed:
+### Bugs fixed:
 
 - Generate duplicate commit([`b7fa03c`](https://github.com/release-lab/whatchanged/commit/b7fa03c8e60d82fb4d06956a8f9c79c174bb227f)) (@axetroy)
 
 ## v0.3.0 (2020-12-30)
 
-### 🔥  New feature:
+### New feature:
 
 - **BREAKING**: update generation template.([`20dfe73`](https://github.com/release-lab/whatchanged/commit/20dfe7361a679e64abd9ec2ba8d59f935627ebfe)) (@axetroy)
 - support release date for generation. close #16([`4e9b59a`](https://github.com/release-lab/whatchanged/commit/4e9b59a5fbbe8c62d782e0350273fb5980e52b48)) (@axetroy)
 
 ## v0.2.7 (2020-12-29)
 
-### 🔥  New feature:
+### New feature:
 
 - add --skip-format and flag options for generation([`a03b7cb`](https://github.com/release-lab/whatchanged/commit/a03b7cb49fa23436de43e6d3436cfd123d831ede)) (@axetroy)
 
-### 🐛  Bugs fixed:
+### Bugs fixed:
 
 - generate incorrect in mutiple version for same commit. close #15([`8fd5818`](https://github.com/release-lab/whatchanged/commit/8fd58182b02ea657c37c09e4a734a48215eaffb6)) (@axetroy)
 - **deps**: update dependency ant-design-vue to v2.0.0-rc.3 (#14)([`e6275b7`](https://github.com/release-lab/whatchanged/commit/e6275b7d7f7b009e79a70f6f869efebb9dc7a866)) (@renovate[bot])
 
 ## v0.2.6 (2020-12-07)
 
-### 🐛  Bugs fixed:
+### Bugs fixed:
 
 - npm binary([`8384bf7`](https://github.com/release-lab/whatchanged/commit/8384bf782d8adf1627082f3e9030ed4a88c0fa5a)) (@axetroy)
 
 ## v0.2.5 (2020-12-05)
 
-### 🐛  Bugs fixed:
+### Bugs fixed:
 
 - **npm**: missing postinstall script([`6209122`](https://github.com/release-lab/whatchanged/commit/6209122eacda6d86421a6955dad86785d0206b4b)) (@axetroy)
 
@@ -126,27 +137,27 @@
 
 ## v0.2.3 (2020-12-05)
 
-### 🔥  New feature:
+### New feature:
 
 - add npm install([`89c46fe`](https://github.com/release-lab/whatchanged/commit/89c46feebf8a467567d192cf40324b50f3080437)) (@axetroy)
 
-### 🐛  Bugs fixed:
+### Bugs fixed:
 
 - **deps**: pin dependencies (#11)([`bfc347c`](https://github.com/release-lab/whatchanged/commit/bfc347c7d945e6ba47787758ba88bc6940d1341a)) (@renovate[bot])
 
 ## v0.2.2 (2020-12-04)
 
-### 🐛  Bugs fixed:
+### Bugs fixed:
 
 - path handler([`58d7a2d`](https://github.com/release-lab/whatchanged/commit/58d7a2d8d04bc99adf0b6a19e0a74261ab48f477)) (@axetroy)
 
 ## v0.2.1 (2020-12-04)
 
-### 🔥  New feature:
+### New feature:
 
 - add share button for playground([`e46ccfd`](https://github.com/release-lab/whatchanged/commit/e46ccfdf4075210534651209b60858103850a49f)) (@axetroy)
 
-### 🐛  Bugs fixed:
+### Bugs fixed:
 
 - regexp not correct([`5a8d338`](https://github.com/release-lab/whatchanged/commit/5a8d338b5c1b9f4abce79e9c248f160907da89b0)) (@axetroy)
 - try fix path handler in windows([`a9c32a6`](https://github.com/release-lab/whatchanged/commit/a9c32a6e9ef7a629d2d13bc341e06f896a8abe15)) (@axetroy)
@@ -156,7 +167,7 @@
 
 ## v0.2.0 (2020-11-27)
 
-### 🔥  New feature:
+### New feature:
 
 - refactor multiple version generation([`65c50c6`](https://github.com/release-lab/whatchanged/commit/65c50c6b30f5dfc608c260c73d55cc8601041bdf)) (@axetroy)
 - unified usage when invalid options([`dde4ece`](https://github.com/release-lab/whatchanged/commit/dde4ecee3db8925c804db839bed098eb4a0f82ec)) (@axetroy)
@@ -166,13 +177,13 @@
 - rename tag:N to @N([`76eb777`](https://github.com/release-lab/whatchanged/commit/76eb7774ac0a1f44ca6b66b9322870cba24a50a8)) (@axetroy)
 - **cli**: rename '--dir' to '--project' and '--file' to '--output' #4([`189186a`](https://github.com/release-lab/whatchanged/commit/189186a89693c724ac794c17f2c35781b2fdc017)) (@axetroy)
 - add whatchanged package for Go([`0bb75dd`](https://github.com/release-lab/whatchanged/commit/0bb75dd41758d85c4608f010298f823346a68a7c)) (@axetroy)
-- rename 'changelog' to 'whatchanged'([`ee18634`](https://github.com/release-lab/whatchanged/commit/ee1863487bd70a2664ff856c4aacfc34d3a5043d)) (@axetroy)
+- rename 'changelog' to 'whatchanged'([`ee18634`](https://github.com/release-lab/whatchanged/commit/ee1863487bd70a2664ff856c4aacfc34d3a5043d)) (@axetroy), Closes: #6
 - implement revert parser([`2c800f2`](https://github.com/release-lab/whatchanged/commit/2c800f24894c495761e715e3a3f81863e0b3b96c)) (@axetroy)
 - add chore block([`418b8f6`](https://github.com/release-lab/whatchanged/commit/418b8f6383b9d710c043655a5dd28fd6627bd85f)) (@axetroy)
 - add changelog repl. generate changelog online almose done.([`c7127b1`](https://github.com/release-lab/whatchanged/commit/c7127b1b0e3869854d293b536eb2f21c4e0c8e3c)) (@axetroy)
 - enabled cors for changelog-remote([`8b5f7fb`](https://github.com/release-lab/whatchanged/commit/8b5f7fbda0f6aefbc933de757a13ed34d105990f)) (@axetroy)
 
-### 🐛  Bugs fixed:
+### Bugs fixed:
 
 - the breaking change block is generate in incorrect format([`5bf4bee`](https://github.com/release-lab/whatchanged/commit/5bf4beea7124cac872598c5487657548e7a826c9)) (@axetroy)
 - the incorrect range generated when there are no parameters([`bbf648e`](https://github.com/release-lab/whatchanged/commit/bbf648e756ab74abb25764ee9ead032343832b3b)) (@axetroy)
@@ -187,7 +198,7 @@
 - **repl**: production assets should be set publicPath([`89ea856`](https://github.com/release-lab/whatchanged/commit/89ea856f4f2046f7347a5ebd2c9d60e3a3650595)) (@axetroy)
 - **repl**: markdown render style([`acebfd0`](https://github.com/release-lab/whatchanged/commit/acebfd0bd736dac9c811186c82ba241d7b1e05e1)) (@axetroy)
 
-### ❤️ BREAKING CHANGES:
+### BREAKING CHANGES:
 
 - rename
 
@@ -215,11 +226,9 @@
 + $ whatchanged --help
 ```
 
-Closes #6
-
 ## v0.1.0 (2020-11-24)
 
-### 🔥  New feature:
+### New feature:
 
 - link commit for generation([`b9432db`](https://github.com/release-lab/whatchanged/commit/b9432db1d1f5afe170296b9e0bfebee1aa62fabb)) (@axetroy)
 - add full preset template([`7553570`](https://github.com/release-lab/whatchanged/commit/7553570590b571bd33e10a4f80ec5639d0613042)) (@axetroy)
@@ -232,7 +241,7 @@ Closes #6
 - support version range. eg v2.0.0~v1.0.0([`a65a4a8`](https://github.com/release-lab/whatchanged/commit/a65a4a8bd0122e41c7b20c98676e9def76e786d3)) (@axetroy)
 - parse commit message and generate to template([`7f67e78`](https://github.com/release-lab/whatchanged/commit/7f67e783926fed647d2ad5414f31448eea106fc3)) (@axetroy)
 
-### 🐛  Bugs fixed:
+### Bugs fixed:
 
 - improve ssh git url parser([`9993ee6`](https://github.com/release-lab/whatchanged/commit/9993ee600c84cf77d3a0c634e8fa83c2580e137f)) (@axetroy)
 - commit range not include commit of tag([`f8df0ba`](https://github.com/release-lab/whatchanged/commit/f8df0ba654c8faf67eccf98262cd55807e53e597)) (@axetroy)
