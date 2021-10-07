@@ -30,7 +30,7 @@ type Footer struct {
 var (
 	EMPTY_LINE_PATTERN    = regexp.MustCompile(`^\s*$`)
 	HEADER_PATTERN        = regexp.MustCompile(`^(?:fixup!\s*)?(\w*)(\(([\w\$\.\*/-]*)\))?(!?):\s(.*)$`)
-	FOOTER_PATTERN        = regexp.MustCompile(`^([\w\s\-]+):(.*)$`)
+	FOOTER_PATTERN        = regexp.MustCompile(`(?i)^([a-z]+((\s|-)[a-z]+)*):\s?(.*)$`)
 	REVERT_HEADER_PATTERN = regexp.MustCompile(`^(?i)revert\s(.*)$`)
 	REVERT_BODY_PATTERN   = regexp.MustCompile(`(?i)This\sreverts\scommit\s(\w+)\.?`)
 )
@@ -83,7 +83,7 @@ func (m Message) ParseFooter() []Footer {
 					footer.Title = line
 				} else {
 					footer.Tag = strings.TrimSpace(matcher[1])
-					footer.Title = strings.TrimSpace(matcher[2])
+					footer.Title = strings.TrimSpace(matcher[4])
 				}
 				continue lineLoop
 			} else {
@@ -218,13 +218,13 @@ func Parse(message string) Message {
 
 				line := lines[index]
 
-				if !FOOTER_PATTERN.MatchString(line) {
-					footerContent = append(footerContent, line)
-					index++
-					continue innerLoop
-				} else {
+				// if match the next footer tag
+				if FOOTER_PATTERN.MatchString(line) {
 					footer = append(footer, strings.TrimSpace(strings.Join(footerContent, "\n")))
 					break innerLoop
+				} else {
+					footerContent = append(footerContent, line)
+					index++
 				}
 			}
 		} else {
