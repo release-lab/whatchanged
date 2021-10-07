@@ -7,64 +7,64 @@
 {{- end -}}
 
 {{if .Feat}}
-### 🔥  New feature:
+### New feature:
 {{ template "body" .Feat }}
 {{ end }}
 
 {{if .Fix}}
-### 🐛  Bugs fixed:
+### Bugs fixed:
 {{ template "body" .Fix }}
 {{ end }}
 
 {{if .Refactor}}
-### 🔨 Code refactoring:
+### Code refactoring:
 {{ template "body" .Refactor }}
 {{- end -}}
 
 {{if .Test}}
-### 🧪 Testing:
+### Testing:
 {{ template "body" .Test }}
 {{- end -}}
 
 {{if .Perf}}
-### ⚡️ Performance improves:
+### Performance improves:
 {{ template "body" .Perf }}
 {{ end }}
 
 {{if .Build}}
-### 🏗️ Build system:
+### Build system:
 {{ template "body" .Build }}
 {{- end -}}
 
 {{if .Ci}}
-### 🚗 CI:
+### CI:
 {{ template "body" .Ci }}
 {{- end -}}
 
 {{if .Chore}}
-### 💡 Chore:
+### Chore:
 {{ template "body" .Chore }}
 {{- end -}}
 
 {{if .Docs}}
-### 📚 Documentation:
+### Documentation:
 {{ template "body" .Docs }}
 {{- end -}}
 
 {{if .Style}}
-### 🌇 Style:
+### Style:
 {{ template "body" .Style }}
 {{- end -}}
 
 {{if .Revert}}
-### 🔙 Revert:
+### Revert:
 {{range .Revert -}}
 - {{if .RevertCommitHash }}revert {{ .RevertCommitHashURL }}, {{ end }}{{ unescape .Field.Header.Subject }}({{ .HashURL }})
 {{ end }}
 {{ end }}
 
 {{if .BreakingChanges}}
-### ❤️ BREAKING CHANGES:
+### BREAKING CHANGES:
 {{ range .BreakingChanges -}}
 
 - {{if .Field.Footer.BreakingChange.Title}}{{ unescape .Field.Footer.BreakingChange.Title }}{{ else }}{{ unescape .Field.Title }}{{ end }}

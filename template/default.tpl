@@ -7,12 +7,12 @@
 {{- end -}}
 
 {{if .Feat}}
-### 🔥  New feature:
+### New feature:
 {{ template "body" .Feat }}
 {{ end }}
 
 {{if .Fix}}
-### 🐛  Bugs fixed:
+### Bugs fixed:
 {{ template "body" .Fix }}
 {{ end }}
 
@@ -22,14 +22,14 @@
 {{ end }}
 
 {{if .Revert}}
-### 🔙 Revert:
+### Revert:
 {{range .Revert -}}
 - {{if .RevertCommitHash }}revert {{ .RevertCommitHashURL }}, {{ end }}{{ unescape .Field.Header.Subject }}({{ .HashURL }})
 {{ end }}
 {{ end }}
 
 {{if .BreakingChanges}}
-### ❤️ BREAKING CHANGES:
+### BREAKING CHANGES:
 {{ range .BreakingChanges -}}
 
 - {{if .Field.Footer.BreakingChange.Title}}{{ unescape .Field.Footer.BreakingChange.Title }}{{ else }}{{ unescape .Field.Title }}{{ end }}
