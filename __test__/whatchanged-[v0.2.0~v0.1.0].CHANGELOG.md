@@ -35,29 +35,27 @@
 
 - rename
 
-```diff
-- tag:0~tag:1
-+ @0~@1
-```
-
+  ```diff
+  - tag:0~tag:1
+  + @0~@1
+  ```
 - new flags
 
-```diff
-- --dir=/path/to/dir
-+ --project=/path/to/project
-```
+  ```diff
+  - --dir=/path/to/dir
+  + --project=/path/to/project
+  ```
 
-```diff
-- --file=CHANGELOG.md
-+ --output=CHANGELOG.md
-```
-
+  ```diff
+  - --file=CHANGELOG.md
+  + --output=CHANGELOG.md
+  ```
 - repo and binary rename to whatchanged
 
-```diff
-- $ changelog --help
-+ $ whatchanged --help
-```
+  ```diff
+  - $ changelog --help
+  + $ whatchanged --help
+  ```
 
 ## v0.1.0 (2020-11-24)
 

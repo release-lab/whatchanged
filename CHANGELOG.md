@@ -1,3 +1,9 @@
+## v0.5.2 (2021-10-08)
+
+### Bugs fixed:
+
+- default template([`fc7584a`](https://github.com/release-lab/whatchanged/commit/fc7584a8f2051b3692253e05780efec0ea174a20)) (@Axetroy)
+
 ## v0.5.1 (2021-10-08)
 
 ### New feature:
@@ -59,9 +65,9 @@
 - remove stringsJoin method in template renderer and make
 - remove npm publish
 
-```diff
-- npm install @axetroy/whatchanged -g
-```
+  ```diff
+  - npm install @axetroy/whatchanged -g
+  ```
 
 ## v0.3.6 (2021-02-18)
 
@@ -202,29 +208,27 @@
 
 - rename
 
-```diff
-- tag:0~tag:1
-+ @0~@1
-```
-
+  ```diff
+  - tag:0~tag:1
+  + @0~@1
+  ```
 - new flags
 
-```diff
-- --dir=/path/to/dir
-+ --project=/path/to/project
-```
+  ```diff
+  - --dir=/path/to/dir
+  + --project=/path/to/project
+  ```
 
-```diff
-- --file=CHANGELOG.md
-+ --output=CHANGELOG.md
-```
-
+  ```diff
+  - --file=CHANGELOG.md
+  + --output=CHANGELOG.md
+  ```
 - repo and binary rename to whatchanged
 
-```diff
-- $ changelog --help
-+ $ whatchanged --help
-```
+  ```diff
+  - $ changelog --help
+  + $ whatchanged --help
+  ```
 
 ## v0.1.0 (2020-11-24)
 

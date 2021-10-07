@@ -110,32 +110,32 @@
 
 - no more use `deno.dts_file` anymore
 
-We think this configuration item is redundant
+  We think this configuration item is redundant
 
-```
-You can configure external declaration files in `tsconfig.json`
+  ```
+  You can configure external declaration files in `tsconfig.json`
 
-before:
+  before:
 
-```json5
-//.vscode/settings.json
-{
-  "deno.enable": true,
-  "deno.dts_file": ["./path/to/demo.d.ts"]
-}
+  ```json5
+  //.vscode/settings.json
+  {
+    "deno.enable": true,
+    "deno.dts_file": ["./path/to/demo.d.ts"]
+  }
 
-```
+  ```
 
-after:
+  after:
 
-```json5
-//.vscode/settings.json
-{
-  "deno.enable": true
-}
+  ```json5
+  //.vscode/settings.json
+  {
+    "deno.enable": true
+  }
 
-```
-```
+  ```
+  ```
 
 ## v3.2.1 (2020-03-08)
 
@@ -156,7 +156,7 @@ after:
 - improve fetching module message([`3bb70e2`](https://github.com/axetroy/vscode-deno/commit/3bb70e23f51750a3eab053289772f154740c3045)) (@axetroy)
 - support Deno Dependency Viewer. close #83([`1b327b8`](https://github.com/axetroy/vscode-deno/commit/1b327b869cf74d2022dab71451c92ec3c4b5c5ea)) (@axetroy)
 
-### ⚡️ Performance improves:
+### Performance improves:
 
 - improve performance for file_walker([`77ce898`](https://github.com/axetroy/vscode-deno/commit/77ce898b12c1e9ec9f995c1ae2b14342547f7cbd)) (@axetroy)
 
