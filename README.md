@@ -53,7 +53,7 @@ $r="release-lab/whatchanged";iwr https://github.com/release-lab/install/raw/v1/i
 4. 使用 [Golang](https://golang.org) 从源码中构建并安装 (全平台支持)
 
 ```bash
-go install github.com/release-lab/whatchanged/cmd/whatchanged@v0.4.1
+go install github.com/release-lab/whatchanged/cmd/whatchanged
 ```
 
 ### 常见问题

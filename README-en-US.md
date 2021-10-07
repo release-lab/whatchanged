@@ -53,7 +53,7 @@ $r="release-lab/whatchanged";iwr https://github.com/release-lab/install/raw/v1/i
 4. Build and install from source using [Golang](https://golang.org) (All platforms)
 
 ```bash
-go install github.com/release-lab/whatchanged/cmd/whatchanged@v0.4.1
+go install github.com/release-lab/whatchanged/cmd/whatchanged
 ```
 
 ### FAQ
