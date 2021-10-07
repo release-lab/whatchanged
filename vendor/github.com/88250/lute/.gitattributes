@@ -1,0 +1,6 @@
+chroma-styles/*.css linguist-generated=true
+test/*.html linguist-detectable=false
+test/*.json linguist-detectable=false
+test/*.md linguist-detectable=false
+javascript/lute.min.js linguist-detectable=false
+benchmark/* linguist-detectable=false
