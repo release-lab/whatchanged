@@ -33,7 +33,6 @@ OPTIONS:
   --preset      指定内置的 markdown 预设模版. 可选项:
                 --preset=default
                 --preset=full
-                --preset=simple
                 仅在设置 --fmt=md 并且 --tpl 为空时有效。
                 默认值: "--preset=default".
   --tpl         指定渲染的 markdown 模版。仅在 --fmt=md 时有效。

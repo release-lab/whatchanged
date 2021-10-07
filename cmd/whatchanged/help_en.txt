@@ -34,7 +34,6 @@ OPTIONS:
   --preset      Cli built-in markdown template. Available options:
                 --preset=default
                 --preset=full
-                --preset=simple
                 Only available when --fmt=md and --tpl is nil.
                 Defaults to "--preset=default".
   --tpl         Specify the template file for generating. Only available when

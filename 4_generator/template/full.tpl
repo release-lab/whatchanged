@@ -73,7 +73,3 @@
 
 {{ end -}}
 {{ end }}
-
-{{ $length := len .Commits }}
-
-{{if gt $length 0}}
