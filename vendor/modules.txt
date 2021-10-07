@@ -125,7 +125,7 @@ github.com/pkg/errors
 # github.com/pmezard/go-difflib v1.0.0
 ## explicit
 github.com/pmezard/go-difflib/difflib
-# github.com/release-lab/conventional-commit-parser v0.1.2
+# github.com/release-lab/conventional-commit-parser v0.1.5
 ## explicit; go 1.17
 github.com/release-lab/conventional-commit-parser
 # github.com/russross/blackfriday v1.6.0
