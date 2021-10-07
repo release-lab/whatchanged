@@ -2,7 +2,7 @@
 
 {{- define "body" -}}
 {{range . -}}
-- {{if .Field.Header.Scope }}**{{ unescape .Field.Header.Scope }}**: {{ end }}{{ unescape .Field.Header.Subject }}({{ .HashURL }}) (@{{ unescape .Author.Name }}){{if .Field.Footer }} {{if .Field.Footer.Closes }}, Closes: {{ .Field.Footer.Closes }} {{- end }}  {{- end}}
+- {{if .Field.Header.Scope }}**{{ unescape .Field.Header.Scope }}**: {{ end }}{{ unescape .Field.Header.Subject }}({{ .HashURL }}) (@{{ unescape .Author.Name }})
 {{ end }}
 {{- end -}}
 
@@ -77,10 +77,3 @@
 {{ $length := len .Commits }}
 
 {{if gt $length 0}}
-
-### 💪  Commits({{ len .Commits }}):
-{{range .Commits -}}
-- {{ .HashURL }} - {{ unescape .Field.Title }}
-{{ end }}
-
-{{ end }}

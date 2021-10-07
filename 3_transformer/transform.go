@@ -7,11 +7,36 @@ import (
 
 	"github.com/go-git/go-git/v5/plumbing/object"
 	"github.com/pkg/errors"
+	conventionalcommitparser "github.com/release-lab/conventional-commit-parser"
 	extractor "github.com/release-lab/whatchanged/2_extractor"
 	"github.com/release-lab/whatchanged/internal/client"
-	"github.com/release-lab/whatchanged/internal/commit/parser"
 	giturls "github.com/whilp/git-urls"
 )
+
+type Header struct {
+	Type      string
+	Scope     string
+	Subject   string
+	Important bool
+}
+
+type BreakingChange struct {
+	Title   string
+	Content string
+}
+
+type Footer struct {
+	BreakingChange *BreakingChange
+	Closes         string
+}
+
+type Message struct {
+	raw    string
+	Title  string
+	Header *conventionalcommitparser.Header
+	Body   string
+	Footer *Footer
+}
 
 type Commit struct {
 	Hash                string
@@ -20,7 +45,7 @@ type Commit struct {
 	Message             string
 	Author              *object.Signature
 	Committer           *object.Signature
-	Field               *parser.Message
+	Field               Message
 	RevertCommitHash    *string // revert hash
 	RevertCommitHashURL *string // revert hash URL
 }
@@ -45,7 +70,15 @@ type TemplateContext struct {
 }
 
 func generateCommitHashURL(remoteURL *url.URL, longHash string) string {
-	shortHash := string(longHash[0:7])
+	var (
+		shortHash string
+	)
+
+	if len(longHash) < 7 {
+		shortHash = longHash
+	} else {
+		shortHash = string(longHash[0:7])
+	}
 
 	if remoteURL != nil {
 		u, _ := url.Parse(remoteURL.String())
@@ -123,86 +156,108 @@ func Transform(g *client.GitClient, splices []*extractor.ExtractSplice) ([]*Temp
 				Author:    &commit.Author,
 				Committer: &commit.Committer,
 			}
-			field := parser.Parser(commit.Message)
 
-			c.Field = field
+			msg := conventionalcommitparser.Parse(commit.Message)
+			header := msg.GetHeader()
 
-			if field.Footer != nil {
-				if field.Footer.BreakingChange != nil {
+			field := msg
+
+			c.Field = Message{
+				raw:    commit.Message,
+				Title:  header.Subject,
+				Header: &header,
+			}
+
+			if field.Footer != nil && len(field.Footer) > 0 {
+				breakingChangeFooter := field.GetFooterField("BREAKING CHANGE", "BREAKING CHANGES", "BREAKING-CHANGE", "BREAKING-CHANGES")
+
+				if breakingChangeFooter != nil {
 					if ctx.BreakingChanges == nil {
 						ctx.BreakingChanges = make([]*Commit, 0)
 					}
 					ctx.BreakingChanges = append(ctx.BreakingChanges, c)
+
+					c.Field.Footer = &Footer{
+						BreakingChange: &BreakingChange{
+							Title:   breakingChangeFooter.Title,
+							Content: breakingChangeFooter.Content,
+						},
+					}
 				}
 			}
 
-			if field.Revert != nil {
-				c.RevertCommitHash = field.Revert
-				revertHashURL := generateCommitHashURL(remoteURL, *field.Revert)
-				c.RevertCommitHashURL = &revertHashURL
+			if header.Type == "revert" {
+				revertFooter := field.GetFooterField("revert", "Revert")
+
+				if revertFooter != nil {
+					revertHash := revertFooter.Content
+
+					if len(revertHash) > 0 {
+						c.RevertCommitHash = &revertHash
+						revertHashURL := generateCommitHashURL(remoteURL, revertHash)
+						c.RevertCommitHashURL = &revertHashURL
+					}
+				}
 			}
 
 			ctx.Commits = append(ctx.Commits, c)
 
-			if field.Header != nil {
-				switch field.Header.Type {
-				case "build":
-					if ctx.Build == nil {
-						ctx.Build = make([]*Commit, 0)
-					}
-					ctx.Build = append(ctx.Build, c)
-				case "ci":
-					if ctx.Ci == nil {
-						ctx.Ci = make([]*Commit, 0)
-					}
-					ctx.Ci = append(ctx.Ci, c)
-				case "chore":
-					if ctx.Chore == nil {
-						ctx.Chore = make([]*Commit, 0)
-					}
-					ctx.Chore = append(ctx.Chore, c)
-				case "docs":
-					if ctx.Docs == nil {
-						ctx.Docs = make([]*Commit, 0)
-					}
-					ctx.Docs = append(ctx.Docs, c)
-				case "feat":
-					if ctx.Feat == nil {
-						ctx.Feat = make([]*Commit, 0)
-					}
-					ctx.Feat = append(ctx.Feat, c)
-				case "fix":
-					if ctx.Fix == nil {
-						ctx.Fix = make([]*Commit, 0)
-					}
-					ctx.Fix = append(ctx.Fix, c)
-				case "perf":
-					if ctx.Perf == nil {
-						ctx.Perf = make([]*Commit, 0)
-					}
-					ctx.Perf = append(ctx.Perf, c)
-				case "refactor":
-					if ctx.Refactor == nil {
-						ctx.Refactor = make([]*Commit, 0)
-					}
-					ctx.Refactor = append(ctx.Refactor, c)
-				case "test":
-					if ctx.Test == nil {
-						ctx.Test = make([]*Commit, 0)
-					}
-					ctx.Test = append(ctx.Test, c)
-				case "style":
-					if ctx.Style == nil {
-						ctx.Style = make([]*Commit, 0)
-					}
-					ctx.Style = append(ctx.Style, c)
-				case "revert":
-					if ctx.Revert == nil {
-						ctx.Revert = make([]*Commit, 0)
-					}
-					ctx.Revert = append(ctx.Revert, c)
+			switch header.Type {
+			case "build":
+				if ctx.Build == nil {
+					ctx.Build = make([]*Commit, 0)
 				}
-
+				ctx.Build = append(ctx.Build, c)
+			case "ci":
+				if ctx.Ci == nil {
+					ctx.Ci = make([]*Commit, 0)
+				}
+				ctx.Ci = append(ctx.Ci, c)
+			case "chore":
+				if ctx.Chore == nil {
+					ctx.Chore = make([]*Commit, 0)
+				}
+				ctx.Chore = append(ctx.Chore, c)
+			case "docs":
+				if ctx.Docs == nil {
+					ctx.Docs = make([]*Commit, 0)
+				}
+				ctx.Docs = append(ctx.Docs, c)
+			case "feat":
+				if ctx.Feat == nil {
+					ctx.Feat = make([]*Commit, 0)
+				}
+				ctx.Feat = append(ctx.Feat, c)
+			case "fix":
+				if ctx.Fix == nil {
+					ctx.Fix = make([]*Commit, 0)
+				}
+				ctx.Fix = append(ctx.Fix, c)
+			case "perf":
+				if ctx.Perf == nil {
+					ctx.Perf = make([]*Commit, 0)
+				}
+				ctx.Perf = append(ctx.Perf, c)
+			case "refactor":
+				if ctx.Refactor == nil {
+					ctx.Refactor = make([]*Commit, 0)
+				}
+				ctx.Refactor = append(ctx.Refactor, c)
+			case "test":
+				if ctx.Test == nil {
+					ctx.Test = make([]*Commit, 0)
+				}
+				ctx.Test = append(ctx.Test, c)
+			case "style":
+				if ctx.Style == nil {
+					ctx.Style = make([]*Commit, 0)
+				}
+				ctx.Style = append(ctx.Style, c)
+			case "revert":
+				if ctx.Revert == nil {
+					ctx.Revert = make([]*Commit, 0)
+				}
+				ctx.Revert = append(ctx.Revert, c)
 			}
 		}
 
