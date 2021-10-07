@@ -12,6 +12,7 @@ import (
 
 	"github.com/pkg/errors"
 	"github.com/release-lab/whatchanged"
+	generator "github.com/release-lab/whatchanged/4_generator"
 	"github.com/release-lab/whatchanged/option"
 )
 
@@ -73,6 +74,26 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func handlerTemplate(w http.ResponseWriter, r *http.Request) {
+	// cors
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", strings.Join([]string{http.MethodGet, http.MethodPost, http.MethodPut, http.MethodDelete}, " ,"))
+
+	if r.Method == http.MethodOptions {
+		w.WriteHeader(200)
+		_, _ = w.Write([]byte{})
+		return
+	}
+
+	b, err := generator.TemplateFS.ReadFile("template/full.tpl")
+
+	if err != nil {
+		_, _ = w.Write([]byte(err.Error()))
+	}
+
+	_, _ = w.Write(b)
+}
+
 func main() {
 	port := os.Getenv("PORT")
 
@@ -80,6 +101,7 @@ func main() {
 		port = "8080"
 	}
 
+	http.HandleFunc("/template", handlerTemplate)
 	http.HandleFunc("/", handler)
 	print("Listen on port ", port, "\n")
 	log.Fatal(http.ListenAndServe(":"+port, nil))

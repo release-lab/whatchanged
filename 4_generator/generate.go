@@ -15,7 +15,7 @@ import (
 )
 
 //go:embed template/*.tpl
-var templateFS embed.FS
+var TemplateFS embed.FS
 
 func Generate(g *client.GitClient, contexts []*transformer.TemplateContext, format option.Format, preset option.Preset, templateFile string, templateStr string) ([]byte, error) {
 	switch format {
@@ -37,7 +37,7 @@ func Generate(g *client.GitClient, contexts []*transformer.TemplateContext, form
 			case option.PresetDefault:
 				fallthrough
 			case option.PresetFull:
-				b, err := templateFS.ReadFile(fmt.Sprintf("template/%s.tpl", preset))
+				b, err := TemplateFS.ReadFile(fmt.Sprintf("template/%s.tpl", preset))
 
 				if err != nil {
 					return nil, errors.WithStack(err)
