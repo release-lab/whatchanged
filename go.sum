@@ -94,6 +94,8 @@ github.com/release-lab/conventional-commit-parser v0.1.1 h1:6C8YGOr7sE5wuPkuO+No
 github.com/release-lab/conventional-commit-parser v0.1.1/go.mod h1:J56B1fNHAVNm5SynjINkz1mThTKqN0KQnFH54Fuz2KQ=
 github.com/release-lab/conventional-commit-parser v0.1.2 h1:sZ0jMtNcO2j+uabV3n/KTKej2PlfNhYCzN2rBeNbTMo=
 github.com/release-lab/conventional-commit-parser v0.1.2/go.mod h1:J56B1fNHAVNm5SynjINkz1mThTKqN0KQnFH54Fuz2KQ=
+github.com/release-lab/conventional-commit-parser v0.1.5 h1:r4kWlRbh5V4Y0ne3j2A44gCam07rPOkGKWCBBC9z5c4=
+github.com/release-lab/conventional-commit-parser v0.1.5/go.mod h1:J56B1fNHAVNm5SynjINkz1mThTKqN0KQnFH54Fuz2KQ=
 github.com/russross/blackfriday v1.6.0 h1:KqfZb0pUVN2lYqZUYRddxF4OR8ZMURnJIG5Y3VRLtww=
 github.com/russross/blackfriday v1.6.0/go.mod h1:ti0ldHuxg49ri4ksnFxlkCfN+hvslNlmVHqNRXXJNAY=
 github.com/sergi/go-diff v1.1.0 h1:we8PVUC3FE2uYfodKH/nBHMSetSfHDR6scGdBi+erh0=
