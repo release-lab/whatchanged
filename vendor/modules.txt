@@ -148,8 +148,6 @@ github.com/go-git/go-git/v5/utils/merkletrie/filesystem
 github.com/go-git/go-git/v5/utils/merkletrie/index
 github.com/go-git/go-git/v5/utils/merkletrie/internal/frame
 github.com/go-git/go-git/v5/utils/merkletrie/noder
-# github.com/google/go-cmp v0.5.5
-## explicit; go 1.8
 # github.com/gopherjs/gopherjs v0.0.0-20210619142842-05447a1fa367
 ## explicit; go 1.16
 github.com/gopherjs/gopherjs/js
@@ -162,9 +160,6 @@ github.com/jbenet/go-context/io
 # github.com/kevinburke/ssh_config v0.0.0-20201106050909-4977a11b4351
 ## explicit
 github.com/kevinburke/ssh_config
-# github.com/mattn/go-runewidth v0.0.9
-## explicit; go 1.9
-github.com/mattn/go-runewidth
 # github.com/mitchellh/go-homedir v1.1.0
 ## explicit
 github.com/mitchellh/go-homedir
@@ -181,18 +176,9 @@ github.com/pmezard/go-difflib/difflib
 # github.com/release-lab/conventional-commit-parser v0.1.5
 ## explicit; go 1.17
 github.com/release-lab/conventional-commit-parser
-# github.com/russross/blackfriday v1.6.0
-## explicit; go 1.13
-github.com/russross/blackfriday
 # github.com/sergi/go-diff v1.1.0
 ## explicit; go 1.12
 github.com/sergi/go-diff/diffmatchpatch
-# github.com/shurcooL/go v0.0.0-20200502201357-93f07166e636
-## explicit
-github.com/shurcooL/go/indentwriter
-# github.com/shurcooL/markdownfmt v0.0.0-20210117162146-75134924a9fd
-## explicit
-github.com/shurcooL/markdownfmt/markdown
 # github.com/stretchr/testify v1.7.0
 ## explicit; go 1.13
 github.com/stretchr/testify/assert
@@ -241,8 +227,6 @@ golang.org/x/text/unicode/norm
 # gopkg.in/warnings.v0 v0.1.2
 ## explicit
 gopkg.in/warnings.v0
-# gopkg.in/yaml.v2 v2.4.0
-## explicit; go 1.15
 # gopkg.in/yaml.v3 v3.0.0-20200615113413-eeeca48fe776
 ## explicit
 gopkg.in/yaml.v3
