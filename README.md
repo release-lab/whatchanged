@@ -9,7 +9,7 @@
 
 ## whatchanged
 
-一个优雅的变更日志生成器
+一个优雅的变更日志生成器，只需遵循 [Conventional Commits 规范](https://www.conventionalcommits.org/en/v1.0.0/)，即可生成一个漂亮的，工整的变更日志。
 
 致力于**优雅**/**简单**/**高效**/**可扩展**
 

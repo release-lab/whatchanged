@@ -9,7 +9,7 @@ English | [中文简体](README.md)
 
 ## whatchanged
 
-An elegant changelog generator.
+An elegant changelog generator. follow the [Conventional Commits Specification](https://www.conventionalcommits.org/en/v1.0.0/) to generate a beautiful and neat change log.
 
 Focus on **Elegant**/**Simple**/**Efficient**/**Scalable**
 
