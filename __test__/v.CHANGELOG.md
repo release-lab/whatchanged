@@ -36,8 +36,6 @@
 
 ### Revert:
 
-- parser: simplify array push detection([`41cc96a`](https://github.com/vlang/v/commit/41cc96aaec7d8cee578da075f10ec1c0726152a6))
-- parser: allow deref assign without parens pt2 update vlib([`7177e71`](https://github.com/vlang/v/commit/7177e714442f1e7e5e818208034630e2b8664964))
 - revert [`0f4c5fb`](https://github.com/vlang/v/commit/0f4c5fb1c9a9dbe80ff5361f48ee6995524dc195), comptime: enable again skipping parsing of other platform branches([`6b31ebe`](https://github.com/vlang/v/commit/6b31ebe456d516bfa0d8ac63f96c199eea3ef598))
 - revert [`ba85b8d`](https://github.com/vlang/v/commit/ba85b8d02448f8057440b1298b842e333f33d1cd), Revert "compiler: support setting pref.output_cross_c with -os cross([`1d9d975`](https://github.com/vlang/v/commit/1d9d9757cf062c39c7ea6c08cc980c4b304cc7eb))
 - revert [`878be4d`](https://github.com/vlang/v/commit/878be4d8861bccdfd275d26feb71a31ef869ad97), compiler: support setting pref.output_cross_c with -os cross([`ba85b8d`](https://github.com/vlang/v/commit/ba85b8d02448f8057440b1298b842e333f33d1cd))
