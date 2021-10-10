@@ -21,7 +21,7 @@
 - [x] 生成 本地/远程 的 git 仓库
 - [x] 内置预设的生成模板
 - [x] 自定义模版文件
-- [x] 常规的 commit 解析器
+- [x] [Conventional Commits 规范解析器](https://github.com/release-lab/conventional-commit-parser)
 - [x] 支持多个版本的变更日志生成
 - [x] [Github Action](https://github.com/release-lab/setup-whatchanged)
 - [x] [Visual Studio Code extension](https://github.com/release-lab/vscode-whatchanged)

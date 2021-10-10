@@ -21,7 +21,7 @@ Feature:
 - [x] Generation for local/Remote git repositories
 - [x] Preset template for generation
 - [x] Custom template file
-- [x] Conventional Commits Parser
+- [x] [Conventional Commits Specification Parser](https://github.com/release-lab/conventional-commit-parser)
 - [x] Generate multiple versions of change logs
 - [x] [Github Action](https://github.com/release-lab/setup-whatchanged)
 - [x] [Visual Studio Code extension](https://github.com/release-lab/vscode-whatchanged)
