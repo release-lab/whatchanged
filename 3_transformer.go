@@ -82,11 +82,7 @@ func generateCommitHashURL(remoteURL *url.URL, longHash string) string {
 	}
 
 	if remoteURL != nil {
-		u, err := url.Parse(remoteURL.String())
-		if err != nil {
-			panic(fmt.Errorf("could not re-parse remote url, check git remote: %w", err))
-		}
-
+		u := *remoteURL // https://github.com/golang/go/issues/38351
 		u.Path = u.Path + "/commit/" + longHash
 
 		return fmt.Sprintf("[`%s`](%s)", shortHash, u.String())
@@ -112,7 +108,6 @@ func Transform(g *client.GitClient, splices []*ExtractSplice) ([]*TemplateContex
 	context := make([]*TemplateContext, 0)
 
 	remote, err := g.GetRemote()
-
 	if err != nil {
 		return nil, errors.WithStack(err)
 	}
