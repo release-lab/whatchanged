@@ -102,7 +102,7 @@ func paddingLeft(txt string, cur string) string {
 	return strings.Join(newArr, "\n")
 }
 
-var githubOrgRegex = regexp.MustCompile(`^([^@]+)@github.com:(\w+)\/(.+)$`)
+var githubOrgRegex = regexp.MustCompile(`^([^@]+)@github\.com:(\w+)\/(.+)$`)
 
 func Transform(g *client.GitClient, splices []*ExtractSplice) ([]*TemplateContext, error) {
 	context := make([]*TemplateContext, 0)
