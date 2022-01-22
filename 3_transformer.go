@@ -3,6 +3,7 @@ package whatchanged
 import (
 	"fmt"
 	"net/url"
+	"regexp"
 	"strings"
 
 	"github.com/go-git/go-git/v5/plumbing/object"
@@ -81,8 +82,7 @@ func generateCommitHashURL(remoteURL *url.URL, longHash string) string {
 	}
 
 	if remoteURL != nil {
-		u, _ := url.Parse(remoteURL.String())
-
+		u := *remoteURL // https://github.com/golang/go/issues/38351
 		u.Path = u.Path + "/commit/" + longHash
 
 		return fmt.Sprintf("[`%s`](%s)", shortHash, u.String())
@@ -102,11 +102,12 @@ func paddingLeft(txt string, cur string) string {
 	return strings.Join(newArr, "\n")
 }
 
+var githubOrgRegex = regexp.MustCompile(`^([^@]+)@github\.com:(\w+)\/(.+)$`)
+
 func Transform(g *client.GitClient, splices []*ExtractSplice) ([]*TemplateContext, error) {
 	context := make([]*TemplateContext, 0)
 
 	remote, err := g.GetRemote()
-
 	if err != nil {
 		return nil, errors.WithStack(err)
 	}
@@ -132,6 +133,15 @@ func Transform(g *client.GitClient, splices []*ExtractSplice) ([]*TemplateContex
 			case "https":
 				if remoteURL, err = url.Parse(fmt.Sprintf("%s://%s%s", remoteURL.Scheme, remoteURL.Host, urlPath)); err != nil {
 					return nil, errors.WithStack(err)
+				}
+			case "file":
+				// not sure if this is a good fix here, but if you have a url that looks like private
+				// github urg ssh url, it'll end up having a "file" Scheme.
+				// so we check it it actually looks like a githubOrg ssh url and then return it
+				if ms := githubOrgRegex.FindAllStringSubmatch(urlPath, -1); ms != nil {
+					if remoteURL, err = url.Parse(fmt.Sprintf("https://github.com/%s/%s", ms[0][2], ms[0][3])); err != nil {
+						return nil, errors.WithStack(err)
+					}
 				}
 			case "ssh":
 				if remoteURL, err = url.Parse(fmt.Sprintf("https://%s/%s", remoteURL.Host, urlPath)); err != nil {
