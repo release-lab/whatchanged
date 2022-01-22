@@ -138,6 +138,7 @@ func Transform(g *client.GitClient, splices []*ExtractSplice) ([]*TemplateContex
 				// not sure if this is a good fix here, but if you have a url that looks like private
 				// github urg ssh url, it'll end up having a "file" Scheme.
 				// so we check it it actually looks like a githubOrg ssh url and then return it
+				// eg. org-1232456@github.com:USER/REPO.git
 				if ms := githubOrgRegex.FindAllStringSubmatch(urlPath, -1); ms != nil {
 					if remoteURL, err = url.Parse(fmt.Sprintf("https://github.com/%s/%s", ms[0][2], ms[0][3])); err != nil {
 						return nil, errors.WithStack(err)
