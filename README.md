@@ -36,25 +36,25 @@ $ whatchanged --help
 
 1. Shell (Mac/Linux)
 
-```bash
-curl -fsSL https://github.com/release-lab/install/raw/v1/install.sh | bash -s -- -r=release-lab/whatchanged
-```
+   ```bash
+   curl -fsSL https://github.com/release-lab/install/raw/v1/install.sh | bash -s -- -r=release-lab/whatchanged
+   ```
 
 2. PowerShell (Windows):
 
-```powershell
-$r="release-lab/whatchanged";iwr https://github.com/release-lab/install/raw/v1/install.ps1 -useb | iex
-```
+   ```powershell
+   $r="release-lab/whatchanged";iwr https://github.com/release-lab/install/raw/v1/install.ps1 -useb | iex
+   ```
 
 3. 从 [Github Release Page](https://github.com/release-lab/whatchanged/releases) 下载 (全平台支持)
 
-> 下载可执行文件，并且把它加入到`$PATH` 环境变量中
+   下载可执行文件，并且把它加入到`$PATH` 环境变量中
 
 4. 使用 [Golang](https://golang.org) 从源码中构建并安装 (全平台支持)
 
-```bash
-go install github.com/release-lab/whatchanged/cmd/whatchanged
-```
+   ```bash
+   go install github.com/release-lab/whatchanged/cmd/whatchanged
+   ```
 
 ### 常见问题
 

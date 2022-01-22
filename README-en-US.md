@@ -36,25 +36,25 @@ $ whatchanged --help
 
 1. Shell (Mac/Linux)
 
-```bash
-curl -fsSL https://github.com/release-lab/install/raw/v1/install.sh | bash -s -- -r=release-lab/whatchanged
-```
+   ```bash
+   curl -fsSL https://github.com/release-lab/install/raw/v1/install.sh | bash -s -- -r=release-lab/whatchanged
+   ```
 
 2. PowerShell (Windows):
 
-```powershell
-$r="release-lab/whatchanged";iwr https://github.com/release-lab/install/raw/v1/install.ps1 -useb | iex
-```
+   ```powershell
+   $r="release-lab/whatchanged";iwr https://github.com/release-lab/install/raw/v1/install.ps1 -useb | iex
+   ```
 
 3. [Github release page](https://github.com/release-lab/whatchanged/releases) (All platforms)
 
-> download the executable file and put the executable file to `$PATH`
+   download the executable file and put the executable file to `$PATH`
 
 4. Build and install from source using [Golang](https://golang.org) (All platforms)
 
-```bash
-go install github.com/release-lab/whatchanged/cmd/whatchanged
-```
+   ```bash
+   go install github.com/release-lab/whatchanged/cmd/whatchanged
+   ```
 
 ### FAQ
 
