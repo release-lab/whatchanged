@@ -1,4 +1,4 @@
-[English](README-en-US.md) | 中文简体
+English | [中文简体](README-zh-CN.md)
 
 [![Build Status](https://github.com/release-lab/whatchanged/workflows/ci/badge.svg)](https://github.com/release-lab/whatchanged/actions)
 [![Build Status](https://github.com/release-lab/whatchanged/workflows/playground/badge.svg)](https://github.com/release-lab/whatchanged/actions)
@@ -9,30 +9,30 @@
 
 ## whatchanged
 
-一个优雅的变更日志生成器，只需遵循 [Conventional Commits 规范](https://www.conventionalcommits.org/en/v1.0.0/)，即可生成一个漂亮的，工整的变更日志。
+An elegant changelog generator. follow the [Conventional Commits Specification](https://www.conventionalcommits.org/en/v1.0.0/) to generate a beautiful and neat change log.
 
-致力于**优雅**/**简单**/**高效**/**可扩展**
+Focus on **Elegant**/**Simple**/**Efficient**/**Scalable**
 
-[在线感受魔法](https://release-lab.github.io)
+[Feel the magic online](https://release-lab.github.io)
 
-特性:
+Feature:
 
-- [x] 跨平台支持
-- [x] 生成 本地/远程 的 git 仓库
-- [x] 内置预设的生成模板
-- [x] 自定义模版文件
-- [x] [Conventional Commits 规范解析器](https://github.com/release-lab/conventional-commit-parser)
-- [x] 支持多个版本的变更日志生成
+- [x] Cross-platform support
+- [x] Generation for local/Remote git repositories
+- [x] Preset template for generation
+- [x] Custom template file
+- [x] [Conventional Commits Specification Parser](https://github.com/release-lab/conventional-commit-parser)
+- [x] Generate multiple versions of change logs
 - [x] [Github Action](https://github.com/release-lab/setup-whatchanged)
 - [x] [Visual Studio Code extension](https://github.com/release-lab/vscode-whatchanged)
 
-### 使用
+### Usage
 
 ```bash
 $ whatchanged --help
 ```
 
-### 安装
+### Install
 
 1. Shell (Mac/Linux)
 
@@ -46,21 +46,21 @@ $ whatchanged --help
    $r="release-lab/whatchanged";iwr https://github.com/release-lab/install/raw/v1/install.ps1 -useb | iex
    ```
 
-3. 从 [Github Release Page](https://github.com/release-lab/whatchanged/releases) 下载 (全平台支持)
+3. [Github release page](https://github.com/release-lab/whatchanged/releases) (All platforms)
 
-   下载可执行文件，并且把它加入到`$PATH` 环境变量中
+   download the executable file and put the executable file to `$PATH`
 
-4. 使用 [Golang](https://golang.org) 从源码中构建并安装 (全平台支持)
+4. Build and install from source using [Golang](https://golang.org) (All platforms)
 
    ```bash
    go install github.com/release-lab/whatchanged/cmd/whatchanged
    ```
 
-### 常见问题
+### FAQ
 
-1. [它是如何工作的?](HOW_IT_WORKS.md)
-2. [如何自定义生成的模版?](CUSTOM_TEMPLATE.md)
+1. [How it works?](HOW_IT_WORKS.md)
+2. [How to custom generation template?](CUSTOM_TEMPLATE.md)
 
-### 开源许可
+### License
 
-The [Anti-996 License](LICENSE_zh-CN)
+The [Anti-996 License](LICENSE)
