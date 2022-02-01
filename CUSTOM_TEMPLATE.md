@@ -30,7 +30,8 @@ There are 3 parts in Context
 
 2. Method
 
-   1. **unescape(text string)**: unescape the string
+   1. **unescape(text string)**: unescape the string `text`.
+   2. **gsub(regex string, repl string, text string)**: search the `regex` and substitute with `repl` the string `text`.
 
 source code:
 

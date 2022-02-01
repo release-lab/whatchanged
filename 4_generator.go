@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"html/template"
 	"io/ioutil"
+	"regexp"
 
 	"github.com/pkg/errors"
 	"github.com/release-lab/whatchanged/internal/client"
@@ -16,6 +17,7 @@ import (
 var TemplateFS embed.FS
 
 func GenerateFromContext(g *client.GitClient, contexts []*TemplateContext, format EnumFormat, preset EnumPreset, templateFile string, templateStr string) ([]byte, error) {
+
 	switch format {
 	case FormatJSON:
 		output, err := json.Marshal(contexts)
@@ -26,6 +28,7 @@ func GenerateFromContext(g *client.GitClient, contexts []*TemplateContext, forma
 
 		return output, nil
 	case FormatMarkdown:
+		regexCache := make(map[string]*regexp.Regexp)
 		var output []byte
 
 		if templateStr != "" {
@@ -59,6 +62,14 @@ func GenerateFromContext(g *client.GitClient, contexts []*TemplateContext, forma
 			t.Funcs(template.FuncMap{
 				"unescape": func(s string) template.HTML {
 					return template.HTML(s)
+				},
+				"gsub": func(pattern string, repl string, s string) string {
+					v, exists := regexCache[pattern]
+					if !exists {
+						v = regexp.MustCompile(pattern)
+						regexCache[pattern] = v
+					}
+					return v.ReplaceAllString(s, repl)
 				},
 			})
 
