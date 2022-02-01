@@ -42,9 +42,10 @@ type Commit struct {
 	Message             string
 	Author              *object.Signature
 	Committer           *object.Signature
-	Field               *parser.Message
-	RevertCommitHash    *string // revert hash
-	RevertCommitHashURL *string // revert hash URL
+	Field               Message
+	RevertCommitHash    *string   // Revert hash
+	RevertCommitHashURL *string   // Revert hash URL
+	Closes              *[]string // Closes issues
 }
 
 // https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit-message-header
@@ -67,10 +68,12 @@ type TemplateContext struct {
 }
 
 type Header struct {
-	Type    string
-	Scope   string
-	Subject string
+	Type      string
+	Scope     string
+	Subject   string
+	Important bool
 }
+
 
 type BreakingChange struct {
 	Title   string
@@ -86,11 +89,11 @@ type Footer struct {
 type Message struct {
 	raw    string
 	Title  string
-	Header *Header
+	Header *conventionalcommitparser.Header
 	Body   string
 	Footer *Footer
-	Revert *string // if it is a revert commit. then this is a hash for that commit
 }
+
 
 // Signature is used to identify who and when created a commit or tag.
 type Signature struct {
