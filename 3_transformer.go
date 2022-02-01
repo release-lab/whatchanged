@@ -187,7 +187,7 @@ func Transform(g *client.GitClient, splices []*ExtractSplice) ([]*TemplateContex
 			c.Field = Message{
 				raw:    commit.Message,
 				Title:  header.Subject,
-				Body: msg.ParseBody(),
+				Body:   msg.Body,
 				Header: &header,
 			}
 
