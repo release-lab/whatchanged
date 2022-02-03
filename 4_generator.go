@@ -9,12 +9,147 @@ import (
 	"io/ioutil"
 	"regexp"
 
+	"github.com/Masterminds/sprig"
+
 	"github.com/pkg/errors"
 	"github.com/release-lab/whatchanged/internal/client"
 )
 
 //go:embed template/*.tpl
 var TemplateFS embed.FS
+
+// Get all regex functions which use a compiled regex cache.
+func getRegexFuncs(regexCache map[string]*regexp.Regexp) template.FuncMap {
+	return map[string]interface{}{
+		// Regex (but cached)
+
+		"regexMatch": func(regex string, s string) bool {
+			r, exists := regexCache[regex]
+			if !exists {
+				r = regexp.MustCompile(regex)
+				regexCache[regex] = r
+			}
+			return r.MatchString(s)
+		},
+
+		"mustRegexMatch": func(regex string, s string) (bool, error) {
+			r, exists := regexCache[regex]
+			if !exists {
+				r, err := regexp.Compile(regex)
+				if err != nil {
+					return false, err
+				}
+				regexCache[regex] = r
+			}
+			return r.MatchString(s), nil
+		},
+
+		"regexFindAll": func(regex string, s string, n int) []string {
+			r, exists := regexCache[regex]
+			if !exists {
+				r = regexp.MustCompile(regex)
+				regexCache[regex] = r
+			}
+			return r.FindAllString(s, n)
+		},
+
+		"mustRegexFindAll": func(regex string, s string, n int) ([]string, error) {
+			r, exists := regexCache[regex]
+			if !exists {
+				r, err := regexp.Compile(regex)
+				if err != nil {
+					return []string{}, err
+				}
+				regexCache[regex] = r
+			}
+			return r.FindAllString(s, n), nil
+		},
+
+		"regexFind": func(regex string, s string) string {
+			r, exists := regexCache[regex]
+			if !exists {
+				r = regexp.MustCompile(regex)
+				regexCache[regex] = r
+			}
+			return r.FindString(s)
+		},
+
+		"mustRegexFind": func(regex string, s string) (string, error) {
+			r, exists := regexCache[regex]
+			if !exists {
+				r, err := regexp.Compile(regex)
+				if err != nil {
+					return "", err
+				}
+				regexCache[regex] = r
+			}
+			return r.FindString(s), nil
+		},
+
+		"regexReplaceAll": func(regex string, s string, repl string) string {
+			r, exists := regexCache[regex]
+			if !exists {
+				r = regexp.MustCompile(regex)
+				regexCache[regex] = r
+			}
+			return r.ReplaceAllString(s, repl)
+		},
+
+		"mustRegexReplaceAll": func(regex string, s string, repl string) (string, error) {
+			r, exists := regexCache[regex]
+			if !exists {
+				r, err := regexp.Compile(regex)
+				if err != nil {
+					return "", err
+				}
+				regexCache[regex] = r
+			}
+			return r.ReplaceAllString(s, repl), nil
+		},
+
+		"regexReplaceAllLiteral": func(regex string, s string, repl string) string {
+			r, exists := regexCache[regex]
+			if !exists {
+				r = regexp.MustCompile(regex)
+				regexCache[regex] = r
+			}
+			return r.ReplaceAllLiteralString(s, repl)
+		},
+
+		"mustRegexReplaceAllLiteral": func(regex string, s string, repl string) (string, error) {
+			r, exists := regexCache[regex]
+			if !exists {
+				r, err := regexp.Compile(regex)
+				if err != nil {
+					return "", err
+				}
+				regexCache[regex] = r
+			}
+			return r.ReplaceAllLiteralString(s, repl), nil
+		},
+
+		"regexSplit": func(regex string, s string, n int) []string {
+			r, exists := regexCache[regex]
+			if !exists {
+				r = regexp.MustCompile(regex)
+				regexCache[regex] = r
+			}
+			return r.Split(s, n)
+		},
+
+		"mustRegexSplit": func(regex string, s string, n int) ([]string, error) {
+			r, exists := regexCache[regex]
+			if !exists {
+				r, err := regexp.Compile(regex)
+				if err != nil {
+					return []string{}, err
+				}
+				regexCache[regex] = r
+			}
+			return r.Split(s, n), nil
+		},
+	}
+}
 
 func GenerateFromContext(g *client.GitClient, contexts []*TemplateContext, format EnumFormat, preset EnumPreset, templateFile string, templateStr string) ([]byte, error) {
 
@@ -28,7 +163,7 @@ func GenerateFromContext(g *client.GitClient, contexts []*TemplateContext, forma
 
 		return output, nil
 	case FormatMarkdown:
-		regexCache := make(map[string]*regexp.Regexp)
+
 		var output []byte
 
 		if templateStr != "" {
@@ -59,19 +194,16 @@ func GenerateFromContext(g *client.GitClient, contexts []*TemplateContext, forma
 		for _, ctx := range contexts {
 			t := template.New(ctx.Version)
 
+			t.Funcs(sprig.FuncMap())
 			t.Funcs(template.FuncMap{
 				"unescape": func(s string) template.HTML {
 					return template.HTML(s)
 				},
-				"gsub": func(pattern string, repl string, s string) string {
-					v, exists := regexCache[pattern]
-					if !exists {
-						v = regexp.MustCompile(pattern)
-						regexCache[pattern] = v
-					}
-					return v.ReplaceAllString(s, repl)
-				},
 			})
+
+			// Overwrite regex function with cached one for better performance.
+			regexCache := make(map[string]*regexp.Regexp)
+			t.Funcs(getRegexFuncs(regexCache))
 
 			if t, err := t.Parse(templateStr); err != nil {
 				return nil, errors.WithStack(err)

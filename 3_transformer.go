@@ -91,17 +91,6 @@ func generateCommitHashURL(remoteURL *url.URL, longHash string) string {
 	}
 }
 
-func paddingLeft(txt string, cur string) string {
-	lines := strings.Split(txt, "\n")
-	newArr := make([]string, 0)
-
-	for _, line := range lines {
-		newArr = append(newArr, cur+line)
-	}
-
-	return strings.Join(newArr, "\n")
-}
-
 var githubOrgRegex = regexp.MustCompile(`^([^@]+)@github\.com:(\w+)\/(.+)$`)
 
 func Transform(g *client.GitClient, splices []*ExtractSplice) ([]*TemplateContext, error) {
@@ -205,7 +194,7 @@ func Transform(g *client.GitClient, splices []*ExtractSplice) ([]*TemplateContex
 					c.Field.Footer = &Footer{
 						BreakingChange: &BreakingChange{
 							Title:   breakingChangeFooter.Title,
-							Content: paddingLeft(breakingChangeFooter.Content, "  "),
+							Content: breakingChangeFooter.Content,
 						},
 					}
 				}
