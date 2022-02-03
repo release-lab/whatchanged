@@ -108,9 +108,9 @@ type Signature struct {
 
 ## example
 
-[Default Template](4_generator/template/default.tpl)
-[Full Template](4_generator/template/full.tpl)
+[Default Template](template/default.tpl)
+[Full Template](template/full.tpl)
 
 ## Source Code
 
-[transformer.go](3_transformer/transform.go)
+[transformer.go](3_transformer.go)
