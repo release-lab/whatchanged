@@ -11,12 +11,12 @@ github.com/88250/lute/util
 # github.com/Masterminds/goutils v1.1.1
 ## explicit
 github.com/Masterminds/goutils
-# github.com/Masterminds/semver v1.5.0
-## explicit
-github.com/Masterminds/semver
-# github.com/Masterminds/sprig v2.22.0+incompatible
-## explicit
-github.com/Masterminds/sprig
+# github.com/Masterminds/semver/v3 v3.1.1
+## explicit; go 1.12
+github.com/Masterminds/semver/v3
+# github.com/Masterminds/sprig/v3 v3.2.2
+## explicit; go 1.13
+github.com/Masterminds/sprig/v3
 # github.com/Microsoft/go-winio v0.4.16
 ## explicit; go 1.12
 github.com/Microsoft/go-winio
@@ -200,6 +200,12 @@ github.com/release-lab/conventional-commit-parser
 # github.com/sergi/go-diff v1.1.0
 ## explicit; go 1.12
 github.com/sergi/go-diff/diffmatchpatch
+# github.com/shopspring/decimal v1.2.0
+## explicit; go 1.13
+github.com/shopspring/decimal
+# github.com/spf13/cast v1.3.1
+## explicit
+github.com/spf13/cast
 # github.com/stretchr/testify v1.7.0
 ## explicit; go 1.13
 github.com/stretchr/testify/assert
@@ -211,6 +217,7 @@ github.com/whilp/git-urls
 github.com/xanzy/ssh-agent
 # golang.org/x/crypto v0.0.0-20210421170649-83a5a9bb288b
 ## explicit; go 1.11
+golang.org/x/crypto/bcrypt
 golang.org/x/crypto/blowfish
 golang.org/x/crypto/cast5
 golang.org/x/crypto/chacha20
