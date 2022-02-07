@@ -110,7 +110,7 @@
 
 ### Bugs fixed:
 
-- segfault when using string.ustring_tmp()([`58577f5`](https://github.com/vlang/v/commit/58577f57c6bd23a42ae2acd02acc2f686c16ab6b)) (@Maciej Sopyło)
+- segfault when using string.ustring_tmp()([`58577f5`](https://github.com/vlang/v/commit/58577f57c6bd23a42ae2acd02acc2f686c16ab6b)) (by Maciej Sopyło)
 
 ### Revert:
 
@@ -174,8 +174,8 @@
 
 ### Bugs fixed:
 
-- add CRLF handling to scanner.v([`461b78b`](https://github.com/vlang/v/commit/461b78bc778feca199c8290d9213a9e87c0a4e6d)) (@Oxylibrium)
-- fix error messages([`cf6aa16`](https://github.com/vlang/v/commit/cf6aa16ee4a72c30e38d3c8f86e8817cd2a56936)) (@Yoshiya Hinosawa)
+- add CRLF handling to scanner.v([`461b78b`](https://github.com/vlang/v/commit/461b78bc778feca199c8290d9213a9e87c0a4e6d)) (by Oxylibrium)
+- fix error messages([`cf6aa16`](https://github.com/vlang/v/commit/cf6aa16ee4a72c30e38d3c8f86e8817cd2a56936)) (by Yoshiya Hinosawa)
 
 ### Revert:
 
