@@ -37,7 +37,7 @@ func getRegexFuncs(regexCache map[string]*regexp.Regexp) template.FuncMap {
 			if !exists {
 				r, err := regexp.Compile(regex)
 				if err != nil {
-					return false, err
+					return false, errors.WithStack(err)
 				}
 				regexCache[regex] = r
 			}
@@ -58,7 +58,7 @@ func getRegexFuncs(regexCache map[string]*regexp.Regexp) template.FuncMap {
 			if !exists {
 				r, err := regexp.Compile(regex)
 				if err != nil {
-					return []string{}, err
+					return []string{}, errors.WithStack(err)
 				}
 				regexCache[regex] = r
 			}
@@ -79,7 +79,7 @@ func getRegexFuncs(regexCache map[string]*regexp.Regexp) template.FuncMap {
 			if !exists {
 				r, err := regexp.Compile(regex)
 				if err != nil {
-					return "", err
+					return "", errors.WithStack(err)
 				}
 				regexCache[regex] = r
 			}
@@ -100,7 +100,7 @@ func getRegexFuncs(regexCache map[string]*regexp.Regexp) template.FuncMap {
 			if !exists {
 				r, err := regexp.Compile(regex)
 				if err != nil {
-					return "", err
+					return "", errors.WithStack(err)
 				}
 				regexCache[regex] = r
 			}
@@ -121,7 +121,7 @@ func getRegexFuncs(regexCache map[string]*regexp.Regexp) template.FuncMap {
 			if !exists {
 				r, err := regexp.Compile(regex)
 				if err != nil {
-					return "", err
+					return "", errors.WithStack(err)
 				}
 				regexCache[regex] = r
 			}
@@ -142,7 +142,7 @@ func getRegexFuncs(regexCache map[string]*regexp.Regexp) template.FuncMap {
 			if !exists {
 				r, err := regexp.Compile(regex)
 				if err != nil {
-					return []string{}, err
+					return []string{}, errors.WithStack(err)
 				}
 				regexCache[regex] = r
 			}
@@ -185,7 +185,7 @@ func GenerateFromContext(g *client.GitClient, contexts []*TemplateContext, forma
 			}
 		} else {
 			if b, err := ioutil.ReadFile(templateFile); err != nil {
-				return nil, err
+				return nil, errors.WithStack(err)
 			} else {
 				templateStr = string(b)
 			}
