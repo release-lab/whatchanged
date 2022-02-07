@@ -59,17 +59,6 @@ func Extract(g *client.GitClient, scopes []*Scope) ([]*ExtractSplice, error) {
 			return nil, errors.WithStack(err)
 		}
 
-		// if there is no tags in this scope
-		// if scope.Tags == nil || len(scope.Tags) == 0 {
-		// 	splices = append(splices, &ExtractSplice{
-		// 		Name:   "Unreleased",
-		// 		Commit: commits,
-		// 		Tag:    nil,
-		// 	})
-
-		// 	return splices, nil
-		// }
-
 		index := 0
 
 		tagIndex := 0

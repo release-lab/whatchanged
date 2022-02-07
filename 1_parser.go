@@ -80,7 +80,7 @@ func getCommit(git *client.GitClient, version string, isStart bool) (*object.Com
 			return nil, errors.WithStack(err)
 		}
 
-		tag, err := git.TagN(int(tagIndex))
+		tag, err := git.GetTagN(int(tagIndex))
 
 		if err != nil {
 			return nil, errors.WithStack(err)
@@ -97,7 +97,7 @@ func getCommit(git *client.GitClient, version string, isStart bool) (*object.Com
 		return git.Commit(version)
 	} else {
 		// else if it's a tag
-		tag, err := git.TagName(version)
+		tag, err := git.GetTagByName(version)
 
 		if err != nil {
 			return nil, errors.WithStack(err)
@@ -119,7 +119,7 @@ func resolveVersion(git *client.GitClient, versionRanges string) ([]string, erro
 	switch true {
 	case versionRanges == "":
 		versions[0] = "HEAD"
-		latestTag, err := git.TagN(0)
+		latestTag, err := git.GetTagN(0)
 
 		if err != nil {
 			return nil, errors.WithStack(err)
@@ -177,11 +177,11 @@ func resolveVersion(git *client.GitClient, versionRanges string) ([]string, erro
 				return nil, errors.WithStack(err)
 			}
 
-			if tag, err = git.TagN(int(tagIndex)); err != nil {
+			if tag, err = git.GetTagN(int(tagIndex)); err != nil {
 				return nil, errors.WithStack(err)
 			}
 		} else {
-			if tag, err = git.TagName(versionRanges); err != nil {
+			if tag, err = git.GetTagByName(versionRanges); err != nil {
 				return nil, errors.WithStack(err)
 			}
 		}

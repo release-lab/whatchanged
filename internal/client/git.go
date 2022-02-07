@@ -91,8 +91,8 @@ type GitClient struct {
 }
 
 // Get the Nth tag
-func (g *GitClient) TagN(offset int) (*Tag, error) {
-	tags, err := g.Tags()
+func (g *GitClient) GetTagN(offset int) (*Tag, error) {
+	tags, err := g.getAllTags()
 
 	if err != nil {
 		return nil, errors.WithStack(err)
@@ -113,7 +113,7 @@ func (g *GitClient) TagN(offset int) (*Tag, error) {
 
 // Get next tag from the specified tag
 func (g *GitClient) PrevTag(target *Tag) (*Tag, error) {
-	tags, err := g.Tags()
+	tags, err := g.getAllTags()
 
 	if err != nil {
 		return nil, errors.WithStack(err)
@@ -134,7 +134,7 @@ func (g *GitClient) PrevTag(target *Tag) (*Tag, error) {
 
 // Get next tag from the specified tag
 func (g *GitClient) NextTag(target *Tag) (*Tag, error) {
-	tags, err := g.Tags()
+	tags, err := g.getAllTags()
 
 	if err != nil {
 		return nil, errors.WithStack(err)
@@ -153,8 +153,8 @@ func (g *GitClient) NextTag(target *Tag) (*Tag, error) {
 }
 
 // Get tag information from tag name
-func (g *GitClient) TagName(name string) (*Tag, error) {
-	tags, err := g.Tags()
+func (g *GitClient) GetTagByName(name string) (*Tag, error) {
+	tags, err := g.getAllTags()
 
 	if err != nil {
 		return nil, errors.WithStack(err)
@@ -174,7 +174,7 @@ func (g *GitClient) TagName(name string) (*Tag, error) {
 }
 
 // Get all tags
-func (g *GitClient) Tags() ([]*Tag, error) {
+func (g *GitClient) getAllTags() ([]*Tag, error) {
 	if g.tags != nil {
 		return g.tags, nil
 	}
@@ -400,7 +400,7 @@ func (g *GitClient) NextCommit(hash string) (*object.Commit, error) {
 // start: v2.0.0
 // end: v1.0.0
 func (g *GitClient) GetTagRangesByTagName(start string, end string) ([]*Tag, error) {
-	tags, err := g.Tags()
+	tags, err := g.getAllTags()
 
 	if err != nil {
 		return nil, errors.WithStack(err)
@@ -424,7 +424,7 @@ func (g *GitClient) GetTagRangesByTagName(start string, end string) ([]*Tag, err
 
 // Get tags with commit range
 func (g *GitClient) GetTagRangesByCommit(start *object.Commit, end *object.Commit) ([]*Tag, error) {
-	tags, err := g.Tags()
+	tags, err := g.getAllTags()
 
 	if err != nil {
 		return nil, errors.WithStack(err)
@@ -446,7 +446,7 @@ func (g *GitClient) GetTagRangesByCommit(start *object.Commit, end *object.Commi
 }
 
 func (g *GitClient) GetTagByCommit(commit *object.Commit) (*Tag, error) {
-	tags, err := g.Tags()
+	tags, err := g.getAllTags()
 
 	if err != nil {
 		return nil, errors.WithStack(err)
