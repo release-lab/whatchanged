@@ -36,6 +36,15 @@ func TestGenerate(t *testing.T) {
 			},
 		},
 		{
+			name:       "test-first-commit",
+			Project:    "./__test__/test-first-commit",
+			ResultFile: "./__test__/test-first-commit.CHANGELOG.md",
+			options: &Options{
+				Version: []string{"HEAD~"},
+				Preset:  PresetFull,
+			},
+		},
+		{
 			name:       "whatchanged single version",
 			Project:    "./",
 			ResultFile: "./__test__/whatchanged-[v0.2.0].CHANGELOG.md",
