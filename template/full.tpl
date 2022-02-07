@@ -73,3 +73,14 @@
 
 {{ end -}}
 {{ end }}
+
+{{ $commitLength := len .Commits }}
+
+{{if gt $commitLength 0}}
+
+### Commits({{ $commitLength }}):
+{{range .Commits -}}
+- {{ .HashURL }} - {{ .Field.Title | unescape}}
+{{ end }}
+
+{{ end }}

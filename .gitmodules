@@ -4,3 +4,6 @@
 [submodule "__test__/v"]
 	path = __test__/v
 	url = https://github.com/vlang/v.git
+[submodule "__test__/test-first-commit"]
+	path = __test__/test-first-commit
+	url = https://github.com/release-lab/test-first-commit.git
