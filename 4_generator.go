@@ -9,7 +9,7 @@ import (
 	"io/ioutil"
 	"regexp"
 
-	"github.com/Masterminds/sprig/v3"
+	sprig "github.com/Masterminds/sprig/v3"
 
 	"github.com/pkg/errors"
 	"github.com/release-lab/whatchanged/internal/client"
@@ -191,19 +191,22 @@ func GenerateFromContext(g *client.GitClient, contexts []*TemplateContext, forma
 			}
 		}
 
+		regexCache := make(map[string]*regexp.Regexp)
+
 		for _, ctx := range contexts {
 			t := template.New(ctx.Version)
 
+			// commom function for sprig
 			t.Funcs(sprig.FuncMap())
+			// overwrite regex function with cached one for better performance.
+			t.Funcs(getRegexFuncs(regexCache))
+
+			// custom function
 			t.Funcs(template.FuncMap{
 				"unescape": func(s string) template.HTML {
 					return template.HTML(s)
 				},
 			})
-
-			// Overwrite regex function with cached one for better performance.
-			regexCache := make(map[string]*regexp.Regexp)
-			t.Funcs(getRegexFuncs(regexCache))
 
 			if t, err := t.Parse(templateStr); err != nil {
 				return nil, errors.WithStack(err)
