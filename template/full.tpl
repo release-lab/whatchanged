@@ -69,7 +69,7 @@
 
 - {{if .Field.Footer.BreakingChange.Title}}{{ unescape .Field.Footer.BreakingChange.Title }}{{ else }}{{ unescape .Field.Title }}{{ end }}
 
-{{ unescape .Field.Footer.BreakingChange.Content }}
+{{ .Field.Footer.BreakingChange.Content | indent 2 | unescape }}
 
 {{ end -}}
 {{ end }}

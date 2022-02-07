@@ -28,9 +28,10 @@ There are 3 parts in Context
    14. **BreakingChanges**: the `commit` list of `revert` which includes `BREAKING CHANGES: xxx` in commit message body
    15. **Commits**: all `commit` of generation
 
-2. Method
+2. Methods
 
-   1. **unescape(text string)**: unescape the string
+   1. **unescape(text string)**: unescape the string `text`.
+   2. All functions from the library [sprig](https://github.com/Masterminds/sprig)
 
 source code:
 
