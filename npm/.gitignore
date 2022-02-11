@@ -1,0 +1,4 @@
+output/cjs/*.js
+output/cjs/*.d.ts
+output/mjs/*.js
+output/mjs/*.d.ts

@@ -13,12 +13,12 @@ const (
 )
 
 type Options struct {
-	Version      []string
-	Branch       string
-	Format       EnumFormat
-	SkipFormat   bool
-	Preset       EnumPreset // Priority: 1 The higher the level, the more priority
-	TemplateFile string     // Priority: 2
-	Template     string     // Priority: 3
-	Silent       bool
+	Version      []string   `json:"version"`
+	Branch       string     `json:"branch"`
+	Format       EnumFormat `json:"format"`
+	SkipFormat   bool       `json:"skip_format"`
+	Preset       EnumPreset `json:"preset"`        // Priority: 1 The higher the level, the more priority
+	TemplateFile string     `json:"template_file"` // Priority: 2
+	Template     string     `json:"template"`      // Priority: 3
+	Silent       bool       `json:"silent"`
 }

@@ -11,27 +11,32 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"regexp"
 
 	"github.com/release-lab/whatchanged"
 )
 
-//export Generate
-func Generate(repo *C.char, version *C.char) *C.char {
-	type Result struct {
-		Error  string `json:"error"`
-		Result string `json:"result"`
-	}
+type FFIResult struct {
+	Error  string `json:"error"`
+	Result string `json:"result"`
+}
 
-	var result Result
+//export Generate
+func Generate(repo *C.char, optionStr *C.char) *C.char {
+	var (
+		result FFIResult
+		option = whatchanged.Options{}
+	)
+
+	if err := json.Unmarshal([]byte(C.GoString(optionStr)), &option); err != nil {
+		result.Error = fmt.Sprintf("%+v\n", err)
+		b, _ := json.Marshal(result)
+
+		return C.CString(string(b))
+	}
 
 	output := bytes.NewBuffer([]byte{})
 
-	err := whatchanged.Generate(context.Background(), C.GoString(repo), output, &whatchanged.Options{
-		Version: regexp.MustCompile(`\s+`).Split(C.GoString(version), -1),
-		Branch:  "master",
-		Preset:  whatchanged.EnumPreset("full"),
-	})
+	err := whatchanged.Generate(context.Background(), C.GoString(repo), output, &option)
 
 	if err != nil {
 		result.Error = fmt.Sprintf("%+v\n", err)
