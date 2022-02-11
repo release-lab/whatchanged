@@ -16,6 +16,9 @@ export class WhatchangedFFI {
 
   /**
    *
+   * @description Linux: whatchanged.so
+   * @description Windows: whatchanged.dll
+   * @description macOS: whatchanged.dylib
    * @param libPath whatchanged Dynamic-link library filepath without extension
    */
   constructor(private libPath: string) {
