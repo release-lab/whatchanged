@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "ffi-napi": "^4.0.3"
+    "ffi-napi": "4.0.3"
   }
 }
