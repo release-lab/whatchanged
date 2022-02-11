@@ -21,8 +21,16 @@ builds:
     flags:
       - -mod=vendor
       - -trimpath
+    hooks:
+      pre:
+        - go build -buildmode=c-shared -o dist/whatchanged.dylib github.com/release-lab/whatchanged/cmd/whatchanged-ffi
+        - go build -buildmode=c-shared -o dist/whatchanged.dll github.com/release-lab/whatchanged/cmd/whatchanged-ffi
+        - go build -buildmode=c-shared -o dist/whatchanged.so github.com/release-lab/whatchanged/cmd/whatchanged-ffi
 
 archives:
   - files:
-      - none*
+      - dist/*.dll
+      - dist/*.so
+      - dist/*.dylib
+      - dist/*.h
     name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}{{ if .Mips }}_{{ .Mips }}{{ end }}"
