@@ -68,6 +68,7 @@ package main
 
 import (
    "context"
+   "bytes"
 
    "github.com/release-lab/whatchanged"
 )
