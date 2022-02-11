@@ -56,6 +56,39 @@ $ whatchanged --help
    go install github.com/release-lab/whatchanged/cmd/whatchanged
    ```
 
+### 作为库使用
+
+```bash
+# 安装包
+go get -v -u github.com/release-lab/whatchanged
+```
+
+```go
+package main
+
+import (
+   "context"
+
+   "github.com/release-lab/whatchanged"
+)
+
+func main() {
+   output := bytes.NewBuffer([]byte{})
+
+   option := whatchanged.Options{
+      Version: []string{"HEAD~"}
+   }
+
+   err := whatchanged.Generate(context.Background(), "/path/to/git/project", output, &option)
+
+   if err!=nil{
+      panic(err)
+   }
+
+   println(output)
+}
+```
+
 ### 常见问题
 
 1. [它是如何工作的?](HOW_IT_WORKS.md)
