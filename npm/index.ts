@@ -2,8 +2,11 @@ import ffi from "ffi-napi";
 
 export interface Options {
   version: string[];
-  branch: string;
-  format: string;
+  /**
+   * clone remote repo for branch
+   */
+  branch?: string;
+  format?: string;
   skip_format?: boolean;
   preset?: string;
   template_file?: string;
