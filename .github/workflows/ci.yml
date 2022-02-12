@@ -43,6 +43,12 @@ jobs:
           go mod tidy
           git checkout ./
 
+      - name: Generate share lib
+        run: |
+          go build -buildmode=c-shared -o dist/whatchanged.dylib ./cmd/whatchanged-ffi
+          go build -buildmode=c-shared -o dist/whatchanged.dll ./cmd/whatchanged-ffi
+          go build -buildmode=c-shared -o dist/whatchanged.so ./cmd/whatchanged-ffi
+
       - name: Build
         uses: goreleaser/goreleaser-action@v2
         with:
@@ -72,6 +78,12 @@ jobs:
         run: |
           ./cmd/whatchanged/run.sh --output=release.md
           cat release.md
+
+      - name: Generate share lib
+        run: |
+          go build -buildmode=c-shared -o dist/whatchanged.dylib ./cmd/whatchanged-ffi
+          go build -buildmode=c-shared -o dist/whatchanged.dll ./cmd/whatchanged-ffi
+          go build -buildmode=c-shared -o dist/whatchanged.so ./cmd/whatchanged-ffi
 
       - name: Release to Github
         uses: goreleaser/goreleaser-action@v2

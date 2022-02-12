@@ -21,11 +21,6 @@ builds:
     flags:
       - -mod=vendor
       - -trimpath
-    hooks:
-      pre:
-        - go build -buildmode=c-shared -o dist/whatchanged.dylib ./cmd/whatchanged-ffi
-        - go build -buildmode=c-shared -o dist/whatchanged.dll ./cmd/whatchanged-ffi
-        - go build -buildmode=c-shared -o dist/whatchanged.so ./cmd/whatchanged-ffi
 
 archives:
   - files:
