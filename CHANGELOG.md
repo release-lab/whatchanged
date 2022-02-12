@@ -96,7 +96,7 @@
 - remove npm publish
 
   ```diff
-  - npm install @axetroy/whatchanged -g
+  - npm install whatchanged -g
   ```
 
 ## v0.3.6 (2021-02-18)
