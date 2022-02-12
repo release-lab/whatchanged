@@ -1,5 +1,5 @@
 {
-  "name": "whatchanged",
+  "name": "@axetroy/whatchanged",
   "version": "0.1.0",
   "description": "whatchanged binding",
   "main": "./output/cjs/index.js",
