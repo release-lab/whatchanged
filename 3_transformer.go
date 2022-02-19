@@ -68,6 +68,7 @@ type TemplateContext struct {
 	Revert          []*Commit
 	BreakingChanges []*Commit
 	Commits         []*Commit
+	Contributors    []string
 }
 
 func generateCommitHashURL(remoteURL *url.URL, longHash string) string {
@@ -94,7 +95,7 @@ func generateCommitHashURL(remoteURL *url.URL, longHash string) string {
 var githubOrgRegex = regexp.MustCompile(`^([^@]+)@github\.com:(\w+)\/(.+)$`)
 
 func Transform(g *client.GitClient, splices []*ExtractSplice) ([]*TemplateContext, error) {
-	context := make([]*TemplateContext, 0)
+	contexts := make([]*TemplateContext, 0)
 
 	remote, err := g.GetRemote()
 	if err != nil {
@@ -143,7 +144,21 @@ func Transform(g *client.GitClient, splices []*ExtractSplice) ([]*TemplateContex
 
 	for _, splice := range splices {
 		ctx := &TemplateContext{
-			Version: splice.Name,
+			Version:         splice.Name,
+			Build:           make([]*Commit, 0),
+			Ci:              make([]*Commit, 0),
+			Chore:           make([]*Commit, 0),
+			Docs:            make([]*Commit, 0),
+			Feat:            make([]*Commit, 0),
+			Fix:             make([]*Commit, 0),
+			Perf:            make([]*Commit, 0),
+			Refactor:        make([]*Commit, 0),
+			Test:            make([]*Commit, 0),
+			Style:           make([]*Commit, 0),
+			Revert:          make([]*Commit, 0),
+			BreakingChanges: make([]*Commit, 0),
+			Commits:         make([]*Commit, 0),
+			Contributors:    make([]string, 0),
 		}
 
 		if splice.Tag != nil {
@@ -229,60 +244,30 @@ func Transform(g *client.GitClient, splices []*ExtractSplice) ([]*TemplateContex
 				}
 				ctx.Build = append(ctx.Build, c)
 			case "ci":
-				if ctx.Ci == nil {
-					ctx.Ci = make([]*Commit, 0)
-				}
 				ctx.Ci = append(ctx.Ci, c)
 			case "chore":
-				if ctx.Chore == nil {
-					ctx.Chore = make([]*Commit, 0)
-				}
 				ctx.Chore = append(ctx.Chore, c)
 			case "docs":
-				if ctx.Docs == nil {
-					ctx.Docs = make([]*Commit, 0)
-				}
 				ctx.Docs = append(ctx.Docs, c)
 			case "feat":
-				if ctx.Feat == nil {
-					ctx.Feat = make([]*Commit, 0)
-				}
 				ctx.Feat = append(ctx.Feat, c)
 			case "fix":
-				if ctx.Fix == nil {
-					ctx.Fix = make([]*Commit, 0)
-				}
 				ctx.Fix = append(ctx.Fix, c)
 			case "perf":
-				if ctx.Perf == nil {
-					ctx.Perf = make([]*Commit, 0)
-				}
 				ctx.Perf = append(ctx.Perf, c)
 			case "refactor":
-				if ctx.Refactor == nil {
-					ctx.Refactor = make([]*Commit, 0)
-				}
 				ctx.Refactor = append(ctx.Refactor, c)
 			case "test":
-				if ctx.Test == nil {
-					ctx.Test = make([]*Commit, 0)
-				}
 				ctx.Test = append(ctx.Test, c)
 			case "style":
-				if ctx.Style == nil {
-					ctx.Style = make([]*Commit, 0)
-				}
 				ctx.Style = append(ctx.Style, c)
 			case "revert":
-				if ctx.Revert == nil {
-					ctx.Revert = make([]*Commit, 0)
-				}
 				ctx.Revert = append(ctx.Revert, c)
 			}
 		}
 
-		context = append(context, ctx)
+		contexts = append(contexts, ctx)
 	}
 
-	return context, nil
+	return contexts, nil
 }
