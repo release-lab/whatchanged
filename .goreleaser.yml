@@ -24,8 +24,8 @@ builds:
 
 archives:
   - files:
-      - dist/*.dll
-      - dist/*.so
-      - dist/*.dylib
-      - dist/*.h
+      - lib/*.dll
+      - lib/*.so
+      - lib/*.dylib
+      - lib/*.h
     name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}{{ if .Mips }}_{{ .Mips }}{{ end }}"
