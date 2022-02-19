@@ -11,11 +11,11 @@ builds:
       - amd64
       - arm
       - arm64
-      - 386
+      - "386"
     goarm:
-      - 5
-      - 6
-      - 7
+      - "5"
+      - "6"
+      - "7"
     env:
       - CGO_ENABLED=0
     flags:
