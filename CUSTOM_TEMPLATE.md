@@ -66,6 +66,7 @@ type TemplateContext struct {
 	Revert          []*Commit
 	BreakingChanges []*Commit
 	Commits         []*Commit
+	Contributors    []string
 }
 
 type Header struct {

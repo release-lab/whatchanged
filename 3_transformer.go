@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/url"
 	"regexp"
+	"sort"
 	"strings"
 
 	"github.com/go-git/go-git/v5/plumbing/object"
@@ -12,13 +13,6 @@ import (
 	"github.com/release-lab/whatchanged/internal/client"
 	giturls "github.com/whilp/git-urls"
 )
-
-type Header struct {
-	Type      string
-	Scope     string
-	Subject   string
-	Important bool
-}
 
 type BreakingChange struct {
 	Title   string
@@ -68,6 +62,7 @@ type TemplateContext struct {
 	Revert          []*Commit
 	BreakingChanges []*Commit
 	Commits         []*Commit
+	Contributors    []string
 }
 
 func generateCommitHashURL(remoteURL *url.URL, longHash string) string {
@@ -94,7 +89,7 @@ func generateCommitHashURL(remoteURL *url.URL, longHash string) string {
 var githubOrgRegex = regexp.MustCompile(`^([^@]+)@github\.com:(\w+)\/(.+)$`)
 
 func Transform(g *client.GitClient, splices []*ExtractSplice) ([]*TemplateContext, error) {
-	context := make([]*TemplateContext, 0)
+	contexts := make([]*TemplateContext, 0)
 
 	remote, err := g.GetRemote()
 	if err != nil {
@@ -143,8 +138,11 @@ func Transform(g *client.GitClient, splices []*ExtractSplice) ([]*TemplateContex
 
 	for _, splice := range splices {
 		ctx := &TemplateContext{
-			Version: splice.Name,
+			Version:      splice.Name,
+			Contributors: make([]string, 0),
 		}
+
+		contributorMap := map[string]int{}
 
 		if splice.Tag != nil {
 			ctx.Date = splice.Tag.Date.Format("2006-01-02")
@@ -158,6 +156,14 @@ func Transform(g *client.GitClient, splices []*ExtractSplice) ([]*TemplateContex
 			ctx.Commits = make([]*Commit, 0)
 		}
 		for _, commit := range splice.Commit {
+			if count, ok := contributorMap[commit.Author.Name]; !ok {
+				contributorMap[commit.Author.Name] = 1
+			} else {
+				contributorMap[commit.Author.Name] = count + 1
+			}
+
+			ctx.Contributors = append(ctx.Contributors, commit.Author.Name)
+
 			hash := commit.Hash.String()
 			c := &Commit{
 				Hash:      hash,
@@ -281,8 +287,15 @@ func Transform(g *client.GitClient, splices []*ExtractSplice) ([]*TemplateContex
 			}
 		}
 
-		context = append(context, ctx)
+		contributors := make([]string, 0, len(contributorMap))
+		for k := range contributorMap {
+			contributors = append(contributors, k)
+		}
+		sort.Strings(contributors)
+		ctx.Contributors = contributors
+
+		contexts = append(contexts, ctx)
 	}
 
-	return context, nil
+	return contexts, nil
 }
