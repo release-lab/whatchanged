@@ -94,9 +94,9 @@ jobs:
 
       - name: Generate share lib
         run: |
-          go build -buildmode=c-shared -o dist/whatchanged.dylib ./cmd/whatchanged-ffi
-          go build -buildmode=c-shared -o dist/whatchanged.dll ./cmd/whatchanged-ffi
-          go build -buildmode=c-shared -o dist/whatchanged.so ./cmd/whatchanged-ffi
+          go build -buildmode=c-shared -o lib/whatchanged.dylib ./cmd/whatchanged-ffi
+          go build -buildmode=c-shared -o lib/whatchanged.dll ./cmd/whatchanged-ffi
+          go build -buildmode=c-shared -o lib/whatchanged.so ./cmd/whatchanged-ffi
 
       - name: Release to Github
         uses: goreleaser/goreleaser-action@v2
