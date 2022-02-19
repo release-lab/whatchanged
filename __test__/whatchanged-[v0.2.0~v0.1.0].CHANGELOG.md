@@ -2,34 +2,34 @@
 
 ### New feature:
 
-- refactor multiple version generation([`65c50c6`](https://github.com/release-lab/whatchanged/commit/65c50c6b30f5dfc608c260c73d55cc8601041bdf)) (by axetroy)
-- unified usage when invalid options([`dde4ece`](https://github.com/release-lab/whatchanged/commit/dde4ecee3db8925c804db839bed098eb4a0f82ec)) (by axetroy)
-- print help/version information to stderr([`ddc712a`](https://github.com/release-lab/whatchanged/commit/ddc712a8e4ec502976deb7430a79532d902bcbf9)) (by axetroy)
-- version range of hash support 8-length short hash([`d9d3be8`](https://github.com/release-lab/whatchanged/commit/d9d3be819e1214139342e48cdaf866ae3b628f4b)) (by axetroy)
-- support to generate multiple specified versions ref: #4([`4a9e7ee`](https://github.com/release-lab/whatchanged/commit/4a9e7ee70a80104933e60f20db4784ea472ae2ec)) (by axetroy)
-- rename tag:N to @N([`76eb777`](https://github.com/release-lab/whatchanged/commit/76eb7774ac0a1f44ca6b66b9322870cba24a50a8)) (by axetroy)
-- **cli**: rename '--dir' to '--project' and '--file' to '--output' #4([`189186a`](https://github.com/release-lab/whatchanged/commit/189186a89693c724ac794c17f2c35781b2fdc017)) (by axetroy)
-- add whatchanged package for Go([`0bb75dd`](https://github.com/release-lab/whatchanged/commit/0bb75dd41758d85c4608f010298f823346a68a7c)) (by axetroy)
-- rename 'changelog' to 'whatchanged'([`ee18634`](https://github.com/release-lab/whatchanged/commit/ee1863487bd70a2664ff856c4aacfc34d3a5043d)) (by axetroy), Closes: #6
-- implement revert parser([`2c800f2`](https://github.com/release-lab/whatchanged/commit/2c800f24894c495761e715e3a3f81863e0b3b96c)) (by axetroy)
-- add chore block([`418b8f6`](https://github.com/release-lab/whatchanged/commit/418b8f6383b9d710c043655a5dd28fd6627bd85f)) (by axetroy)
-- add changelog repl. generate changelog online almose done.([`c7127b1`](https://github.com/release-lab/whatchanged/commit/c7127b1b0e3869854d293b536eb2f21c4e0c8e3c)) (by axetroy)
-- enabled cors for changelog-remote([`8b5f7fb`](https://github.com/release-lab/whatchanged/commit/8b5f7fbda0f6aefbc933de757a13ed34d105990f)) (by axetroy)
+- refactor multiple version generation([`65c50c6`](https://github.com/release-lab/whatchanged/commit/65c50c6b30f5dfc608c260c73d55cc8601041bdf))
+- unified usage when invalid options([`dde4ece`](https://github.com/release-lab/whatchanged/commit/dde4ecee3db8925c804db839bed098eb4a0f82ec))
+- print help/version information to stderr([`ddc712a`](https://github.com/release-lab/whatchanged/commit/ddc712a8e4ec502976deb7430a79532d902bcbf9))
+- version range of hash support 8-length short hash([`d9d3be8`](https://github.com/release-lab/whatchanged/commit/d9d3be819e1214139342e48cdaf866ae3b628f4b))
+- support to generate multiple specified versions ref: #4([`4a9e7ee`](https://github.com/release-lab/whatchanged/commit/4a9e7ee70a80104933e60f20db4784ea472ae2ec))
+- rename tag:N to @N([`76eb777`](https://github.com/release-lab/whatchanged/commit/76eb7774ac0a1f44ca6b66b9322870cba24a50a8))
+- **cli**: rename '--dir' to '--project' and '--file' to '--output' #4([`189186a`](https://github.com/release-lab/whatchanged/commit/189186a89693c724ac794c17f2c35781b2fdc017))
+- add whatchanged package for Go([`0bb75dd`](https://github.com/release-lab/whatchanged/commit/0bb75dd41758d85c4608f010298f823346a68a7c))
+- rename 'changelog' to 'whatchanged'([`ee18634`](https://github.com/release-lab/whatchanged/commit/ee1863487bd70a2664ff856c4aacfc34d3a5043d)), Closes: #6
+- implement revert parser([`2c800f2`](https://github.com/release-lab/whatchanged/commit/2c800f24894c495761e715e3a3f81863e0b3b96c))
+- add chore block([`418b8f6`](https://github.com/release-lab/whatchanged/commit/418b8f6383b9d710c043655a5dd28fd6627bd85f))
+- add changelog repl. generate changelog online almose done.([`c7127b1`](https://github.com/release-lab/whatchanged/commit/c7127b1b0e3869854d293b536eb2f21c4e0c8e3c))
+- enabled cors for changelog-remote([`8b5f7fb`](https://github.com/release-lab/whatchanged/commit/8b5f7fbda0f6aefbc933de757a13ed34d105990f))
 
 ### Bugs fixed:
 
-- the breaking change block is generate in incorrect format([`5bf4bee`](https://github.com/release-lab/whatchanged/commit/5bf4beea7124cac872598c5487657548e7a826c9)) (by axetroy)
-- the incorrect range generated when there are no parameters([`bbf648e`](https://github.com/release-lab/whatchanged/commit/bbf648e756ab74abb25764ee9ead032343832b3b)) (by axetroy)
-- parse single version tag:N incorrect([`aa62d6b`](https://github.com/release-lab/whatchanged/commit/aa62d6be3294619c81159a39208c9f7bba07630f)) (by axetroy)
-- **repl**: server not response markdown([`45b6ad2`](https://github.com/release-lab/whatchanged/commit/45b6ad20ec4a50dc7661bf575fa408ef6383c46b)) (by axetroy)
-- **repl**: generate error([`8a92fd7`](https://github.com/release-lab/whatchanged/commit/8a92fd7693568683beba2431b0e0659fc99e3c82)) (by axetroy)
-- **repl**: no-cors mode([`6410c1b`](https://github.com/release-lab/whatchanged/commit/6410c1be6cc35e3165172f99738add18ef4d5beb)) (by axetroy)
-- **repl**: source block do not render after request success([`d4af36b`](https://github.com/release-lab/whatchanged/commit/d4af36be80ca60f4bbbcb96603b070883ac44a6a)) (by axetroy)
-- **repl**: improve error handler([`b2bbbbd`](https://github.com/release-lab/whatchanged/commit/b2bbbbd7608501813986d74f6e44c233719246eb)) (by axetroy)
-- **repl**: markdown is not rendered correctly([`4cf9f6e`](https://github.com/release-lab/whatchanged/commit/4cf9f6ee53d19f67380144030a38ede88cb1a59b)) (by axetroy)
-- **deps**: update dependency ant-design-vue to v2.0.0-rc.2 (#8)([`a340efc`](https://github.com/release-lab/whatchanged/commit/a340efc8b86b1728eb1dcaedc9c101767582e811)) (by renovate[bot])
-- **repl**: production assets should be set publicPath([`89ea856`](https://github.com/release-lab/whatchanged/commit/89ea856f4f2046f7347a5ebd2c9d60e3a3650595)) (by axetroy)
-- **repl**: markdown render style([`acebfd0`](https://github.com/release-lab/whatchanged/commit/acebfd0bd736dac9c811186c82ba241d7b1e05e1)) (by axetroy)
+- the breaking change block is generate in incorrect format([`5bf4bee`](https://github.com/release-lab/whatchanged/commit/5bf4beea7124cac872598c5487657548e7a826c9))
+- the incorrect range generated when there are no parameters([`bbf648e`](https://github.com/release-lab/whatchanged/commit/bbf648e756ab74abb25764ee9ead032343832b3b))
+- parse single version tag:N incorrect([`aa62d6b`](https://github.com/release-lab/whatchanged/commit/aa62d6be3294619c81159a39208c9f7bba07630f))
+- **repl**: server not response markdown([`45b6ad2`](https://github.com/release-lab/whatchanged/commit/45b6ad20ec4a50dc7661bf575fa408ef6383c46b))
+- **repl**: generate error([`8a92fd7`](https://github.com/release-lab/whatchanged/commit/8a92fd7693568683beba2431b0e0659fc99e3c82))
+- **repl**: no-cors mode([`6410c1b`](https://github.com/release-lab/whatchanged/commit/6410c1be6cc35e3165172f99738add18ef4d5beb))
+- **repl**: source block do not render after request success([`d4af36b`](https://github.com/release-lab/whatchanged/commit/d4af36be80ca60f4bbbcb96603b070883ac44a6a))
+- **repl**: improve error handler([`b2bbbbd`](https://github.com/release-lab/whatchanged/commit/b2bbbbd7608501813986d74f6e44c233719246eb))
+- **repl**: markdown is not rendered correctly([`4cf9f6e`](https://github.com/release-lab/whatchanged/commit/4cf9f6ee53d19f67380144030a38ede88cb1a59b))
+- **deps**: update dependency ant-design-vue to v2.0.0-rc.2 (#8)([`a340efc`](https://github.com/release-lab/whatchanged/commit/a340efc8b86b1728eb1dcaedc9c101767582e811))
+- **repl**: production assets should be set publicPath([`89ea856`](https://github.com/release-lab/whatchanged/commit/89ea856f4f2046f7347a5ebd2c9d60e3a3650595))
+- **repl**: markdown render style([`acebfd0`](https://github.com/release-lab/whatchanged/commit/acebfd0bd736dac9c811186c82ba241d7b1e05e1))
 
 ### BREAKING CHANGES:
 
@@ -61,21 +61,21 @@
 
 ### New feature:
 
-- link commit for generation([`b9432db`](https://github.com/release-lab/whatchanged/commit/b9432db1d1f5afe170296b9e0bfebee1aa62fabb)) (by axetroy)
-- add full preset template([`7553570`](https://github.com/release-lab/whatchanged/commit/7553570590b571bd33e10a4f80ec5639d0613042)) (by axetroy)
-- support changelog for git submodule([`ec6a957`](https://github.com/release-lab/whatchanged/commit/ec6a957752fbca9faa261d8694826779e2cbec1f)) (by axetroy)
-- add writer step([`441ad13`](https://github.com/release-lab/whatchanged/commit/441ad1322b1fecaca89a170ecebaf2955a77d630)) (by axetroy)
-- add formatter for markdown output([`8c177e0`](https://github.com/release-lab/whatchanged/commit/8c177e032e8bdb1b76d135981ea10e7053f3ef34)) (by axetroy)
-- add --file flag to generate file([`0e4fb09`](https://github.com/release-lab/whatchanged/commit/0e4fb09789732fec5b09b247e208d61794c3da0d)) (by axetroy)
-- support custom tmeplate and preset([`3aa0aee`](https://github.com/release-lab/whatchanged/commit/3aa0aee2584036da1c63dea9bb399cb83b48a8db)) (by axetroy)
-- support tag ranges([`3d14c9c`](https://github.com/release-lab/whatchanged/commit/3d14c9cf2dc7d51e348fddc7764d8aba1691fac9)) (by axetroy)
-- support version range. eg v2.0.0~v1.0.0([`a65a4a8`](https://github.com/release-lab/whatchanged/commit/a65a4a8bd0122e41c7b20c98676e9def76e786d3)) (by axetroy)
-- parse commit message and generate to template([`7f67e78`](https://github.com/release-lab/whatchanged/commit/7f67e783926fed647d2ad5414f31448eea106fc3)) (by axetroy)
+- link commit for generation([`b9432db`](https://github.com/release-lab/whatchanged/commit/b9432db1d1f5afe170296b9e0bfebee1aa62fabb))
+- add full preset template([`7553570`](https://github.com/release-lab/whatchanged/commit/7553570590b571bd33e10a4f80ec5639d0613042))
+- support changelog for git submodule([`ec6a957`](https://github.com/release-lab/whatchanged/commit/ec6a957752fbca9faa261d8694826779e2cbec1f))
+- add writer step([`441ad13`](https://github.com/release-lab/whatchanged/commit/441ad1322b1fecaca89a170ecebaf2955a77d630))
+- add formatter for markdown output([`8c177e0`](https://github.com/release-lab/whatchanged/commit/8c177e032e8bdb1b76d135981ea10e7053f3ef34))
+- add --file flag to generate file([`0e4fb09`](https://github.com/release-lab/whatchanged/commit/0e4fb09789732fec5b09b247e208d61794c3da0d))
+- support custom tmeplate and preset([`3aa0aee`](https://github.com/release-lab/whatchanged/commit/3aa0aee2584036da1c63dea9bb399cb83b48a8db))
+- support tag ranges([`3d14c9c`](https://github.com/release-lab/whatchanged/commit/3d14c9cf2dc7d51e348fddc7764d8aba1691fac9))
+- support version range. eg v2.0.0~v1.0.0([`a65a4a8`](https://github.com/release-lab/whatchanged/commit/a65a4a8bd0122e41c7b20c98676e9def76e786d3))
+- parse commit message and generate to template([`7f67e78`](https://github.com/release-lab/whatchanged/commit/7f67e783926fed647d2ad5414f31448eea106fc3))
 
 ### Bugs fixed:
 
-- improve ssh git url parser([`9993ee6`](https://github.com/release-lab/whatchanged/commit/9993ee600c84cf77d3a0c634e8fa83c2580e137f)) (by axetroy)
-- commit range not include commit of tag([`f8df0ba`](https://github.com/release-lab/whatchanged/commit/f8df0ba654c8faf67eccf98262cd55807e53e597)) (by axetroy)
-- unescape template([`e118cbf`](https://github.com/release-lab/whatchanged/commit/e118cbfafd201b945848f15303fdb261e251f058)) (by axetroy)
-- if empty argument for command line([`9c79fd9`](https://github.com/release-lab/whatchanged/commit/9c79fd91bbf88f7861b4aca89ced8384cf2b9bcd)) (by axetroy)
-- **ci**: remove unsued code([`66bcf8f`](https://github.com/release-lab/whatchanged/commit/66bcf8f43db85409e0392c93f2e347ed91699e81)) (by axetroy)
+- improve ssh git url parser([`9993ee6`](https://github.com/release-lab/whatchanged/commit/9993ee600c84cf77d3a0c634e8fa83c2580e137f))
+- commit range not include commit of tag([`f8df0ba`](https://github.com/release-lab/whatchanged/commit/f8df0ba654c8faf67eccf98262cd55807e53e597))
+- unescape template([`e118cbf`](https://github.com/release-lab/whatchanged/commit/e118cbfafd201b945848f15303fdb261e251f058))
+- if empty argument for command line([`9c79fd9`](https://github.com/release-lab/whatchanged/commit/9c79fd91bbf88f7861b4aca89ced8384cf2b9bcd))
+- **ci**: remove unsued code([`66bcf8f`](https://github.com/release-lab/whatchanged/commit/66bcf8f43db85409e0392c93f2e347ed91699e81))

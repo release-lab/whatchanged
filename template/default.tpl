@@ -2,7 +2,7 @@
 
 {{- define "body" -}}
 {{range . -}}
-- {{if .Field.Header.Scope }}**{{ .Field.Header.Scope | unescape }}**: {{ end }}{{ .Field.Header.Subject | unescape }}({{ .HashURL }}) (by {{ .Author.Name | unescape }}){{if .Closes }}, Closes: {{ range $index, $element := .Closes}}{{if $index}},{{end}}{{$element}}{{- end -}} {{- end }}
+- {{if .Field.Header.Scope }}**{{ .Field.Header.Scope | unescape }}**: {{ end }}{{ .Field.Header.Subject | unescape }}({{ .HashURL }}){{if .Closes }}, Closes: {{ range $index, $element := .Closes}}{{if $index}},{{end}}{{$element}}{{- end -}} {{- end }}
 {{ end }}
 {{- end -}}
 
