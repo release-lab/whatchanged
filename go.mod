@@ -1,6 +1,6 @@
 module github.com/release-lab/whatchanged
 
-go 1.17
+go 1.19
 
 require (
 	github.com/88250/lute v1.7.3
