@@ -63,7 +63,7 @@ jobs:
           go build -buildmode=c-shared -o dist/whatchanged.so ./cmd/whatchanged-ffi
 
       - name: Build
-        uses: goreleaser/goreleaser-action@v2
+        uses: goreleaser/goreleaser-action@v5
         with:
           version: latest
           args: release --rm-dist --skip-publish --skip-validate
@@ -99,7 +99,7 @@ jobs:
           go build -buildmode=c-shared -o lib/whatchanged.so ./cmd/whatchanged-ffi
 
       - name: Release to Github
-        uses: goreleaser/goreleaser-action@v2
+        uses: goreleaser/goreleaser-action@v5
         with:
           version: latest
           args: release --rm-dist --release-notes=./release.md
