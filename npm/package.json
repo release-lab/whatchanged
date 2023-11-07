@@ -20,7 +20,7 @@
   "author": "axetroy",
   "license": "Anti-996",
   "devDependencies": {
-    "@types/ffi-napi": "4.0.5",
+    "@types/ffi-napi": "4.0.10",
     "jest": "27.5.1",
     "typescript": "5.0.4"
   },
