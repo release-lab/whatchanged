@@ -12,10 +12,12 @@ package parse
 
 import (
 	"bytes"
+	"strconv"
+
 	"github.com/88250/lute/ast"
+	"github.com/88250/lute/editor"
 	"github.com/88250/lute/lex"
 	"github.com/88250/lute/util"
-	"strconv"
 )
 
 // ListStart 判断列表、列表项（* - + 1.）或者任务列表项是否开始。
@@ -96,6 +98,23 @@ func (context *Context) listFinalize(list *ast.Node) {
 	if context.ParseOption.KramdownBlockIAL {
 		for li := list.FirstChild; nil != li; li = li.Next {
 			if nil == li.FirstChild {
+				if ast.NodeKramdownBlockIAL != li.Type {
+					id := ast.NewNodeID()
+					ialTokens := []byte("{: id=\"" + id + "\"}")
+					li.KramdownIAL = [][]string{{"id", id}}
+					li.ID = id
+					li.InsertAfter(&ast.Node{Type: ast.NodeKramdownBlockIAL, Tokens: ialTokens})
+
+					id = ast.NewNodeID()
+					ialTokens = []byte("{: id=\"" + id + "\"}")
+					p := &ast.Node{Type: ast.NodeParagraph, ID: id}
+					p.KramdownIAL = [][]string{{"id", id}}
+					p.ID = id
+					p.InsertAfter(&ast.Node{Type: ast.NodeKramdownBlockIAL, Tokens: ialTokens})
+					li.AppendChild(p)
+					li = li.Next
+				}
+
 				continue
 			}
 
@@ -212,8 +231,8 @@ func (t *Tree) parseListMarker(container *ast.Node) (data *ast.ListData, ial [][
 			}
 		}
 
-		if t.Context.ParseOption.VditorWYSIWYG || t.Context.ParseOption.VditorIR || t.Context.ParseOption.VditorSV || t.Context.ParseOption.ProtyleWYSIWYG {
-			tokens = bytes.ReplaceAll(tokens, util.CaretTokens, nil)
+		if t.Context.ParseOption.VditorWYSIWYG || t.Context.ParseOption.VditorIR || t.Context.ParseOption.VditorSV {
+			tokens = bytes.ReplaceAll(tokens, editor.CaretTokens, nil)
 		}
 
 		if 3 <= len(tokens) { // 至少需要 [ ] 或者 [x] 3 个字符

@@ -7,9 +7,9 @@
 转轴拨弦三两声 未成曲调先有情
 </em>
 <br><br>
-<a title="Build Status" target="_blank" href="https://travis-ci.org/88250/lute"><img src="https://img.shields.io/travis/88250/lute.svg?style=flat-square"></a>
+<a title="Build Status" target="_blank" href="https://github.com/88250/lute/actions/workflows/gotest.yml"><img src="https://img.shields.io/github/actions/workflow/status/88250/lute/gotest.yml?style=flat-square"></a>
 <a title="Go Report Card" target="_blank" href="https://goreportcard.com/report/github.com/88250/lute"><img src="https://goreportcard.com/badge/github.com/88250/lute?style=flat-square"></a>
-<a title="Coverage Status" target="_blank" href="https://coveralls.io/repos/github/88250/lute/badge.svg?branch=master"><img src="https://img.shields.io/coveralls/github/88250/lute.svg?style=flat-square&color=CC9933"></a>
+<a title="Coverage Status" target="_blank" href="https://coveralls.io/github/88250/lute"><img src="https://img.shields.io/coveralls/github/88250/lute.svg?style=flat-square&color=CC9933"></a>
 <a title="Code Size" target="_blank" href="https://github.com/88250/lute"><img src="https://img.shields.io/github/languages/code-size/88250/lute.svg?style=flat-square"></a>
 <a title="MulanPSL" target="_blank" href="https://github.com/88250/lute/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MulanPSL-orange.svg?style=flat-square"></a>
 <br>
@@ -76,6 +76,10 @@ Lute 的目标是构建一个结构化的 Markdown 引擎，实现 GFM/CM 规范
 
 * [链滴](https://ld246.com)
 * [思源笔记](https://github.com/siyuan-note/siyuan)
+* [Vditor 编辑器](https://github.com/Vanessa219/vditor)
+* [Sym 社区系统](https://github.com/88250/symphony)
+* [Solo 博客系统](https://github.com/88250/solo)
+* [Pipe 博客系统](https://github.com/88250/pipe)
 
 ## 🇨🇳 中文语境优化
 
@@ -317,97 +321,10 @@ func main() {
 
 ![Vditor](https://b3logfile.com/file/2020/02/%E6%88%AA%E5%9B%BE%E4%B8%93%E7%94%A8-ef21ef12.png)
 
-#### 关于 `lute.RenderJSON()` 的使用
-
-```typescript
-// JSONRenderer的类型
-type JSONRendererType = Array<JSONRendererItemType>
-
-// Flag节点
-type FlagType = |
-    | "Paragraph"
-    | "Emphasis"
-    | "Strong"
-    | "Blockquote"
-    | "ListItem"
-    | "Strikethrough"
-    | "TableHead"
-    | "Table"
-    | "TableRow"
-    | "Mark"
-    | "Sub"
-    | "Sup"
-    | "Tag"
-    | "BlockRef"
-
-// 非Flag节点
-type NotFlagType = |
-    | "Heading"
-    | "ThematicBreak"
-    | "List"
-    | "HTMLBlock"
-    | "InlineHTML"
-    | "CodeBlock"
-    | "Text"
-    | "CodeSpan"
-    | "HardBreak"     
-    | "SoftBreak"
-    | "Link"
-    | "Image"
-    | "HTMLEntity"
-    | "TaskListItemMarker"
-    | "TableCell"
-    | "EmojiUnicode"
-    | "EmojiImg"
-    | "MathBlock"
-    | "InlineMath"
-    | "YamlFrontMatter"
-    | "Backslash"
-    | "BlockEmbed"
-    | "BlockQueryEmbed"
-
-interface JSONRendererItemType {
-    type?: string
-    value?: string
-    flag?: string
-    title?: string
-    language?: string
-    mindmap?: string
-    children?: Array<JSONRendererItemType>
-}
-
-// 节点分为四类：常规节点、flag节点、链接节点、代码块节点
-interface NormalNodeType {
-    type: string
-    value: string
-    children?: Array<JSONRendererItemType>
-}
-
-interface FlagNodeType {
-    flag: string
-    children?: Array<JSONRendererItemType>
-}
-
-// 链接或者图片
-interface LinkNodeType {
-    type: string
-    value: string
-    title: string
-    children?: Array<JSONRendererItemType>
-}
-
-interface CodeBlockType {
-    type: string
-    value: string
-    language: string
-    mindmap?: string // 如果language为mingmap
-}
-```
-
 一些细节：
 
 1. lute.js 没有内置语法高亮特性
-2. lute.js 编译后大小为 ~2MB，通过 `brotli -o lute.min.js.br lute.min.js` 压缩后大小 ~200KB，常规 GZip 压缩后大小 ~300KB
+2. lute.js 编译后大小为 ~3.5MB，GZip 压缩后大小 ~500KB
 
 ## 📜 文档
 

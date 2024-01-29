@@ -65,12 +65,12 @@ func NewEChartsJSONRenderer(tree *parse.Tree, options *Options) Renderer {
 	ret.RendererFuncs[ast.NodeHTMLEntity] = ret.renderHtmlEntity
 	ret.RendererFuncs[ast.NodeYamlFrontMatter] = ret.renderYamlFrontMatter
 	ret.RendererFuncs[ast.NodeBlockRef] = ret.renderBlockRef
+	ret.RendererFuncs[ast.NodeFileAnnotationRef] = ret.renderFileAnnotationRef
 	ret.RendererFuncs[ast.NodeMark] = ret.renderMark
 	ret.RendererFuncs[ast.NodeSup] = ret.renderSup
 	ret.RendererFuncs[ast.NodeSub] = ret.renderSub
 	ret.RendererFuncs[ast.NodeKramdownBlockIAL] = ret.renderKramdownBlockIAL
 	ret.RendererFuncs[ast.NodeKramdownSpanIAL] = ret.renderKramdownSpanIAL
-	ret.RendererFuncs[ast.NodeBlockEmbed] = ret.renderBlockEmbed
 	ret.RendererFuncs[ast.NodeBlockQueryEmbed] = ret.renderBlockQueryEmbed
 	ret.DefaultRendererFunc = ret.renderDefault
 	return ret
@@ -129,16 +129,16 @@ func (r *EChartsJSONRenderer) renderBlockQueryEmbed(node *ast.Node, entering boo
 	return ast.WalkSkipChildren
 }
 
-func (r *EChartsJSONRenderer) renderBlockEmbed(node *ast.Node, entering bool) ast.WalkStatus {
+func (r *EChartsJSONRenderer) renderBlockRef(node *ast.Node, entering bool) ast.WalkStatus {
 	if entering {
-		r.leaf("BlockEmbed\n!((id))", node)
+		r.leaf("BlockRef\n((id))", node)
 	}
 	return ast.WalkSkipChildren
 }
 
-func (r *EChartsJSONRenderer) renderBlockRef(node *ast.Node, entering bool) ast.WalkStatus {
+func (r *EChartsJSONRenderer) renderFileAnnotationRef(node *ast.Node, entering bool) ast.WalkStatus {
 	if entering {
-		r.leaf("BlockRef\n((id))", node)
+		r.leaf("FileAnnotationRef\n<<id>>", node)
 	}
 	return ast.WalkSkipChildren
 }

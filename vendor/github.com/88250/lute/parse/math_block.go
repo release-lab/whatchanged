@@ -12,12 +12,14 @@ package parse
 
 import (
 	"bytes"
+
 	"github.com/88250/lute/ast"
+	"github.com/88250/lute/editor"
 	"github.com/88250/lute/lex"
 	"github.com/88250/lute/util"
 )
 
-// 判断数学公式块（$$）是否开始。
+// MathBlockStart 判断数学公式块（$$）是否开始。
 func MathBlockStart(t *Tree, container *ast.Node) int {
 	if t.Context.indented {
 		return 0
@@ -58,8 +60,8 @@ func MathBlockContinue(mathBlock *ast.Node, context *Context) int {
 
 var MathBlockMarker = util.StrToBytes("$$")
 var MathBlockMarkerNewline = util.StrToBytes("$$\n")
-var MathBlockMarkerCaret = util.StrToBytes("$$" + util.Caret)
-var MathBlockMarkerCaretNewline = util.StrToBytes("$$" + util.Caret + "\n")
+var MathBlockMarkerCaret = util.StrToBytes("$$" + editor.Caret)
+var MathBlockMarkerCaretNewline = util.StrToBytes("$$" + editor.Caret + "\n")
 
 func (context *Context) mathBlockFinalize(mathBlock *ast.Node) {
 	if 2 > len(mathBlock.Tokens) {
@@ -77,12 +79,12 @@ func (context *Context) mathBlockFinalize(mathBlock *ast.Node) {
 	}
 	tokens := mathBlock.Tokens[2:] // 剔除开头的 $$
 	tokens = lex.TrimWhitespace(tokens)
-	if context.ParseOption.VditorWYSIWYG || context.ParseOption.VditorIR || context.ParseOption.VditorSV || context.ParseOption.ProtyleWYSIWYG  {
+	if context.ParseOption.VditorWYSIWYG || context.ParseOption.VditorIR || context.ParseOption.VditorSV || context.ParseOption.ProtyleWYSIWYG {
 		if bytes.HasSuffix(tokens, MathBlockMarkerCaret) {
 			// 剔除结尾的 $$‸
 			tokens = bytes.TrimSuffix(tokens, MathBlockMarkerCaret)
 			// 把 Vditor 插入符移动到内容末尾
-			tokens = append(tokens, util.CaretTokens...)
+			tokens = append(tokens, editor.CaretTokens...)
 		}
 	}
 	if bytes.HasSuffix(tokens, MathBlockMarker) {
@@ -113,9 +115,10 @@ func (t *Tree) parseMathBlock() (ok bool, mathBlockDollarOffset int) {
 }
 
 func (context *Context) isMathBlockClose(tokens []byte) bool {
-	if context.ParseOption.KramdownBlockIAL && len("{: id=\"") < len(tokens) {
+	if context.ParseOption.KramdownBlockIAL && simpleCheckIsBlockIAL(tokens) {
 		// 判断 IAL 打断
 		if ial := context.parseKramdownBlockIAL(tokens); 0 < len(ial) {
+			context.Tip.ID = IAL2Map(ial)["id"]
 			context.Tip.KramdownIAL = ial
 			context.Tip.InsertAfter(&ast.Node{Type: ast.NodeKramdownBlockIAL, Tokens: tokens})
 			return true

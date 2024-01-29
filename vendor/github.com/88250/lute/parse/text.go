@@ -14,6 +14,7 @@ import (
 	"bytes"
 
 	"github.com/88250/lute/ast"
+	"github.com/88250/lute/editor"
 	"github.com/88250/lute/lex"
 	"github.com/88250/lute/util"
 )
@@ -31,18 +32,14 @@ func (t *Tree) parseText(ctx *InlineContext) *ast.Node {
 
 // isMarker 判断 token 是否是潜在的 Markdown 标记符。
 func (t *Tree) isMarker(token byte) bool {
-	switch token {
-	case lex.ItemAsterisk, lex.ItemUnderscore, lex.ItemOpenBracket, lex.ItemBang, lex.ItemNewline, lex.ItemBackslash, lex.ItemBacktick, lex.ItemLess,
-		lex.ItemCloseBracket, lex.ItemAmpersand, lex.ItemTilde, lex.ItemDollar, lex.ItemOpenBrace, lex.ItemOpenParen, lex.ItemEqual, lex.ItemCrosshatch:
+	if lex.IsMarker(token) {
 		return true
-	case lex.ItemCaret:
-		if t.Context.ParseOption.Sup {
-			return true
-		}
-		return false
-	default:
-		return false
 	}
+
+	if t.Context.ParseOption.Sup && lex.ItemCaret == token {
+		return true
+	}
+	return false
 }
 
 var backslash = util.StrToBytes("\\")
@@ -60,6 +57,14 @@ func (t *Tree) parseBackslash(block *ast.Node, ctx *InlineContext) *ast.Node {
 		return &ast.Node{Type: ast.NodeHardBreak, Tokens: []byte{token}}
 	}
 	if lex.IsASCIIPunct(token) {
+		if '<' == token && nil != t.Context.oldtip && ast.NodeTable == t.Context.oldtip.Type {
+			// 表格单元格内存在多行时末尾输入转义符 `\` 导致 `<br />` 暴露 https://github.com/siyuan-note/siyuan/issues/7725
+			isBr := ctx.tokens[ctx.pos:]
+			if bytes.HasPrefix(isBr, []byte("<br />")) {
+				return &ast.Node{Type: ast.NodeText, Tokens: backslash}
+			}
+		}
+
 		ctx.pos++
 		n := &ast.Node{Type: ast.NodeBackslash}
 		block.AppendChild(n)
@@ -69,16 +74,29 @@ func (t *Tree) parseBackslash(block *ast.Node, ctx *InlineContext) *ast.Node {
 	if t.Context.ParseOption.VditorWYSIWYG || t.Context.ParseOption.VditorIR || t.Context.ParseOption.ProtyleWYSIWYG {
 		// 处理 \‸x 情况，插入符后的字符才是待转义的
 		tokens := ctx.tokens[ctx.pos:]
-		caret := util.CaretTokens
+		caret := editor.CaretTokens
 		if len(caret) < len(tokens) && bytes.HasPrefix(tokens, caret) {
 			token = ctx.tokens[ctx.pos+len(caret)]
 			if lex.IsASCIIPunct(token) {
+				if '<' == token && nil != t.Context.oldtip && ast.NodeTable == t.Context.oldtip.Type {
+					// 表格单元格内存在多行时末尾输入转义符 `\` 导致 `<br />` 暴露 https://github.com/siyuan-note/siyuan/issues/7725
+					isBr := ctx.tokens[ctx.pos+len(caret):]
+					if bytes.HasPrefix(isBr, []byte("<br />")) {
+						return &ast.Node{Type: ast.NodeText, Tokens: backslash}
+					}
+				}
+
 				ctx.pos += len(caret)
 				ctx.pos++
 				n := &ast.Node{Type: ast.NodeBackslash}
 				block.AppendChild(n)
 				n.AppendChild(&ast.Node{Type: ast.NodeBackslashContent, Tokens: []byte{token}})
-				block.AppendChild(&ast.Node{Type: ast.NodeText, Tokens: caret})
+				if t.Context.ParseOption.ProtyleWYSIWYG {
+					// Protyle WYSIWYG 模式下插入符移到转义符节点前面
+					n.InsertBefore(&ast.Node{Type: ast.NodeText, Tokens: caret})
+				} else {
+					block.AppendChild(&ast.Node{Type: ast.NodeText, Tokens: caret})
+				}
 				return nil
 			}
 		}
@@ -107,6 +125,10 @@ func (t *Tree) parseNewline(block *ast.Node, ctx *InlineContext) (ret *ast.Node)
 		ret.Type = ast.NodeHardBreak
 	}
 	return
+}
+
+func (t *Tree) MergeText() {
+	t.mergeText(t.Root)
 }
 
 // mergeText 合并 node 中所有（包括子节点）连续的文本节点。

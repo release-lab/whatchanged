@@ -12,10 +12,10 @@ package parse
 
 import (
 	"bytes"
-	"github.com/88250/lute/util"
-
 	"github.com/88250/lute/ast"
+	"github.com/88250/lute/editor"
 	"github.com/88250/lute/lex"
+	"github.com/88250/lute/util"
 )
 
 func ParagraphContinue(p *ast.Node, context *Context) int {
@@ -26,7 +26,11 @@ func ParagraphContinue(p *ast.Node, context *Context) int {
 }
 
 func paragraphFinalize(p *ast.Node, context *Context) (insertTable bool) {
-	p.Tokens = lex.TrimWhitespace(p.Tokens)
+	if context.ParseOption.ParagraphBeginningSpace {
+		_, p.Tokens = lex.TrimRight(p.Tokens)
+	} else {
+		p.Tokens = lex.TrimWhitespace(p.Tokens)
+	}
 
 	// 解析链接引用定义
 	hasReferenceDefs := false
@@ -42,11 +46,28 @@ func paragraphFinalize(p *ast.Node, context *Context) (insertTable bool) {
 		p.Unlink()
 	}
 
+	if context.ParseOption.KramdownBlockIAL && nil != context.Tip.Parent && ast.NodeListItem == context.Tip.Parent.Type && p == context.Tip.Parent.FirstChild {
+		if ial := Tokens2IAL(p.Tokens); nil != ial {
+			// 列表项下没有子节点，应该挂一个空段落上去，并将当前段落转换为空段落的 IAL 节点
+			emptyP := &ast.Node{Type: ast.NodeParagraph, KramdownIAL: ial}
+			m := IAL2Map(ial)
+			emptyP.ID = m["id"]
+			context.Tip.Parent.AppendChild(emptyP)
+			emptyP.InsertAfter(&ast.Node{Type: ast.NodeKramdownBlockIAL, Tokens: IAL2Tokens(ial)})
+			p.Unlink()
+			return
+		}
+	}
+
 	if context.ParseOption.GFMTaskListItem {
 		// 尝试解析任务列表项
 		if listItem := p.Parent; nil != listItem && ast.NodeListItem == listItem.Type && listItem.FirstChild == p {
 			if 3 == listItem.ListData.Typ {
+				isEditor := context.ParseOption.VditorWYSIWYG || context.ParseOption.VditorIR || context.ParseOption.VditorSV || context.ParseOption.ProtyleWYSIWYG
 				isTaskListItem := 3 < len(p.Tokens)
+				if context.ParseOption.ProtyleWYSIWYG {
+					isTaskListItem = 3 <= len(p.Tokens)
+				}
 				if isTaskListItem {
 					// 如果是任务列表项则添加任务列表标记符节点
 
@@ -59,18 +80,18 @@ func paragraphFinalize(p *ast.Node, context *Context) (insertTable bool) {
 					}
 
 					if (3 == len(tokens) && (bytes.EqualFold(tokens, []byte("[x]")) || bytes.Equal(tokens, []byte("[ ]")))) ||
-						(3 < len(tokens) && (lex.IsWhitespace(tokens[3]) || util.CaretTokens[0] == tokens[3] || util.CaretTokens[0] == tokens[2])) {
+						(3 < len(tokens) && (lex.IsWhitespace(tokens[3]) || editor.CaretTokens[0] == tokens[3] || editor.CaretTokens[0] == tokens[2])) {
 						var caretStartText, caretAfterCloseBracket, caretInBracket bool
 						if context.ParseOption.VditorWYSIWYG || context.ParseOption.VditorIR || context.ParseOption.VditorSV || context.ParseOption.ProtyleWYSIWYG {
 							closeBracket := bytes.IndexByte(tokens, lex.ItemCloseBracket)
-							if bytes.HasPrefix(tokens, util.CaretTokens) {
-								tokens = bytes.ReplaceAll(tokens, util.CaretTokens, nil)
+							if bytes.HasPrefix(tokens, editor.CaretTokens) {
+								tokens = bytes.ReplaceAll(tokens, editor.CaretTokens, nil)
 								caretStartText = true
-							} else if bytes.HasPrefix(tokens[closeBracket+1:], util.CaretTokens) {
-								tokens = bytes.ReplaceAll(tokens, util.CaretTokens, nil)
+							} else if bytes.HasPrefix(tokens[closeBracket+1:], editor.CaretTokens) {
+								tokens = bytes.ReplaceAll(tokens, editor.CaretTokens, nil)
 								caretAfterCloseBracket = true
-							} else if bytes.Contains(tokens[1:closeBracket], util.CaretTokens) {
-								tokens = bytes.ReplaceAll(tokens, util.CaretTokens, nil)
+							} else if bytes.Contains(tokens[1:closeBracket], editor.CaretTokens) {
+								tokens = bytes.ReplaceAll(tokens, editor.CaretTokens, nil)
 								caretInBracket = true
 							}
 						}
@@ -81,10 +102,10 @@ func paragraphFinalize(p *ast.Node, context *Context) (insertTable bool) {
 							p.PrependChild(taskListItemMarker)
 						}
 						p.Tokens = tokens[3:] // 剔除开头的 [ ]、[x] 或者 [X]
-						if context.ParseOption.VditorWYSIWYG || context.ParseOption.VditorIR || context.ParseOption.VditorSV || context.ParseOption.ProtyleWYSIWYG {
+						if isEditor {
 							p.Tokens = bytes.TrimSpace(p.Tokens)
 							if caretStartText || caretAfterCloseBracket || caretInBracket {
-								p.Tokens = append([]byte(" "+util.Caret), p.Tokens...)
+								p.Tokens = append([]byte(" "+editor.Caret), p.Tokens...)
 							} else {
 								if !context.ParseOption.ProtyleWYSIWYG {
 									p.Tokens = append([]byte(" "), p.Tokens...)
@@ -92,19 +113,41 @@ func paragraphFinalize(p *ast.Node, context *Context) (insertTable bool) {
 							}
 						}
 
-						subTree := Parse("", p.Tokens, context.ParseOption)
-						subBlock := subTree.Root.FirstChild
-						if ast.NodeParagraph != subBlock.Type {
-							listItem.PrependChild(&ast.Node{Type: ast.NodeText, Tokens: []byte(" ")})
-							if nil != p.FirstChild {
-								listItem.PrependChild(p.FirstChild)
-							} else {
-								listItem.PrependChild(&ast.Node{Type: ast.NodeParagraph})
+						if 0 < len(p.Tokens) {
+							subTree := Parse("", p.Tokens, context.ParseOption)
+							subBlock := subTree.Root.FirstChild
+							if ast.NodeParagraph != subBlock.Type {
+								if !context.ParseOption.ProtyleWYSIWYG {
+									// Protyle `Optimize typography` exception in case of task list and heading https://github.com/siyuan-note/siyuan/issues/9035
+									listItem.PrependChild(&ast.Node{Type: ast.NodeText, Tokens: []byte(" ")})
+								}
+								if nil != p.FirstChild {
+									listItem.PrependChild(p.FirstChild)
+								}
+								subBlock.ID = p.ID
+								subBlock.KramdownIAL = p.KramdownIAL
+
+								// Incomplete data when pasting task list nested list https://github.com/siyuan-note/siyuan/issues/9239
+								var last *ast.Node
+								var blocks []*ast.Node
+								for b := subBlock; nil != b && ast.NodeDocument != b.Type; b = b.Next {
+									if ast.NodeKramdownBlockIAL == b.Type {
+										if util.IsDocIAL(b.Tokens) {
+											break
+										}
+									}
+
+									last = b
+								}
+								for b := last; nil != b; b = b.Previous {
+									blocks = append(blocks, b)
+								}
+								for _, b := range blocks {
+									p.InsertAfter(b)
+								}
+
+								p.Unlink()
 							}
-							subBlock.ID = p.ID
-							subBlock.KramdownIAL = p.KramdownIAL
-							p.InsertAfter(subBlock)
-							p.Unlink()
 						}
 					}
 				}

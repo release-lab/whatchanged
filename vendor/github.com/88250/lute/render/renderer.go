@@ -12,11 +12,13 @@ package render
 
 import (
 	"bytes"
-	"github.com/88250/lute/html"
 	"strconv"
 	"strings"
 	"unicode"
 	"unicode/utf8"
+
+	"github.com/88250/lute/editor"
+	"github.com/88250/lute/html"
 
 	"github.com/88250/lute/ast"
 	"github.com/88250/lute/lex"
@@ -67,12 +69,15 @@ type Options struct {
 	KramdownBlockIAL bool
 	// KramdownSpanIAL 设置是否打开 kramdown 行级内联属性列表支持。
 	KramdownSpanIAL bool
+	// SuperBlock 设置是否支持超级块。 https://github.com/88250/lute/issues/111
+	SuperBlock bool
 	// ImageLazyLoading 设置图片懒加载时使用的图片路径，配置该字段后将启用图片懒加载。
 	// 图片 src 的值会复制给新属性 data-src，然后使用该参数值作为 src 的值 https://github.com/88250/lute/issues/55
 	ImageLazyLoading string
 	// ChineseParagraphBeginningSpace 设置是否使用传统中文排版“段落开头空两格”。
 	ChineseParagraphBeginningSpace bool
 	// Sanitize 设置是否启用 XSS 安全过滤 https://github.com/88250/lute/issues/51
+	// 注意：Lute 目前的实现存在一些漏洞，请不要依赖它来防御 XSS 攻击。
 	Sanitize bool
 	// FixTermTypo 设置是否对普通文本中出现的术语进行修正。
 	// https://github.com/sparanoid/chinese-copywriting-guidelines
@@ -97,7 +102,7 @@ type Options struct {
 	VditorMathBlockPreview bool
 	// VditorHTMLBlockPreview 设置 Vditor HTML 块是否需要渲染预览部分
 	VditorHTMLBlockPreview bool
-	// LinkBase 设置链接、图片的基础路径。如果用户在链接或者图片地址中使用相对路径（没有协议前缀且不以 / 开头）并且 LinkBase 不为空则会用该值作为前缀。
+	// LinkBase 设置链接、图片、脚注的基础路径。如果用户在链接或者图片地址中使用相对路径（没有协议前缀且不以 / 开头）并且 LinkBase 不为空则会用该值作为前缀。
 	// 比如 LinkBase 设置为 http://domain.com/，对于 ![foo](bar.png) 则渲染为 <img src="http://domain.com/bar.png" alt="foo" />
 	LinkBase string
 	// LinkPrefix 设置连接、图片的路径前缀。一旦设置该值，链接渲染将强制添加该值作为链接前缀，这有别于 LinkBase。
@@ -108,6 +113,12 @@ type Options struct {
 	NodeIndexStart int
 	// ProtyleContenteditable 设置 Protyle 渲染时标签中的 contenteditable 属性。
 	ProtyleContenteditable bool
+	// KeepParagraphBeginningSpace 设置是否保留段首空格
+	KeepParagraphBeginningSpace bool
+	// NetImgMarker 设置 Protyle 是否标记网络图片
+	ProtyleMarkNetImg bool
+	// Spellcheck 设置是否启用拼写检查
+	Spellcheck bool
 }
 
 func NewOptions() *Options {
@@ -137,6 +148,9 @@ func NewOptions() *Options {
 		LinkPrefix:                     "",
 		NodeIndexStart:                 1,
 		ProtyleContenteditable:         true,
+		ProtyleMarkNetImg:              true,
+		Spellcheck:                     false,
+		Terms:                          NewTerms(),
 	}
 }
 
@@ -156,7 +170,7 @@ type BaseRenderer struct {
 
 // NewBaseRenderer 构造一个 BaseRenderer。
 func NewBaseRenderer(tree *parse.Tree, options *Options) *BaseRenderer {
-	ret := &BaseRenderer{RendererFuncs: map[ast.NodeType]RendererFunc{}, ExtRendererFuncs: map[ast.NodeType]ExtRendererFunc{}, Options: options, Tree: tree}
+	ret := &BaseRenderer{RendererFuncs: make(map[ast.NodeType]RendererFunc, 192), ExtRendererFuncs: map[ast.NodeType]ExtRendererFunc{}, Options: options, Tree: tree}
 	ret.Writer = &bytes.Buffer{}
 	ret.Writer.Grow(4096)
 	return ret
@@ -230,13 +244,23 @@ func (r *BaseRenderer) TextAutoSpacePrevious(node *ast.Node) {
 		return
 	}
 
-	if text := node.ChildByType(ast.NodeText); nil != text && nil != text.Tokens {
-		if previous := node.Previous; nil != previous && ast.NodeText == previous.Type {
-			prevLast, _ := utf8.DecodeLastRune(previous.Tokens)
-			first, _ := utf8.DecodeRune(text.Tokens)
-			if allowSpace(prevLast, first) {
-				r.Writer.WriteByte(lex.ItemSpace)
-			}
+	text := node.ChildByType(ast.NodeText)
+	var tokens []byte
+	if nil != text {
+		tokens = text.Tokens
+	}
+	if ast.NodeTextMark == node.Type {
+		tokens = []byte(node.TextMarkTextContent)
+	}
+	if 1 > len(tokens) {
+		return
+	}
+
+	if previous := node.Previous; nil != previous && ast.NodeText == previous.Type {
+		prevLast, _ := utf8.DecodeLastRune(previous.Tokens)
+		first, _ := utf8.DecodeRune(tokens)
+		if allowSpace(prevLast, first) {
+			r.Writer.WriteByte(lex.ItemSpace)
 		}
 	}
 }
@@ -246,12 +270,34 @@ func (r *BaseRenderer) TextAutoSpaceNext(node *ast.Node) {
 		return
 	}
 
-	if text := node.ChildByType(ast.NodeText); nil != text && nil != text.Tokens {
-		if next := node.Next; nil != next && ast.NodeText == next.Type {
+	text := node.ChildByType(ast.NodeText)
+	var tokens []byte
+	if nil != text {
+		tokens = text.Tokens
+	}
+	if ast.NodeTextMark == node.Type {
+		tokens = []byte(node.TextMarkTextContent)
+	}
+	if 1 > len(tokens) {
+		return
+	}
+
+	if next := node.Next; nil != next {
+		if ast.NodeText == next.Type {
 			nextFirst, _ := utf8.DecodeRune(next.Tokens)
-			last, _ := utf8.DecodeLastRune(text.Tokens)
+			last, _ := utf8.DecodeLastRune(tokens)
 			if allowSpace(last, nextFirst) {
 				r.Writer.WriteByte(lex.ItemSpace)
+			}
+		} else if ast.NodeKramdownSpanIAL == next.Type {
+			// 优化排版未处理样式文本 https://github.com/siyuan-note/siyuan/issues/6305
+			next = next.Next
+			if nil != next && ast.NodeText == next.Type {
+				nextFirst, _ := utf8.DecodeRune(next.Tokens)
+				last, _ := utf8.DecodeLastRune(tokens)
+				if allowSpace(last, nextFirst) {
+					next.Tokens = append([]byte{lex.ItemSpace}, next.Tokens...)
+				}
 			}
 		}
 	}
@@ -341,7 +387,7 @@ func normalizeHeadingID(heading *ast.Node) (ret string) {
 	}
 
 	id = strings.TrimLeft(id, "#")
-	id = strings.ReplaceAll(id, util.Caret, "")
+	id = strings.ReplaceAll(id, editor.Caret, "")
 	for _, r := range id {
 		if unicode.IsLetter(r) || unicode.IsDigit(r) {
 			ret += string(r)
@@ -353,9 +399,10 @@ func normalizeHeadingID(heading *ast.Node) (ret string) {
 }
 
 type Heading struct {
-	URL      string     `json:"url"`
-	Path     string     `json:"path"`
 	ID       string     `json:"id"`
+	Box      string     `json:"box"`
+	Path     string     `json:"path"`
+	HPath    string     `json:"hPath"`
 	Content  string     `json:"content"`
 	Level    int        `json:"level"`
 	Children []*Heading `json:"children"`
@@ -439,9 +486,10 @@ func (r *BaseRenderer) headings() (ret []*Heading) {
 		}
 
 		h := &Heading{
-			URL:     r.Tree.URL,
-			Path:    r.Tree.Path,
 			ID:      id,
+			Box:     r.Tree.Box,
+			Path:    r.Tree.Path,
+			HPath:   r.Tree.HPath,
 			Content: headingText(heading),
 			Level:   heading.HeadingLevel,
 		}
@@ -487,24 +535,24 @@ func headingText(n *ast.Node) (ret string) {
 		}
 
 		switch n.Type {
-		case ast.NodeLinkText, ast.NodeBlockRefText, ast.NodeBlockEmbedText:
+		case ast.NodeLinkText, ast.NodeBlockRefText, ast.NodeBlockRefDynamicText, ast.NodeFileAnnotationRefText:
 			buf.Write(n.Tokens)
 		case ast.NodeInlineMathContent:
 			buf.WriteString("<span class=\"language-math\">")
-			buf.Write(n.Tokens)
+			buf.Write(html.EscapeHTML(n.Tokens))
 			buf.WriteString("</span>")
 		case ast.NodeCodeSpanContent:
 			buf.WriteString("<code>")
-			buf.Write(n.Tokens)
+			buf.Write(html.EscapeHTML(n.Tokens))
 			buf.WriteString("</code>")
 		case ast.NodeText:
 			if n.ParentIs(ast.NodeStrong) {
 				buf.WriteString("<strong>")
-				buf.Write(n.Tokens)
+				buf.Write(html.EscapeHTML(n.Tokens))
 				buf.WriteString("</strong>")
 			} else if n.ParentIs(ast.NodeEmphasis) {
 				buf.WriteString("<em>")
-				buf.Write(n.Tokens)
+				buf.Write(html.EscapeHTML(n.Tokens))
 				buf.WriteString("</em>")
 			} else {
 				if nil != n.Previous && ast.NodeInlineHTML == n.Previous.Type {
@@ -516,7 +564,7 @@ func headingText(n *ast.Node) (ret string) {
 						buf.Write(n.Next.Tokens)
 					}
 				} else {
-					buf.Write(n.Tokens)
+					buf.Write(html.EscapeHTML(n.Tokens))
 				}
 			}
 		}
@@ -534,7 +582,7 @@ func (r *BaseRenderer) setextHeadingLen(node *ast.Node) (ret int) {
 		return ast.WalkContinue
 	})
 	content := buf.String()
-	content = strings.ReplaceAll(content, util.Caret, "")
+	content = strings.ReplaceAll(content, editor.Caret, "")
 	lines := strings.Split(content, "\n")
 	lastLine := lines[len(lines)-1]
 	for _, r := range lastLine {
@@ -580,7 +628,7 @@ func (r *BaseRenderer) tagSrc(tokens []byte) []byte {
 func (r *BaseRenderer) tagSrcPath(tokens []byte) []byte {
 	if srcIndex := bytes.Index(tokens, []byte("src=\"")); 0 < srcIndex {
 		src := tokens[srcIndex+len("src=\""):]
-		if 1 > len(bytes.ReplaceAll(src, util.CaretTokens, nil)) {
+		if 1 > len(bytes.ReplaceAll(src, editor.CaretTokens, nil)) {
 			return tokens
 		}
 		targetSrc := r.LinkPath(src)
@@ -594,7 +642,7 @@ func (r *BaseRenderer) tagSrcPath(tokens []byte) []byte {
 }
 
 func (r *BaseRenderer) isLastNode(treeRoot, node *ast.Node) bool {
-	if treeRoot == node {
+	if treeRoot == node || nil == node || nil == node.Parent {
 		return true
 	}
 	if nil != node.Next {
@@ -606,6 +654,9 @@ func (r *BaseRenderer) isLastNode(treeRoot, node *ast.Node) bool {
 
 	var n *ast.Node
 	for n = node.Parent; ; n = n.Parent {
+		if nil == n || nil == n.Parent {
+			return true
+		}
 		if ast.NodeDocument == n.Parent.Type {
 			break
 		}
@@ -618,9 +669,6 @@ func (r *BaseRenderer) NodeID(node *ast.Node) (ret string) {
 		if "id" == kv[0] {
 			return kv[1]
 		}
-	}
-	if ast.NodeListItem == node.Type { // 列表项暂时不生成 ID，等确定是否需要列表项块类型后再打开
-		return ""
 	}
 	return ast.NewNodeID()
 }
@@ -651,7 +699,7 @@ func (r *BaseRenderer) NodeAttrsStr(node *ast.Node) (ret string) {
 // languagesNoHighlight 中定义的语言不要进行代码语法高亮。这些代码块会在前端进行渲染，比如各种图表。
 var languagesNoHighlight = []string{"mermaid", "echarts", "abc", "graphviz", "mindmap", "flowchart", "plantuml"}
 
-func (r *BaseRenderer) NoHighlight(language string) bool {
+func NoHighlight(language string) bool {
 	if "" == language {
 		return false
 	}
@@ -670,8 +718,9 @@ func (r *BaseRenderer) Text(node *ast.Node) (ret string) {
 			switch n.Type {
 			case ast.NodeText, ast.NodeLinkText, ast.NodeLinkDest, ast.NodeLinkSpace, ast.NodeLinkTitle, ast.NodeCodeBlockCode,
 				ast.NodeCodeSpanContent, ast.NodeInlineMathContent, ast.NodeMathBlockContent, ast.NodeYamlFrontMatterContent,
-				ast.NodeHTMLBlock, ast.NodeInlineHTML, ast.NodeEmojiAlias, ast.NodeBlockRefText, ast.NodeBlockRefSpace,
-				ast.NodeBlockEmbedText, ast.NodeBlockEmbedSpace, ast.NodeKramdownSpanIAL:
+				ast.NodeHTMLBlock, ast.NodeInlineHTML, ast.NodeEmojiAlias, ast.NodeFileAnnotationRefText, ast.NodeFileAnnotationRefSpace,
+				ast.NodeBlockRefText, ast.NodeBlockRefDynamicText, ast.NodeBlockRefSpace,
+				ast.NodeKramdownSpanIAL:
 				ret += string(n.Tokens)
 			case ast.NodeCodeBlockFenceInfoMarker:
 				ret += string(n.CodeBlockInfo)
@@ -694,7 +743,7 @@ func RenderHeadingText(n *ast.Node) (ret string) {
 		}
 
 		switch n.Type {
-		case ast.NodeLinkText, ast.NodeBlockRefText, ast.NodeBlockEmbedText:
+		case ast.NodeLinkText, ast.NodeBlockRefText, ast.NodeBlockRefDynamicText, ast.NodeFileAnnotationRefText:
 			buf.Write(n.Tokens)
 		case ast.NodeInlineMathContent:
 			buf.WriteString("<span class=\"language-math\">")

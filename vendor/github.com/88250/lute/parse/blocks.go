@@ -12,7 +12,9 @@ package parse
 
 import (
 	"bytes"
+
 	"github.com/88250/lute/ast"
+	"github.com/88250/lute/editor"
 	"github.com/88250/lute/lex"
 	"github.com/88250/lute/util"
 )
@@ -23,16 +25,16 @@ func (t *Tree) parseBlocks() {
 	lines := 0
 	for line := t.lexer.NextLine(); nil != line; line = t.lexer.NextLine() {
 		if t.Context.ParseOption.VditorWYSIWYG || t.Context.ParseOption.VditorIR || t.Context.ParseOption.VditorSV || t.Context.ParseOption.ProtyleWYSIWYG {
-			if !bytes.Equal(line, util.CaretNewlineTokens) && t.Context.Tip.ParentIs(ast.NodeListItem) && bytes.HasPrefix(line, util.CaretTokens) {
+			if !bytes.Equal(line, editor.CaretNewlineTokens) && t.Context.Tip.ParentIs(ast.NodeListItem) && bytes.HasPrefix(line, editor.CaretTokens) {
 				// 插入符在开头的话移动到上一行结尾，处理 https://github.com/Vanessa219/vditor/issues/633 中的一些情况
 				if ast.NodeListItem == t.Context.Tip.Type {
 					t.Context.Tip.AppendChild(&ast.Node{Type: ast.NodeText, Tokens: line})
 					break
 				} else {
 					t.Context.Tip.Tokens = bytes.TrimSuffix(t.Context.Tip.Tokens, []byte("\n"))
-					t.Context.Tip.Tokens = append(t.Context.Tip.Tokens, util.CaretNewlineTokens...)
+					t.Context.Tip.Tokens = append(t.Context.Tip.Tokens, editor.CaretNewlineTokens...)
 				}
-				line = line[len(util.CaretTokens):]
+				line = line[len(editor.CaretTokens):]
 			}
 		}
 
@@ -111,6 +113,7 @@ func (t *Tree) incorporateLine(line []byte) {
 				t.Context.Tip = sb.Parent
 				t.Context.lastMatchedContainer = sb
 			} else {
+				t.Context.Tip.AppendChild(&ast.Node{Type: ast.NodeSuperBlockCloseMarker})
 				t.Context.Tip.Close = true
 				t.Context.Tip = t.Context.Tip.Parent
 				t.Context.lastMatchedContainer = t.Context.Tip
@@ -142,6 +145,7 @@ func (t *Tree) incorporateLine(line []byte) {
 			lex.ItemHyphen != maybeMarker && lex.ItemAsterisk != maybeMarker && lex.ItemPlus != maybeMarker && // 无序列表
 			!lex.IsDigit(maybeMarker) && // 有序列表
 			lex.ItemBacktick != maybeMarker && lex.ItemTilde != maybeMarker && // 代码块
+			lex.ItemSemicolon != maybeMarker && // 定义块
 			lex.ItemCrosshatch != maybeMarker && // ATX 标题
 			lex.ItemGreater != maybeMarker && // 块引用
 			lex.ItemLess != maybeMarker && // HTML 块
@@ -151,7 +155,7 @@ func (t *Tree) incorporateLine(line []byte) {
 			lex.ItemOpenBrace != maybeMarker && // kramdown 内联属性列表或超级块开始
 			lex.ItemCloseBrace != maybeMarker && // 超级块闭合
 			lex.ItemBang != maybeMarker && "！"[0] != maybeMarker && // 内容块嵌入
-			util.Caret[0] != maybeMarker { // Vditor 编辑器支持
+			editor.Caret[0] != maybeMarker { // Vditor 编辑器支持
 			t.Context.advanceNextNonspace()
 			break
 		}
@@ -199,6 +203,7 @@ func (t *Tree) incorporateLine(line []byte) {
 			!(typ == ast.NodeFootnotesDef ||
 				typ == ast.NodeBlockquote || // 块引用行肯定不会是空行因为至少有一个 >
 				(typ == ast.NodeCodeBlock && isFenced) || // 围栏代码块不计入空行判断
+				(typ == ast.NodeCustomBlock) || // 自定义块不计入空行判断
 				(typ == ast.NodeMathBlock) || // 数学公式块不计入空行判断
 				(typ == ast.NodeGitConflict) || // Git 冲突标记不计入空行判断
 				(typ == ast.NodeListItem && nil == container.FirstChild)) // 内容为空的列表项也不计入空行判断
@@ -247,11 +252,18 @@ func (t *Tree) addLine() {
 		charsToTab := 4 - (t.Context.column % 4)
 		t.Context.Tip.AppendTokens(bytes.Repeat(util.StrToBytes(" "), charsToTab))
 	}
-	t.Context.Tip.AppendTokens(t.Context.currentLine[t.Context.offset:])
+
+	startWithSpace := 1 < t.Context.currentLineLen && (' ' == t.Context.currentLine[0] || '\t' == t.Context.currentLine[0])
+	docChildPara := ast.NodeDocument == t.Context.Tip.Parent.Type
+	if t.Context.ParseOption.ParagraphBeginningSpace && startWithSpace && docChildPara {
+		t.Context.Tip.AppendTokens(t.Context.currentLine)
+	} else {
+		t.Context.Tip.AppendTokens(t.Context.currentLine[t.Context.offset:])
+	}
 }
 
 // _continue 判断节点是否可以继续处理，比如块引用需要 >，缩进代码块需要 4 空格，围栏代码块需要 ```。
-// 如果可以继续处理返回 0，如果不能接续处理返回 1，如果返回 2（仅在围栏代码块或超级块闭合时）则说明可以继续下一行处理了。
+// 如果可以继续处理返回 0，如果不能接续处理返回 1，如果返回 2（仅在围栏代码块、超级块或自定义块闭合时）则说明可以继续下一行处理了。
 func _continue(n *ast.Node, context *Context) int {
 	switch n.Type {
 	case ast.NodeCodeBlock:
@@ -274,8 +286,10 @@ func _continue(n *ast.Node, context *Context) int {
 		return SuperBlockContinue(n, context)
 	case ast.NodeGitConflict:
 		return GitConflictContinue(n, context)
-	case ast.NodeHeading, ast.NodeThematicBreak, ast.NodeKramdownBlockIAL, ast.NodeBlockEmbed, ast.NodeLinkRefDefBlock, ast.NodeBlockQueryEmbed,
-		ast.NodeIFrame, ast.NodeVideo, ast.NodeAudio:
+	case ast.NodeCustomBlock:
+		return CustomBlockContinue(n, context)
+	case ast.NodeHeading, ast.NodeThematicBreak, ast.NodeKramdownBlockIAL, ast.NodeLinkRefDefBlock, ast.NodeBlockQueryEmbed,
+		ast.NodeIFrame, ast.NodeVideo, ast.NodeAudio, ast.NodeWidget, ast.NodeAttributeView:
 		return 1
 	}
 	return 0

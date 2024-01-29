@@ -3,9 +3,9 @@
 <br><br>
 A structured Markdown engine that supports Go and JavaScript
 <br><br>
-<a title="Build Status" target="_blank" href="https://travis-ci.org/88250/lute"><img src="https://img.shields.io/travis/88250/lute.svg?style=flat-square"></a>
+<a title="Build Status" target="_blank" href="https://github.com/88250/lute/actions/workflows/gotest.yml"><img src="https://img.shields.io/github/actions/workflow/status/88250/lute/gotest.yml?style=flat-square"></a>
 <a title="Go Report Card" target="_blank" href="https://goreportcard.com/report/github.com/88250/lute"><img src="https://goreportcard.com/badge/github.com/88250/lute?style=flat-square"></a>
-<a title="Coverage Status" target="_blank" href="https://coveralls.io/repos/github/88250/lute/badge.svg?branch=master"><img src="https://img.shields.io/coveralls/github/88250/lute.svg?style=flat-square&color=CC9933"></a>
+<a title="Coverage Status" target="_blank" href="https://coveralls.io/github/88250/lute"><img src="https://img.shields.io/coveralls/github/88250/lute.svg?style=flat-square&color=CC9933"></a>
 <a title="Code Size" target="_blank" href="https://github.com/88250/lute"><img src="https://img.shields.io/github/languages/code-size/88250/lute.svg?style=flat-square"></a>
 <a title="MulanPSL" target="_blank" href="https://github.com/88250/lute/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MulanPSL-orange.svg?style=flat-square"></a>
 <br>
@@ -70,6 +70,10 @@ Finally, another important motivation is that the B3log open source community ne
 
 * [LianDi](https://ld246.com)
 * [SiYuan](https://github.com/siyuan-note/siyuan)
+* [Vditor](https://github.com/Vanessa219/vditor)
+* [Sym](https://github.com/88250/symphony)
+* [Solo](https://github.com/88250/solo)
+* [Pipe](https://github.com/88250/pipe)
 
 ## 🇨🇳 Chinese context optimization
 
@@ -314,94 +318,7 @@ For a simple example, please refer to the demo in the JavaScript directory. For 
 Some details:
 
 1. lute.js has no built-in syntax highlighting feature
-2. The size of lute.js after compilation is ~2MB, the size after compression through `brotli -o lute.min.js.br lute.min.js` is ~200KB, the size after regular GZip compression is ~300KB
-
-#### How to use `lute.RenderJSON()`
-
-```typescript
-// Type of JSONRenderer
-type JSONRendererType = Array<JSONRendererItemType>
-
-// Flag Node
-type FlagType = |
-    | "Paragraph"
-    | "Emphasis"
-    | "Strong"
-    | "Blockquote"
-    | "ListItem"
-    | "Strikethrough"
-    | "TableHead"
-    | "Table"
-    | "TableRow"
-    | "Mark"
-    | "Sub"
-    | "Sup"
-    | "Tag"
-    | "BlockRef"
-
-// Non-Flag Node
-type NotFlagType = |
-    | "Heading"
-    | "ThematicBreak"
-    | "List"
-    | "HTMLBlock"
-    | "InlineHTML"
-    | "CodeBlock"
-    | "Text"
-    | "CodeSpan"
-    | "HardBreak"     
-    | "SoftBreak"
-    | "Link"
-    | "Image"
-    | "HTMLEntity"
-    | "TaskListItemMarker"
-    | "TableCell"
-    | "EmojiUnicode"
-    | "EmojiImg"
-    | "MathBlock"
-    | "InlineMath"
-    | "YamlFrontMatter"
-    | "Backslash"
-    | "BlockEmbed"
-    | "BlockQueryEmbed"
-
-interface JSONRendererItemType {
-    type?: string
-    value?: string
-    flag?: string
-    title?: string
-    language?: string
-    mindmap?: string
-    children?: Array<JSONRendererItemType>
-}
-
-// Node has 4 types: Normal Node, Flag Node, Link Node, Codeblock Node
-interface NormalNodeType {
-    type: string
-    value: string
-    children?: Array<JSONRendererItemType>
-}
-
-interface FlagNodeType {
-    flag: string
-    children?: Array<JSONRendererItemType>
-}
-
-// Link or Image
-interface LinkNodeType {
-    type: string
-    value: string
-    title: string
-    children?: Array<JSONRendererItemType>
-}
-
-interface CodeBlockType {
-    type: string
-    value: string
-    language: string
-    mindmap?: string // if language is "mindmap"
-}
-```
+2. The size of lute.js after compilation is ~3.5MB, the size after regular GZip compression is ~500KB
 
 ## 📜 Documentation
 

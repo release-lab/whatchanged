@@ -10,7 +10,9 @@
 
 package util
 
-import "bytes"
+import (
+	"bytes"
+)
 
 func IsDocIAL(tokens []byte) bool {
 	return bytes.Contains(tokens, []byte("type=\"doc\""))

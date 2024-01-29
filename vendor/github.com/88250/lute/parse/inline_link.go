@@ -11,8 +11,10 @@
 package parse
 
 import (
-	"github.com/88250/lute/html"
+	"bytes"
 	"unicode/utf8"
+
+	"github.com/88250/lute/html"
 
 	"github.com/88250/lute/lex"
 	"github.com/88250/lute/util"
@@ -62,13 +64,17 @@ func (context *Context) parseInlineLinkDest(tokens []byte) (passed, remains, des
 			}
 		}
 
-		if !matchEnd || (length > i && lex.ItemCloseParen != tokens[i+1]) {
+		if !matchEnd || length <= i+1 {
 			passed = nil
 			return
 		}
 
-		passed = append(passed, tokens[i+1])
-		remains = tokens[i+2:]
+		if lex.ItemGreater == tokens[i+1] || lex.ItemCloseParen == tokens[i+1] {
+			passed = append(passed, tokens[i+1])
+			remains = tokens[i+2:]
+		} else { // 后跟空格的情况
+			remains = tokens[i+1:]
+		}
 	} else {
 		var openParens int
 		i := 0
@@ -140,8 +146,13 @@ func (context *Context) parseInlineLinkDest(tokens []byte) (passed, remains, des
 		}
 	}
 
+	if (context.ParseOption.ProtyleWYSIWYG || !context.ParseOption.DataImage) && bytes.HasPrefix(bytes.ToLower(destination), []byte("data:image")) {
+		return nil, nil, nil
+	}
+
 	if nil != passed {
-		if !context.ParseOption.VditorWYSIWYG && !context.ParseOption.VditorIR && !context.ParseOption.VditorSV && !context.ParseOption.ProtyleWYSIWYG {
+		if (!context.ParseOption.VditorWYSIWYG && !context.ParseOption.VditorIR && !context.ParseOption.VditorSV && !context.ParseOption.ProtyleWYSIWYG) &&
+			!context.ParseOption.ImgPathAllowSpace {
 			destination = html.EncodeDestination(html.UnescapeBytes(destination))
 		}
 	}

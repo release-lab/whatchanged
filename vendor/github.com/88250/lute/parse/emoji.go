@@ -12,6 +12,7 @@ package parse
 
 import (
 	"bytes"
+
 	"github.com/88250/lute/ast"
 	"github.com/88250/lute/lex"
 	"github.com/88250/lute/util"
@@ -79,7 +80,10 @@ func (t *Tree) emoji0(node *ast.Node) {
 			continue
 		}
 
-		if emoji, ok := t.Context.ParseOption.AliasEmoji[util.BytesToStr(maybeEmoji)]; ok {
+		EmojiLock.Lock()
+		emoji, ok := t.Context.ParseOption.AliasEmoji[util.BytesToStr(maybeEmoji)]
+		EmojiLock.Unlock()
+		if ok {
 			emojiNode := &ast.Node{Type: ast.NodeEmoji}
 			emojiUnicodeOrImg := &ast.Node{Type: ast.NodeEmojiUnicode}
 			emojiNode.AppendChild(emojiUnicodeOrImg)
@@ -89,6 +93,8 @@ func (t *Tree) emoji0(node *ast.Node) {
 				suffix := ".png"
 				if "huaji" == alias {
 					suffix = ".gif"
+				} else if "siyuan" == alias {
+					suffix = ".svg"
 				}
 				src := t.Context.ParseOption.EmojiSite + "/" + alias + suffix
 				emojiUnicodeOrImg.Type = ast.NodeEmojiImg

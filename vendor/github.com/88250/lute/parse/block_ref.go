@@ -14,8 +14,8 @@ import (
 	"bytes"
 
 	"github.com/88250/lute/ast"
+	"github.com/88250/lute/editor"
 	"github.com/88250/lute/lex"
-	"github.com/88250/lute/util"
 )
 
 func (t *Tree) parseBlockRef(ctx *InlineContext) *ast.Node {
@@ -31,6 +31,7 @@ func (t *Tree) parseBlockRef(ctx *InlineContext) *ast.Node {
 	}
 
 	var id, text []byte
+	var subtype string
 	savePos := ctx.pos
 	ctx.pos += 2
 	var ok, matched bool
@@ -51,7 +52,7 @@ func (t *Tree) parseBlockRef(ctx *InlineContext) *ast.Node {
 		if 1 > len(remains) || !lex.IsWhitespace(remains[0]) {
 			break
 		}
-		// 跟空格的话后续尝试 title 解析
+		// 跟空格的话后续尝试锚文本解析
 		if ok, passed, remains = lex.Spnl(remains); !ok {
 			break
 		}
@@ -62,7 +63,7 @@ func (t *Tree) parseBlockRef(ctx *InlineContext) *ast.Node {
 			break
 		}
 		var validTitle bool
-		if validTitle, passed, remains, text = t.Context.parseLinkTitle(remains); !validTitle {
+		if validTitle, passed, remains, text, subtype = t.Context.parseBlockRefText(remains); !validTitle {
 			break
 		}
 		ctx.pos += len(passed)
@@ -84,9 +85,12 @@ func (t *Tree) parseBlockRef(ctx *InlineContext) *ast.Node {
 	ret.AppendChild(&ast.Node{Type: ast.NodeOpenParen})
 	ret.AppendChild(&ast.Node{Type: ast.NodeOpenParen})
 	ret.AppendChild(&ast.Node{Type: ast.NodeBlockRefID, Tokens: id})
-	if 1 < len(text) {
+	if 0 < len(text) {
 		ret.AppendChild(&ast.Node{Type: ast.NodeBlockRefSpace})
 		textNode := &ast.Node{Type: ast.NodeBlockRefText, Tokens: text}
+		if "d" == subtype {
+			textNode.Type = ast.NodeBlockRefDynamicText
+		}
 		ret.AppendChild(textNode)
 	}
 	ret.AppendChild(&ast.Node{Type: ast.NodeCloseParen})
@@ -105,7 +109,7 @@ func (context *Context) parseBlockRefID(tokens []byte) (passed, remains, id []by
 	var token byte
 	for ; i < length; i++ {
 		token = tokens[i]
-		if bytes.Contains(util.CaretTokens, []byte{token}) {
+		if bytes.Contains(editor.CaretTokens, []byte{token}) {
 			continue
 		}
 
@@ -115,14 +119,14 @@ func (context *Context) parseBlockRefID(tokens []byte) (passed, remains, id []by
 	}
 	remains = tokens[i:]
 	id = tokens[:i]
-	if 64 < len(id) || 2 > len(remains) {
+	if 2 > len(remains) || !ast.IsNodeIDPattern(string(id)) {
 		return
 	}
 	passed = make([]byte, 0, 64)
 	passed = append(passed, id...)
-	if bytes.HasPrefix(remains, util.CaretTokens) {
-		passed = append(passed, util.CaretTokens...)
-		remains = remains[len(util.CaretTokens):]
+	if bytes.HasPrefix(remains, editor.CaretTokens) {
+		passed = append(passed, editor.CaretTokens...)
+		remains = remains[len(editor.CaretTokens):]
 	}
 	closed := lex.ItemCloseParen == remains[0] && lex.ItemCloseParen == remains[1]
 	if closed {
