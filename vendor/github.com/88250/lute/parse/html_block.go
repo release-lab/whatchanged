@@ -27,8 +27,13 @@ func HtmlBlockStart(t *Tree, container *ast.Node) int {
 		return 0
 	}
 
-	if t.Context.ParseOption.VditorWYSIWYG || t.Context.ParseOption.ProtyleWYSIWYG {
+	if t.Context.ParseOption.VditorWYSIWYG {
 		if bytes.Contains(t.Context.currentLine, []byte("vditor-comment")) {
+			return 0
+		}
+	}
+	if t.Context.ParseOption.ProtyleWYSIWYG {
+		if bytes.Contains(t.Context.currentLine, []byte("<span ")) {
 			return 0
 		}
 	}
@@ -38,19 +43,46 @@ func HtmlBlockStart(t *Tree, container *ast.Node) int {
 		t.Context.closeUnmatchedBlocks()
 
 		if t.Context.ParseOption.ProtyleWYSIWYG {
-			if bytes.HasPrefix(tokens, []byte("<iframe")) {
-				t.Context.addChild(ast.NodeIFrame)
+			tokens = bytes.TrimSpace(tokens)
+			if bytes.HasPrefix(tokens, []byte("<iframe")) && bytes.HasSuffix(tokens, []byte(">")) {
+				if bytes.Contains(tokens, []byte("data-subtype=\"widget\"")) {
+					t.Context.addChild(ast.NodeWidget)
+				} else {
+					t.Context.addChild(ast.NodeIFrame)
+				}
 				return 2
-			} else if bytes.HasPrefix(tokens, []byte("<video")) {
+			} else if bytes.HasPrefix(tokens, []byte("<video")) && bytes.HasSuffix(tokens, []byte(">")) {
 				t.Context.addChild(ast.NodeVideo)
 				return 2
-			} else if bytes.HasPrefix(tokens, []byte("<audio")) {
+			} else if bytes.HasPrefix(tokens, []byte("<audio")) && bytes.HasSuffix(tokens, []byte(">")) {
 				t.Context.addChild(ast.NodeAudio)
 				return 2
-			}
+			} else if bytes.HasPrefix(tokens, []byte("<div")) &&
+				bytes.Contains(tokens, []byte("data-type=\"NodeAttributeView\"")) &&
+				bytes.Contains(tokens, []byte("data-av-type=\"")) &&
+				bytes.HasSuffix(tokens, []byte("</div>")) {
+				av := t.Context.addChild(ast.NodeAttributeView)
+				avTypeIdx := bytes.Index(tokens, []byte("data-av-type=\"")) + len("data-av-type=\"")
+				avTypeEndIdx := avTypeIdx + bytes.Index(tokens[avTypeIdx:], []byte("\""))
+				av.AttributeViewType = string(tokens[avTypeIdx:avTypeEndIdx])
+				if avIdIdx := bytes.Index(tokens, []byte("data-av-id=\"")); 0 < avIdIdx {
+					avIdIdx = avIdIdx + len("data-av-id=\"")
+					avIdEndIdx := avIdIdx + bytes.Index(tokens[avIdIdx:], []byte("\""))
+					av.AttributeViewID = string(tokens[avIdIdx:avIdEndIdx])
+				} else {
+					av.AttributeViewID = ast.NewNodeID()
 
-			// Protyle 中不存在 HTML 块，使用段落块
-			return 0
+				}
+				return 2
+			}
+		}
+
+		if t.Context.ParseOption.ProtyleWYSIWYG {
+			// Protyle WYSIWYG 模式下，只有 <div 开头的块级元素才能被解析为 HTML 块
+			// Only HTML code wrapped in `<div>` is supported to be parsed into HTML blocks https://github.com/siyuan-note/siyuan/issues/9758
+			if !bytes.HasPrefix(t.Context.currentLine, []byte("<div")) {
+				return 0
+			}
 		}
 
 		block := t.Context.addChild(ast.NodeHTMLBlock)
@@ -62,11 +94,11 @@ func HtmlBlockStart(t *Tree, container *ast.Node) int {
 
 func HtmlBlockContinue(html *ast.Node, context *Context) int {
 	tokens := context.currentLine
-	if context.ParseOption.KramdownBlockIAL && len("{: id=\"") < len(tokens) {
+	if context.ParseOption.KramdownBlockIAL && simpleCheckIsBlockIAL(tokens) {
 		// 判断 IAL 打断
 		if ial := context.parseKramdownBlockIAL(tokens); 0 < len(ial) {
+			context.Tip.ID = IAL2Map(ial)["id"]
 			context.Tip.KramdownIAL = ial
-			context.Tip.InsertAfter(&ast.Node{Type: ast.NodeKramdownBlockIAL, Tokens: tokens})
 			return 1
 		}
 	}
@@ -94,9 +126,10 @@ var (
 )
 
 func (t *Tree) isHTMLBlockClose(tokens []byte, htmlType int) bool {
-	if t.Context.ParseOption.KramdownBlockIAL && len("{: id=\"") < len(tokens) {
+	if t.Context.ParseOption.KramdownBlockIAL && simpleCheckIsBlockIAL(tokens) {
 		// 判断 IAL 打断
 		if ial := t.Context.parseKramdownBlockIAL(tokens); 0 < len(ial) {
+			t.Context.Tip.ID = IAL2Map(ial)["id"]
 			t.Context.Tip.KramdownIAL = ial
 			t.Context.Tip.InsertAfter(&ast.Node{Type: ast.NodeKramdownBlockIAL, Tokens: tokens})
 			return true
@@ -268,12 +301,16 @@ func (t *Tree) isOpenTag(tokens []byte) (isOpenTag bool) {
 		if 1 < len(nameAndValue) {
 			value := nameAndValue[1]
 			if bytes.HasPrefix(value, htmlBlockSinglequote) && bytes.HasSuffix(value, htmlBlockSinglequote) {
-				value = value[1:]
+				if value = value[1:]; 1 > len(value) {
+					return
+				}
 				value = value[:len(value)-1]
 				return !bytes.Contains(value, htmlBlockSinglequote)
 			}
 			if bytes.HasPrefix(value, htmlBlockDoublequote) && bytes.HasSuffix(value, htmlBlockDoublequote) {
-				value = value[1:]
+				if value = value[1:]; 1 > len(value) {
+					return
+				}
 				value = value[:len(value)-1]
 				return !bytes.Contains(value, htmlBlockDoublequote)
 			}

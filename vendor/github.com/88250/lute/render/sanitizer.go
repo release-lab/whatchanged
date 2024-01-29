@@ -14,7 +14,9 @@ import (
 	"bytes"
 	"io"
 	"strings"
+	"unicode"
 
+	"github.com/88250/lute/editor"
 	"github.com/88250/lute/html"
 	"github.com/88250/lute/util"
 )
@@ -36,6 +38,10 @@ var setOfElementsToSkipContent = map[string]interface{}{
 	"title":    nil,
 }
 
+func Sanitize(str string) string {
+	return string(sanitize([]byte(str)))
+}
+
 func sanitize(tokens []byte) []byte {
 	var (
 		buff                     bytes.Buffer
@@ -44,8 +50,8 @@ func sanitize(tokens []byte) []byte {
 		mostRecentlyStartedToken string
 	)
 
-	caretLeftSpace := bytes.Contains(tokens, []byte(" "+util.Caret))
-	tokens = bytes.ReplaceAll(tokens, util.CaretTokens, []byte(util.CaretReplacement))
+	caretLeftSpace := bytes.Contains(tokens, []byte(" "+editor.Caret))
+	tokens = bytes.ReplaceAll(tokens, editor.CaretTokens, []byte(editor.CaretReplacement))
 
 	tokenizer := html.NewTokenizer(bytes.NewReader(tokens))
 	for {
@@ -54,11 +60,11 @@ func sanitize(tokens []byte) []byte {
 			if err == io.EOF {
 				ret := buff.Bytes()
 				if caretLeftSpace {
-					ret = bytes.ReplaceAll(ret, []byte("\""+util.CaretReplacement), []byte("\" "+util.CaretReplacement))
+					ret = bytes.ReplaceAll(ret, []byte("\""+editor.CaretReplacement), []byte("\" "+editor.CaretReplacement))
 				} else {
-					ret = bytes.ReplaceAll(ret, []byte("\" "+util.CaretReplacement), []byte("\""+util.CaretReplacement))
+					ret = bytes.ReplaceAll(ret, []byte("\" "+editor.CaretReplacement), []byte("\""+editor.CaretReplacement))
 				}
-				ret = bytes.ReplaceAll(ret, []byte(util.CaretReplacement), util.CaretTokens)
+				ret = bytes.ReplaceAll(ret, []byte(editor.CaretReplacement), editor.CaretTokens)
 				return ret
 			}
 
@@ -156,8 +162,8 @@ func writeLinkableBuf(buff *bytes.Buffer, token *html.Token) {
 	tokenBuff.WriteString("<")
 	tokenBuff.WriteString(token.Data)
 	for _, attr := range token.Attr {
-		if attr.Key == util.CaretReplacement {
-			tokenBuff.WriteString(" " + util.CaretReplacement)
+		if attr.Key == editor.CaretReplacement {
+			tokenBuff.WriteString(" " + editor.CaretReplacement)
 			continue
 		}
 		tokenBuff.WriteByte(' ')
@@ -184,8 +190,14 @@ func sanitizeAttrs(attrs []*html.Attribute) (ret []*html.Attribute) {
 		if !allowAttr(attr.Key) {
 			continue
 		}
-		if "src" == attr.Key {
-			if strings.HasPrefix(attr.Val, "data:image/svg+xml") || strings.HasPrefix(attr.Val, "javascript") {
+		if "src" == attr.Key || "srcdoc" == attr.Key || "srcset" == attr.Key || "href" == attr.Key {
+			val := strings.ToLower(strings.TrimSpace(attr.Val))
+			val = removeSpace(val)
+			if strings.HasPrefix(val, "data:image/svg+xml") || strings.HasPrefix(val, "data:text/html") || strings.HasPrefix(val, "javascript") {
+				continue
+			}
+
+			if newVal := html.UnescapeAttrVal(string(sanitize([]byte(val)))); val != newVal {
 				continue
 			}
 		}
@@ -193,6 +205,16 @@ func sanitizeAttrs(attrs []*html.Attribute) (ret []*html.Attribute) {
 		ret = append(ret, attr)
 	}
 	return
+}
+
+func removeSpace(s string) string {
+	rr := make([]rune, 0, len(s))
+	for _, r := range s {
+		if !unicode.IsSpace(r) || ' ' == r {
+			rr = append(rr, r)
+		}
+	}
+	return string(rr)
 }
 
 func allowAttr(attrName string) bool {
@@ -247,6 +269,8 @@ var eventAttrs = map[string]interface{}{
 	"onmousemove":  nil,
 	"onmouseout":   nil,
 	"onmouseover":  nil,
+	"onmouseleave": nil,
+	"onmouseenter": nil,
 	"onmouseup":    nil,
 	"onmousewheel": nil,
 	"onwheel":      nil,
@@ -274,7 +298,6 @@ var eventAttrs = map[string]interface{}{
 	"ondurationchange": nil,
 	"onemptied":        nil,
 	"onended":          nil,
-	//"onerror":  nil,
 	"onloadeddata":     nil,
 	"onloadedmetadata": nil,
 	"onloadstart":      nil,
@@ -293,4 +316,15 @@ var eventAttrs = map[string]interface{}{
 
 	// Misc
 	"ontoggle": nil,
+
+	// SVG
+	"onbegin":  nil,
+	"onend":    nil,
+	"onrepeat": nil,
+
+	// meta
+	"http-equiv": nil,
+
+	// input
+	"formaction": nil,
 }

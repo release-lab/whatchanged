@@ -14,6 +14,7 @@ import (
 	"bytes"
 
 	"github.com/88250/lute/ast"
+	"github.com/88250/lute/editor"
 	"github.com/88250/lute/html"
 	"github.com/88250/lute/lex"
 	"github.com/88250/lute/util"
@@ -128,27 +129,29 @@ func (t *Tree) parseFencedCode() (ok bool, fenceChar byte, fenceLen int, fenceOf
 
 	openFence = t.Context.currentLine[t.Context.nextNonspace : t.Context.nextNonspace+fenceLen]
 
-	var info []byte
+	if t.Context.ParseOption.ProtyleWYSIWYG {
+		str := string(t.Context.currentLine[t.Context.nextNonspace+fenceLen:])
+		for _, c := range str {
+			if "~" == string(c) {
+				return
+			}
+		}
+	}
+
 	infoTokens := t.Context.currentLine[t.Context.nextNonspace+fenceLen:]
 	if lex.ItemBacktick == marker && bytes.Contains(infoTokens, codeBlockBacktick) {
 		// info 部分不能包含 `
 		return
 	}
-	info = lex.TrimWhitespace(infoTokens)
+	info := lex.TrimWhitespace(infoTokens)
 	info = html.UnescapeBytes(info)
+	if idx := bytes.IndexByte(info, ' '); 0 <= idx {
+		info = info[:idx]
+	}
 	return true, fenceChar, fenceLen, t.Context.indent, openFence, info
 }
 
 func (context *Context) isFencedCodeClose(tokens []byte, openMarker byte, num int) (ok bool, closeFence []byte) {
-	if context.ParseOption.KramdownBlockIAL && len("{: id=\"") < len(tokens) {
-		// 判断 IAL 打断
-		if ial := context.parseKramdownBlockIAL(tokens); 0 < len(ial) {
-			context.Tip.KramdownIAL = ial
-			context.Tip.InsertAfter(&ast.Node{Type: ast.NodeKramdownBlockIAL, Tokens: tokens})
-			return true, context.Tip.CodeBlockOpenFence
-		}
-	}
-
 	closeMarker := tokens[0]
 	if closeMarker != openMarker {
 		return false, nil
@@ -157,12 +160,12 @@ func (context *Context) isFencedCodeClose(tokens []byte, openMarker byte, num in
 		return false, nil
 	}
 	tokens = lex.TrimWhitespace(tokens)
-	endCaret := bytes.HasSuffix(tokens, util.CaretTokens)
+	endCaret := bytes.HasSuffix(tokens, editor.CaretTokens)
 	if context.ParseOption.VditorWYSIWYG || context.ParseOption.VditorIR || context.ParseOption.VditorSV || context.ParseOption.ProtyleWYSIWYG {
-		tokens = bytes.ReplaceAll(tokens, util.CaretTokens, nil)
+		tokens = bytes.ReplaceAll(tokens, editor.CaretTokens, nil)
 		if endCaret {
 			context.Tip.Tokens = bytes.TrimSuffix(context.Tip.Tokens, []byte("\n"))
-			context.Tip.Tokens = append(context.Tip.Tokens, util.CaretTokens...)
+			context.Tip.Tokens = append(context.Tip.Tokens, editor.CaretTokens...)
 		}
 	}
 	for _, token := range tokens {

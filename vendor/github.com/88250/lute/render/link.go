@@ -12,9 +12,14 @@ package render
 
 import (
 	"bytes"
-
 	"github.com/88250/lute/util"
+	"strings"
 )
+
+func (r *BaseRenderer) EncodeLinkSpace(dest string) string {
+	// Improve export of Markdown hyperlink spaces and markers https://github.com/siyuan-note/siyuan/issues/9792
+	return strings.ReplaceAll(dest, " ", "%20")
+}
 
 func (r *BaseRenderer) LinkPath(dest []byte) []byte {
 	dest = r.RelativePath(dest)
@@ -37,12 +42,11 @@ func (r *BaseRenderer) RelativePath(dest []byte) []byte {
 		return dest
 	}
 
-	// 强制将 %5C 即反斜杠 \ 转换为斜杠 / 以兼容 Windows 平台上使用的路径
-	dest = bytes.ReplaceAll(dest, []byte("%5C"), []byte("\\"))
 	if !r.isRelativePath(dest) {
 		return dest
 	}
 
+	dest = bytes.ReplaceAll(dest, []byte("%5C"), []byte("\\"))
 	linkBase := util.StrToBytes(r.Options.LinkBase)
 	if !bytes.HasSuffix(linkBase, []byte("/")) {
 		linkBase = append(linkBase, []byte("/")...)
@@ -62,5 +66,5 @@ func (r *BaseRenderer) isRelativePath(dest []byte) bool {
 	if '/' == dest[0] {
 		return false
 	}
-	return !bytes.Contains(dest, []byte(":/")) && !bytes.Contains(dest, []byte(":\\"))
+	return !bytes.Contains(dest, []byte(":/")) && !bytes.Contains(dest, []byte(":\\")) && !bytes.Contains(dest, []byte(":%5C"))
 }

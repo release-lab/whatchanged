@@ -22,18 +22,99 @@ func (context *Context) parseTable(paragraph *ast.Node) (retParagraph, retTable 
 	length := len(paragraph.Tokens)
 	lineCnt := 0
 	for i := 0; i < length; i++ {
-		if lex.ItemNewline == paragraph.Tokens[i] || 0 == i {
-			if 0 == i {
-				tokens = paragraph.Tokens[i:]
-			} else {
-				tokens = paragraph.Tokens[i+1:]
+		if context.ParseOption.ProtyleWYSIWYG {
+			lines := lex.Split(paragraph.Tokens, lex.ItemNewline)
+			delimRowIndex := context.findTableDelimRow(lines)
+			if -1 == delimRowIndex {
+				return
 			}
-			if table := context.parseTable0(tokens); nil != table {
-				if 0 < lineCnt {
-					retParagraph = &ast.Node{Type: ast.NodeParagraph, Tokens: paragraph.Tokens[0:i]}
+
+			aligns := context.parseTableDelimRow(lex.TrimWhitespace(lines[delimRowIndex]))
+			if nil == aligns {
+				return
+			}
+
+			if 2 == length && 1 == len(aligns) && 0 == aligns[0] && !bytes.Contains(tokens, []byte("|")) {
+				// 对于 Protyle 来说，这里应该是可以不必判断的，但为了保险，还是保留该判断逻辑
+				// 具体细节可参考下方 GFM Table 解析的注释
+				return
+			}
+
+			var headRows []*ast.Node
+			for j := 0; j < delimRowIndex; j++ {
+				headRow := context.parseTableRow(lex.TrimWhitespace(lines[j]), aligns, true)
+				if nil == headRow {
+					return
 				}
-				retTable = table
-				break
+				headRows = append(headRows, headRow)
+				for th := headRow.FirstChild; nil != th; th = th.Next {
+					ialStart := bytes.Index(th.Tokens, []byte("{:"))
+					if 0 != ialStart {
+						continue
+					}
+
+					subTokens := th.Tokens[ialStart:]
+					if pos, ial := context.parseKramdownSpanIAL(subTokens); 0 < len(ial) {
+						ialTokens := subTokens[:pos+1]
+						if bytes.Contains(ialTokens, []byte("span")) || bytes.Contains(ialTokens, []byte("fn__none")) || // 合并单元格
+							bytes.Contains(ialTokens, []byte("width:")) /* width: 是为了兼容遗留数据 */ {
+							th.KramdownIAL = ial
+							th.Tokens = th.Tokens[len(ialTokens):]
+							spanIAL := &ast.Node{Type: ast.NodeKramdownSpanIAL, Tokens: ialTokens}
+							th.PrependChild(spanIAL)
+						}
+					}
+				}
+			}
+
+			retTable = &ast.Node{Type: ast.NodeTable, TableAligns: aligns}
+			retTable.TableAligns = aligns
+			retTable.AppendChild(context.newTableHead(headRows))
+
+			for j := delimRowIndex + 1; j < len(lines); j++ {
+				line := lex.TrimWhitespace(lines[j])
+				tableRow := context.parseTableRow(line, aligns, false)
+				if nil == tableRow {
+					return
+				}
+				if context.ParseOption.KramdownSpanIAL {
+					for td := tableRow.FirstChild; nil != td; td = td.Next {
+						ialStart := bytes.Index(td.Tokens, []byte("{:"))
+						if 0 != ialStart {
+							continue
+						}
+
+						subTokens := td.Tokens[ialStart:]
+						if pos, ial := context.parseKramdownSpanIAL(subTokens); 0 < len(ial) {
+							ialTokens := subTokens[:pos+1]
+							if bytes.Contains(ialTokens, []byte("span")) || bytes.Contains(ialTokens, []byte("fn__none")) || // 合并单元格
+								bytes.Contains(ialTokens, []byte("width:")) /* width: 是为了兼容遗留数据 */ {
+								td.KramdownIAL = ial
+								td.Tokens = td.Tokens[len(ialTokens):]
+								spanIAL := &ast.Node{Type: ast.NodeKramdownSpanIAL, Tokens: ialTokens}
+								td.PrependChild(spanIAL)
+							}
+						}
+					}
+				}
+				retTable.AppendChild(tableRow)
+			}
+			return
+		} else {
+			if lex.ItemNewline == paragraph.Tokens[i] || 0 == i {
+				if 0 == i {
+					tokens = paragraph.Tokens[i:]
+				} else {
+					tokens = paragraph.Tokens[i+1:]
+				}
+				if table := context.parseTable0(tokens); nil != table {
+					if 0 < lineCnt {
+						retParagraph = &ast.Node{Type: ast.NodeParagraph, Tokens: paragraph.Tokens[0:i]}
+					}
+					retTable = table
+					retTable.Tokens = tokens
+					break
+				}
 			}
 		}
 		lineCnt++
@@ -48,7 +129,13 @@ func (context *Context) parseTable0(tokens []byte) (ret *ast.Node) {
 		return
 	}
 
-	aligns := context.parseTableDelimRow(lex.TrimWhitespace(lines[1]))
+	delimRow := lex.TrimWhitespace(lines[1])
+	if 2 > len(delimRow) {
+		// 换行+冒号会被识别为表格 https://github.com/88250/lute/issues/198
+		return
+	}
+
+	aligns := context.parseTableDelimRow(delimRow)
 	if nil == aligns {
 		return
 	}
@@ -65,33 +152,92 @@ func (context *Context) parseTable0(tokens []byte) (ret *ast.Node) {
 		return
 	}
 
+	if context.ParseOption.KramdownSpanIAL {
+		for th := headRow.FirstChild; nil != th; th = th.Next {
+			ialStart := bytes.LastIndex(th.Tokens, []byte("{:"))
+			if 0 > ialStart {
+				continue
+			}
+			subTokens := th.Tokens[ialStart:]
+			if pos, ial := context.parseKramdownSpanIAL(subTokens); 0 < len(ial) {
+				th.KramdownIAL = ial
+				ialTokens := subTokens[:pos+1]
+				th.Tokens = th.Tokens[:len(th.Tokens)-len(ialTokens)]
+				spanIAL := &ast.Node{Type: ast.NodeKramdownSpanIAL, Tokens: ialTokens}
+				th.InsertAfter(spanIAL)
+				th = th.Next
+			}
+		}
+	}
+
 	ret = &ast.Node{Type: ast.NodeTable, TableAligns: aligns}
 	ret.TableAligns = aligns
-	ret.AppendChild(context.newTableHead(headRow))
+	ret.AppendChild(context.newTableHead([]*ast.Node{headRow}))
 	for i := 2; i < length; i++ {
-		tableRow := context.parseTableRow(lex.TrimWhitespace(lines[i]), aligns, false)
+		line := lex.TrimWhitespace(lines[i])
+		tableRow := context.parseTableRow(line, aligns, false)
 		if nil == tableRow {
 			return
+		}
+		if context.ParseOption.KramdownSpanIAL {
+			for th := tableRow.FirstChild; nil != th; th = th.Next {
+				ialStart := bytes.LastIndex(th.Tokens, []byte("{:"))
+				if 0 > ialStart {
+					continue
+				}
+				subTokens := th.Tokens[ialStart:]
+				if pos, ial := context.parseKramdownSpanIAL(subTokens); 0 < len(ial) {
+					th.KramdownIAL = ial
+					ialTokens := subTokens[:pos+1]
+					th.Tokens = th.Tokens[:len(th.Tokens)-len(ialTokens)]
+					spanIAL := &ast.Node{Type: ast.NodeKramdownSpanIAL, Tokens: ialTokens}
+					th.InsertAfter(spanIAL)
+					th = th.Next
+				}
+			}
 		}
 		ret.AppendChild(tableRow)
 	}
 	return
 }
 
-func (context *Context) newTableHead(headRow *ast.Node) *ast.Node {
+func (context *Context) newTableHead(headRows []*ast.Node) *ast.Node {
 	ret := &ast.Node{Type: ast.NodeTableHead}
-	tr := &ast.Node{Type: ast.NodeTableRow}
-	ret.AppendChild(tr)
-	for c := headRow.FirstChild; nil != c; {
-		next := c.Next
-		tr.AppendChild(c)
-		c = next
+	for _, headRow := range headRows {
+		tr := &ast.Node{Type: ast.NodeTableRow}
+		ret.AppendChild(tr)
+		for c := headRow.FirstChild; nil != c; {
+			next := c.Next
+			tr.AppendChild(c)
+			c = next
+		}
 	}
 	return ret
 }
 
+func inInline(tokens []byte, i int, mathOrCodeMarker byte) bool {
+	if i+1 >= len(tokens) || i < 1 {
+		return false
+	}
+
+	start := bytes.IndexByte(tokens[:i], mathOrCodeMarker)
+	startClosed := 0 == bytes.Count(tokens[:i], []byte{mathOrCodeMarker})%2
+	if startClosed {
+		return false
+	}
+	end := bytes.IndexByte(tokens[i+1:], mathOrCodeMarker)
+	return -1 < start && -1 < end
+}
+
 func (context *Context) parseTableRow(line []byte, aligns []int, isHead bool) (ret *ast.Node) {
 	ret = &ast.Node{Type: ast.NodeTableRow, TableAligns: aligns}
+
+	if idx := bytes.Index(line, []byte("\\|")); 0 < idx {
+		if inInline(line, idx, lex.ItemDollar) || inInline(line, idx, lex.ItemBacktick) {
+			line = bytes.ReplaceAll(line, []byte("\\|"), []byte("\\&#124;"))
+		}
+	}
+
 	cols := lex.SplitWithoutBackslashEscape(line, lex.ItemPipe)
 	if 1 > len(cols) {
 		return nil
@@ -113,6 +259,7 @@ func (context *Context) parseTableRow(line []byte, aligns []int, isHead bool) (r
 	var col []byte
 	for ; i < colsLen && i < alignsLen; i++ {
 		col = lex.TrimWhitespace(cols[i])
+		col = bytes.ReplaceAll(col, []byte("&#124;"), []byte("|"))
 		cell := &ast.Node{Type: ast.NodeTableCell, TableCellAlign: aligns[i]}
 		cell.Tokens = col
 		ret.AppendChild(cell)
@@ -124,6 +271,21 @@ func (context *Context) parseTableRow(line []byte, aligns []int, isHead bool) (r
 		ret.AppendChild(cell)
 	}
 	return
+}
+
+func (context *Context) findTableDelimRow(lines [][]byte) (index int) {
+	length := len(lines)
+	if 2 > length {
+		return -1
+	}
+
+	for i, line := range lines {
+		if nil != context.parseTableDelimRow(line) {
+			index = i
+			return
+		}
+	}
+	return -1
 }
 
 func (context *Context) parseTableDelimRow(line []byte) (aligns []int) {
@@ -141,6 +303,12 @@ func (context *Context) parseTableDelimRow(line []byte) (aligns []int) {
 		}
 	}
 
+	if idx := bytes.Index(line, []byte("\\|")); 0 < idx {
+		if inInline(line, idx, lex.ItemDollar) || inInline(line, idx, lex.ItemBacktick) {
+			line = bytes.ReplaceAll(line, []byte("\\|"), []byte("\\&#124;"))
+		}
+	}
+
 	cols := lex.SplitWithoutBackslashEscape(line, lex.ItemPipe)
 	if lex.IsBlank(cols[0]) {
 		cols = cols[1:]
@@ -152,6 +320,7 @@ func (context *Context) parseTableDelimRow(line []byte) (aligns []int) {
 	var alignments []int
 	for _, col := range cols {
 		col = lex.TrimWhitespace(col)
+		col = bytes.ReplaceAll(col, []byte("&#124;"), []byte("|"))
 		if 1 > length || nil == col {
 			return nil
 		}

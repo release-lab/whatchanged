@@ -16,8 +16,10 @@ import (
 	"unicode"
 
 	"github.com/88250/lute/ast"
+	"github.com/88250/lute/editor"
 	"github.com/88250/lute/html"
 	"github.com/88250/lute/html/atom"
+	"github.com/88250/lute/lex"
 	"github.com/88250/lute/parse"
 	"github.com/88250/lute/render"
 	"github.com/88250/lute/util"
@@ -86,8 +88,14 @@ func (lute *Lute) genASTByDOM(n *html.Node, tree *parse.Tree) {
 		return
 	}
 
-	dataRender := lute.domAttrValue(n, "data-render")
+	dataRender := util.DomAttrValue(n, "data-render")
 	if "1" == dataRender {
+		return
+	}
+
+	class := util.DomAttrValue(n, "class")
+	if strings.HasPrefix(class, "line-number") &&
+		!strings.HasPrefix(class, "line-numbers" /* 简书代码块 https://github.com/siyuan-note/siyuan/issues/4361 */) {
 		return
 	}
 
@@ -111,22 +119,35 @@ func (lute *Lute) genASTByDOM(n *html.Node, tree *parse.Tree) {
 				break
 			}
 			node.Tokens = bytes.TrimSpace(node.Tokens)
+			node.Tokens = bytes.ReplaceAll(node.Tokens, []byte("\n"), []byte(""))
 		}
 		node.Tokens = bytes.ReplaceAll(node.Tokens, []byte{194, 160}, []byte{' '}) // 将 &nbsp; 转换为空格
-		if nil != n.Parent && atom.Span == n.Parent.DataAtom && ("" != lute.domAttrValue(n.Parent, "class")) {
+		node.Tokens = bytes.ReplaceAll(node.Tokens, []byte("\n"), []byte{' '})     // 将 \n 转换为空格 https://github.com/siyuan-note/siyuan/issues/6052
+		if lute.ParseOptions.ProtyleWYSIWYG {
+			node.Tokens = lex.EscapeProtyleMarkers(node.Tokens)
+		} else {
+			node.Tokens = lex.EscapeMarkers(node.Tokens)
+		}
+		if nil != tree.Context.Tip && tree.Context.Tip.IsBlock() && nil != n.Parent && atom.Span != n.Parent.DataAtom && 1 > len(lex.TrimWhitespace(node.Tokens)) {
+			// 块级节点下非 span 包裹需要忽略空白
+			// 剪藏时列表下方块缩进不正确 https://github.com/siyuan-note/siyuan/issues/6650
+			return
+		}
+
+		if nil != n.Parent && atom.Span == n.Parent.DataAtom && ("" != util.DomAttrValue(n.Parent, "class")) {
 			if lastc := tree.Context.Tip.LastChild; nil == lastc || (ast.NodeText == lastc.Type && !bytes.HasSuffix(lastc.Tokens, []byte("**"))) {
 				node.Tokens = []byte("**" + util.BytesToStr(node.Tokens) + "**")
 			}
 		}
 		tree.Context.Tip.AppendChild(node)
 	case atom.P, atom.Div, atom.Section:
-		if lute.parentIs(n, atom.Table) {
+		if lute.parentIs(n, atom.Table) || ast.NodeLink == tree.Context.Tip.Type {
 			break
 		}
 
 		if atom.Div == n.DataAtom {
 			// 解析 GitHub 语法高亮代码块
-			class := lute.domAttrValue(n, "class")
+			class := util.DomAttrValue(n, "class")
 			language := ""
 			if strings.Contains(class, "-source-") {
 				language = class[strings.LastIndex(class, "-source-")+len("-source-"):]
@@ -140,7 +161,7 @@ func (lute *Lute) genASTByDOM(n *html.Node, tree *parse.Tree) {
 				node.AppendChild(&ast.Node{Type: ast.NodeCodeBlockFenceInfoMarker})
 				buf := &bytes.Buffer{}
 				node.LastChild.CodeBlockInfo = []byte(language)
-				buf.WriteString(lute.domText(n))
+				buf.WriteString(util.DomText(n))
 				content := &ast.Node{Type: ast.NodeCodeBlockCode, Tokens: buf.Bytes()}
 				node.AppendChild(content)
 				node.AppendChild(&ast.Node{Type: ast.NodeCodeBlockFenceCloseMarker, Tokens: util.StrToBytes("```"), CodeBlockFenceLen: 3})
@@ -153,6 +174,10 @@ func (lute *Lute) genASTByDOM(n *html.Node, tree *parse.Tree) {
 		tree.Context.Tip = node
 		defer tree.Context.ParentTip()
 	case atom.H1, atom.H2, atom.H3, atom.H4, atom.H5, atom.H6:
+		if ast.NodeLink == tree.Context.Tip.Type {
+			break
+		}
+
 		node.Type = ast.NodeHeading
 		node.HeadingLevel = int(node.Tokens[1] - byte('0'))
 		node.AppendChild(&ast.Node{Type: ast.NodeHeadingC8hMarker, Tokens: util.StrToBytes(strings.Repeat("#", node.HeadingLevel))})
@@ -180,11 +205,11 @@ func (lute *Lute) genASTByDOM(n *html.Node, tree *parse.Tree) {
 		defer tree.Context.ParentTip()
 	case atom.Li:
 		node.Type = ast.NodeListItem
-		marker := lute.domAttrValue(n, "data-marker")
+		marker := util.DomAttrValue(n, "data-marker")
 		var bullet byte
 		if "" == marker {
 			if nil != n.Parent && atom.Ol == n.Parent.DataAtom {
-				start := lute.domAttrValue(n.Parent, "start")
+				start := util.DomAttrValue(n.Parent, "start")
 				if "" == start {
 					marker = "1."
 				} else {
@@ -206,46 +231,100 @@ func (lute *Lute) genASTByDOM(n *html.Node, tree *parse.Tree) {
 		defer tree.Context.ParentTip()
 	case atom.Pre:
 		if firstc := n.FirstChild; nil != firstc {
-			if html.TextNode == firstc.Type || atom.Span == firstc.DataAtom || atom.Code == firstc.DataAtom {
+			if atom.Div == firstc.DataAtom && nil != firstc.NextSibling && atom.Code == firstc.NextSibling.DataAtom {
+				firstc = firstc.NextSibling
+				n.FirstChild.Unlink()
+			}
+
+			if html.TextNode == firstc.Type || atom.Span == firstc.DataAtom || atom.Code == firstc.DataAtom || atom.Section == firstc.DataAtom || atom.Pre == firstc.DataAtom {
 				node.Type = ast.NodeCodeBlock
 				node.IsFencedCodeBlock = true
 				node.AppendChild(&ast.Node{Type: ast.NodeCodeBlockFenceOpenMarker, Tokens: util.StrToBytes("```"), CodeBlockFenceLen: 3})
 				node.AppendChild(&ast.Node{Type: ast.NodeCodeBlockFenceInfoMarker})
 				if atom.Code == firstc.DataAtom || atom.Span == firstc.DataAtom {
-					class := lute.domAttrValue(firstc, "class")
+					class := util.DomAttrValue(firstc, "class")
 					if !strings.Contains(class, "language-") {
-						class = lute.domAttrValue(n, "class")
+						class = util.DomAttrValue(n, "class")
 					}
 					if strings.Contains(class, "language-") {
 						language := class[strings.Index(class, "language-")+len("language-"):]
+						language = strings.Split(language, " ")[0]
 						node.LastChild.CodeBlockInfo = []byte(language)
 					}
 				}
 
-				if atom.Code == n.FirstChild.DataAtom && nil != n.FirstChild.NextSibling && atom.Code == n.FirstChild.NextSibling.DataAtom {
+				if atom.Code == firstc.DataAtom {
+					if nil != firstc.NextSibling && atom.Code == firstc.NextSibling.DataAtom {
+						// pre.code code 每个 code 为一行的结构，需要在 code 中间插入换行
+						for c := firstc.NextSibling; nil != c; c = c.NextSibling {
+							c.InsertBefore(&html.Node{DataAtom: atom.Br})
+						}
+					}
+					if nil != firstc.FirstChild && atom.Ol == firstc.FirstChild.DataAtom {
+						// CSDN 代码块：pre.code.ol.li
+						for li := firstc.FirstChild.FirstChild; nil != li; li = li.NextSibling {
+							if li != firstc.FirstChild.FirstChild {
+								li.InsertBefore(&html.Node{DataAtom: atom.Br})
+							}
+						}
+					}
+					if nil != n.LastChild && atom.Ul == n.LastChild.DataAtom {
+						// CSDN 代码块：pre.code,ul
+						n.LastChild.Unlink() // 去掉最后一个代码行号子块 https://github.com/siyuan-note/siyuan/issues/5564
+					}
+				}
+
+				if atom.Pre == firstc.DataAtom && nil != firstc.FirstChild {
 					// pre.code code 每个 code 为一行的结构，需要在 code 中间插入换行
-					for c := n.FirstChild.NextSibling; nil != c; c = c.NextSibling {
+					for c := firstc.FirstChild.NextSibling; nil != c; c = c.NextSibling {
 						c.InsertBefore(&html.Node{DataAtom: atom.Br})
 					}
 				}
 
 				buf := &bytes.Buffer{}
-				buf.WriteString(lute.domText(n))
+				buf.WriteString(util.DomText(n))
 				content := &ast.Node{Type: ast.NodeCodeBlockCode, Tokens: buf.Bytes()}
 				node.AppendChild(content)
 				node.AppendChild(&ast.Node{Type: ast.NodeCodeBlockFenceCloseMarker, Tokens: util.StrToBytes("```"), CodeBlockFenceLen: 3})
-				tree.Context.Tip.AppendChild(node)
+
+				if tree.Context.Tip.ParentIs(ast.NodeTable) {
+					// 表格中不支持添加块级元素，所以这里只能将其转换为多个行级代码元素
+					lines := bytes.Split(content.Tokens, []byte("\n"))
+					for i, line := range lines {
+						if 0 < len(line) {
+							code := &ast.Node{Type: ast.NodeCodeSpan}
+							code.AppendChild(&ast.Node{Type: ast.NodeCodeSpanOpenMarker, Tokens: []byte("`")})
+							code.AppendChild(&ast.Node{Type: ast.NodeCodeSpanContent, Tokens: line})
+							code.AppendChild(&ast.Node{Type: ast.NodeCodeSpanCloseMarker, Tokens: []byte("`")})
+							tree.Context.Tip.AppendChild(code)
+							if i < len(lines)-1 {
+								if tree.Context.ParseOption.ProtyleWYSIWYG {
+									tree.Context.Tip.AppendChild(&ast.Node{Type: ast.NodeBr})
+								} else {
+									tree.Context.Tip.AppendChild(&ast.Node{Type: ast.NodeHardBreak, Tokens: []byte("\n")})
+								}
+							}
+						}
+					}
+				} else {
+					tree.Context.Tip.AppendChild(node)
+				}
 			} else {
 				node.Type = ast.NodeHTMLBlock
-				node.Tokens = lute.domHTML(n)
+				node.Tokens = util.DomHTML(n)
 				tree.Context.Tip.AppendChild(node)
 			}
 		}
 		return
 	case atom.Em, atom.I:
-		text := lute.domText(n)
-		if "" == text {
+		text := util.DomText(n)
+		if "" == strings.TrimSpace(text) {
 			break
+		}
+
+		if nil != tree.Context.Tip.LastChild && (ast.NodeStrong == tree.Context.Tip.LastChild.Type || ast.NodeEmphasis == tree.Context.Tip.LastChild.Type) {
+			// 在两个相邻的加粗或者斜体之间插入零宽空格，避免标记符重复
+			tree.Context.Tip.AppendChild(&ast.Node{Type: ast.NodeText, Tokens: util.StrToBytes(editor.Zwsp)})
 		}
 
 		node.Type = ast.NodeEmphasis
@@ -255,9 +334,13 @@ func (lute *Lute) genASTByDOM(n *html.Node, tree *parse.Tree) {
 		tree.Context.Tip = node
 		defer tree.Context.ParentTip()
 	case atom.Strong, atom.B:
-		text := lute.domText(n)
-		if "" == text {
+		text := util.DomText(n)
+		if "" == strings.TrimSpace(text) {
 			break
+		}
+
+		if nil != tree.Context.Tip.LastChild && (ast.NodeStrong == tree.Context.Tip.LastChild.Type || ast.NodeEmphasis == tree.Context.Tip.LastChild.Type) {
+			tree.Context.Tip.AppendChild(&ast.Node{Type: ast.NodeText, Tokens: util.StrToBytes(editor.Zwsp)})
 		}
 
 		node.Type = ast.NodeStrong
@@ -271,7 +354,11 @@ func (lute *Lute) genASTByDOM(n *html.Node, tree *parse.Tree) {
 			return
 		}
 
-		code := lute.domHTML(n)
+		if nil != tree.Context.Tip.LastChild && ast.NodeCodeSpan == tree.Context.Tip.LastChild.Type {
+			tree.Context.Tip.AppendChild(&ast.Node{Type: ast.NodeText, Tokens: util.StrToBytes(editor.Zwsp)})
+		}
+
+		code := util.DomHTML(n)
 		if bytes.Contains(code, []byte(">")) {
 			code = code[bytes.Index(code, []byte(">"))+1:]
 		}
@@ -288,7 +375,11 @@ func (lute *Lute) genASTByDOM(n *html.Node, tree *parse.Tree) {
 		defer tree.Context.ParentTip()
 		return
 	case atom.Br:
-		if tree.Context.ParseOption.ProtyleWYSIWYG {
+		if ast.NodeLink == tree.Context.Tip.Type {
+			break
+		}
+
+		if tree.Context.ParseOption.ProtyleWYSIWYG && lute.parentIs(n, atom.Table) {
 			node.Type = ast.NodeBr
 		} else {
 			node.Type = ast.NodeHardBreak
@@ -299,20 +390,26 @@ func (lute *Lute) genASTByDOM(n *html.Node, tree *parse.Tree) {
 		defer tree.Context.ParentTip()
 	case atom.A:
 		node.Type = ast.NodeLink
-		if "" == lute.domText(n) && nil != n.Parent && (atom.H1 == n.Parent.DataAtom || atom.H2 == n.Parent.DataAtom || atom.H3 == n.Parent.DataAtom || atom.H4 == n.Parent.DataAtom || atom.H5 == n.Parent.DataAtom || atom.H6 == n.Parent.DataAtom) {
+		text := util.DomText(n)
+		if "" == text && nil != n.Parent && (atom.H1 == n.Parent.DataAtom || atom.H2 == n.Parent.DataAtom || atom.H3 == n.Parent.DataAtom || atom.H4 == n.Parent.DataAtom || atom.H5 == n.Parent.DataAtom || atom.H6 == n.Parent.DataAtom) {
 			// 丢弃标题中文本为空的链接，这样的链接可能是锚点 https://github.com/Vanessa219/vditor/issues/359
 			return
 		}
+		if "" == text && nil == n.FirstChild {
+			// 剪藏时过滤空的超链接 https://github.com/siyuan-note/siyuan/issues/5686
+			return
+		}
+
 		node.AppendChild(&ast.Node{Type: ast.NodeOpenBracket})
 		tree.Context.Tip.AppendChild(node)
 		tree.Context.Tip = node
 		defer tree.Context.ParentTip()
 	case atom.Img:
-		imgClass := lute.domAttrValue(n, "class")
-		imgAlt := lute.domAttrValue(n, "alt")
+		imgClass := util.DomAttrValue(n, "class")
+		imgAlt := util.DomAttrValue(n, "alt")
 		if "emoji" == imgClass {
 			node.Type = ast.NodeEmoji
-			emojiImg := &ast.Node{Type: ast.NodeEmojiImg, Tokens: tree.EmojiImgTokens(imgAlt, lute.domAttrValue(n, "src"))}
+			emojiImg := &ast.Node{Type: ast.NodeEmojiImg, Tokens: tree.EmojiImgTokens(imgAlt, util.DomAttrValue(n, "src"))}
 			emojiImg.AppendChild(&ast.Node{Type: ast.NodeEmojiAlias, Tokens: util.StrToBytes(":" + imgAlt + ":")})
 			node.AppendChild(emojiImg)
 		} else {
@@ -324,18 +421,44 @@ func (lute *Lute) genASTByDOM(n *html.Node, tree *parse.Tree) {
 			}
 			node.AppendChild(&ast.Node{Type: ast.NodeCloseBracket})
 			node.AppendChild(&ast.Node{Type: ast.NodeOpenParen})
-			src := lute.domAttrValue(n, "src")
+			src := util.DomAttrValue(n, "src")
 			if strings.HasPrefix(src, "data:image") {
 				// 处理可能存在的预加载情况
-				src = lute.domAttrValue(n, "data-src")
+				if dataSrc := util.DomAttrValue(n, "data-src"); "" != dataSrc {
+					src = dataSrc
+				}
+			}
+			if "" == src {
+				// 处理使用 srcset 属性的情况
+				if srcset := util.DomAttrValue(n, "srcset"); "" != srcset {
+					if strings.Contains(srcset, ",") {
+						src = strings.Split(srcset, ",")[len(strings.Split(srcset, ","))-1]
+						src = strings.TrimSpace(src)
+						if strings.Contains(src, " ") {
+							src = strings.TrimSpace(strings.Split(src, " ")[0])
+						}
+					} else {
+						src = strings.TrimSpace(src)
+						if strings.Contains(src, " ") {
+							src = strings.TrimSpace(strings.Split(srcset, " ")[0])
+						}
+					}
+				}
 			}
 			node.AppendChild(&ast.Node{Type: ast.NodeLinkDest, Tokens: util.StrToBytes(src)})
-			linkTitle := lute.domAttrValue(n, "title")
+			linkTitle := util.DomAttrValue(n, "title")
 			if "" != linkTitle {
 				node.AppendChild(&ast.Node{Type: ast.NodeLinkSpace})
 				node.AppendChild(&ast.Node{Type: ast.NodeLinkTitle, Tokens: []byte(linkTitle)})
 			}
 			node.AppendChild(&ast.Node{Type: ast.NodeCloseParen})
+		}
+
+		if ast.NodeDocument == tree.Context.Tip.Type {
+			p := &ast.Node{Type: ast.NodeParagraph}
+			tree.Context.Tip.AppendChild(p)
+			tree.Context.Tip = p
+			defer tree.Context.ParentTip()
 		}
 		tree.Context.Tip.AppendChild(node)
 		tree.Context.Tip = node
@@ -353,15 +476,15 @@ func (lute *Lute) genASTByDOM(n *html.Node, tree *parse.Tree) {
 		}
 	case atom.Del, atom.S, atom.Strike:
 		node.Type = ast.NodeStrikethrough
-		marker := "~"
-		node.AppendChild(&ast.Node{Type: ast.NodeStrikethrough1OpenMarker, Tokens: util.StrToBytes(marker)})
+		marker := "~~"
+		node.AppendChild(&ast.Node{Type: ast.NodeStrikethrough2OpenMarker, Tokens: util.StrToBytes(marker)})
 		tree.Context.Tip.AppendChild(node)
 		tree.Context.Tip = node
 		defer tree.Context.ParentTip()
 	case atom.Mark:
 		node.Type = ast.NodeMark
 		marker := "=="
-		node.AppendChild(&ast.Node{Type: ast.NodeMark1OpenMarker, Tokens: util.StrToBytes(marker)})
+		node.AppendChild(&ast.Node{Type: ast.NodeMark2OpenMarker, Tokens: util.StrToBytes(marker)})
 		tree.Context.Tip.AppendChild(node)
 		tree.Context.Tip = node
 		defer tree.Context.ParentTip()
@@ -380,17 +503,19 @@ func (lute *Lute) genASTByDOM(n *html.Node, tree *parse.Tree) {
 	case atom.Table:
 		node.Type = ast.NodeTable
 		var tableAligns []int
-		for th := n.FirstChild.FirstChild.FirstChild; nil != th; th = th.NextSibling {
-			align := lute.domAttrValue(th, "align")
-			switch align {
-			case "left":
-				tableAligns = append(tableAligns, 1)
-			case "center":
-				tableAligns = append(tableAligns, 2)
-			case "right":
-				tableAligns = append(tableAligns, 3)
-			default:
-				tableAligns = append(tableAligns, 0)
+		if nil != n.FirstChild && nil != n.FirstChild.FirstChild && nil != n.FirstChild.FirstChild.FirstChild {
+			for th := n.FirstChild.FirstChild.FirstChild; nil != th; th = th.NextSibling {
+				align := util.DomAttrValue(th, "align")
+				switch align {
+				case "left":
+					tableAligns = append(tableAligns, 1)
+				case "center":
+					tableAligns = append(tableAligns, 2)
+				case "right":
+					tableAligns = append(tableAligns, 3)
+				default:
+					tableAligns = append(tableAligns, 0)
+				}
 			}
 		}
 		node.TableAligns = tableAligns
@@ -398,6 +523,9 @@ func (lute *Lute) genASTByDOM(n *html.Node, tree *parse.Tree) {
 		tree.Context.Tip = node
 		defer tree.Context.ParentTip()
 	case atom.Thead:
+		if nil == n.FirstChild {
+			break
+		}
 		node.Type = ast.NodeTableHead
 		tree.Context.Tip.AppendChild(node)
 		tree.Context.Tip = node
@@ -409,19 +537,21 @@ func (lute *Lute) genASTByDOM(n *html.Node, tree *parse.Tree) {
 		}
 		table := n.Parent.Parent
 		node.Type = ast.NodeTableRow
-		if atom.Thead != table.FirstChild.DataAtom && n == n.Parent.FirstChild {
+
+		if nil == tree.Context.Tip.ChildByType(ast.NodeTableHead) && nil == util.DomChildByType(table, atom.Thead) {
 			// 补全 thread 节点
 			thead := &ast.Node{Type: ast.NodeTableHead}
 			tree.Context.Tip.AppendChild(thead)
 			tree.Context.Tip = thead
 			defer tree.Context.ParentTip()
 		}
+
 		tree.Context.Tip.AppendChild(node)
 		tree.Context.Tip = node
 		defer tree.Context.ParentTip()
 	case atom.Th, atom.Td:
 		node.Type = ast.NodeTableCell
-		align := lute.domAttrValue(n, "align")
+		align := util.DomAttrValue(n, "align")
 		var tableAlign int
 		switch align {
 		case "left":
@@ -445,20 +575,20 @@ func (lute *Lute) genASTByDOM(n *html.Node, tree *parse.Tree) {
 		}
 	case atom.Font:
 		node.Type = ast.NodeText
-		node.Tokens = []byte(lute.domText(n))
+		node.Tokens = []byte(util.DomText(n))
 		node.Tokens = bytes.ReplaceAll(node.Tokens, []byte("\n"), nil)
 		tree.Context.Tip.AppendChild(node)
 		return
 	case atom.Details:
 		node.Type = ast.NodeHTMLBlock
-		node.Tokens = lute.domHTML(n)
+		node.Tokens = util.DomHTML(n)
 		node.Tokens = bytes.SplitAfter(node.Tokens, []byte("</summary>"))[0]
 		tree.Context.Tip.AppendChild(node)
 	case atom.Summary:
 		return
 	case atom.Iframe, atom.Audio, atom.Video:
 		node.Type = ast.NodeHTMLBlock
-		node.Tokens = lute.domHTML(n)
+		node.Tokens = util.DomHTML(n)
 		tree.Context.Tip.AppendChild(node)
 		return
 	case atom.Noscript:
@@ -466,9 +596,14 @@ func (lute *Lute) genASTByDOM(n *html.Node, tree *parse.Tree) {
 	case atom.Figcaption:
 		node.Type = ast.NodeParagraph
 		node.AppendChild(&ast.Node{Type: ast.NodeHardBreak})
-		node.AppendChild(&ast.Node{Type: ast.NodeText, Tokens: util.StrToBytes(lute.domText(n))})
+		node.AppendChild(&ast.Node{Type: ast.NodeText, Tokens: util.StrToBytes(util.DomText(n))})
 		tree.Context.Tip.AppendChild(node)
 		return
+	case atom.Figure:
+		node.Type = ast.NodeParagraph
+		tree.Context.Tip.AppendChild(node)
+		tree.Context.Tip = node
+		defer tree.Context.ParentTip()
 	default:
 	}
 
@@ -488,20 +623,20 @@ func (lute *Lute) genASTByDOM(n *html.Node, tree *parse.Tree) {
 	case atom.A:
 		node.AppendChild(&ast.Node{Type: ast.NodeCloseBracket})
 		node.AppendChild(&ast.Node{Type: ast.NodeOpenParen})
-		node.AppendChild(&ast.Node{Type: ast.NodeLinkDest, Tokens: util.StrToBytes(lute.domAttrValue(n, "href"))})
-		linkTitle := lute.domAttrValue(n, "title")
+		node.AppendChild(&ast.Node{Type: ast.NodeLinkDest, Tokens: util.StrToBytes(util.DomAttrValue(n, "href"))})
+		linkTitle := util.DomAttrValue(n, "title")
 		if "" != linkTitle {
 			node.AppendChild(&ast.Node{Type: ast.NodeLinkSpace})
 			node.AppendChild(&ast.Node{Type: ast.NodeLinkTitle, Tokens: util.StrToBytes(linkTitle)})
 		}
 		node.AppendChild(&ast.Node{Type: ast.NodeCloseParen})
 	case atom.Del, atom.S, atom.Strike:
-		marker := "~"
-		node.AppendChild(&ast.Node{Type: ast.NodeStrikethrough1CloseMarker, Tokens: util.StrToBytes(marker)})
+		marker := "~~"
+		node.AppendChild(&ast.Node{Type: ast.NodeStrikethrough2CloseMarker, Tokens: util.StrToBytes(marker)})
 		appendSpace(n, tree, lute)
 	case atom.Mark:
 		marker := "=="
-		node.AppendChild(&ast.Node{Type: ast.NodeMark1CloseMarker, Tokens: util.StrToBytes(marker)})
+		node.AppendChild(&ast.Node{Type: ast.NodeMark2CloseMarker, Tokens: util.StrToBytes(marker)})
 		appendSpace(n, tree, lute)
 	case atom.Sup:
 		node.AppendChild(&ast.Node{Type: ast.NodeSupCloseMarker})
@@ -516,20 +651,60 @@ func (lute *Lute) genASTByDOM(n *html.Node, tree *parse.Tree) {
 
 func appendSpace(n *html.Node, tree *parse.Tree, lute *Lute) {
 	if nil != n.NextSibling {
-		if nextText := lute.domText(n.NextSibling); "" != nextText {
+		if nextText := util.DomText(n.NextSibling); "" != nextText {
 			if runes := []rune(nextText); !unicode.IsSpace(runes[0]) {
 				if unicode.IsPunct(runes[0]) || unicode.IsSymbol(runes[0]) {
-					tree.Context.Tip.InsertBefore(&ast.Node{Type: ast.NodeText, Tokens: []byte(" ")})
-					tree.Context.Tip.InsertAfter(&ast.Node{Type: ast.NodeText, Tokens: []byte(" ")})
+					tree.Context.Tip.InsertBefore(&ast.Node{Type: ast.NodeText, Tokens: []byte(editor.Zwsp)})
+					tree.Context.Tip.InsertAfter(&ast.Node{Type: ast.NodeText, Tokens: []byte(editor.Zwsp)})
 					return
 				}
 
-				if curText := lute.domText(n); "" != curText {
+				if curText := util.DomText(n); "" != curText {
 					runes = []rune(curText)
 					if lastC := runes[len(runes)-1]; unicode.IsPunct(lastC) || unicode.IsSymbol(lastC) {
-						tree.Context.Tip.InsertBefore(&ast.Node{Type: ast.NodeText, Tokens: []byte(" ")})
-						tree.Context.Tip.InsertAfter(&ast.Node{Type: ast.NodeText, Tokens: []byte(" ")})
+						text := tree.Context.Tip.ChildByType(ast.NodeText)
+						if nil != text {
+							text.Tokens = append([]byte(editor.Zwsp), text.Tokens...)
+							text.Tokens = append(text.Tokens, []byte(editor.Zwsp)...)
+						}
 						return
+					}
+
+					spaces := lute.prefixSpaces(curText)
+					if "" != spaces {
+						previous := tree.Context.Tip.Previous
+						if nil != previous {
+							if ast.NodeText == previous.Type {
+								previous.Tokens = append(previous.Tokens, util.StrToBytes(spaces)...)
+							} else {
+								previous.InsertAfter(&ast.Node{Type: ast.NodeText, Tokens: util.StrToBytes(spaces)})
+							}
+						} else {
+							tree.Context.Tip.AppendChild(&ast.Node{Type: ast.NodeText, Tokens: util.StrToBytes(spaces)})
+						}
+
+						text := tree.Context.Tip.ChildByType(ast.NodeText)
+						text.Tokens = bytes.TrimLeft(text.Tokens, " \u0160")
+					}
+					spaces = lute.suffixSpaces(curText)
+					if "" != spaces {
+						texts := tree.Context.Tip.ChildrenByType(ast.NodeText)
+						if 0 < len(texts) {
+							text := texts[len(texts)-1]
+							text.Tokens = bytes.TrimRight(text.Tokens, " \u0160")
+							if 1 > len(text.Tokens) {
+								text.Unlink()
+							}
+						}
+						if nil != n.NextSibling {
+							if html.TextNode == n.NextSibling.Type {
+								n.NextSibling.Data = spaces + n.NextSibling.Data
+							} else {
+								tree.Context.Tip.InsertAfter(&ast.Node{Type: ast.NodeText, Tokens: util.StrToBytes(spaces)})
+							}
+						} else {
+							tree.Context.Tip.InsertAfter(&ast.Node{Type: ast.NodeText, Tokens: util.StrToBytes(spaces)})
+						}
 					}
 				}
 			}

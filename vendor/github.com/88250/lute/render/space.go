@@ -14,14 +14,14 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"github.com/88250/lute/util"
+	"github.com/88250/lute/editor"
 )
 
 // Space 会把 tokens 中的中西文之间加上空格。
 func (r *BaseRenderer) Space(tokens []byte) []byte {
-	text := util.BytesToStr(tokens)
+	text := string(tokens)
 	text = Space0(text)
-	return util.StrToBytes(text)
+	return []byte(text)
 }
 
 func Space0(text string) (ret string) {
@@ -61,25 +61,31 @@ func addSpaceAtBoundary(prefix string, nextChar rune) string {
 
 func allowSpace(currentChar, nextChar rune) bool {
 	if unicode.IsSpace(currentChar) || unicode.IsSpace(nextChar) ||
-		(util.CaretRune == currentChar) || (util.CaretRune == nextChar) ||
+		(editor.CaretRune == currentChar) || (editor.CaretRune == nextChar) ||
 		!unicode.IsPrint(currentChar) || !unicode.IsPrint(nextChar) {
 		return false
 	}
 
-	currentIsHan := unicode.Is(unicode.Han, currentChar)
+	currentIsCJK := isCJK(currentChar)
 	nextIsPunct := '%' != nextChar && '@' != nextChar && (unicode.IsPunct(nextChar) || '~' == nextChar || '=' == nextChar || '#' == nextChar)
-	if currentIsHan && nextIsPunct {
+	if currentIsCJK && nextIsPunct {
 		return false
 	}
 
 	currentIsPunct := '%' != currentChar && '@' != currentChar && (unicode.IsPunct(currentChar) || '~' == currentChar || '=' == currentChar || '#' == currentChar)
-	nextIsHan := unicode.Is(unicode.Han, nextChar)
-	if nextIsHan && currentIsPunct {
+	nextIsCJK := isCJK(nextChar)
+	if nextIsCJK && currentIsPunct {
 		return false
 	}
 
-	if (!currentIsHan && !nextIsHan) || (currentIsHan && nextIsHan) {
+	if (!currentIsCJK && !nextIsCJK) || (currentIsCJK && nextIsCJK) {
 		return false
 	}
 	return true
+}
+
+func isCJK(r rune) bool {
+	return unicode.Is(unicode.Han, r) || unicode.Is(unicode.Lm, r) ||
+		unicode.Is(unicode.Hiragana, r) || unicode.Is(unicode.Katakana, r) ||
+		unicode.Is(unicode.Hangul, r)
 }
